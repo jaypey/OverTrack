@@ -1,15 +1,14 @@
 ## Local development with Docker
 
-### Building docker container
+### Using docker compose
+
+> :warning: If you get the ```exec /ontrack/entrypoint.sh: no such file or directory``` error, change the entrypoint.sh file endings from CRLF to LF.
 
 ```bash
-docker build --rm --compress -t inoda/ontrack .
-```
-
-### Using docker-compose
-
-```bash
-docker-compose up -d
+# Starts the containers in the background
+docker compose up -d
+# Rebuilding the containers
+docker compose up --build -d
 ```
 
 ### Running

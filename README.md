@@ -51,6 +51,7 @@ friendly.
 ![voice](./app/assets/images/readme/voice.png)
 
 ## Installation
+- [Install with Docker](docs/docker_install.md)
 - [Install with Homebrew](docs/homebrew_install.md)
 - [Install on Ubuntu 16.04+](docs/ubuntu_install.md)
 - Spin up an instance (for free) using the Heroku deploy button below. Heroku account is required.
