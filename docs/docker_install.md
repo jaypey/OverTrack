@@ -1,16 +1,22 @@
 ## Local development with Docker
 
-### Building docker container
+### Using docker compose
+
+> :warning: If you get the ```exec /ontrack/entrypoint.sh: no such file or directory``` error, change the entrypoint.sh file endings from CRLF to LF.
 
 ```bash
-docker build --rm --compress -t inoda/ontrack .
+# Starts the containers in the background
+docker compose up -d
+# Rebuilding the containers
+docker compose up --build -d
 ```
 
-### Using docker-compose
-
+To get your container's ip address you can enter:
 ```bash
-docker-compose up -d
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' overtrackDB
 ```
+You will then be able to connect to the postgres database from your host machine using that IP.
+
 
 ### Running
 
