@@ -1,4 +1,5 @@
 #!/bin/sh
+
 rails db:migrate
 if [ $RAILS_ENV = "production" ]; then
   export RAILS_SERVE_STATIC_FILES=true
