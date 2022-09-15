@@ -11,4 +11,4 @@ RUN apk add --no-cache build-base postgresql-dev yarn && \
 
 EXPOSE 3000
 
-ENTRYPOINT [ "/ontrack/entrypoint.sh" ] 
+ENTRYPOINT ["/ontrack/entrypoint.sh"] 
