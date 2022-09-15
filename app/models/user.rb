@@ -3,7 +3,19 @@ class User < ApplicationRecord
     super(BCrypt::Password.create(value))
   end
 
-  def username=(value)
-    super(BCrypt::Password.create(value))
+  def email=(value)
+    super(value)
+  end 
+
+  def first_name=(value)
+    super(value)
+  end
+
+  def last_name=(value)
+    super(value)
+  end
+
+  def phone_number=(value)
+    super(value)
   end
 end
