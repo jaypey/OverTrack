@@ -5,7 +5,7 @@ services:
   app:
     build:
       context: .
-    container_name: ontrack
+    container_name: overtrack
     restart: always
     depends_on:
       - database
@@ -15,17 +15,20 @@ services:
       NODE_ENV: development
       RAILS_ENV: development
       SECRET_KEY_BASE: super-secret
-      DATABASE_URL: postgres://ontrack:secret@database/ontrack
-
+      DATABASE_URL: postgres://overtrack:secret@database/overtrack
+    volumes:
+      - type: bind
+        source: .
+        target: /overtrack
   database:
     image: postgres
-    container_name: ontrack-db
+    container_name: overtrack-db
     volumes:
       - database:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: secret
-      POSTGRES_USER: ontrack
-      POSTGRES_DB: ontrack
+      POSTGRES_USER: overtrack
+      POSTGRES_DB: overtrack
 
 volumes:
   database: {}
