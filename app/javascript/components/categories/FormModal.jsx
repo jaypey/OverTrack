@@ -45,7 +45,7 @@ class FormModal extends React.Component {
     if (this.props.category.id) {
       apiCall = Categories.update(this.props.category.id, { color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim() });
     } else {
-      apiCall = Categories.create({ color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim() });
+      apiCall = Categories.create({ color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim(), is_revenue: 0 });
     }
 
     apiCall.then(

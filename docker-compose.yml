@@ -16,10 +16,6 @@ services:
       RAILS_ENV: development
       SECRET_KEY_BASE: super-secret
       DATABASE_URL: postgres://overtrack:secret@database/overtrack
-    volumes:
-      - type: bind
-        source: .
-        target: /overtrack
   database:
     image: postgres
     container_name: overtrack-db
@@ -29,6 +25,7 @@ services:
       - database:/var/lib/postgresql/data
       - ./config/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
     environment:
+      POSTGRES_HOST_AUTH-METHOD: md5
       POSTGRES_PASSWORD: secret
       POSTGRES_USER: overtrack
       POSTGRES_DB: overtrack
