@@ -22,15 +22,14 @@ You will then be able to connect to the postgres database from your host machine
 
 ```bash
 docker run --rm -d \
-  -e "POSTGRESQL_DATABASE=ontrack" \
-  -e "POSTGRESQL_USERNAME=ontrack" \
+  -e "POSTGRESQL_DATABASE=overtrack" \
+  -e "POSTGRESQL_USERNAME=overtrack" \
   -e "POSTGRESQL_PASSWORD=secret" \
-  --name "ontrack-db" \
+  --name "overtrack-db" \
   postgres
 
 docker run --rm -d \
-  --link "ontrack-postgres" \
-  -e "DATABASE_URL=postgres://ontrack:secret@ontrack-postgres/ontrack" \
+  -e "DATABASE_URL=postgres://overtrack:secret@overtrack-postgres/overtrack" \
   -e "RAILS_ENV=development" \
   -p 3000:3000 \
   inoda/ontrack
