@@ -61,6 +61,37 @@ friendly.
 - `User.create!(username: "...", password: "...")` The username and password will be hashed.
 - If you ever need to change your username/password: `User.first.update!(username: "...", password: "...")`
 
+## How to see the database?
+
+### Using the docker terminal
+- Open the terminal of overtrack-db
+- To enter the instance, type `psql -U overtrack`
+- To choose the database, type `\c overtrack`
+- To show the data of a table, type `\ds [table_name]`
+
+### Using DBeaver
+- Open DBeaver
+- Click on Database/New Database Connection
+- Choose a PostgreSQL database
+- Type in the host section your IP address
+- Type in the port section: `5432`
+- Type in the database and username section: `overtrack`
+- Type in the password section: `secret`
+- Test the connection
+- Click on finish
+
+### Using PGAdmin
+- Start the pgadmin-1 container
+- Type in the email address section: `admin@overtrack.com`
+- Type in the password section: `overtrack`
+- Click on login
+- Click on Add New Server
+- In General section, type in the name section: `overtrack`
+- In Connection section, type in the Host name/address section your IP address
+- In Connection section, type in the Port section: `5432`
+- In Connection section, type in Maintenance database and Username section: `overtrack`
+- In Connection section, type in Password section: `secret`
+
 ## Hosting your own
 I'd recommend using [Heroku](https://heroku.com) since it's super simple (and free) to
 deploy a Rails app. Keep it awake with my [Heroku Pinger](https://github.com/inoda/heroku-pinger)!
