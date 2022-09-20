@@ -70,7 +70,6 @@ class Main extends React.Component {
     return (
       <div>
         {this.renderExpenseCreateModal()}
-
         <div className="container">
           <Overview categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} monthlyGoal={this.state.monthlyGoal} onChange={this.loadData} />
         </div>
