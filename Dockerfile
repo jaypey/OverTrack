@@ -1,6 +1,6 @@
 FROM ruby:2.6.6-alpine
 
-WORKDIR /overtrack
+WORKDIR /ontrack
 
 COPY . .
 
@@ -12,4 +12,4 @@ RUN apk add --no-cache build-base postgresql-dev yarn && \
 
 EXPOSE 3000
 
-ENTRYPOINT [ "/overtrack/entrypoint.sh" ] 
+ENTRYPOINT [ "/ontrack/entrypoint.sh" ] 
