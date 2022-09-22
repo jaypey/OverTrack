@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  validates_presence_of :name, :color
+  validates_presence_of :name, :color, :is_revenue
 
   has_many :expenses
 

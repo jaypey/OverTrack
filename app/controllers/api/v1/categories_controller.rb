@@ -5,7 +5,7 @@ module Api; module V1
     end
 
     def create
-      category = ::Category.new(color: params[:color], name: params[:name], monthly_goal: params[:monthly_goal])
+      category = ::Category.new(color: params[:color], name: params[:name], monthly_goal: params[:monthly_goal], is_revenue: params[:is_revenue])
       successful = category.save
       render json: category, status: successful ? 200 : 500
     end
