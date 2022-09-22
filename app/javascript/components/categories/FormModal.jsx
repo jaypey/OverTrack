@@ -16,6 +16,7 @@ class FormModal extends React.Component {
       goal: this.props.category.monthly_goal || 0,
       name: this.props.category.name,
       submitted: false,
+      is_revenue: 0
     };
   }
 
@@ -26,6 +27,16 @@ class FormModal extends React.Component {
   handleNameChange = (e) => { this.setState({ name: e.target.value }); }
   handleGoalChange = (num) => { this.setState({ goal: num }); }
   handleColorChange = (color) => { this.setState({ color }); }
+
+  handleRevenueChange = event => {
+    if (event.target.checked) {
+      this.state.is_revenue = 1;
+    } else {
+      this.state.is_revenue = 0;
+    }
+    setIsRevenue(current => !current);
+  }
+
   handleErrors = (key, errs) => { this.setState({ errors: Object.assign(this.state.errors, { [key]: errs }) }); }
   handleDelete = () => {
     Alerts.genericDelete('category').then((result) => {
@@ -45,7 +56,7 @@ class FormModal extends React.Component {
     if (this.props.category.id) {
       apiCall = Categories.update(this.props.category.id, { color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim() });
     } else {
-      apiCall = Categories.create({ color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim() });
+      apiCall = Categories.create({ color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim(), is_revenue: this.state.is_revenue });
     }
 
     apiCall.then(
@@ -99,6 +110,19 @@ class FormModal extends React.Component {
             </div>
           </div>
 
+          <div className="input-group">
+            <label htmlFor="isRevenue">
+              <input
+                type="checkbox"
+                value={this.state.isRevenue}
+                onChange={this.handleRevenueChange}
+                id="isRevenue"
+                name="isRevenue"
+              />
+              Is this a revenue?
+            </label>
+          </div>
+
           <div className="form-actions">
             <button className="btn btn-dark" type="submit">Save</button>
             {this.renderDelete()}
@@ -114,6 +138,7 @@ FormModal.defaultProps = {
     color: '',
     monthly_goal: 0,
     name: '',
+    is_revenue: 0,
   },
   colorsToSkip: [],
 };

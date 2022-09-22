@@ -2,6 +2,29 @@
 version: "3.4"
 
 services:
+  database:
+    image: postgres
+    container_name: overtrack-db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+    environment:
+  #    POSTGRES_HOST_AUTH_METHOD: md5
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: overtrack
+      POSTGRES_DB: overtrack
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@overtrack.com
+      PGADMIN_DEFAULT_PASSWORD: overtrack
+    ports:
+      - "5555:80"
+    restart: unless-stopped
+    
   app:
     build:
       context: .
@@ -19,15 +42,6 @@ services:
       RAILS_ENV: development
       SECRET_KEY_BASE: super-secret
       DATABASE_URL: postgres://overtrack:secret@database/overtrack
-  database:
-    image: postgres
-    container_name: overtrack-db
-    volumes:
-      - database:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: secret
-      POSTGRES_USER: overtrack
-      POSTGRES_DB: overtrack
 
 volumes:
   database: {}
