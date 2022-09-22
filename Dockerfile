@@ -7,8 +7,8 @@ COPY . .
 RUN apk add --no-cache build-base postgresql-dev yarn && \
     yarn install --non-interactive --check-files && \
     gem install bundler && \
-    bundle install && \
-    bundle update
+    bundle update && \
+    bundle install
 
 EXPOSE 3000
 

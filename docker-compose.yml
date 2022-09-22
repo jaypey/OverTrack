@@ -11,15 +11,14 @@ services:
       - database
     ports:
       - "3000:3000"
+    volumes:
+      - .:/ontrack
+      - node_modules:/ontrack/node_modules
     environment:
       NODE_ENV: development
       RAILS_ENV: development
       SECRET_KEY_BASE: super-secret
       DATABASE_URL: postgres://overtrack:secret@database/overtrack
-    volumes:
-      - type: bind
-        source: .
-        target: /overtrack
   database:
     image: postgres
     container_name: overtrack-db
@@ -32,3 +31,4 @@ services:
 
 volumes:
   database: {}
+  node_modules:
