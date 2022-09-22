@@ -1,0 +1,134 @@
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 172.18.0.1 at 2022-09-22 18:31:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1056.1ms | Allocations: 2340452)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.5ms | Allocations: 603)
+  Rendered layout layouts/application.html.erb (Duration: 1081.2ms | Allocations: 2362826)
+Completed 200 OK in 1100ms (Views: 1086.8ms | ActiveRecord: 0.0ms | Allocations: 2366962)
+
+
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:31:17 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  
+Started GET "/" for 172.18.0.1 at 2022-09-22 18:31:27 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 2051)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.5ms | Allocations: 588)
+  Rendered layout layouts/application.html.erb (Duration: 13.1ms | Allocations: 22393)
+Completed 200 OK in 15ms (Views: 14.3ms | ActiveRecord: 0.0ms | Allocations: 23482)
+
+
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:31:44 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  
+Started GET "/" for 172.18.0.1 at 2022-09-22 18:33:04 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.0ms | Allocations: 2046)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.6ms | Allocations: 593)
+  Rendered layout layouts/application.html.erb (Duration: 26.8ms | Allocations: 22271)
+Completed 200 OK in 29ms (Views: 28.0ms | ActiveRecord: 0.0ms | Allocations: 23364)
+
+
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:34:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:36:06 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  
+Started GET "/rails/info/routes?path=re" for 172.18.0.1 at 2022-09-22 18:36:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"re"}
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 2858)
+
+
+Started GET "/rails/info/routes?path=regise" for 172.18.0.1 at 2022-09-22 18:36:25 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"regise"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 974)
+
+
+Started GET "/rails/info/routes?path=regiset" for 172.18.0.1 at 2022-09-22 18:36:25 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"regiset"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 973)
+
+
+Started GET "/rails/info/routes?path=register" for 172.18.0.1 at 2022-09-22 18:36:26 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"register"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 972)
+
+
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:36:40 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:36:43 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  
+Started GET "/" for 172.18.0.1 at 2022-09-22 18:40:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 2704)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.5ms | Allocations: 588)
+  Rendered layout layouts/application.html.erb (Duration: 13.7ms | Allocations: 22926)
+Completed 200 OK in 16ms (Views: 14.8ms | Allocations: 24074)
+
+
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:40:51 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:46:04 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  
+Started GET "/" for 172.18.0.1 at 2022-09-22 18:50:09 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.7ms | Allocations: 2691)
+  Rendered layouts/_image_paths.html.erb (Duration: 1.3ms | Allocations: 588)
+  Rendered layout layouts/application.html.erb (Duration: 37.2ms | Allocations: 22910)
+Completed 200 OK in 39ms (Views: 38.5ms | Allocations: 24057)
+
+
+Started POST "/" for 172.18.0.1 at 2022-09-22 18:50:10 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [POST] "/"):
+  

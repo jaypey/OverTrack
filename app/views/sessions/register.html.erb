@@ -1,43 +1,7 @@
 <%= image_tag "logo.svg", size: "150x150" %>
 <div class="login">
   <div class="flex flex-space-between">
-    <%= form_tag sessions_path do %>
-      <div class="input-group">
-        <label>Email</label>
-        <%= text_field_tag :email, nil, autocomplete: "off" %>
-      </div>
-
-      <div class="input-group">
-        <label>First Name</label>
-        <%= text_field_tag :first_name, nil, autocomplete: "off" %>
-      </div>
-
-      <div class="input-group">
-        <label>Last Name</label>
-        <%= text_field_tag :last_name, nil, autocomplete: "off" %>
-      </div>
-
-      <div class="input-group">
-        <label>Phone Number</label>
-        <%= text_field_tag :phone_number, nil, autocomplete: "off" %>
-      </div>
-
-     <div class="input-group">
-        <label>Password</label>
-        <%= password_field_tag :password, nil, autocomplete: "off" %>
-      </div>
-      <div class="input-group">
-        <label>Confirm Password</label>
-        <%= password_field_tag :password, nil, autocomplete: "off" %>
-      </div>
-
-      <div class="form-actions">
-        <%= submit_tag "Submit", class: "btn btn-dark btn-full btn-round" %>
-      </div>
-    <% end %>
-
-    <%= button_to 'register' %>
-
+    <p>Test</p>
     <%= image_tag "coins.png" %>
   </div>
 </div>
