@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_22_184153) do
+ActiveRecord::Schema.define(version: 2022_09_22_204705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2022_09_22_184153) do
     t.integer "monthly_goal", default: 0
     t.integer "rank", default: 0
     t.integer "is_revenue", null: false
+    t.bigint "budget_id"
+    t.index ["budget_id"], name: "index_categories_on_budget_id"
     t.index ["rank"], name: "index_categories_on_rank"
   end
 
@@ -86,4 +88,5 @@ ActiveRecord::Schema.define(version: 2022_09_22_184153) do
   end
 
   add_foreign_key "budgets", "users", column: "owner_id"
+  add_foreign_key "categories", "budgets"
 end
