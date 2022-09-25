@@ -6,14 +6,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.first
+
+    email = params[:email]
+
+    user = User.where(email: email).first
 
     unless user
-      flash[:error] = "No user found"
+      # flash[:error] = "No user found"
       redirect_to :root and return
     end
 
-    if BCrypt::Password.new(user.password) == params[:password] && BCrypt::Password.new(user.username) == params[:username]
+    if BCrypt::Password.new(user.password) == params[:password] && user.email == params[:email]
       cookies.signed[:logged_in] = true
     else
       flash[:error] = "Incorrect login"
