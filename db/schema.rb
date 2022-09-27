@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2022_09_19_213255) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "monthly_goal", default: 0
     t.integer "rank", default: 0
-    t.integer "is_revenue", null: false
     t.index ["rank"], name: "index_categories_on_rank"
   end
 
@@ -43,18 +42,6 @@ ActiveRecord::Schema.define(version: 2022_09_19_213255) do
     t.index ["amount"], name: "index_expenses_on_amount"
     t.index ["category_id"], name: "index_expenses_on_category_id"
     t.index ["paid_at"], name: "index_expenses_on_paid_at"
-  end
-
-  create_table "revenues", force: :cascade do |t|
-    t.text "description", null: false
-    t.integer "amount", null: false
-    t.integer "category_id", null: false
-    t.datetime "paid_at", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["amount"], name: "index_revenues_on_amount"
-    t.index ["category_id"], name: "index_revenues_on_category_id"
-    t.index ["paid_at"], name: "index_revenues_on_paid_at"
   end
 
   create_table "users", force: :cascade do |t|
