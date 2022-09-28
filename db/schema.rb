@@ -10,15 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2031_42_15_561245) do
+ActiveRecord::Schema.define(version: 2022_09_22_204705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "budget", force: :cascade do |t|
-    t.text "name", null: false
+  create_table "budgets", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.bigint "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_budgets_on_owner_id"
+  end
+
+  create_table "budgets_users", id: false, force: :cascade do |t|
+    t.bigint "budget_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["budget_id"], name: "index_budgets_users_on_budget_id"
+    t.index ["user_id"], name: "index_budgets_users_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -29,6 +39,8 @@ ActiveRecord::Schema.define(version: 2031_42_15_561245) do
     t.integer "monthly_goal", default: 0
     t.integer "rank", default: 0
     t.integer "is_revenue", null: false
+    t.bigint "budget_id"
+    t.index ["budget_id"], name: "index_categories_on_budget_id"
     t.index ["rank"], name: "index_categories_on_rank"
   end
 
@@ -75,4 +87,6 @@ ActiveRecord::Schema.define(version: 2031_42_15_561245) do
     t.string "phone"
   end
 
+  add_foreign_key "budgets", "users", column: "owner_id"
+  add_foreign_key "categories", "budgets"
 end
