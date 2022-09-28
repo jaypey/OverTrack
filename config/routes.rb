@@ -31,7 +31,8 @@ Rails.application.routes.draw do
       end
     end
   end
-
+  
+  get "budget", to: "budget#index"
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#not_found"
   get "/500", to: "errors#not_found"
