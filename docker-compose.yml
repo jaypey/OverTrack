@@ -21,8 +21,11 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@overtrack.com
       PGADMIN_DEFAULT_PASSWORD: overtrack
+      GUNICORN_ACCESS_LOGFILE: '/dev/null'
     ports:
       - "5555:80"
+    logging:
+      driver: none
     restart: unless-stopped
     
   app:
