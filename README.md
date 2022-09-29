@@ -2,7 +2,6 @@
 
 <a href="https://www.buymeacoffee.com/inoda" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-
 ## About
 
 In a nutshell: a private budgeting tool that can be self-hosted.
@@ -73,7 +72,7 @@ friendly.
 - Open DBeaver
 - Click on Database/New Database Connection
 - Choose a PostgreSQL database
-- Type in the host section your IP address
+- Type in the host section your IP address (doesn't work for everyone)
 - Type in the port section: `5432`
 - Type in the database and username section: `overtrack`
 - Type in the password section: `secret`
@@ -81,16 +80,36 @@ friendly.
 - Click on finish
 
 ### Using PGAdmin
+
+#### Connecting to the database
 - Start the pgadmin-1 container
+- Go to the internet address: `localhost:5555`
 - Type in the email address section: `admin@overtrack.com`
 - Type in the password section: `overtrack`
 - Click on login
 - Click on Add New Server
 - In General section, type in the name section: `overtrack`
-- In Connection section, type in the Host name/address section your IP address
+- In Connection section, type in the Host name/address section: `database`
 - In Connection section, type in the Port section: `5432`
 - In Connection section, type in Maintenance database and Username section: `overtrack`
 - In Connection section, type in Password section: `secret`
+
+#### How to see the scheme in PGAdmin?
+- Connect to the database
+- Right click on the database `overtrack`
+- Select the `Generate ERD`
+
+#### How to see the database table?
+- Connect to the database
+- Left click on the database `overtrack`
+- Left click on scheme
+- Left click on table
+
+#### How to see the table's data?
+- Connect to the database
+- Right click on the database `overtrack`
+- Left click on Query Tools
+- Write the wanted SELECT statement
 
 ## Hosting your own
 I'd recommend using [Heroku](https://heroku.com) since it's super simple (and free) to
