@@ -1,1 +1,1 @@
-git config core.autocrlf=false
+entrypoint.sh text eol=lf
