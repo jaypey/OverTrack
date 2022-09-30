@@ -4387,3 +4387,2528 @@ Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 2.1ms | Allocations: 2396
   [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
   [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$XF9KuYTmYAtrn4IyPjkeqeEz2X5wnO.TtNEcV93b91Rdnq2b4Unnu"], ["created_at", "2022-09-30 17:39:10.403810"], ["updated_at", "2022-09-30 17:39:10.403810"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
   [1m[36mTRANSACTION (5.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:39:22 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2415.6ms | Allocations: 2321434)
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:39:25 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 31.7ms | Allocations: 1998)
+  Rendered layouts/_image_paths.html.erb (Duration: 8.7ms | Allocations: 980)
+  Rendered layout layouts/application.html.erb (Duration: 396.2ms | Allocations: 42131)
+Completed 200 OK in 398ms (Views: 397.2ms | ActiveRecord: 0.0ms | Allocations: 42459)
+
+
+  Rendered layouts/_image_paths.html.erb (Duration: 9.8ms | Allocations: 1249)
+  Rendered layout layouts/application.html.erb (Duration: 2925.6ms | Allocations: 2369191)
+Completed 200 OK in 2984ms (Views: 2946.0ms | ActiveRecord: 0.0ms | Allocations: 2372491)
+
+
+Started POST "/sessions" for 172.20.0.1 at 2022-09-30 17:39:33 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"NJpM0+YGnHHsZiVB6eVY8Joe+27d/ZYjyI5iKbFsXF10vq6u3b6a0JAOhEkFqeQ1M8bXy2A+PsGZLAW+LfEljA==", "email"=>"email@example.com", "password"=>"[FILTERED]", "commit"=>"Submit"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "email@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:15:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 294ms (ActiveRecord: 3.3ms | Allocations: 10577)
+
+
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:39:34 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 269)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 17:39:34 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] /usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+
+[Webpacker] assets by status 3.18 MiB [cached] 11 assets
+assets by path . 53.8 KiB
+  asset js/projections-fcec1b6d0434a1981b7f.js 46.5 KiB [emitted] [immutable] (name: projections) 1 related asset
+  asset manifest.json 7.31 KiB [emitted] [compared for emit]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 246 KiB
+  modules by path ./app/javascript/components/ 234 KiB 28 modules
+  modules by path ./app/javascript/packs/ 4.52 KiB 6 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 6149 ms
+
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 8254.7ms | Allocations: 4962)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.4ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 19.2ms | Allocations: 1447)
+  Rendered layout layouts/application.html.erb (Duration: 8733.3ms | Allocations: 26667)
+Completed 200 OK in 8744ms (Views: 8737.1ms | ActiveRecord: 0.0ms | Allocations: 27628)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:39:43 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 14ms (Views: 1.8ms | ActiveRecord: 1.4ms | Allocations: 2452)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:39:43 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 12ms (Views: 1.9ms | ActiveRecord: 0.7ms | Allocations: 1321)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:39:43 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 839)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 17:39:43 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 4.1ms | Allocations: 3014)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:39:44 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 286.4ms | Allocations: 3257)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.1ms | Allocations: 935)
+  Rendered layout layouts/application.html.erb (Duration: 711.7ms | Allocations: 24316)
+Completed 200 OK in 723ms (Views: 716.1ms | ActiveRecord: 0.0ms | Allocations: 25231)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:41:10 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] /usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+
+[Webpacker] assets by status 3.18 MiB [cached] 11 assets
+assets by path . 52.9 KiB
+  asset js/projections-ed1050cd157134758003.js 45.6 KiB [emitted] [immutable] (name: projections) 1 related asset
+  asset manifest.json 7.31 KiB [emitted] [compared for emit]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 246 KiB
+  modules by path ./app/javascript/components/ 233 KiB 28 modules
+  modules by path ./app/javascript/packs/ 4.52 KiB 6 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 5960 ms
+
+  Rendered projections/index.html.erb within layouts/application (Duration: 8084.1ms | Allocations: 4858)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.6ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.0ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 8492.4ms | Allocations: 25894)
+Completed 200 OK in 8494ms (Views: 8493.4ms | ActiveRecord: 0.0ms | Allocations: 26294)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:41:19 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.4ms | Allocations: 872)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:41:19 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.4ms | Allocations: 869)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:41:19 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 834)
+
+
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:42:47 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 263)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 17:42:47 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 273.3ms | Allocations: 3199)
+  Rendered layouts/_image_paths.html.erb (Duration: 14.9ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.9ms | Allocations: 930)
+  Rendered layout layouts/application.html.erb (Duration: 753.8ms | Allocations: 24252)
+Completed 200 OK in 755ms (Views: 754.9ms | ActiveRecord: 0.0ms | Allocations: 24651)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:42:48 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.4ms | Allocations: 870)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:42:48 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 869)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:42:48 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 833)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 17:42:48 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 2.4ms | Allocations: 2382)
+
+
+Started GET "/expense_uploads/new" for 172.20.0.1 at 2022-09-30 17:42:50 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.4ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:16
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 6.1ms | Allocations: 1272)
+  Rendered layouts/_image_paths.html.erb (Duration: 19.5ms | Allocations: 501)
+  Rendered layouts/_navbar.html.erb (Duration: 17.7ms | Allocations: 940)
+  Rendered layout layouts/application.html.erb (Duration: 466.8ms | Allocations: 22334)
+Completed 200 OK in 490ms (Views: 470.5ms | ActiveRecord: 1.8ms | Allocations: 24811)
+
+
+Started GET "/expenses" for 172.20.0.1 at 2022-09-30 17:42:52 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpensesController#index as HTML
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/expenses_controller.rb:4:in `index'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expenses_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering expenses/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered expenses/index.html.erb within layouts/application (Duration: 280.2ms | Allocations: 3159)
+  Rendered layouts/_image_paths.html.erb (Duration: 18.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.8ms | Allocations: 935)
+  Rendered layout layouts/application.html.erb (Duration: 729.4ms | Allocations: 24210)
+Completed 200 OK in 745ms (Views: 733.5ms | ActiveRecord: 0.7ms | Allocations: 26220)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-09-30 17:42:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 307.3ms | Allocations: 3162)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.0ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.5ms | Allocations: 935)
+  Rendered layout layouts/application.html.erb (Duration: 743.1ms | Allocations: 24213)
+Completed 200 OK in 760ms (Views: 747.5ms | ActiveRecord: 0.6ms | Allocations: 26222)
+
+
+Started GET "/expenses" for 172.20.0.1 at 2022-09-30 17:42:59 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpensesController#index as HTML
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/expenses_controller.rb:4:in `index'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expenses_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering expenses/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered expenses/index.html.erb within layouts/application (Duration: 286.3ms | Allocations: 3042)
+  Rendered layouts/_image_paths.html.erb (Duration: 16.7ms | Allocations: 500)
+  Rendered layouts/_navbar.html.erb (Duration: 17.1ms | Allocations: 930)
+  Rendered layout layouts/application.html.erb (Duration: 783.0ms | Allocations: 24090)
+Completed 200 OK in 789ms (Views: 784.0ms | ActiveRecord: 0.6ms | Allocations: 25566)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-09-30 17:43:06 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 275.1ms | Allocations: 3058)
+  Rendered layouts/_image_paths.html.erb (Duration: 14.7ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.1ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 730.1ms | Allocations: 24094)
+Completed 200 OK in 736ms (Views: 731.1ms | ActiveRecord: 0.6ms | Allocations: 25551)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:43:08 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 268.0ms | Allocations: 3200)
+  Rendered layouts/_image_paths.html.erb (Duration: 14.9ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.3ms | Allocations: 930)
+  Rendered layout layouts/application.html.erb (Duration: 705.5ms | Allocations: 24248)
+Completed 200 OK in 707ms (Views: 706.4ms | ActiveRecord: 0.0ms | Allocations: 24662)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:43:09 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.4ms | Allocations: 875)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:43:09 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.3ms | Allocations: 886)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:43:09 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 852)
+
+
+Started GET "/expense_uploads/new" for 172.20.0.1 at 2022-09-30 17:45:44 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.4ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:16
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 953)
+  Rendered layouts/_image_paths.html.erb (Duration: 18.6ms | Allocations: 495)
+  Rendered layouts/_navbar.html.erb (Duration: 18.2ms | Allocations: 921)
+  Rendered layout layouts/application.html.erb (Duration: 449.1ms | Allocations: 21890)
+Completed 200 OK in 453ms (Views: 449.7ms | ActiveRecord: 0.8ms | Allocations: 22872)
+
+
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:45:46 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 271)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 17:45:46 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Compiling...
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:45:48 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 259)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 17:45:48 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+assets by status 3.05 MiB [cached] 9 assets
+assets by path . 144 KiB
+  asset js/dashboard-68892d54fc27a9ae6ba4.js 76.7 KiB [emitted] [immutable] (name: dashboard) 1 related asset
+  asset js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-13a311569e6f2ef09801.js 47.7 KiB [emitted] [immutable] 1 related asset
+  asset js/projections-e7c52c35887d6b4b7838.js 12.9 KiB [emitted] [immutable] (name: projections) 1 related asset
+  asset manifest.json 7.22 KiB [emitted]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 220 KiB
+  modules by path ./app/javascript/components/ 208 KiB 24 modules
+  modules by path ./app/javascript/packs/ 4.52 KiB 6 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+
+ERROR in ./app/javascript/components/projections/Main.jsx 10:0-34
+Module not found: Error: Can't resolve './Overview' in '/ontrack/app/javascript/components/projections'
+ @ ./app/javascript/packs/projections.jsx 7:0-61 11:52-67
+
+ERROR in ./app/javascript/components/projections/Main.jsx 11:0-46
+Module not found: Error: Can't resolve './CategoriesList' in '/ontrack/app/javascript/components/projections'
+ @ ./app/javascript/packs/projections.jsx 7:0-61 11:52-67
+
+ERROR in ./app/javascript/components/projections/Main.jsx 13:0-28
+Module not found: Error: Can't resolve './Chart' in '/ontrack/app/javascript/components/projections'
+ @ ./app/javascript/packs/projections.jsx 7:0-61 11:52-67
+
+3 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+webpack 5.28.0 compiled with 3 errors in 5687 ms
+
+
+/usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 7794.9ms | Allocations: 11710)
+  Rendered layouts/_image_paths.html.erb (Duration: 18.7ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 18.4ms | Allocations: 930)
+  Rendered layout layouts/application.html.erb (Duration: 8294.8ms | Allocations: 32757)
+Completed 200 OK in 8297ms (Views: 8295.9ms | ActiveRecord: 0.0ms | Allocations: 33151)
+
+
+[Webpacker] Compilation failed:
+assets by status 3.19 MiB [cached] 12 assets
+asset manifest.json 7.22 KiB [compared for emit]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 220 KiB
+  modules by path ./app/javascript/components/ 208 KiB 24 modules
+  modules by path ./app/javascript/packs/ 4.52 KiB 6 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+
+ERROR in ./app/javascript/components/projections/Main.jsx 10:0-34
+Module not found: Error: Can't resolve './Overview' in '/ontrack/app/javascript/components/projections'
+ @ ./app/javascript/packs/projections.jsx 7:0-61 11:52-67
+
+ERROR in ./app/javascript/components/projections/Main.jsx 11:0-46
+Module not found: Error: Can't resolve './CategoriesList' in '/ontrack/app/javascript/components/projections'
+ @ ./app/javascript/packs/projections.jsx 7:0-61 11:52-67
+
+ERROR in ./app/javascript/components/projections/Main.jsx 13:0-28
+Module not found: Error: Can't resolve './Chart' in '/ontrack/app/javascript/components/projections'
+ @ ./app/javascript/packs/projections.jsx 7:0-61 11:52-67
+
+3 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+webpack 5.28.0 compiled with 3 errors in 6015 ms
+
+
+/usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 8237.3ms | Allocations: 28387)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 15.8ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 8742.1ms | Allocations: 49421)
+Completed 200 OK in 8744ms (Views: 8743.2ms | ActiveRecord: 0.0ms | Allocations: 49814)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:45:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.3ms | Allocations: 868)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:45:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.3ms | Allocations: 867)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:45:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 832)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 17:45:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 2.3ms | Allocations: 2392)
+
+
+Started POST "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:46:13 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#create as HTML
+  Parameters: {"color"=>"#88b779", "monthly_goal"=>1300, "name"=>"asdasd", "is_revenue"=>0, "category"=>{"name"=>"asdasd", "color"=>"#88b779", "monthly_goal"=>1300, "is_revenue"=>0}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:9:in `create'
+  [1m[36mCategory Create (3.0ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "monthly_goal", "is_revenue") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "asdasd"], ["color", "#88b779"], ["created_at", "2022-09-30 17:46:13.054853"], ["updated_at", "2022-09-30 17:46:13.054853"], ["monthly_goal", 1300], ["is_revenue", 0]]
+  ↳ app/controllers/api/v1/categories_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:9:in `create'
+Completed 200 OK in 22ms (Views: 0.4ms | ActiveRecord: 8.5ms | Allocations: 6749)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:46:13 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.3ms | Allocations: 1010)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:46:13 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 879)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:46:13 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 843)
+
+
+Started POST "/api/v1/expenses" for 172.20.0.1 at 2022-09-30 17:46:20 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#create as HTML
+  Parameters: {"description"=>"aaa", "category_id"=>1, "amount"=>12300, "paid_at"=>"2022-09-30T17:46:15.400Z", "expense"=>{"description"=>"aaa", "amount"=>12300, "category_id"=>1, "paid_at"=>"2022-09-30T17:46:15.400Z"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:24:in `create'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/expenses_controller.rb:24:in `create'
+  [1m[36mExpense Create (3.0ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "aaa"], ["amount", 12300], ["category_id", 1], ["paid_at", "2022-09-30 17:46:15.400000"], ["created_at", "2022-09-30 17:46:20.270092"], ["updated_at", "2022-09-30 17:46:20.270092"]]
+  ↳ app/controllers/api/v1/expenses_controller.rb:24:in `create'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:24:in `create'
+Completed 200 OK in 96ms (Views: 0.6ms | ActiveRecord: 6.4ms | Allocations: 10163)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:46:20 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.3ms | Allocations: 992)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:46:20 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.3ms | Allocations: 995)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:46:20 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 834)
+
+
+Started PUT "/api/v1/categories/1" for 172.20.0.1 at 2022-09-30 17:46:42 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#update as HTML
+  Parameters: {"color"=>"#88b779", "monthly_goal"=>13344400, "name"=>"asdasd", "id"=>"1", "category"=>{"name"=>"asdasd", "color"=>"#88b779", "monthly_goal"=>13344400}}
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/categories_controller.rb:14:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:15:in `update'
+  [1m[36mCategory Update (0.5ms)[0m  [1m[33mUPDATE "categories" SET "updated_at" = $1, "monthly_goal" = $2 WHERE "categories"."id" = $3[0m  [["updated_at", "2022-09-30 17:46:42.829710"], ["monthly_goal", 13344400], ["id", 1]]
+  ↳ app/controllers/api/v1/categories_controller.rb:15:in `update'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:15:in `update'
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 2.6ms | Allocations: 2941)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:46:42 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.3ms | Allocations: 988)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:46:42 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 983)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:46:42 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 829)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-09-30 17:46:50 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 259.9ms | Allocations: 3009)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.1ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 741.0ms | Allocations: 24042)
+Completed 200 OK in 747ms (Views: 742.0ms | ActiveRecord: 0.6ms | Allocations: 25506)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-09-30 17:46:51 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 17:46:51 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+Processing by Api::V1::ReportsController#month as HTML
+  [1m[35m (2.1ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 12300.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  Parameters: {"month"=>"September 2022"}
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+Completed 200 OK in 20ms (Views: 2.8ms | ActiveRecord: 5.9ms | Allocations: 3824)
+
+
+  [1m[35m (1.6ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 35ms (Views: 0.8ms | ActiveRecord: 11.1ms | Allocations: 7915)
+
+
+Started GET "/expenses" for 172.20.0.1 at 2022-09-30 17:46:52 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpensesController#index as HTML
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/expenses_controller.rb:4:in `index'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expenses_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering expenses/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered expenses/index.html.erb within layouts/application (Duration: 265.5ms | Allocations: 2993)
+  Rendered layouts/_image_paths.html.erb (Duration: 16.6ms | Allocations: 500)
+  Rendered layouts/_navbar.html.erb (Duration: 18.0ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 726.1ms | Allocations: 24027)
+Completed 200 OK in 732ms (Views: 727.1ms | ActiveRecord: 0.9ms | Allocations: 25631)
+
+
+Started GET "/api/v1/expenses?include_category=true&paid_before=1664560013&paid_after=1656784013&category_id=&sort=paid_at&sort_desc=true&search=&page=1&per_page=10" for 172.20.0.1 at 2022-09-30 17:46:53 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"include_category"=>"true", "paid_before"=>"1664560013", "paid_after"=>"1656784013", "category_id"=>"", "sort"=>"paid_at", "sort_desc"=>"true", "search"=>"", "page"=>"1", "per_page"=>"10"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 17:46:53') AND (paid_at <= '2022-09-30 17:46:53')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 17:46:53') AND (paid_at <= '2022-09-30 17:46:53')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 17:46:53') AND (paid_at <= '2022-09-30 17:46:53')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 17:46:53') AND (paid_at <= '2022-09-30 17:46:53')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-07-02 17:46:53') AND (paid_at <= '2022-09-30 17:46:53') ORDER BY paid_at DESC, "expenses"."id" DESC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["id", 1]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+Completed 200 OK in 75ms (Views: 0.3ms | ActiveRecord: 1.5ms | Allocations: 6878)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:46:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 216.7ms | Allocations: 3068)
+  Rendered layouts/_image_paths.html.erb (Duration: 13.2ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.7ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 636.9ms | Allocations: 24101)
+Completed 200 OK in 639ms (Views: 637.8ms | ActiveRecord: 0.0ms | Allocations: 24504)
+
+
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:48:12 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 58.6ms | Allocations: 1601)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.7ms | Allocations: 495)
+  Rendered layout layouts/application.html.erb (Duration: 511.1ms | Allocations: 21366)
+Completed 200 OK in 512ms (Views: 512.1ms | ActiveRecord: 0.0ms | Allocations: 21677)
+
+
+Started POST "/sessions" for 172.20.0.1 at 2022-09-30 17:48:25 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"UrL7kIADzhUj+KHuwTnMVFbyAM1xMrJLN02zopiNoRec3am6fw/71FqH4RO/q4WsbcMzv/HtcApZy6SZTWZCBA==", "email"=>"email@example.com", "password"=>"[FILTERED]", "commit"=>"Submit"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "email@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:15:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 226ms (ActiveRecord: 0.5ms | Allocations: 1103)
+
+
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:48:25 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 267)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 17:48:25 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 254.2ms | Allocations: 3149)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.4ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.4ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 642.4ms | Allocations: 24183)
+Completed 200 OK in 644ms (Views: 643.3ms | ActiveRecord: 0.0ms | Allocations: 24584)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:48:26 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.4ms | Allocations: 996)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:48:26 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.3ms | Allocations: 991)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:48:26 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 837)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 17:48:26 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 2.8ms | Allocations: 2422)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:48:29 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 266.1ms | Allocations: 3069)
+  Rendered layouts/_image_paths.html.erb (Duration: 19.1ms | Allocations: 500)
+  Rendered layouts/_navbar.html.erb (Duration: 18.0ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 760.6ms | Allocations: 24106)
+Completed 200 OK in 762ms (Views: 761.7ms | ActiveRecord: 0.0ms | Allocations: 24507)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:48:31 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 258.8ms | Allocations: 3068)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.0ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.4ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 691.4ms | Allocations: 24105)
+Completed 200 OK in 693ms (Views: 692.4ms | ActiveRecord: 0.0ms | Allocations: 24498)
+
+
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:50:45 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 54.2ms | Allocations: 1585)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.8ms | Allocations: 495)
+  Rendered layout layouts/application.html.erb (Duration: 509.9ms | Allocations: 21348)
+Completed 200 OK in 511ms (Views: 510.9ms | ActiveRecord: 0.0ms | Allocations: 21658)
+
+
+Started POST "/sessions" for 172.20.0.1 at 2022-09-30 17:50:54 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"51J0yzpUyl03+945gBaiuiYjXQbJbrpL4AoQwRaf/fJcuMUjgPZCyR5lSiCeEr4YmE1MbSroWYQbrKLJl6eFig==", "email"=>"email@example.com", "password"=>"[FILTERED]", "commit"=>"Submit"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "email@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:15:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 221ms (ActiveRecord: 0.3ms | Allocations: 1089)
+
+
+Started GET "/" for 172.20.0.1 at 2022-09-30 17:50:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 269)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 17:50:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] /usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+
+[Webpacker] assets by status 3.22 MiB [cached] 12 assets
+asset manifest.json 7.31 KiB [emitted]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 246 KiB
+  modules by path ./app/javascript/components/ 233 KiB 28 modules
+  modules by path ./app/javascript/packs/ 4.52 KiB 6 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 5906 ms
+
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 8074.5ms | Allocations: 4857)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.8ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.2ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 8466.8ms | Allocations: 25890)
+Completed 200 OK in 8468ms (Views: 8467.7ms | ActiveRecord: 0.0ms | Allocations: 26293)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:51:03 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.3ms | Allocations: 998)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:51:03 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 1002)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:51:03 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 840)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 17:51:03 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 11ms (Views: 0.3ms | ActiveRecord: 2.5ms | Allocations: 2424)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-09-30 17:51:04 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 293.7ms | Allocations: 3059)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.4ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 787.3ms | Allocations: 24092)
+Completed 200 OK in 794ms (Views: 788.4ms | ActiveRecord: 0.7ms | Allocations: 25568)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-09-30 17:51:05 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 17:51:05 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+Processing by Api::V1::ReportsController#month as HTML
+  [1m[35m (1.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 12300.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (1.1ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+Completed 200 OK in 23ms (Views: 4.5ms | ActiveRecord: 5.1ms | Allocations: 4391)
+
+
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 42ms (Views: 0.4ms | ActiveRecord: 3.2ms | Allocations: 4568)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:51:06 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 277.6ms | Allocations: 3198)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.9ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.4ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 727.0ms | Allocations: 24236)
+Completed 200 OK in 728ms (Views: 727.9ms | ActiveRecord: 0.0ms | Allocations: 24639)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:51:07 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.4ms | Allocations: 994)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:51:07 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.3ms | Allocations: 989)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:51:07 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 835)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:54:08 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 318.9ms | Allocations: 3202)
+  Rendered layouts/_image_paths.html.erb (Duration: 16.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.9ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 779.6ms | Allocations: 24235)
+Completed 200 OK in 784ms (Views: 782.4ms | ActiveRecord: 0.0ms | Allocations: 24634)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:54:09 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.3ms | Allocations: 988)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:54:09 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 983)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:54:09 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 829)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 17:54:11 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 343.8ms | Allocations: 3199)
+  Rendered layouts/_image_paths.html.erb (Duration: 16.7ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.9ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 832.5ms | Allocations: 24232)
+Completed 200 OK in 836ms (Views: 834.9ms | ActiveRecord: 0.0ms | Allocations: 24625)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 17:54:12 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.3ms | Allocations: 998)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 17:54:12 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms | Allocations: 993)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 17:54:12 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 839)
+
+
+Started GET "/" for 172.20.0.1 at 2022-09-30 18:00:12 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 2ms (Allocations: 269)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 18:00:12 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 276.5ms | Allocations: 3198)
+  Rendered layouts/_image_paths.html.erb (Duration: 23.1ms | Allocations: 500)
+  Rendered layouts/_navbar.html.erb (Duration: 18.0ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 721.3ms | Allocations: 24233)
+Completed 200 OK in 723ms (Views: 722.3ms | Allocations: 24636)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:00:47 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] /usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+
+[Webpacker] assets by status 3.18 MiB [cached] 11 assets
+assets by path . 52.9 KiB
+  asset js/projections-bf9074f33433041b0d4e.js 45.6 KiB [emitted] [immutable] (name: projections) 1 related asset
+  asset manifest.json 7.31 KiB [emitted] [compared for emit]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 246 KiB
+  modules by path ./app/javascript/components/ 233 KiB 28 modules
+  modules by path ./app/javascript/packs/ 4.52 KiB 6 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 6088 ms
+
+  Rendered projections/index.html.erb within layouts/application (Duration: 8256.6ms | Allocations: 4858)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.0ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.3ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 8729.8ms | Allocations: 25895)
+Completed 200 OK in 8731ms (Views: 8730.8ms | Allocations: 26284)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 18:00:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (1.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 19ms (Views: 2.5ms | ActiveRecord: 5.8ms | Allocations: 4237)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 18:00:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.6ms | Allocations: 1009)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 18:00:56 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.7ms | Allocations: 872)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 18:03:37 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.4ms | Allocations: 1000)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 18:03:37 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.4ms | Allocations: 995)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 18:03:37 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 841)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 18:03:37 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 2.7ms | Allocations: 2426)
+
+
+Started GET "/expenses" for 172.20.0.1 at 2022-09-30 18:03:40 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpensesController#index as HTML
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/expenses_controller.rb:4:in `index'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expenses_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering expenses/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered expenses/index.html.erb within layouts/application (Duration: 282.1ms | Allocations: 3043)
+  Rendered layouts/_image_paths.html.erb (Duration: 16.8ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 18.8ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 743.1ms | Allocations: 24076)
+Completed 200 OK in 749ms (Views: 744.1ms | ActiveRecord: 0.7ms | Allocations: 25664)
+
+
+Started GET "/api/v1/expenses?include_category=true&paid_before=1664561021&paid_after=1656785021&category_id=&sort=paid_at&sort_desc=true&search=&page=1&per_page=10" for 172.20.0.1 at 2022-09-30 18:03:41 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"include_category"=>"true", "paid_before"=>"1664561021", "paid_after"=>"1656785021", "category_id"=>"", "sort"=>"paid_at", "sort_desc"=>"true", "search"=>"", "page"=>"1", "per_page"=>"10"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41') ORDER BY paid_at DESC, "expenses"."id" DESC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["id", 1]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+Completed 200 OK in 12ms (Views: 0.5ms | ActiveRecord: 1.4ms | Allocations: 4000)
+
+
+Started GET "/api/v1/expenses?include_category=true&paid_before=1664561021&paid_after=1656785021&category_id=&sort=paid_at&sort_desc=false&search=&page=1&per_page=10" for 172.20.0.1 at 2022-09-30 18:03:47 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"include_category"=>"true", "paid_before"=>"1664561021", "paid_after"=>"1656785021", "category_id"=>"", "sort"=>"paid_at", "sort_desc"=>"false", "search"=>"", "page"=>"1", "per_page"=>"10"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41') ORDER BY paid_at ASC, "expenses"."id" DESC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["id", 1]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+Completed 200 OK in 13ms (Views: 0.3ms | ActiveRecord: 1.2ms | Allocations: 3996)
+
+
+Started GET "/api/v1/expenses?include_category=true&paid_before=1664561021&paid_after=1656785021&category_id=&sort=paid_at&sort_desc=true&search=&page=1&per_page=10" for 172.20.0.1 at 2022-09-30 18:03:47 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"include_category"=>"true", "paid_before"=>"1664561021", "paid_after"=>"1656785021", "category_id"=>"", "sort"=>"paid_at", "sort_desc"=>"true", "search"=>"", "page"=>"1", "per_page"=>"10"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41') ORDER BY paid_at DESC, "expenses"."id" DESC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["id", 1]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+Completed 200 OK in 11ms (Views: 0.3ms | ActiveRecord: 1.1ms | Allocations: 3995)
+
+
+Started GET "/api/v1/expenses?include_category=true&paid_before=1664561021&paid_after=1656785021&category_id=&sort=amount&sort_desc=true&search=&page=1&per_page=10" for 172.20.0.1 at 2022-09-30 18:03:49 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"include_category"=>"true", "paid_before"=>"1664561021", "paid_after"=>"1656785021", "category_id"=>"", "sort"=>"amount", "sort_desc"=>"true", "search"=>"", "page"=>"1", "per_page"=>"10"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41') ORDER BY amount DESC, "expenses"."id" DESC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["id", 1]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 1.2ms | Allocations: 3993)
+
+
+Started GET "/api/v1/expenses?include_category=true&paid_before=1664561021&paid_after=1656785021&category_id=&sort=amount&sort_desc=false&search=&page=1&per_page=10" for 172.20.0.1 at 2022-09-30 18:03:49 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"include_category"=>"true", "paid_before"=>"1664561021", "paid_after"=>"1656785021", "category_id"=>"", "sort"=>"amount", "sort_desc"=>"false", "search"=>"", "page"=>"1", "per_page"=>"10"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-07-02 18:03:41') AND (paid_at <= '2022-09-30 18:03:41') ORDER BY amount ASC, "expenses"."id" DESC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["id", 1]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 1.2ms | Allocations: 3996)
+
+
+Started GET "/expense_uploads/new" for 172.20.0.1 at 2022-09-30 18:03:57 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.4ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:16
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 3.0ms | Allocations: 991)
+Started GET "/insights" for 172.20.0.1 at 2022-09-30 18:03:58 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+  Rendered layouts/_image_paths.html.erb (Duration: 18.7ms | Allocations: 548)
+  Rendered layouts/_navbar.html.erb (Duration: 18.9ms | Allocations: 929)
+  Rendered layout layouts/application.html.erb (Duration: 527.0ms | Allocations: 30218)
+Completed 200 OK in 531ms (Views: 527.7ms | ActiveRecord: 0.8ms | Allocations: 31189)
+
+
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 288.3ms | Allocations: 6663)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.6ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 726.8ms | Allocations: 27699)
+Completed 200 OK in 748ms (Views: 727.8ms | ActiveRecord: 5.4ms | Allocations: 32678)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-09-30 18:03:59 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 18:03:59 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (1.3ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 12300.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (1.0ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 19ms (Views: 3.2ms | ActiveRecord: 5.0ms | Allocations: 4921)
+
+
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 17ms (Views: 0.4ms | ActiveRecord: 3.5ms | Allocations: 4880)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:07:23 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] /usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+
+[Webpacker] assets by status 2.37 MiB [cached] 6 assets
+assets by path . 876 KiB
+  assets by chunk 593 KiB (id hint: vendors)
+    asset js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-72def2cd3c0611ee20ab.js 577 KiB [emitted] [immutable] (id hint: vendors) 1 related asset
+    asset js/vendors-node_modules_react-text-mask_dist_reactTextMask_js-node_modules_text-mask-addons_dist-48bda0-6d3867ad562ec26e47e0.js 16.1 KiB [emitted] [immutable] (id hint: vendors) 1 related asset
+  asset js/dashboard-7eea55a5b2b5af0f621d.js 96.1 KiB [emitted] [immutable] (name: dashboard) 1 related asset
+  asset js/history-e10fa4067cd303afca42.js 58.7 KiB [emitted] [immutable] (name: history) 1 related asset
+  asset js/projections-2b7b21a21055842196c4.js 56.2 KiB [emitted] [immutable] (name: projections) 1 related asset
+  asset js/upload_preview-1fa5747791ac5e96bc9a.js 35.7 KiB [emitted] [immutable] (name: upload_preview) 1 related asset
+  asset js/app_javascript_components_goals_FormModal_jsx-app_javascript_components_shared_BarChart_jsx-a-86ecc0-c09ada5b0c7c76d3845e.js 28.3 KiB [emitted] [immutable] 1 related asset
+  asset manifest.json 8.05 KiB [emitted]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 257 KiB
+  modules by path ./app/javascript/components/ 245 KiB 27 modules
+  modules by path ./app/javascript/packs/ 4.52 KiB 6 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 7012 ms
+
+  Rendered projections/index.html.erb within layouts/application (Duration: 9186.7ms | Allocations: 4851)
+  Rendered layouts/_image_paths.html.erb (Duration: 14.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.8ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 9620.5ms | Allocations: 25884)
+Completed 200 OK in 9622ms (Views: 9621.4ms | ActiveRecord: 0.0ms | Allocations: 26279)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-09-30 18:07:36 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 307.6ms | Allocations: 3053)
+  Rendered layouts/_image_paths.html.erb (Duration: 19.2ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 19.6ms | Allocations: 921)
+  Rendered layout layouts/application.html.erb (Duration: 778.9ms | Allocations: 24090)
+Completed 200 OK in 786ms (Views: 780.0ms | ActiveRecord: 0.7ms | Allocations: 25565)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-09-30 18:07:37 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 18:07:37 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+Processing by Api::V1::ReportsController#month as HTML
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (1.0ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 12300.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (1.0ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (1.7ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 22ms (Views: 3.3ms | ActiveRecord: 5.9ms | Allocations: 4905)
+
+
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 21ms (Views: 0.4ms | ActiveRecord: 4.6ms | Allocations: 4887)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:07:38 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 279.6ms | Allocations: 3194)
+  Rendered layouts/_image_paths.html.erb (Duration: 17.4ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 18.4ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 790.5ms | Allocations: 24228)
+Completed 200 OK in 792ms (Views: 791.7ms | ActiveRecord: 0.0ms | Allocations: 24629)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:08:12 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 313.5ms | Allocations: 3194)
+  Rendered layouts/_image_paths.html.erb (Duration: 14.4ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.6ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 774.5ms | Allocations: 24227)
+Completed 200 OK in 776ms (Views: 775.7ms | ActiveRecord: 0.0ms | Allocations: 24632)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:09:16 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 279.1ms | Allocations: 3193)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.2ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.3ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 744.5ms | Allocations: 24227)
+Completed 200 OK in 746ms (Views: 745.6ms | ActiveRecord: 0.0ms | Allocations: 24628)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:09:18 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 294.6ms | Allocations: 3193)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.0ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.7ms | Allocations: 921)
+  Rendered layout layouts/application.html.erb (Duration: 752.5ms | Allocations: 24227)
+Completed 200 OK in 754ms (Views: 753.5ms | ActiveRecord: 0.0ms | Allocations: 24632)
+
+
+Started GET "/expense_uploads/new" for 172.20.0.1 at 2022-09-30 18:10:09 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.5ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:16
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 987)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.8ms | Allocations: 495)
+  Rendered layouts/_navbar.html.erb (Duration: 14.9ms | Allocations: 915)
+  Rendered layout layouts/application.html.erb (Duration: 391.3ms | Allocations: 21915)
+Completed 200 OK in 395ms (Views: 391.8ms | ActiveRecord: 0.9ms | Allocations: 22894)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:10:13 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 276.3ms | Allocations: 3194)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 15.8ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 747.8ms | Allocations: 24231)
+Completed 200 OK in 749ms (Views: 748.8ms | ActiveRecord: 0.0ms | Allocations: 24630)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.5ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 11]]
+  [1m[36mUser Destroy (1.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 11]]
+  [1m[36mTRANSACTION (5.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$Da5hq1k81v70UofnnXcSY.9LA9lkJMmN/TIuiVGLsr6/fjktYgt5O"], ["created_at", "2022-09-30 18:12:04.875074"], ["updated_at", "2022-09-30 18:12:04.875074"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 172.20.0.1 at 2022-09-30 18:12:16 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 22ms (ActiveRecord: 0.0ms | Allocations: 1285)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 18:12:16 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 314.2ms | Allocations: 3651)
+Started GET "/dashboard" for 172.20.0.1 at 2022-09-30 18:12:18 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 322.9ms | Allocations: 276467)
+  Rendered layouts/_image_paths.html.erb (Duration: 8.6ms | Allocations: 989)
+  Rendered layouts/_image_paths.html.erb (Duration: 9.3ms | Allocations: 1238)
+  Rendered layouts/_navbar.html.erb (Duration: 9.9ms | Allocations: 1830)
+  Rendered layout layouts/application.html.erb (Duration: 3242.6ms | Allocations: 2373394)
+  Rendered layouts/_navbar.html.erb (Duration: 11.4ms | Allocations: 2470)
+Completed 200 OK in 3287ms (Views: 3267.0ms | ActiveRecord: 0.0ms | Allocations: 2376631)
+
+
+  Rendered layout layouts/application.html.erb (Duration: 703.3ms | Allocations: 318649)
+Completed 200 OK in 706ms (Views: 705.5ms | ActiveRecord: 0.0ms | Allocations: 319782)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-09-30 18:12:19 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 44ms (Views: 7.7ms | ActiveRecord: 3.4ms | Allocations: 8017)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.20.0.1 at 2022-09-30 18:12:19 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 26ms (Views: 7.7ms | ActiveRecord: 2.8ms | Allocations: 5483)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-09-30 18:12:19 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 27ms (Views: 0.3ms | ActiveRecord: 2.8ms | Allocations: 8392)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 18:12:20 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 2.6ms | Allocations: 2467)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:12:20 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/projections_controller.rb:3:in `index'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/projections_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 273.0ms | Allocations: 3252)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.7ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.7ms | Allocations: 935)
+  Rendered layout layouts/application.html.erb (Duration: 724.1ms | Allocations: 24308)
+Completed 200 OK in 739ms (Views: 728.0ms | ActiveRecord: 0.6ms | Allocations: 26322)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-09-30 18:12:22 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 266.9ms | Allocations: 3160)
+  Rendered layouts/_image_paths.html.erb (Duration: 16.7ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 16.5ms | Allocations: 935)
+  Rendered layout layouts/application.html.erb (Duration: 730.5ms | Allocations: 24216)
+Completed 200 OK in 746ms (Views: 734.7ms | ActiveRecord: 0.5ms | Allocations: 26219)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-09-30 18:12:23 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 18:12:23 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+Processing by Api::V1::ReportsController#month as HTML
+  [1m[35m (1.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 12300.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  Parameters: {"month"=>"September 2022"}
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (1.0ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+Completed 200 OK in 17ms (Views: 3.0ms | ActiveRecord: 4.9ms | Allocations: 3768)
+
+
+  [1m[35m (1.4ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 33ms (Views: 0.4ms | ActiveRecord: 11.0ms | Allocations: 7933)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:12:24 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/projections_controller.rb:3:in `index'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/projections_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 274.5ms | Allocations: 3193)
+  Rendered layouts/_image_paths.html.erb (Duration: 16.0ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 18.2ms | Allocations: 931)
+  Rendered layout layouts/application.html.erb (Duration: 731.1ms | Allocations: 24241)
+Completed 200 OK in 738ms (Views: 732.1ms | ActiveRecord: 0.7ms | Allocations: 25758)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:13:28 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/projections_controller.rb:3:in `index'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/projections_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 291.7ms | Allocations: 3194)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.2ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.3ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 747.5ms | Allocations: 24228)
+Completed 200 OK in 755ms (Views: 748.5ms | ActiveRecord: 0.9ms | Allocations: 25700)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:13:31 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/projections_controller.rb:3:in `index'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/projections_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 272.0ms | Allocations: 3193)
+  Rendered layouts/_image_paths.html.erb (Duration: 16.2ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 18.3ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 781.2ms | Allocations: 24226)
+Completed 200 OK in 787ms (Views: 782.1ms | ActiveRecord: 0.7ms | Allocations: 25691)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-09-30 18:13:32 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 291.3ms | Allocations: 3054)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 17.2ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 746.5ms | Allocations: 24087)
+Completed 200 OK in 752ms (Views: 747.6ms | ActiveRecord: 0.6ms | Allocations: 25554)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-09-30 18:13:33 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=September+2022" for 172.20.0.1 at 2022-09-30 18:13:33 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+  [1m[35m (1.0ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 12300.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (1.3ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (1.2ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+Completed 200 OK in 20ms (Views: 3.3ms | ActiveRecord: 5.3ms | Allocations: 4740)
+
+
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 16ms (Views: 0.4ms | ActiveRecord: 3.3ms | Allocations: 4593)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-09-30 18:13:34 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/projections_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/projections_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 292.0ms | Allocations: 3196)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 19.3ms | Allocations: 920)
+  Rendered layout layouts/application.html.erb (Duration: 813.5ms | Allocations: 24229)
+Completed 200 OK in 819ms (Views: 814.4ms | ActiveRecord: 0.6ms | Allocations: 25699)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.5ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 12]]
+  [1m[36mUser Destroy (0.8ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 12]]
+  [1m[36mTRANSACTION (4.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$DMonI8gCG9Unq9ddQyoF4OIjAUQOsypVjOm/dtj7gACn6EqYLgPWi"], ["created_at", "2022-09-30 18:14:29.637223"], ["updated_at", "2022-09-30 18:14:29.637223"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[35mCOMMIT[0m
