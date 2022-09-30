@@ -1,0 +1,36 @@
+<%= image_tag "logo.svg", size: "150x150" %>
+<div class="login">
+  <div class="flex flex-space-between">
+    <%= form_for :User do |f| %>
+      <div class="input-group">
+        <label>Email</label>
+        <%= text_field :email, nil, autocomplete: "off" %>
+      </div>
+      <div class="input-group">
+        <label>First name</label>
+        <%= text_field :firstname, nil, autocomplete: "off" %>
+      </div>
+      <div class="input-group">
+        <label>Last name</label>
+        <%= text_field :lastname, nil, autocomplete: "off" %>
+      </div>
+      <div class="input-group">
+        <label>Phone number</label>
+        <%= text_field :phone, nil, autocomplete: "off" %>
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <%= password_field :password, nil, autocomplete: "off" %>
+      </div>
+      <div class="input-group">
+        <label>Confirm password</label>
+        <input type="text"/>
+      </div>
+      <div class="form-actions">
+        <%= submit_tag "Submit", class: "btn btn-dark btn-full btn-round" %>
+      </div>
+    <% end %>
+
+    <%= image_tag "coins.png" %>
+  </div>
+</div>
