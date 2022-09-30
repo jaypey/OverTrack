@@ -32,7 +32,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get "register", to: "user#register"
+  get 'user/register', to: 'user#register', as: 'register_user' # new
+  post 'user', to: 'user#create' # create
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#not_found"
   get "/500", to: "errors#not_found"

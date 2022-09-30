@@ -1,33 +1,36 @@
 <%= image_tag "logo.svg", size: "150x150" %>
 <div class="login">
   <div class="flex flex-space-between">
-    <%= form_for :User do |f| %>
+    <%= form_with model: user, url: user_path, method: :post, local: true, scope: :user do |f| %>
+      <% if flash[:success] %>
+        <div class="success"><%= flash[:success] %></div>
+      <% end %>
+      <% if flash[:error] %>
+        <div class="error"><%= flash[:error] %></div>
+      <% end %>
+
       <div class="input-group">
-        <label>Email</label>
-        <%= text_field :email, nil, autocomplete: "off" %>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
       </div>
       <div class="input-group">
-        <label>First name</label>
-        <%= text_field :firstname, nil, autocomplete: "off" %>
+        <%= f.label :firstname %>
+        <%= f.text_field :firstname %>
       </div>
       <div class="input-group">
-        <label>Last name</label>
-        <%= text_field :lastname, nil, autocomplete: "off" %>
+        <%= f.label :lastname %>
+        <%= f.text_field :lastname %>
       </div>
       <div class="input-group">
-        <label>Phone number</label>
-        <%= text_field :phone, nil, autocomplete: "off" %>
+        <%= f.label :phone %>
+        <%= f.text_field :phone %>
       </div>
       <div class="input-group">
-        <label>Password</label>
-        <%= password_field :password, nil, autocomplete: "off" %>
-      </div>
-      <div class="input-group">
-        <label>Confirm password</label>
-        <input type="text"/>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
       </div>
       <div class="form-actions">
-        <%= submit_tag "Submit", class: "btn btn-dark btn-full btn-round" %>
+        <%= f.submit "Create", class: "btn btn-dark btn-full btn-round" %>
       </div>
     <% end %>
 
