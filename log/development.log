@@ -1723,3 +1723,719 @@ FOREIGN KEY ("budget_id")
   [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
   [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$ckCwkjmwlhaaaxkd2D9UCuYSLDR5eSZPCKCPKWSWbgj9wThVzDbei"], ["created_at", "2022-09-30 00:04:07.093058"], ["updated_at", "2022-09-30 00:04:07.093058"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
   [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.7ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 12]]
+  [1m[36mUser Destroy (1.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 12]]
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$AD/bdq9pFtRdAc0aKezgXO.GLtQPzcsK8D2bEwGnoMBJIlB8YX386"], ["created_at", "2022-09-30 15:53:05.446034"], ["updated_at", "2022-09-30 15:53:05.446034"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 192.168.96.1 at 2022-09-30 15:53:07 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1980.8ms | Allocations: 2345871)
+  Rendered layouts/_image_paths.html.erb (Duration: 1.1ms | Allocations: 598)
+  Rendered layout layouts/application.html.erb (Duration: 2012.0ms | Allocations: 2368525)
+Completed 200 OK in 2033ms (Views: 2018.4ms | ActiveRecord: 0.0ms | Allocations: 2371271)
+
+
+Started POST "/sessions" for 192.168.96.1 at 2022-09-30 15:53:14 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"J9RtcFEWtnm+1u+tqBDzEu7A8kyT1mb4gKr5uW83N09n+eHQ9zg96jmZYrLJcF3cAmXjX6DKJ7xBrVnqXqNhTg==", "email"=>"email@example.com", "password"=>"[FILTERED]", "commit"=>"Submit"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "email@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:15:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 268ms (ActiveRecord: 4.2ms | Allocations: 10636)
+
+
+Started GET "/" for 192.168.96.1 at 2022-09-30 15:53:14 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 289)
+
+
+Started GET "/dashboard" for 192.168.96.1 at 2022-09-30 15:53:14 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 3084)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.6ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 1.7ms | Allocations: 1311)
+  Rendered layout layouts/application.html.erb (Duration: 23.8ms | Allocations: 24571)
+Completed 200 OK in 26ms (Views: 25.1ms | ActiveRecord: 0.0ms | Allocations: 25556)
+
+
+Started GET "/api/v1/categories" for 192.168.96.1 at 2022-09-30 15:53:15 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (1.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 23ms (Views: 10.8ms | ActiveRecord: 4.8ms | Allocations: 6729)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 192.168.96.1 at 2022-09-30 15:53:15 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (1.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 16ms (Views: 9.4ms | ActiveRecord: 4.1ms | Allocations: 5245)
+
+
+Started GET "/api/v1/goals" for 192.168.96.1 at 2022-09-30 15:53:15 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 866)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 192.168.96.1 at 2022-09-30 15:53:15 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (1.7ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (1.2ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 16ms (Views: 0.6ms | ActiveRecord: 5.0ms | Allocations: 2502)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 15:53:31 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (1.4ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:16
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 10.1ms | Allocations: 1312)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.8ms | Allocations: 501)
+  Rendered layouts/_navbar.html.erb (Duration: 1.7ms | Allocations: 877)
+  Rendered layout layouts/application.html.erb (Duration: 53.7ms | Allocations: 22232)
+Completed 200 OK in 77ms (Views: 56.4ms | ActiveRecord: 6.4ms | Allocations: 24756)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:02:42 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (2.6ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (2.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:17
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 15.0ms | Allocations: 1257)
+  Rendered layouts/_image_paths.html.erb (Duration: 2.8ms | Allocations: 588)
+  Rendered layouts/_navbar.html.erb (Duration: 4.9ms | Allocations: 1285)
+  Rendered layout layouts/application.html.erb (Duration: 91.9ms | Allocations: 23097)
+Completed 200 OK in 173ms (Views: 96.0ms | ActiveRecord: 22.4ms | Allocations: 28102)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:04:17 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (1.5ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (2.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:19
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 12.0ms | Allocations: 1220)
+  Rendered layouts/_image_paths.html.erb (Duration: 1.1ms | Allocations: 593)
+  Rendered layouts/_navbar.html.erb (Duration: 2.1ms | Allocations: 1285)
+  Rendered layout layouts/application.html.erb (Duration: 114.9ms | Allocations: 23062)
+Completed 200 OK in 133ms (Views: 118.1ms | ActiveRecord: 3.7ms | Allocations: 24796)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:04:47 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.4ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:20
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1221)
+  Rendered layouts/_image_paths.html.erb (Duration: 1.1ms | Allocations: 588)
+  Rendered layouts/_navbar.html.erb (Duration: 1.6ms | Allocations: 1285)
+  Rendered layout layouts/application.html.erb (Duration: 25.0ms | Allocations: 23055)
+Completed 200 OK in 30ms (Views: 25.7ms | ActiveRecord: 1.1ms | Allocations: 24788)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:04:48 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (1.3ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:20
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 7.4ms | Allocations: 990)
+  Rendered layouts/_image_paths.html.erb (Duration: 1.7ms | Allocations: 495)
+  Rendered layouts/_navbar.html.erb (Duration: 3.0ms | Allocations: 853)
+  Rendered layout layouts/application.html.erb (Duration: 66.5ms | Allocations: 21780)
+Completed 200 OK in 77ms (Views: 67.3ms | ActiveRecord: 2.7ms | Allocations: 22788)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:06:29 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (1.9ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:21
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 11.4ms | Allocations: 1222)
+  Rendered layouts/_image_paths.html.erb (Duration: 2.7ms | Allocations: 588)
+  Rendered layouts/_navbar.html.erb (Duration: 4.5ms | Allocations: 1285)
+  Rendered layout layouts/application.html.erb (Duration: 84.0ms | Allocations: 23061)
+Completed 200 OK in 102ms (Views: 87.7ms | ActiveRecord: 3.8ms | Allocations: 24808)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:07:56 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (2.1ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:21
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 10.4ms | Allocations: 1222)
+  Rendered layouts/_image_paths.html.erb (Duration: 3.2ms | Allocations: 588)
+  Rendered layouts/_navbar.html.erb (Duration: 5.8ms | Allocations: 1285)
+  Rendered layout layouts/application.html.erb (Duration: 91.5ms | Allocations: 23056)
+Completed 200 OK in 110ms (Views: 96.2ms | ActiveRecord: 3.7ms | Allocations: 24792)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:08:09 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (1.5ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:21
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 11.2ms | Allocations: 1222)
+  Rendered layouts/_image_paths.html.erb (Duration: 2.4ms | Allocations: 593)
+  Rendered layouts/_navbar.html.erb (Duration: 4.8ms | Allocations: 1285)
+  Rendered layout layouts/application.html.erb (Duration: 130.0ms | Allocations: 23065)
+Completed 200 OK in 149ms (Views: 134.4ms | ActiveRecord: 3.1ms | Allocations: 24819)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:09:42 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (1.4ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:21
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 10.0ms | Allocations: 1222)
+  Rendered layouts/_image_paths.html.erb (Duration: 2.8ms | Allocations: 588)
+  Rendered layouts/_navbar.html.erb (Duration: 5.1ms | Allocations: 1285)
+  Rendered layout layouts/application.html.erb (Duration: 76.5ms | Allocations: 23056)
+Completed 200 OK in 94ms (Views: 81.0ms | ActiveRecord: 2.9ms | Allocations: 24793)
+
+
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:10:27 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (1.6ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/views/expense_uploads/new.html.erb:21
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 10.7ms | Allocations: 1222)
+  Rendered layouts/_image_paths.html.erb (Duration: 3.1ms | Allocations: 588)
+  Rendered layouts/_navbar.html.erb (Duration: 5.6ms | Allocations: 1285)
+  Rendered layout layouts/application.html.erb (Duration: 83.6ms | Allocations: 23056)
+Completed 200 OK in 101ms (Views: 87.2ms | ActiveRecord: 3.1ms | Allocations: 24792)
+
+
+Started GET "/" for 192.168.96.1 at 2022-09-30 16:44:46 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 4ms (Allocations: 299)
+
+
+Started GET "/dashboard" for 192.168.96.1 at 2022-09-30 16:44:47 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+
+[Webpacker] assets by status 3.09 MiB [cached] 10 assets
+asset manifest.json 5.61 KiB [emitted] [compared for emit]
+Entrypoint application 8.54 KiB (6.98 KiB) = js/runtime-cd31353a17a0505265f4.js 7.24 KiB js/application-bb859c936b81fe913e43.js 1.3 KiB 2 auxiliary assets
+Entrypoint dashboard 2.94 MiB (3.31 MiB) = 6 assets 6 auxiliary assets
+Entrypoint history 2.47 MiB (2.73 MiB) = js/runtime-cd31353a17a0505265f4.js 7.24 KiB js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js 1.79 MiB js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-f9a82906bc1ecb5c8558.js 593 KiB js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js 30.4 KiB js/history-7990f155674469845572.js 58.6 KiB 5 auxiliary assets
+Entrypoint insights 2.3 MiB (2.68 MiB) = js/runtime-cd31353a17a0505265f4.js 7.24 KiB js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js 1.79 MiB js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js 419 KiB js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js 30.4 KiB js/insights-b38d4971a63c2b5f1101.js 57.8 KiB 5 auxiliary assets
+Entrypoint upload_preview 2.44 MiB (2.72 MiB) = js/runtime-cd31353a17a0505265f4.js 7.24 KiB js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js 1.79 MiB js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-f9a82906bc1ecb5c8558.js 593 KiB js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js 30.4 KiB js/upload_preview-b21fa8e9df61a485e81c.js 35.7 KiB 5 auxiliary assets
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 212 KiB
+  modules by path ./app/javascript/components/ 201 KiB 22 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/packs/ 3.73 KiB 5 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 5337 ms
+
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 7203.8ms | Allocations: 4748)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.8ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 1.7ms | Allocations: 867)
+  Rendered layout layouts/application.html.erb (Duration: 7237.3ms | Allocations: 25652)
+Completed 200 OK in 7243ms (Views: 7241.2ms | Allocations: 26594)
+
+
+Started GET "/api/v1/categories" for 192.168.96.1 at 2022-09-30 16:44:54 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (1.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 56ms (Views: 9.2ms | ActiveRecord: 18.3ms | Allocations: 4269)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 192.168.96.1 at 2022-09-30 16:44:54 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (1.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 9ms (Views: 2.6ms | ActiveRecord: 1.7ms | Allocations: 1038)
+
+
+Started GET "/api/v1/goals" for 192.168.96.1 at 2022-09-30 16:44:54 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 0.9ms | Allocations: 904)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 192.168.96.1 at 2022-09-30 16:44:54 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (3.7ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (1.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (1.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 26ms (Views: 0.7ms | ActiveRecord: 8.4ms | Allocations: 2457)
+
+
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCsvConfig Create (3.5ms)[0m  [1m[32mINSERT INTO "csv_configs" ("name", "config_json", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Checking account CSVs"], ["config_json", "{\"has_header\":true,\"descriptions\":{\"index\":0,\"ignore_substrings\":[\"Payment made\"]},\"categories\":{\"index\":1,\"mappings\":{\"Gas\":\"Car\"}},\"amounts\":{\"index\":2,\"spend_is_negative\":true,\"skip_non_spend\":false},\"timestamps\":{\"index\":3},\"auto_detect\":{\"filename_substring\":\"account1234\",\"default_category\":\"Uncategorized\"}}"], ["created_at", "2022-09-30 16:54:14.828436"], ["updated_at", "2022-09-30 16:54:14.828436"]]
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/expense_uploads/new" for 192.168.96.1 at 2022-09-30 16:54:34 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.5ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:17:in `block in new'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 3.1ms | Allocations: 522)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.4ms | Allocations: 495)
+  Rendered layouts/_navbar.html.erb (Duration: 0.7ms | Allocations: 858)
+  Rendered layout layouts/application.html.erb (Duration: 131.2ms | Allocations: 21318)
+Completed 200 OK in 166ms (Views: 132.1ms | ActiveRecord: 6.9ms | Allocations: 28307)
+
+
+Started POST "/expense_uploads/preview" for 192.168.96.1 at 2022-09-30 16:54:49 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#preview as HTML
+  Parameters: {"authenticity_token"=>"Mi3FA5ezt/o5o91GCIVhUwQKICM0MSxr11ryJ11R4qejeUSg9uFfxTjp54spS5PhM40yfPt+CRMYlhQsxeKKUw==", "file"=>#<ActionDispatch::Http::UploadedFile:0x00007fbed78598d0 @tempfile=#<Tempfile:/tmp/RackMultipart20220930-48-ck6511.csv>, @original_filename="stuff.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"stuff.csv\"\r\nContent-Type: text/csv\r\n">, "csv_config_id"=>"1", "default_category_id"=>"1", "skip_existing"=>"on"}
+  [1m[36mCsvConfig Load (0.4ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" WHERE "csv_configs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/expense_uploads_controller.rb:25:in `preview'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m
+  ↳ app/services/csv_processor.rb:6:in `initialize'
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 1.0ms | Allocations: 3004)
+
+
+  
+NoMethodError (undefined method `downcase' for nil:NilClass):
+  
+app/services/csv_processor.rb:93:in `get_category_id'
+app/services/csv_processor.rb:77:in `process_row'
+app/services/csv_processor.rb:13:in `block in process!'
+app/services/csv_processor.rb:11:in `each'
+app/services/csv_processor.rb:11:in `each_with_index'
+app/services/csv_processor.rb:11:in `process!'
+app/controllers/expense_uploads_controller.rb:30:in `preview'
+Started POST "/expense_uploads/preview" for 192.168.96.1 at 2022-09-30 16:57:25 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#preview as HTML
+  Parameters: {"authenticity_token"=>"Mi3FA5ezt/o5o91GCIVhUwQKICM0MSxr11ryJ11R4qejeUSg9uFfxTjp54spS5PhM40yfPt+CRMYlhQsxeKKUw==", "file"=>#<ActionDispatch::Http::UploadedFile:0x00007fbed5f6fbf8 @tempfile=#<Tempfile:/tmp/RackMultipart20220930-48-m82t6y.csv>, @original_filename="stuff.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"stuff.csv\"\r\nContent-Type: text/csv\r\n">, "csv_config_id"=>"1", "default_category_id"=>"1", "skip_existing"=>"on"}
+  [1m[36mCsvConfig Load (0.3ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" WHERE "csv_configs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/expense_uploads_controller.rb:25:in `preview'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m
+  ↳ app/services/csv_processor.rb:6:in `initialize'
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.8ms | Allocations: 2325)
+
+
+  
+NoMethodError (undefined method `downcase' for nil:NilClass):
+  
+app/services/csv_processor.rb:93:in `get_category_id'
+app/services/csv_processor.rb:77:in `process_row'
+app/services/csv_processor.rb:13:in `block in process!'
+app/services/csv_processor.rb:11:in `each'
+app/services/csv_processor.rb:11:in `each_with_index'
+app/services/csv_processor.rb:11:in `process!'
+app/controllers/expense_uploads_controller.rb:30:in `preview'
+Started POST "/expense_uploads/preview" for 192.168.96.1 at 2022-09-30 16:58:15 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#preview as HTML
+  Parameters: {"authenticity_token"=>"Mi3FA5ezt/o5o91GCIVhUwQKICM0MSxr11ryJ11R4qejeUSg9uFfxTjp54spS5PhM40yfPt+CRMYlhQsxeKKUw==", "file"=>#<ActionDispatch::Http::UploadedFile:0x00007fbed61f8780 @tempfile=#<Tempfile:/tmp/RackMultipart20220930-48-eqpdtm.csv>, @original_filename="stuff.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"stuff.csv\"\r\nContent-Type: text/csv\r\n">, "csv_config_id"=>"1", "default_category_id"=>"1", "skip_existing"=>"on"}
+  [1m[36mCsvConfig Load (0.3ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" WHERE "csv_configs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/expense_uploads_controller.rb:25:in `preview'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m
+  ↳ app/services/csv_processor.rb:6:in `initialize'
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 7.7ms | Allocations: 11521)
+
+
+  
+NoMethodError (undefined method `downcase' for nil:NilClass):
+  
+app/services/csv_processor.rb:93:in `get_category_id'
+app/services/csv_processor.rb:77:in `process_row'
+app/services/csv_processor.rb:13:in `block in process!'
+app/services/csv_processor.rb:11:in `each'
+app/services/csv_processor.rb:11:in `each_with_index'
+app/services/csv_processor.rb:11:in `process!'
+app/controllers/expense_uploads_controller.rb:30:in `preview'
+Started POST "/expense_uploads/preview" for 192.168.96.1 at 2022-09-30 16:58:21 +0000
+Cannot render console from 192.168.96.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#preview as HTML
+  Parameters: {"authenticity_token"=>"Mi3FA5ezt/o5o91GCIVhUwQKICM0MSxr11ryJ11R4qejeUSg9uFfxTjp54spS5PhM40yfPt+CRMYlhQsxeKKUw==", "file"=>#<ActionDispatch::Http::UploadedFile:0x00007fbed6803698 @tempfile=#<Tempfile:/tmp/RackMultipart20220930-48-1eg31sw.csv>, @original_filename="stuff.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"stuff.csv\"\r\nContent-Type: text/csv\r\n">, "csv_config_id"=>"1", "default_category_id"=>"1", "skip_existing"=>"on"}
+  [1m[36mCsvConfig Load (0.2ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" WHERE "csv_configs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/expense_uploads_controller.rb:25:in `preview'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m
+  ↳ app/services/csv_processor.rb:6:in `initialize'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.5ms | Allocations: 2333)
+
+
+  
+NoMethodError (undefined method `downcase' for nil:NilClass):
+  
+app/services/csv_processor.rb:93:in `get_category_id'
+app/services/csv_processor.rb:77:in `process_row'
+app/services/csv_processor.rb:13:in `block in process!'
+app/services/csv_processor.rb:11:in `each'
+app/services/csv_processor.rb:11:in `each_with_index'
+app/services/csv_processor.rb:11:in `process!'
+app/controllers/expense_uploads_controller.rb:30:in `preview'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.6ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 13]]
+  [1m[36mUser Destroy (0.8ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 13]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$PqVW4tPaPWXqptZFJTgG7exgbfwHCcMbBt.Qq/r5rE4trnumUi2bW"], ["created_at", "2022-09-30 17:00:10.698579"], ["updated_at", "2022-09-30 17:00:10.698579"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 172.18.0.1 at 2022-09-30 17:00:13 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 9ms (ActiveRecord: 0.0ms | Allocations: 1225)
+
+
+Started GET "/dashboard" for 172.18.0.1 at 2022-09-30 17:00:13 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 9.3ms | Allocations: 3230)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.5ms | Allocations: 607)
+  Rendered layouts/_navbar.html.erb (Duration: 1.5ms | Allocations: 1323)
+  Rendered layout layouts/application.html.erb (Duration: 1207.7ms | Allocations: 2371402)
+Completed 200 OK in 1214ms (Views: 1210.9ms | ActiveRecord: 0.0ms | Allocations: 2373286)
+
+
+Started GET "/api/v1/categories" for 172.18.0.1 at 2022-09-30 17:00:14 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (1.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 19ms (Views: 7.9ms | ActiveRecord: 5.0ms | Allocations: 8018)
+
+
+Started GET "/api/v1/expenses?paid_after=1662004800" for 172.18.0.1 at 2022-09-30 17:00:14 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1662004800"}
+  [1m[36mExpense Load (1.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-09-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 14ms (Views: 6.9ms | ActiveRecord: 2.9ms | Allocations: 5509)
+
+
+Started GET "/api/v1/goals" for 172.18.0.1 at 2022-09-30 17:00:14 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 22ms (Views: 0.2ms | ActiveRecord: 3.3ms | Allocations: 8419)
+
+
+Started GET "/api/v1/reports/month?month=September+2022" for 172.18.0.1 at 2022-09-30 17:00:14 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"September 2022"}
+  [1m[35m (1.2ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-09-01'
+        and paid_at < '2022-10-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-09-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-09-01' and paid_at < '2022-10-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 9ms (Views: 0.7ms | ActiveRecord: 2.7ms | Allocations: 2495)
+
+
+Started GET "/expense_uploads/new" for 172.18.0.1 at 2022-09-30 17:00:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.5ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:17:in `block in new'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 834)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.4ms | Allocations: 501)
+  Rendered layouts/_navbar.html.erb (Duration: 0.6ms | Allocations: 877)
+  Rendered layout layouts/application.html.erb (Duration: 14.2ms | Allocations: 21753)
+Completed 200 OK in 26ms (Views: 15.2ms | ActiveRecord: 3.2ms | Allocations: 27059)
+
+
+Started POST "/expense_uploads/preview" for 172.18.0.1 at 2022-09-30 17:00:26 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#preview as HTML
+  Parameters: {"authenticity_token"=>"NEqaTQL9TFpBlj3KNweZTBS94SI31cieWGI8z4SylyalHhvuY6+kZUDcBwcWyWv+Izrzffia7eaXrtrEHAH/0g==", "file"=>#<ActionDispatch::Http::UploadedFile:0x00007f02c9c4bda0 @tempfile=#<Tempfile:/tmp/RackMultipart20220930-395-13secnd.csv>, @original_filename="stuff.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"stuff.csv\"\r\nContent-Type: text/csv\r\n">, "csv_config_id"=>"1", "default_category_id"=>"1", "skip_existing"=>"on"}
+  [1m[36mCsvConfig Load (0.3ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" WHERE "csv_configs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/expense_uploads_controller.rb:25:in `preview'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m
+  ↳ app/services/csv_processor.rb:6:in `initialize'
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.9ms | Allocations: 2984)
+
+
+  
+NoMethodError (undefined method `downcase' for nil:NilClass):
+  
+app/services/csv_processor.rb:93:in `get_category_id'
+app/services/csv_processor.rb:77:in `process_row'
+app/services/csv_processor.rb:13:in `block in process!'
+app/services/csv_processor.rb:11:in `each'
+app/services/csv_processor.rb:11:in `each_with_index'
+app/services/csv_processor.rb:11:in `process!'
+app/controllers/expense_uploads_controller.rb:30:in `preview'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.3ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 14]]
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 14]]
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$r08c4sqJo.CosNOCJGgCT.cf7m2hy9vPivxidk2o1e6qMSUmWeKRm"], ["created_at", "2022-09-30 17:02:36.676061"], ["updated_at", "2022-09-30 17:02:36.676061"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/expense_uploads/new" for 172.19.0.1 at 2022-09-30 17:03:40 +0000
+Cannot render console from 172.19.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.5ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:17:in `block in new'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 6.1ms | Allocations: 961)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.5ms | Allocations: 605)
+  Rendered layouts/_navbar.html.erb (Duration: 1.2ms | Allocations: 1319)
+  Rendered layout layouts/application.html.erb (Duration: 1222.4ms | Allocations: 2369022)
+Completed 200 OK in 1277ms (Views: 1226.0ms | ActiveRecord: 5.8ms | Allocations: 2382909)
+
+
+Started POST "/expense_uploads/preview" for 172.19.0.1 at 2022-09-30 17:03:52 +0000
+Cannot render console from 172.19.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#preview as HTML
+  Parameters: {"authenticity_token"=>"BXIID+1/04/YH6s7WFRkhJgIDIco4hHjmNYI+8w11biUJomsjC07sNlVkfZ5mpY2r48e2OetNJtXGu7wVIa9TA==", "file"=>#<ActionDispatch::Http::UploadedFile:0x00007f4cc431c3c0 @tempfile=#<Tempfile:/tmp/RackMultipart20220930-394-1tgniok.csv>, @original_filename="stuff.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"stuff.csv\"\r\nContent-Type: text/csv\r\n">, "csv_config_id"=>"1", "default_category_id"=>"1", "skip_existing"=>"on"}
+  [1m[36mCsvConfig Load (0.2ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" WHERE "csv_configs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/expense_uploads_controller.rb:25:in `preview'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m
+  ↳ app/services/csv_processor.rb:6:in `initialize'
+  [1m[36mExpense Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "expenses" WHERE "expenses"."amount" = $1 AND "expenses"."paid_at" IS NULL AND "expenses"."description" = $2 LIMIT $3[0m  [["amount", 0], ["description", "Test Test Test"], ["LIMIT", 1]]
+  ↳ app/controllers/expense_uploads_controller.rb:39:in `block in preview'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:44:in `preview'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/preview.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered expense_uploads/preview.html.erb within layouts/application (Duration: 6.3ms | Allocations: 3096)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.5ms | Allocations: 495)
+  Rendered layouts/_navbar.html.erb (Duration: 0.8ms | Allocations: 867)
+  Rendered layout layouts/application.html.erb (Duration: 18.7ms | Allocations: 23888)
+Completed 200 OK in 37ms (Views: 19.3ms | ActiveRecord: 2.4ms | Allocations: 31127)
+
+
+Started GET "/sessions/logout" for 172.19.0.1 at 2022-09-30 17:06:43 +0000
+Cannot render console from 172.19.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#logout as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 437)
+
+
+Started GET "/" for 172.19.0.1 at 2022-09-30 17:06:43 +0000
+Cannot render console from 172.19.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.2ms | Allocations: 1891)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.4ms | Allocations: 495)
+  Rendered layout layouts/application.html.erb (Duration: 15.2ms | Allocations: 21671)
+Completed 200 OK in 17ms (Views: 16.4ms | ActiveRecord: 0.0ms | Allocations: 22624)
+
+
+Started GET "/register" for 172.19.0.1 at 2022-09-30 17:06:48 +0000
+Cannot render console from 172.19.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#register as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/register.html.erb within layouts/application
+  Rendered sessions/register.html.erb within layouts/application (Duration: 2.2ms | Allocations: 2055)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.4ms | Allocations: 495)
+  Rendered layout layouts/application.html.erb (Duration: 14.5ms | Allocations: 21802)
+Completed 200 OK in 16ms (Views: 15.1ms | ActiveRecord: 0.0ms | Allocations: 22358)
+
+
