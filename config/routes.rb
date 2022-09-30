@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get "projections", to: "projections#index"
   get "register", to: "sessions#register"
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#not_found"
