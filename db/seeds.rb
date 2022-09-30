@@ -16,3 +16,4 @@ users = User.create!(
     lastname: 'Lastname',
     phone: '555-555-5555'
     )
+    
