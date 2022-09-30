@@ -102,8 +102,8 @@ friendly.
 #### How to see the database table?
 - Connect to the database
 - Left click on the database `overtrack`
-- Left click on scheme
-- Left click on table
+- Left click on schemas
+- Left click on tables
 
 #### How to see the table's data?
 - Connect to the database
