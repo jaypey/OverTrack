@@ -55,6 +55,9 @@ friendly.
 - [Install on Ubuntu 16.04+](docs/ubuntu_install.md)
 - Spin up an instance (for free) using the Heroku deploy button below. Heroku account is required.
 
+## Debugging
+- [BackEnd Debugging of Ruby](docs/DebugSetup.md)
+
 ### Creating a user
 - `bundle exec rails c` to run Rails console
 - `User.create!(username: "...", password: "...")` The username and password will be hashed.
