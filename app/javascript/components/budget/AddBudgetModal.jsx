@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../shared/Modal';
-import DatePicker from '../shared/DatePicker';
-import CurrencyInput from '../shared/CurrencyInput';
 import FieldErrors from '../shared/FieldErrors';
-import { Expenses } from '../../api/main';
-import { Alerts } from '../../helpers/main';
 
 class AddBudgetModal extends React.Component {
     constructor(props) {
@@ -55,16 +51,9 @@ class AddBudgetModal extends React.Component {
   }
 }
 
-AddBudgetModal.defaultProps = {
-  categories: [],
-  categoryId: 0,
-};
-
 AddBudgetModal.propTypes = {
-  categories: PropTypes.array,
-  categoryId: PropTypes.number,
   onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
+  //onSave: PropTypes.func.isRequired,
 };
 
 export default AddBudgetModal;
