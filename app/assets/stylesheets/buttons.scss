@@ -42,6 +42,15 @@
   }
 }
 
+.btn.btn-accept {
+  color: #fff;
+  background-color: #1bc700;
+
+  &:hover {
+    background-color: #5F666A;
+  }
+}
+
 .btn.btn-sm {
   font-size: 12px;
   padding: 5px 10px;

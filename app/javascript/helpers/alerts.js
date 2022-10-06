@@ -47,6 +47,18 @@ const Alerts = {
     });
   },
 
+  genericRemove(label) {
+    return Swal.fire({
+      title: 'Confirm delete',
+      text: `Are you sure you want to remove this ${label}?`,
+      type: 'warning',
+      confirmButtonText: 'Yes, remove it!',
+      showCancelButton: true,
+      focusCancel: true,
+      confirmButtonColor: '#bd4d4d',
+    });
+  },
+
   genericConflict(description) {
     return Swal.fire({
       title: 'Hold on',
