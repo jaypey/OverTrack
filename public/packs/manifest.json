@@ -1,6 +1,6 @@
 {
   "application.js": "/packs/js/application-05b11bb75320897eaa48.js",
-  "budget.js": "/packs/js/budget-a3ab16acffcf3e97f679.js",
+  "budget.js": "/packs/js/budget-27e2912e71c92df455b1.js",
   "dashboard.js": "/packs/js/dashboard-70da35654bfe9b470d4e.js",
   "entrypoints": {
     "application": {
@@ -17,7 +17,7 @@
           "/packs/js/runtime-cd31353a17a0505265f4.js",
           "/packs/js/vendors-node_modules_prop-types_index_js-node_modules_react-dom_index_js-5207533dd1a0714eced7.js",
           "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js",
-          "/packs/js/budget-a3ab16acffcf3e97f679.js"
+          "/packs/js/budget-27e2912e71c92df455b1.js"
         ]
       }
     },
@@ -76,7 +76,7 @@
   "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-bdffbcd1d3c049203bea.js": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-bdffbcd1d3c049203bea.js",
   "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-bdffbcd1d3c049203bea.js.map": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-bdffbcd1d3c049203bea.js.map",
   "js/application-05b11bb75320897eaa48.js.map": "/packs/js/application-05b11bb75320897eaa48.js.map",
-  "js/budget-a3ab16acffcf3e97f679.js.map": "/packs/js/budget-a3ab16acffcf3e97f679.js.map",
+  "js/budget-27e2912e71c92df455b1.js.map": "/packs/js/budget-27e2912e71c92df455b1.js.map",
   "js/dashboard-70da35654bfe9b470d4e.js.map": "/packs/js/dashboard-70da35654bfe9b470d4e.js.map",
   "js/history-19a85daedc2f37643187.js.map": "/packs/js/history-19a85daedc2f37643187.js.map",
   "js/insights-6b1a993314be2a3e4cfe.js.map": "/packs/js/insights-6b1a993314be2a3e4cfe.js.map",
