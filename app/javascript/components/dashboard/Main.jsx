@@ -140,14 +140,24 @@ class Main extends React.Component {
           </div>
         </div>
 
-        <div className="bg-art mt-150">
+        <div className="bg-art">
           <div className="container">
             <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openExpenseCreate}>+ add an expense</button>
           </div>
-          <div className="container pv-100 mh-350">
+          <div className="container pv-100">
             <CategoriesList categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} onChange={this.reloadData} />
           </div>
         </div>
+
+        <div className="bg-art-2 top-border">
+          <div className="container">
+            <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" >+ add a revenue</button> {/*onClick={this.openExpenseCreate}*/}
+          </div>
+          <div className="container pv-100">
+            {/* <CategoriesList categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} onChange={this.reloadData} /> */}
+          </div>
+        </div>
+
       </div>
     );
   }
