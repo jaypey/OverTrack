@@ -51,7 +51,7 @@ Revenue.where(description: "Supreme T-Shirt Sales")
 revenues = Revenue.create([{
     category_id: categories4.id,
     description: "Supreme T-Shirt Sales",
-    amount: 10000000,
+    amount: 1000000,
     paid_at: Date.today,
     created_at: Date.today,
     updated_at: Date.today
@@ -59,7 +59,7 @@ revenues = Revenue.create([{
 {
     category_id: categories3.id,
     description: "Sneaker Sales",
-    amount: 5000000,
+    amount: 500000,
     paid_at: Date.today,
     created_at: Date.today,
     updated_at: Date.today
@@ -74,7 +74,7 @@ Expense.where(description: "Breakfast")
 expenses = Expense.create!([{
     category_id: categories1.id,
     description: "Breakfast",
-    amount: 500000,
+    amount: 5000,
     paid_at: Date.today,
     created_at: Date.today,
     updated_at: Date.today
@@ -82,7 +82,7 @@ expenses = Expense.create!([{
 {
     category_id: categories1.id,
     description: "Lunch",
-    amount: 1000000,
+    amount: 10000,
     paid_at: Date.today,
     created_at: Date.today,
     updated_at: Date.today
@@ -90,7 +90,7 @@ expenses = Expense.create!([{
 {
     category_id: categories2.id,
     description: "IT Salary",
-    amount: 5000000,
+    amount: 500000,
     paid_at: Date.today,
     created_at: Date.today,
     updated_at: Date.today
@@ -98,7 +98,7 @@ expenses = Expense.create!([{
 {
     category_id: categories2.id,
     description: "Human Resources Salary",
-    amount: 1000000,
+    amount: 250000,
     paid_at: Date.today,
     created_at: Date.today,
     updated_at: Date.today
