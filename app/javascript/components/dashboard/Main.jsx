@@ -11,14 +11,17 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
+      expensecategories: [],
+      revenuecategories: [],
       expenses: [],
-      sumExpenses: 0,
       revenues: [],
+      sumExpenses: 0,
       sumRevenues: 0,
-      loaded: false,
+      loadedexpenses: false,
+      loadedrevenues: false,
       monthlyGoal: 0,
       showExpenseCreateModal: false,
+      showRevenueCreateModal: false,
       data: [],
       labels: [],
       colors: [],
@@ -31,21 +34,24 @@ class Main extends React.Component {
 
   openExpenseCreate = () => { this.setState({ showExpenseCreateModal: true }); }
   closeExpenseCreate = () => { this.setState({ showExpenseCreateModal: false }); }
+  openRevenueCreate = () => { this.setState({ showRevenueCreateModal: true }); }
+  closeRevenueCreate = () => { this.setState({ showRevenueCreateModal: false }); }
   onExpenseSave = () => {
     this.closeExpenseCreate();
+    this.closeRevenueCreate();
     this.reloadData();
   }
 
   reloadData = () => {
-    this.loadCategory();
+    this.loadCategories();
     this.loadExpensesData();
     this.loadRevenueData();
     this.loadPieChartData(moment().format('MMMM YYYY'));
   }
 
-  loadCategory = () => {
-    Categories.list().then(
-      (cResp) => { this.setState({ categories: cResp }); },
+  loadCategories = () => {
+    Categories.listExpenses().then(
+      (cResp) => { this.setState({ expensecategories: cResp }); },
       () => { Alerts.error("Categories didn't load correctly"); }
     );
   }
@@ -65,7 +71,7 @@ class Main extends React.Component {
 
   categoriesWithExpensesAndSpend() {
     const categories = [];
-    this.state.categories.forEach((category) => {
+    this.state.expensecategories.forEach((category) => {
       category.expenses = this.state.expenses.filter((expense) => expense.category_id == category.id);
       category.spend = category.expenses.reduce((sum, exp) => sum + exp.amount, 0);
       categories.push(category);
@@ -75,7 +81,12 @@ class Main extends React.Component {
 
   renderExpenseCreateModal() {
     if (!this.state.showExpenseCreateModal) { return ''; }
-    return <ExpenseFormModal categories={this.state.categories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
+    return <ExpenseFormModal categories={this.state.expensecategories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
+  }
+
+  renderRevenueCreateModal() {
+    if (!this.state.showRevenueCreateModal) { return ''; }
+    return <RevenueFormModal categories={this.state.expensecategories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
   }
 
   loadRevenueData = () => {
@@ -90,7 +101,7 @@ class Main extends React.Component {
   loadSum = () => {
     var indexRev = 0;
 
-    this.state.categories.forEach((category) => {
+    this.state.expensecategories.forEach((category) => {
       if (category.is_revenue == 1) {
         category.revenues = this.state.revenues.filter((revenue) => revenue.category_id == category.id);
         category.revenues.forEach((revenue) => {
@@ -151,7 +162,7 @@ class Main extends React.Component {
 
         <div className="bg-art-2 top-border">
           <div className="container">
-            <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" >+ add a revenue</button> {/*onClick={this.openExpenseCreate}*/}
+            <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openRevenueCreate}>+ add a revenue</button> {}
           </div>
           <div className="container pv-100">
             {/* <CategoriesList categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} onChange={this.reloadData} /> */}
