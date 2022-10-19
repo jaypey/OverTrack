@@ -4,6 +4,18 @@ module Api; module V1
       render json: ::Category.all.order(:name)
     end
 
+    def listExpenses
+      categories = ::Category.all.order(:name)
+      categories = categories.where('is_revenue = 0')
+      render json: categories
+    end
+
+    def listRevenues
+      categories = ::Category.all.order(:name)
+      categories = categories.where('is_revenue = 1')
+      render json: categories
+    end
+
     def create
       category = ::Category.new(color: params[:color], name: params[:name], monthly_goal: params[:monthly_goal], is_revenue: params[:is_revenue])
       successful = category.save
