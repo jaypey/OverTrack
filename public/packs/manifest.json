@@ -1,7 +1,7 @@
 {
   "application.js": "/packs/js/application-bb859c936b81fe913e43.js",
   "budget.js": "/packs/js/budget-27e2912e71c92df455b1.js",
-  "dashboard.js": "/packs/js/dashboard-91cb4a36e6eeedc48f54.js",
+  "dashboard.js": "/packs/js/dashboard-fd012cbe3c2ec13d9ae5.js",
   "entrypoints": {
     "application": {
       "assets": {
@@ -30,7 +30,7 @@
           "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-f9a82906bc1ecb5c8558.js",
           "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
           "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-b6ad4e4f80bae258cbba.js",
-          "/packs/js/dashboard-91cb4a36e6eeedc48f54.js"
+          "/packs/js/dashboard-fd012cbe3c2ec13d9ae5.js"
         ]
       }
     },
@@ -77,7 +77,7 @@
   "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-b6ad4e4f80bae258cbba.js.map": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-b6ad4e4f80bae258cbba.js.map",
   "js/application-bb859c936b81fe913e43.js.map": "/packs/js/application-bb859c936b81fe913e43.js.map",
   "js/budget-27e2912e71c92df455b1.js.map": "/packs/js/budget-27e2912e71c92df455b1.js.map",
-  "js/dashboard-91cb4a36e6eeedc48f54.js.map": "/packs/js/dashboard-91cb4a36e6eeedc48f54.js.map",
+  "js/dashboard-fd012cbe3c2ec13d9ae5.js.map": "/packs/js/dashboard-fd012cbe3c2ec13d9ae5.js.map",
   "js/history-c98afdc2b97b5d78f530.js.map": "/packs/js/history-c98afdc2b97b5d78f530.js.map",
   "js/insights-45ee4f16e779323d7f0a.js.map": "/packs/js/insights-45ee4f16e779323d7f0a.js.map",
   "js/runtime-cd31353a17a0505265f4.js.map": "/packs/js/runtime-cd31353a17a0505265f4.js.map",

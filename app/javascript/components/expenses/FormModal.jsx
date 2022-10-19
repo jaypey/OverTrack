@@ -102,7 +102,7 @@ class FormModal extends React.Component {
 
   render() {
     return (
-      <Modal title="Create Expense" onClose={this.props.onClose}>
+      <Modal title={this.props.title} onClose={this.props.onClose}>
         {this.renderForm()}
       </Modal>
     );
@@ -112,9 +112,11 @@ class FormModal extends React.Component {
 FormModal.defaultProps = {
   categories: [],
   categoryId: 0,
+  title: '',
 };
 
 FormModal.propTypes = {
+  title: PropTypes.string,
   categories: PropTypes.array,
   categoryId: PropTypes.number,
   onClose: PropTypes.func.isRequired,

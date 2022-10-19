@@ -128,12 +128,12 @@ class Main extends React.Component {
 
   renderExpenseCreateModal() {
     if (!this.state.showExpenseCreateModal) { return ''; }
-    return <ExpenseFormModal categories={this.state.categories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
+    return <ExpenseFormModal categories={this.state.expenseCategories} title="Add an expense" onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
   }
 
   renderRevenueCreateModal() {
     if (!this.state.showRevenueCreateModal) { return ''; }
-    return <RevenueFormModal categories={this.state.categories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
+    return <ExpenseFormModal categories={this.state.revenueCategories} title="Add a revenue" onClose={this.closeRevenueCreate} onSave={this.onExpenseSave} />;
   }
 
   loadSum = () => {
@@ -179,6 +179,7 @@ class Main extends React.Component {
     return (
       <div>
         {this.renderExpenseCreateModal()}
+        {this.renderRevenueCreateModal()}
         <div className="container">
           <Overview categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} monthlyGoal={this.state.monthlyGoal} onChange={this.reloadData} />
         </div>
@@ -189,7 +190,7 @@ class Main extends React.Component {
           </div>
         </div>
 
-        <div className="bg-art">
+        <div className="bg-art-2">
           <div className="container">
             <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openExpenseCreate}>+ add an expense</button>
           </div>
@@ -198,7 +199,7 @@ class Main extends React.Component {
           </div>
         </div>
 
-        <div className="bg-art-2 top-border">
+        <div className="bg-art top-border">
           <div className="container">
             <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openRevenueCreate}>+ add a revenue</button> {}
           </div>
