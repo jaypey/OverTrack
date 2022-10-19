@@ -11,8 +11,9 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      expensecategories: [],
-      revenuecategories: [],
+      categories: [],
+      expenseCategories: [],
+      revenueCategories: [],
       expenses: [],
       revenues: [],
       sumExpenses: 0,
@@ -44,14 +45,30 @@ class Main extends React.Component {
 
   reloadData = () => {
     this.loadCategories();
+    this.loadExpensesCategories();
+    this.loadRevenuesCategories();
     this.loadExpensesData();
     this.loadRevenueData();
     this.loadPieChartData(moment().format('MMMM YYYY'));
   }
 
   loadCategories = () => {
+    Categories.list().then(
+      (cResp) => { this.setState({ categories: cResp }); },
+      () => { Alerts.error("Categories didn't load correctly"); }
+    );
+  }
+
+  loadExpensesCategories = () => {
     Categories.listExpenses().then(
-      (cResp) => { this.setState({ expensecategories: cResp }); },
+      (cResp) => { this.setState({ expenseCategories: cResp }); },
+      () => { Alerts.error("Categories didn't load correctly"); }
+    );
+  }
+
+  loadRevenuesCategories = () => {
+    Categories.listRevenues().then(
+      (cResp) => { this.setState({ revenueCategories: cResp }); },
       () => { Alerts.error("Categories didn't load correctly"); }
     );
   }
@@ -69,26 +86,6 @@ class Main extends React.Component {
     );
   }
 
-  categoriesWithExpensesAndSpend() {
-    const categories = [];
-    this.state.expensecategories.forEach((category) => {
-      category.expenses = this.state.expenses.filter((expense) => expense.category_id == category.id);
-      category.spend = category.expenses.reduce((sum, exp) => sum + exp.amount, 0);
-      categories.push(category);
-    });
-    return categories;
-  }
-
-  renderExpenseCreateModal() {
-    if (!this.state.showExpenseCreateModal) { return ''; }
-    return <ExpenseFormModal categories={this.state.expensecategories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
-  }
-
-  renderRevenueCreateModal() {
-    if (!this.state.showRevenueCreateModal) { return ''; }
-    return <RevenueFormModal categories={this.state.expensecategories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
-  }
-
   loadRevenueData = () => {
     Revenues.list({ paid_after: moment().startOf('month').unix() }).then(
       (rResp) => {
@@ -98,10 +95,51 @@ class Main extends React.Component {
     );
   }
 
+  categoriesWithExpensesAndSpend() {
+    const categories = [];
+    this.state.categories.forEach((category) => {
+      category.expenses = this.state.expenses.filter((expense) => expense.category_id == category.id);
+      category.spend = category.expenses.reduce((sum, exp) => sum + exp.amount, 0);
+      categories.push(category);
+    });
+    return categories;
+  }
+
+  EcategoriesWithExpensesAndSpend() {
+    const categories = [];
+    this.state.expenseCategories.forEach((category) => {
+      category.expenses = this.state.expenses.filter((expense) => expense.category_id == category.id);
+      category.spend = category.expenses.reduce((sum, exp) => sum + exp.amount, 0);
+      categories.push(category);
+    });
+    return categories;
+  }
+
+  RcategoriesWithExpensesAndSpend() {
+    const categories = [];
+    this.state.revenueCategories.forEach((category) => {
+      category.expenses = this.state.expenses.filter((expense) => expense.category_id == category.id);
+      category.spend = category.expenses.reduce((sum, exp) => sum + exp.amount, 0);
+      categories.push(category);
+    });
+    return categories;
+  }
+  
+
+  renderExpenseCreateModal() {
+    if (!this.state.showExpenseCreateModal) { return ''; }
+    return <ExpenseFormModal categories={this.state.categories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
+  }
+
+  renderRevenueCreateModal() {
+    if (!this.state.showRevenueCreateModal) { return ''; }
+    return <RevenueFormModal categories={this.state.categories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
+  }
+
   loadSum = () => {
     var indexRev = 0;
 
-    this.state.expensecategories.forEach((category) => {
+    this.state.categories.forEach((category) => {
       if (category.is_revenue == 1) {
         category.revenues = this.state.revenues.filter((revenue) => revenue.category_id == category.id);
         category.revenues.forEach((revenue) => {
@@ -156,7 +194,7 @@ class Main extends React.Component {
             <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openExpenseCreate}>+ add an expense</button>
           </div>
           <div className="container pv-100">
-            <CategoriesList categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} onChange={this.reloadData} />
+            <CategoriesList categoriesWithExpensesAndSpend={this.EcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
           </div>
         </div>
 
@@ -165,7 +203,7 @@ class Main extends React.Component {
             <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openRevenueCreate}>+ add a revenue</button> {}
           </div>
           <div className="container pv-100">
-            {/* <CategoriesList categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} onChange={this.reloadData} /> */}
+            <CategoriesList categoriesWithExpensesAndSpend={this.RcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
           </div>
         </div>
 
