@@ -3,7 +3,7 @@ module Api; module V1
     def index
       render json: ::Category.all.order(:name)
     end
-
+    
     def listExpenses
       categories = ::Category.all.order(:name)
       categories = categories.where('is_revenue = 0')
