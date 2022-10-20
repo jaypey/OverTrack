@@ -1,11 +1,12 @@
 module Api; module V1
     class BudgetController < BaseController
         def index 
-            render json: User.find(params[:id]).budgets
+            render json: User.find(cookies.signed[:user_id]).budgets.to_json(include: {users: { only: [:firstname, :lastname, :email, :id]}})
         end
 
         def create
-            budget = ::Budget.new(name: params[:name], description: params[:description], owner_id: params[:owner_id])
+            budget = ::Budget.new(name: params[:name], description: params[:description], owner_id: cookies.signed[:user_id])
+            budget.users << User.find(cookies.signed[:user_id])
             successful = budget.save
             render json: budget, status: successful ? 200 : 500
         end
