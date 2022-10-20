@@ -1,8 +1,6 @@
 <div class="container pb-100">
 
-<div class="flex">
-  <button class="btn" style="margin:auto;margin-bottom:25px">Create a new CSV config</button>
-</div>
+<%= button_to "Create a new CSV config", {action: "create_config"}, method: "get" %>  
 
   <%= form_tag preview_expense_uploads_path, multipart: true do %>
     <div class="row">

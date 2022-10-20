@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :expense_uploads, only: [:new] do
     collection do
       post :preview
+      get :create_config
     end
   end
 

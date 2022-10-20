@@ -44,4 +44,7 @@ class ExpenseUploadsController < ApplicationController
     @categories = Category.all.order(:name).to_json
     @rows = rows.to_json
   end
+
+  def create_config
+  end
 end
