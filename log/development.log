@@ -4704,3 +4704,390 @@ Your manifest contains:
     6: <%= javascript_pack_tag 'create_config' %>
   
 app/views/expense_uploads/create_config.erb:6
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.3ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 84]]
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 84]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$wk310PDd8FseXuXmZHSYc.flsTm6Lieib9akiaznYy2Qgae64aZt6"], ["created_at", "2022-10-20 03:47:13.329451"], ["updated_at", "2022-10-20 03:47:13.329451"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 172.18.0.1 at 2022-10-20 03:47:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 13ms (ActiveRecord: 0.0ms | Allocations: 1197)
+
+
+Started GET "/dashboard" for 172.18.0.1 at 2022-10-20 03:47:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 4.6ms | Allocations: 3230)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.6ms | Allocations: 607)
+  Rendered layouts/_navbar.html.erb (Duration: 1.3ms | Allocations: 1323)
+  Rendered layout layouts/application.html.erb (Duration: 677.5ms | Allocations: 1430537)
+Completed 200 OK in 681ms (Views: 679.8ms | ActiveRecord: 0.0ms | Allocations: 1432395)
+
+
+Started GET "/api/v1/categories" for 172.18.0.1 at 2022-10-20 03:47:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 17ms (Views: 8.6ms | ActiveRecord: 4.3ms | Allocations: 8023)
+
+
+Started GET "/api/v1/expenses?paid_after=1664596800" for 172.18.0.1 at 2022-10-20 03:47:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1664596800"}
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.7ms | Allocations: 1616)
+
+
+Started GET "/api/v1/goals" for 172.18.0.1 at 2022-10-20 03:47:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 14ms (Views: 0.1ms | ActiveRecord: 3.5ms | Allocations: 8405)
+
+
+Started GET "/api/v1/reports/month?month=October+2022" for 172.18.0.1 at 2022-10-20 03:47:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"October 2022"}
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.3ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 3018)
+
+
+Started GET "/expense_uploads/new" for 172.18.0.1 at 2022-10-20 03:47:22 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (0.3ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:17:in `block in new'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 946)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.4ms | Allocations: 501)
+  Rendered layouts/_navbar.html.erb (Duration: 0.7ms | Allocations: 875)
+  Rendered layout layouts/application.html.erb (Duration: 13.1ms | Allocations: 21707)
+Completed 200 OK in 23ms (Views: 14.3ms | ActiveRecord: 2.2ms | Allocations: 27035)
+
+
+Started GET "/expense_uploads/create_config" for 172.18.0.1 at 2022-10-20 03:47:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#create_config as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/create_config.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered expense_uploads/create_config.erb within layouts/application (Duration: 3.8ms | Allocations: 4339)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | Allocations: 4420)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 4917)
+
+
+  
+ActionView::Template::Error (Webpacker can't find create_config.js in /ontrack/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+  "application.js": "/packs/js/application-bb859c936b81fe913e43.js",
+  "dashboard.js": "/packs/js/dashboard-1a25d712e00d7b657ca8.js",
+  "entrypoints": {
+    "application": {
+      "assets": {
+        "js": [
+          "/packs/js/runtime-cd31353a17a0505265f4.js",
+          "/packs/js/application-bb859c936b81fe913e43.js"
+        ]
+      }
+    },
+    "dashboard": {
+      "assets": {
+        "js": [
+          "/packs/js/runtime-cd31353a17a0505265f4.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js",
+          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+          "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js",
+          "/packs/js/dashboard-1a25d712e00d7b657ca8.js"
+        ]
+      }
+    },
+    "history": {
+      "assets": {
+        "js": [
+          "/packs/js/runtime-cd31353a17a0505265f4.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js",
+          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js",
+          "/packs/js/history-16b943e66ec3138abfd3.js"
+        ]
+      }
+    },
+    "insights": {
+      "assets": {
+        "js": [
+          "/packs/js/runtime-cd31353a17a0505265f4.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js",
+          "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js",
+          "/packs/js/insights-3d97c7a3da8c6b9f451e.js"
+        ]
+      }
+    },
+    "upload_preview": {
+      "assets": {
+        "js": [
+          "/packs/js/runtime-cd31353a17a0505265f4.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js",
+          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js",
+          "/packs/js/upload_preview-516ebef3b52fc7fd5953.js"
+        ]
+      }
+    }
+  },
+  "history.js": "/packs/js/history-16b943e66ec3138abfd3.js",
+  "insights.js": "/packs/js/insights-3d97c7a3da8c6b9f451e.js",
+  "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js",
+  "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js.map": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js.map",
+  "js/application-bb859c936b81fe913e43.js.map": "/packs/js/application-bb859c936b81fe913e43.js.map",
+  "js/dashboard-1a25d712e00d7b657ca8.js.map": "/packs/js/dashboard-1a25d712e00d7b657ca8.js.map",
+  "js/history-16b943e66ec3138abfd3.js.map": "/packs/js/history-16b943e66ec3138abfd3.js.map",
+  "js/insights-3d97c7a3da8c6b9f451e.js.map": "/packs/js/insights-3d97c7a3da8c6b9f451e.js.map",
+  "js/runtime-cd31353a17a0505265f4.js.map": "/packs/js/runtime-cd31353a17a0505265f4.js.map",
+  "js/upload_preview-516ebef3b52fc7fd5953.js.map": "/packs/js/upload_preview-516ebef3b52fc7fd5953.js.map",
+  "js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js": "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js",
+  "js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js.map": "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js.map",
+  "js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js": "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
+  "js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js.map": "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js.map",
+  "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+  "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js.map": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js.map",
+  "runtime.js": "/packs/js/runtime-cd31353a17a0505265f4.js",
+  "upload_preview.js": "/packs/js/upload_preview-516ebef3b52fc7fd5953.js"
+}
+):
+    3: <script type="text/javascript">
+    4: 
+    5: </script>
+    6: <%= javascript_pack_tag 'create_config' %>
+  
+app/views/expense_uploads/create_config.erb:6
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.4ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 85]]
+  [1m[36mUser Destroy (0.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 85]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$nCHOn5HDu14XdAExIzXy6eTgsx2QNPjU/GT6WOMzXZUKVz2sdTEZ."], ["created_at", "2022-10-20 03:50:28.587666"], ["updated_at", "2022-10-20 03:50:28.587666"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 172.18.0.1 at 2022-10-20 03:50:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 8ms (ActiveRecord: 0.0ms | Allocations: 1193)
+
+
+Started GET "/dashboard" for 172.18.0.1 at 2022-10-20 03:50:33 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] Browserslist: caniuse-lite is outdated. Please run:
+  npx browserslist@latest --update-db
+  Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+
+[Webpacker] assets by status 3.09 MiB [cached] 10 assets
+assets by path . 24.5 KiB
+  asset js/create_config-b5a5affef7e9b2b9aefc.js 18.1 KiB [emitted] [immutable] (name: create_config) 1 related asset
+  asset manifest.json 6.41 KiB [emitted]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.69 MiB 225 modules
+modules by path ./app/javascript/ 219 KiB
+  modules by path ./app/javascript/components/ 207 KiB 23 modules
+  modules by path ./app/javascript/packs/ 4.52 KiB 6 modules
+  modules by path ./app/javascript/api/ 3.73 KiB 6 modules
+  modules by path ./app/javascript/helpers/*.js 3.78 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.4 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 3014 ms
+
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 4287.2ms | Allocations: 4875)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.6ms | Allocations: 607)
+  Rendered layouts/_navbar.html.erb (Duration: 1.3ms | Allocations: 1323)
+  Rendered layout layouts/application.html.erb (Duration: 4992.7ms | Allocations: 1432182)
+Completed 200 OK in 4996ms (Views: 4994.7ms | ActiveRecord: 0.0ms | Allocations: 1434036)
+
+
+Started GET "/api/v1/categories" for 172.18.0.1 at 2022-10-20 03:50:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 23ms (Views: 14.7ms | ActiveRecord: 2.8ms | Allocations: 8022)
+
+
+Started GET "/api/v1/expenses?paid_after=1664596800" for 172.18.0.1 at 2022-10-20 03:50:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"paid_after"=>"1664596800"}
+  [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 3ms (Views: 1.0ms | ActiveRecord: 0.5ms | Allocations: 1596)
+
+
+Started GET "/api/v1/goals" for 172.18.0.1 at 2022-10-20 03:50:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 12ms (Views: 0.1ms | ActiveRecord: 2.2ms | Allocations: 8440)
+
+
+Started GET "/api/v1/reports/month?month=October+2022" for 172.18.0.1 at 2022-10-20 03:50:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"October 2022"}
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:55:in `month'
+  [1m[35m (0.3ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.3ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:82:in `average_by_category'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:70:in `month'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:71:in `month'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 2.2ms | Allocations: 3013)
+
+
+Started GET "/expense_uploads/new" for 172.18.0.1 at 2022-10-20 03:50:39 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#new as HTML
+  [1m[36mCsvConfig Load (1.2ms)[0m  [1m[34mSELECT "csv_configs".* FROM "csv_configs" ORDER BY "csv_configs"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:8:in `map'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expense_uploads_controller.rb:17:in `block in new'
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/new.html.erb within layouts/application
+  Rendered expense_uploads/new.html.erb within layouts/application (Duration: 2.2ms | Allocations: 946)
+  Rendered layouts/_image_paths.html.erb (Duration: 0.9ms | Allocations: 501)
+  Rendered layouts/_navbar.html.erb (Duration: 1.5ms | Allocations: 875)
+  Rendered layout layouts/application.html.erb (Duration: 42.3ms | Allocations: 21708)
+Completed 200 OK in 63ms (Views: 44.2ms | ActiveRecord: 6.4ms | Allocations: 26996)
+
+
+Started GET "/expense_uploads/create_config" for 172.18.0.1 at 2022-10-20 03:50:41 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpenseUploadsController#create_config as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering expense_uploads/create_config.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered expense_uploads/create_config.erb within layouts/application (Duration: 6.0ms | Allocations: 3078)
+  Rendered layouts/_image_paths.html.erb (Duration: 1.1ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 2.2ms | Allocations: 867)
+  Rendered layout layouts/application.html.erb (Duration: 45.0ms | Allocations: 23831)
+Completed 200 OK in 46ms (Views: 45.7ms | ActiveRecord: 0.0ms | Allocations: 24355)
+
+

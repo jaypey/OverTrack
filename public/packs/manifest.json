@@ -1,5 +1,6 @@
 {
   "application.js": "/packs/js/application-bb859c936b81fe913e43.js",
+  "create_config.js": "/packs/js/create_config-b5a5affef7e9b2b9aefc.js",
   "dashboard.js": "/packs/js/dashboard-1a25d712e00d7b657ca8.js",
   "entrypoints": {
     "application": {
@@ -7,6 +8,17 @@
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
           "/packs/js/application-bb859c936b81fe913e43.js"
+        ]
+      }
+    },
+    "create_config": {
+      "assets": {
+        "js": [
+          "/packs/js/runtime-cd31353a17a0505265f4.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-1725af-08ecf50487f26afa786a.js",
+          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js",
+          "/packs/js/create_config-b5a5affef7e9b2b9aefc.js"
         ]
       }
     },
@@ -61,6 +73,7 @@
   "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js",
   "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js.map": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-d4ed4d58029909fba452.js.map",
   "js/application-bb859c936b81fe913e43.js.map": "/packs/js/application-bb859c936b81fe913e43.js.map",
+  "js/create_config-b5a5affef7e9b2b9aefc.js.map": "/packs/js/create_config-b5a5affef7e9b2b9aefc.js.map",
   "js/dashboard-1a25d712e00d7b657ca8.js.map": "/packs/js/dashboard-1a25d712e00d7b657ca8.js.map",
   "js/history-16b943e66ec3138abfd3.js.map": "/packs/js/history-16b943e66ec3138abfd3.js.map",
   "js/insights-3d97c7a3da8c6b9f451e.js.map": "/packs/js/insights-3d97c7a3da8c6b9f451e.js.map",
