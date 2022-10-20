@@ -17,7 +17,6 @@ for user in usersToDelete do
 end
 
 user1 = User.create!(
-    username: '$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay',
     password: 'user',
     email: 'email@example.com',
     firstname: 'Firstname',
@@ -26,7 +25,6 @@ user1 = User.create!(
     )
 
 user2 = User.create(
-        username: '$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay',
         password: 'user',
         email: 'email2@example.com',
         firstname: 'Firstname',
@@ -36,7 +34,6 @@ user2 = User.create(
 
 
 user3 = User.create(
-        username: '$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay',
         password: 'user',
         email: 'email3@example.com',
         firstname: 'Firstname',

@@ -23011,3 +23011,114 @@ Completed 200 OK in 3600ms (Views: 3506.2ms | ActiveRecord: 0.0ms | Allocations:
   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
   [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Human Resources Salary"], ["amount", 250000], ["category_id", 8], ["paid_at", "2022-10-19 00:00:00"], ["created_at", "2022-10-19 00:00:00"], ["updated_at", "2022-10-19 00:00:00"]]
   [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveUserNameFromUsers (20220930163357)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.5ms)[0m  [1m[35mALTER TABLE "users" DROP COLUMN "username"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220930163357"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBudget (20314215561245)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (16.8ms)[0m  [1m[35mCREATE TABLE "budget" ("id" bigserial primary key, "name" text NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20314215561245"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."firstname" = $1[0m  [["firstname", "Firstname"]]
+  [1m[36mBudget Load (1.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 128]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.8ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND "budgets_users"."budget_id" = $2[0m  [["user_id", 128], ["budget_id", 5]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 128]]
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 128]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."budget_id" = $1[0m  [["budget_id", 5]]
+  [1m[36mBudget Destroy (1.4ms)[0m  [1m[31mDELETE FROM "budgets" WHERE "budgets"."id" = $1[0m  [["id", 5]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.1ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 128]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 128]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 129]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 129]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 129]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.1ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 129]]
+  [1m[36mUser Destroy (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 129]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 130]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.1ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 130]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 130]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.1ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 130]]
+  [1m[36mUser Destroy (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 130]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."firstname" = $1[0m  [["firstname", "Firstname"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (5.6ms)[0m  [1m[32mINSERT INTO "users" ("password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["password", "$2a$12$TskCUV4sXuIQFXEYExsV7u6.qXUWwISvvA2Ds8dna8i1Ty8OEKjXa"], ["created_at", "2022-10-20 18:01:34.995353"], ["updated_at", "2022-10-20 18:01:34.995353"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["password", "$2a$12$eePfFzKLRc4iLym1OHmbFO0SeF4RwvseMdjJ1jtgil6hXjp.C1xfG"], ["created_at", "2022-10-20 18:01:35.223170"], ["updated_at", "2022-10-20 18:01:35.223170"], ["email", "email2@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["password", "$2a$12$42OB1Tzh5p7Thgl9Mn.ZcuSMIhBJP6atYsgaC4HudTElQVPgmas2G"], ["created_at", "2022-10-20 18:01:35.453368"], ["updated_at", "2022-10-20 18:01:35.453368"], ["email", "email3@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."name" = $1[0m  [["name", "test"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget Create (0.8ms)[0m  [1m[32mINSERT INTO "budgets" ("name", "description", "owner_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "test"], ["description", "Budget Test"], ["owner_id", 131], ["created_at", "2022-10-20 18:01:35.487997"], ["updated_at", "2022-10-20 18:01:35.487997"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.4ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 6], ["user_id", 131]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 6], ["user_id", 132]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.1ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 6], ["user_id", 133]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE ("categories"."name" = $1 OR "categories"."name" = $2 OR "categories"."name" = $3 OR "categories"."name" = $4) ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["name", "food"], ["name", "salary"], ["name", "Shoes sales"], ["name", "T-Shirt sales"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.6ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "food"], ["color", "red"], ["created_at", "2022-10-20 18:01:35.521939"], ["updated_at", "2022-10-20 18:01:35.521939"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "salary"], ["color", "purple"], ["created_at", "2022-10-20 18:01:35.525638"], ["updated_at", "2022-10-20 18:01:35.525638"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Shoes sales"], ["color", "green"], ["created_at", "2022-10-20 18:01:35.528932"], ["updated_at", "2022-10-20 18:01:35.528932"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "T-Shirt sales"], ["color", "blue"], ["created_at", "2022-10-20 18:01:35.532092"], ["updated_at", "2022-10-20 18:01:35.532092"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRevenue Load (1.0ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE ("revenues"."description" = $1 OR "revenues"."description" = $2)[0m  [["description", "Supreme T-Shirt Sales"], ["description", "Sneaker Sales"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.7ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Supreme T-Shirt Sales"], ["amount", 1000000], ["category_id", 7], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.2ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Sneaker Sales"], ["amount", 500000], ["category_id", 6], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mExpense Load (1.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE ("expenses"."description" = $1 OR "expenses"."description" = $2 OR "expenses"."description" = $3 OR "expenses"."description" = $4)[0m  [["description", "Breakfast"], ["description", "Lunch"], ["description", "IT Salary"], ["description", "Human Resources Salary"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.5ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Breakfast"], ["amount", 5000], ["category_id", 4], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Lunch"], ["amount", 10000], ["category_id", 4], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "IT Salary"], ["amount", 500000], ["category_id", 5], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Human Resources Salary"], ["amount", 250000], ["category_id", 5], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
