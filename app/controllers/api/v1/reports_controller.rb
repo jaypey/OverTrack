@@ -65,12 +65,12 @@ module Api; module V1
         select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
         from expenses 
         join categories on expenses.category_id = categories.id 
-        where paid_at >= '#{start_date}' 
+        where paid_at >= '#{start_date}'
         and paid_at < '#{end_date}' 
         group by categories.rank, categories.id 
         order by categories.rank asc, categories.id asc) 
         UNION ALL
-        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        (select 'leftovers' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
         from categories 
         full outer join expenses on categories.id = expenses.category_id 
         full outer join revenues on categories.id = revenues.category_id)";

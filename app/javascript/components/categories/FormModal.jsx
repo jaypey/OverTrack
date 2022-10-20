@@ -60,6 +60,11 @@ class FormModal extends React.Component {
     return 'Update';
   }
 
+  type() {
+    if(this.props.is_revenue == 1) {return 'revenue'; }
+    return 'expense'
+  }
+
   renderDelete() {
     if (!this.props.category.id) { return ''; }
     return <a className="link-danger" onClick={this.handleDelete}>Delete</a>;
@@ -67,7 +72,7 @@ class FormModal extends React.Component {
 
   render() {
     return (
-      <Modal onClose={this.props.onClose} title={`${this.action()} Category`}>
+      <Modal onClose={this.props.onClose} title={`${this.action()} ${this.type()} category`}>
         <form onSubmit={this.handleSubmit}>
           <div className="row row-flex">
             <div className="input-group eight columns">
