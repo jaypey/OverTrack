@@ -23011,3 +23011,1796 @@ Completed 200 OK in 3600ms (Views: 3506.2ms | ActiveRecord: 0.0ms | Allocations:
   [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
   [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Human Resources Salary"], ["amount", 250000], ["category_id", 8], ["paid_at", "2022-10-19 00:00:00"], ["created_at", "2022-10-19 00:00:00"], ["updated_at", "2022-10-19 00:00:00"]]
   [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."firstname" = $1[0m  [["firstname", "Firstname"]]
+  [1m[36mBudget Load (0.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 248]]
+  [1m[36mUser::HABTM_Budgets Destroy (1.6ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND "budgets_users"."budget_id" = $2[0m  [["user_id", 248], ["budget_id", 78]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 248]]
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 248]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Destroy (0.3ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."budget_id" = $1[0m  [["budget_id", 78]]
+  [1m[36mBudget Destroy (8.2ms)[0m  [1m[31mDELETE FROM "budgets" WHERE "budgets"."id" = $1[0m  [["id", 78]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 248]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 248]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 249]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 249]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 249]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 249]]
+  [1m[36mUser Destroy (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 249]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 250]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 250]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 250]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 250]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 250]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$Jw31aMXtoKDTUAEuHtkII.T4XUZwf0u89.xm3LJP1CSu92xKUk/3K"], ["created_at", "2022-10-20 18:05:53.613000"], ["updated_at", "2022-10-20 18:05:53.613000"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$wMhml2hU5Kbe1aPhAb67BuTVM0bor6ke9RrgxCTfKZV2Ssvs7C.cy"], ["created_at", "2022-10-20 18:05:53.786149"], ["updated_at", "2022-10-20 18:05:53.786149"], ["email", "email2@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$uscE2j./W/Mn2H03aUP35uxGo//p9JO/YWyZKGjBtG.lrqkrhvNwG"], ["created_at", "2022-10-20 18:05:53.957594"], ["updated_at", "2022-10-20 18:05:53.957594"], ["email", "email3@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."name" = $1[0m  [["name", "test"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget Create (0.6ms)[0m  [1m[32mINSERT INTO "budgets" ("name", "description", "owner_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "test"], ["description", "Budget Test"], ["owner_id", 251], ["created_at", "2022-10-20 18:05:53.968668"], ["updated_at", "2022-10-20 18:05:53.968668"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.4ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 79], ["user_id", 251]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.3ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 79], ["user_id", 252]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.7ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 79], ["user_id", 253]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE ("categories"."name" = $1 OR "categories"."name" = $2 OR "categories"."name" = $3 OR "categories"."name" = $4) ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["name", "food"], ["name", "salary"], ["name", "Shoes sales"], ["name", "T-Shirt sales"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 311]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 312]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 313]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 314]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "food"], ["color", "red"], ["created_at", "2022-10-20 18:05:54.032108"], ["updated_at", "2022-10-20 18:05:54.032108"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "salary"], ["color", "purple"], ["created_at", "2022-10-20 18:05:54.036909"], ["updated_at", "2022-10-20 18:05:54.036909"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Shoes sales"], ["color", "green"], ["created_at", "2022-10-20 18:05:54.041190"], ["updated_at", "2022-10-20 18:05:54.041190"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "T-Shirt sales"], ["color", "blue"], ["created_at", "2022-10-20 18:05:54.045933"], ["updated_at", "2022-10-20 18:05:54.045933"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRevenue Load (0.4ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE ("revenues"."description" = $1 OR "revenues"."description" = $2)[0m  [["description", "Supreme T-Shirt Sales"], ["description", "Sneaker Sales"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRevenue Destroy (0.2ms)[0m  [1m[31mDELETE FROM "revenues" WHERE "revenues"."id" = $1[0m  [["id", 155]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRevenue Destroy (0.2ms)[0m  [1m[31mDELETE FROM "revenues" WHERE "revenues"."id" = $1[0m  [["id", 156]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 318], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.4ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Supreme T-Shirt Sales"], ["amount", 1000000], ["category_id", 318], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 317], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.2ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Sneaker Sales"], ["amount", 500000], ["category_id", 317], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE ("expenses"."description" = $1 OR "expenses"."description" = $2 OR "expenses"."description" = $3 OR "expenses"."description" = $4)[0m  [["description", "Breakfast"], ["description", "Lunch"], ["description", "IT Salary"], ["description", "Human Resources Salary"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 312]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 313]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 314]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 315]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 315], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.3ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Breakfast"], ["amount", 5000], ["category_id", 315], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 315], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Lunch"], ["amount", 10000], ["category_id", 315], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 316], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "IT Salary"], ["amount", 500000], ["category_id", 316], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 316], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Human Resources Salary"], ["amount", 250000], ["category_id", 316], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 172.20.0.1 at 2022-10-20 18:06:10 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 22ms (ActiveRecord: 0.0ms | Allocations: 1332)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-10-20 18:06:10 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Compiling...
+Started GET "/dashboard" for 172.20.0.1 at 2022-10-20 18:06:13 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] /usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-proposal-class-properties.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-proposal-private-methods since the "loose" mode option was set to "true" for @babel/plugin-proposal-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-proposal-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+
+[Webpacker] assets by status 3.18 MiB [cached] 13 assets
+assets by path . 66.2 KiB
+  asset js/projections-917dc295426f73e9cc18.js 58 KiB [emitted] [immutable] (name: projections) 1 related asset
+  asset manifest.json 8.26 KiB [emitted]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.71 MiB 226 modules
+modules by path ./app/javascript/ 283 KiB
+  modules by path ./app/javascript/components/ 268 KiB 28 modules
+  modules by path ./app/javascript/packs/ 5.28 KiB 7 modules
+  modules by path ./app/javascript/api/ 4.81 KiB 7 modules
+  modules by path ./app/javascript/helpers/*.js 4.12 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.73 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 6220 ms
+
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 8228.8ms | Allocations: 10297)
+[Webpacker] Compiled all packs in /ontrack/public/packs
+[Webpacker] /usr/local/bin/ruby: warning: shebang line ending with \r may cause problems
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+
+[Webpacker] assets by status 3.24 MiB [cached] 14 assets
+asset manifest.json 8.26 KiB [compared for emit]
+runtime modules 3.7 KiB 8 modules
+modules by path ./node_modules/ 2.71 MiB 226 modules
+modules by path ./app/javascript/ 283 KiB
+  modules by path ./app/javascript/components/ 268 KiB 28 modules
+  modules by path ./app/javascript/packs/ 5.28 KiB 7 modules
+  modules by path ./app/javascript/api/ 4.81 KiB 7 modules
+  modules by path ./app/javascript/helpers/*.js 4.12 KiB
+    ./app/javascript/helpers/main.js 160 bytes [built] [code generated]
+    ./app/javascript/helpers/numerics.js 1.65 KiB [built] [code generated]
+    ./app/javascript/helpers/arrays.js 224 bytes [built] [code generated]
+    ./app/javascript/helpers/alerts.js 1.73 KiB [built] [code generated]
+    ./app/javascript/helpers/util.js 364 bytes [built] [code generated]
+webpack 5.28.0 compiled successfully in 6162 ms
+
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 8312.4ms | Allocations: 2341757)
+  Rendered layouts/_image_paths.html.erb (Duration: 15.4ms | Allocations: 1692)
+  Rendered layouts/_navbar.html.erb (Duration: 12.0ms | Allocations: 2488)
+  Rendered layout layouts/application.html.erb (Duration: 11275.4ms | Allocations: 2366531)
+Completed 200 OK in 11311ms (Views: 11295.0ms | ActiveRecord: 0.0ms | Allocations: 2369000)
+
+
+  Rendered layouts/_image_paths.html.erb (Duration: 12.2ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 13.4ms | Allocations: 982)
+  Rendered layout layouts/application.html.erb (Duration: 8674.6ms | Allocations: 2372173)
+Completed 200 OK in 8676ms (Views: 8675.7ms | ActiveRecord: 0.0ms | Allocations: 2372564)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-10-20 18:06:22 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/expenses?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:06:22 +0000
+Started GET "/api/v1/revenues?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:06:22 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:06:22 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+Processing by Api::V1::ExpensesController#index as HTML
+Processing by Api::V1::RevenuesController#index as HTML
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"paid_after"=>"1664596800"}
+  Parameters: {"paid_after"=>"1664596800"}
+  Parameters: {"month"=>"October 2022"}
+  [1m[36mCategory Load (1.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 59ms (Views: 8.4ms | ActiveRecord: 24.2ms | Allocations: 11960)
+
+
+  [1m[35m (2.0ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  [1m[36mRevenue Load (1.1ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  [1m[36mExpense Load (1.0ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+  ↳ app/controllers/api/v1/revenues_controller.rb:13:in `index'
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+  [1m[35m (1.0ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  [1m[35m (1.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+Completed 200 OK in 56ms (Views: 7.5ms | ActiveRecord: 11.8ms | Allocations: 25138)
+
+
+Completed 200 OK in 48ms (Views: 7.3ms | ActiveRecord: 15.7ms | Allocations: 27333)
+
+
+  [1m[35m (1.3ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-10-20 18:06:22 +0000
+Completed 200 OK in 69ms (Views: 0.5ms | ActiveRecord: 16.8ms | Allocations: 36964)
+
+
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 837)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:06:24 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BudgetController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering budget/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered budget/index.html.erb within layouts/application (Duration: 239.7ms | Allocations: 3070)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.0ms | Allocations: 998)
+  Rendered layout layouts/application.html.erb (Duration: 605.6ms | Allocations: 24244)
+Completed 200 OK in 614ms (Views: 608.7ms | ActiveRecord: 0.0ms | Allocations: 25159)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-10-20 18:06:54 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 242.6ms | Allocations: 3317)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.6ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.3ms | Allocations: 998)
+  Rendered layout layouts/application.html.erb (Duration: 608.8ms | Allocations: 24499)
+Completed 200 OK in 622ms (Views: 612.5ms | ActiveRecord: 0.6ms | Allocations: 26749)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-10-20 18:06:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:06:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"October 2022"}
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+  [1m[35m (2.5ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+  [1m[35m (1.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 1124500.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  [1m[35m (1.5ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (1.2ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+Completed 200 OK in 23ms (Views: 3.3ms | ActiveRecord: 6.0ms | Allocations: 5575)
+
+
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Completed 200 OK in 24ms (Views: 0.5ms | ActiveRecord: 8.1ms | Allocations: 6489)
+
+
+Started GET "/expenses" for 172.20.0.1 at 2022-10-20 18:07:15 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ExpensesController#index as HTML
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/expenses_controller.rb:4:in `index'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/expenses_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering expenses/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered expenses/index.html.erb within layouts/application (Duration: 243.1ms | Allocations: 3287)
+  Rendered layouts/_image_paths.html.erb (Duration: 28.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.0ms | Allocations: 999)
+  Rendered layout layouts/application.html.erb (Duration: 637.1ms | Allocations: 24462)
+Completed 200 OK in 652ms (Views: 640.3ms | ActiveRecord: 0.9ms | Allocations: 27172)
+
+
+Started GET "/api/v1/expenses?include_category=true&paid_before=1666289235&paid_after=1658513235&category_id=&sort=paid_at&sort_desc=true&search=&page=1&per_page=10" for 172.20.0.1 at 2022-10-20 18:07:15 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"include_category"=>"true", "paid_before"=>"1666289235", "paid_after"=>"1658513235", "category_id"=>"", "sort"=>"paid_at", "sort_desc"=>"true", "search"=>"", "page"=>"1", "per_page"=>"10"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-22 18:07:15') AND (paid_at <= '2022-10-20 18:07:15')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-22 18:07:15') AND (paid_at <= '2022-10-20 18:07:15')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-22 18:07:15') AND (paid_at <= '2022-10-20 18:07:15')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses" WHERE (paid_at >= '2022-07-22 18:07:15') AND (paid_at <= '2022-10-20 18:07:15')[0m
+  ↳ app/models/concerns/paginator.rb:20:in `total_items'
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-07-22 18:07:15') AND (paid_at <= '2022-10-20 18:07:15') ORDER BY paid_at DESC, "expenses"."id" DESC LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4) ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["id", 316], ["id", 315], ["id", 2], ["id", 1]]
+  ↳ app/controllers/api/v1/base_controller.rb:10:in `paginate'
+Completed 200 OK in 49ms (Views: 0.6ms | ActiveRecord: 1.4ms | Allocations: 8233)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:07:16 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BudgetController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering budget/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered budget/index.html.erb within layouts/application (Duration: 244.1ms | Allocations: 3013)
+  Rendered layouts/_image_paths.html.erb (Duration: 13.1ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.1ms | Allocations: 993)
+  Rendered layout layouts/application.html.erb (Duration: 602.4ms | Allocations: 24183)
+Completed 200 OK in 604ms (Views: 603.2ms | ActiveRecord: 0.0ms | Allocations: 24605)
+
+
+Started GET "/budget" for 172.20.0.1 at 2022-10-20 18:07:19 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BudgetController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering budget/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered budget/index.html.erb within layouts/application (Duration: 234.1ms | Allocations: 3013)
+  Rendered layouts/_image_paths.html.erb (Duration: 13.9ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.4ms | Allocations: 982)
+  Rendered layout layouts/application.html.erb (Duration: 606.2ms | Allocations: 24168)
+Completed 200 OK in 607ms (Views: 606.9ms | ActiveRecord: 0.0ms | Allocations: 24571)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:07:20 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BudgetController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering budget/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered budget/index.html.erb within layouts/application (Duration: 232.5ms | Allocations: 3013)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.9ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 13.6ms | Allocations: 982)
+  Rendered layout layouts/application.html.erb (Duration: 595.4ms | Allocations: 24173)
+Completed 200 OK in 597ms (Views: 596.2ms | ActiveRecord: 0.0ms | Allocations: 24576)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:07:23 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BudgetController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering budget/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered budget/index.html.erb within layouts/application (Duration: 249.0ms | Allocations: 3017)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.0ms | Allocations: 982)
+  Rendered layout layouts/application.html.erb (Duration: 650.6ms | Allocations: 24172)
+Completed 200 OK in 652ms (Views: 651.3ms | ActiveRecord: 0.0ms | Allocations: 24575)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:07:24 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BudgetController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering budget/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered budget/index.html.erb within layouts/application (Duration: 259.8ms | Allocations: 3013)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 13.9ms | Allocations: 985)
+  Rendered layout layouts/application.html.erb (Duration: 639.4ms | Allocations: 24176)
+Completed 200 OK in 641ms (Views: 640.2ms | ActiveRecord: 0.0ms | Allocations: 24575)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."firstname" = $1[0m  [["firstname", "Firstname"]]
+  [1m[36mBudget Load (0.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 251]]
+  [1m[36mUser::HABTM_Budgets Destroy (4.7ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND "budgets_users"."budget_id" = $2[0m  [["user_id", 251], ["budget_id", 79]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 251]]
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 251]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Destroy (0.3ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."budget_id" = $1[0m  [["budget_id", 79]]
+  [1m[36mBudget Destroy (0.5ms)[0m  [1m[31mDELETE FROM "budgets" WHERE "budgets"."id" = $1[0m  [["id", 79]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 251]]
+  [1m[36mUser Destroy (0.4ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 251]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 252]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.7ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 252]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 252]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 252]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 252]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 253]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 253]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 253]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 253]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 253]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$dMAK/Rz6qPM8P7sARQQ5BOmxMkDe9QU5DBkcTzp9Y9ePPOuvDcUeO"], ["created_at", "2022-10-20 18:08:30.440588"], ["updated_at", "2022-10-20 18:08:30.440588"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$YDCi5yVevhBvPSJ4fgtnGO5lhMYGKOv9i9Y7RZRw7pPN8D/Ejxs9q"], ["created_at", "2022-10-20 18:08:30.619046"], ["updated_at", "2022-10-20 18:08:30.619046"], ["email", "email2@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$RpWUgfz5lrJ728ZRrOVFXeHKFVy0UijYiP8Byehz9YVLLpwaJPBFe"], ["created_at", "2022-10-20 18:08:30.792628"], ["updated_at", "2022-10-20 18:08:30.792628"], ["email", "email3@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."name" = $1[0m  [["name", "test"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget Create (0.5ms)[0m  [1m[32mINSERT INTO "budgets" ("name", "description", "owner_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "test"], ["description", "Budget Test"], ["owner_id", 254], ["created_at", "2022-10-20 18:08:30.802746"], ["updated_at", "2022-10-20 18:08:30.802746"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.3ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 80], ["user_id", 254]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.7ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 80], ["user_id", 255]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 80], ["user_id", 256]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE ("categories"."name" = $1 OR "categories"."name" = $2 OR "categories"."name" = $3 OR "categories"."name" = $4) ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["name", "food"], ["name", "salary"], ["name", "Shoes sales"], ["name", "T-Shirt sales"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 315]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.2ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 316]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.2ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 317]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 318]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "food"], ["color", "red"], ["created_at", "2022-10-20 18:08:30.859054"], ["updated_at", "2022-10-20 18:08:30.859054"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "salary"], ["color", "purple"], ["created_at", "2022-10-20 18:08:30.863485"], ["updated_at", "2022-10-20 18:08:30.863485"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Shoes sales"], ["color", "green"], ["created_at", "2022-10-20 18:08:30.867603"], ["updated_at", "2022-10-20 18:08:30.867603"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "T-Shirt sales"], ["color", "blue"], ["created_at", "2022-10-20 18:08:30.871778"], ["updated_at", "2022-10-20 18:08:30.871778"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRevenue Load (0.4ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE ("revenues"."description" = $1 OR "revenues"."description" = $2)[0m  [["description", "Supreme T-Shirt Sales"], ["description", "Sneaker Sales"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRevenue Destroy (0.2ms)[0m  [1m[31mDELETE FROM "revenues" WHERE "revenues"."id" = $1[0m  [["id", 157]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRevenue Destroy (0.2ms)[0m  [1m[31mDELETE FROM "revenues" WHERE "revenues"."id" = $1[0m  [["id", 158]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 322], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.4ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Supreme T-Shirt Sales"], ["amount", 1000000], ["category_id", 322], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 321], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.2ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Sneaker Sales"], ["amount", 500000], ["category_id", 321], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE ("expenses"."description" = $1 OR "expenses"."description" = $2 OR "expenses"."description" = $3 OR "expenses"."description" = $4)[0m  [["description", "Breakfast"], ["description", "Lunch"], ["description", "IT Salary"], ["description", "Human Resources Salary"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 316]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 317]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 318]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 319]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 319], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.3ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Breakfast"], ["amount", 5000], ["category_id", 319], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 319], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Lunch"], ["amount", 10000], ["category_id", 319], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 320], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.3ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "IT Salary"], ["amount", 500000], ["category_id", 320], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 320], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Human Resources Salary"], ["amount", 250000], ["category_id", 320], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 172.20.0.1 at 2022-10-20 18:08:43 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 19ms (ActiveRecord: 0.0ms | Allocations: 1342)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-10-20 18:08:43 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 251.6ms | Allocations: 3682)
+  Rendered layouts/_image_paths.html.erb (Duration: 14.9ms | Allocations: 607)
+  Rendered layouts/_navbar.html.erb (Duration: 16.0ms | Allocations: 1593)
+  Rendered layout layouts/application.html.erb (Duration: 2775.2ms | Allocations: 2346826)
+Completed 200 OK in 2808ms (Views: 2793.0ms | ActiveRecord: 0.0ms | Allocations: 2349374)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-10-20 18:08:46 +0000
+Started GET "/api/v1/expenses?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:08:46 +0000
+Started GET "/api/v1/revenues?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:08:46 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:08:46 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+Processing by Api::V1::ExpensesController#index as HTML
+Processing by Api::V1::RevenuesController#index as HTML
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"paid_after"=>"1664596800"}
+  Parameters: {"paid_after"=>"1664596800"}
+  Parameters: {"month"=>"October 2022"}
+  [1m[36mCategory Load (13.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+Completed 200 OK in 71ms (Views: 8.5ms | ActiveRecord: 36.4ms | Allocations: 11919)
+
+
+  [1m[36mExpense Load (0.8ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+  [1m[35m (2.9ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  [1m[36mRevenue Load (0.8ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+  ↳ app/controllers/api/v1/revenues_controller.rb:13:in `index'
+  [1m[35m (1.7ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+Completed 200 OK in 70ms (Views: 7.5ms | ActiveRecord: 11.7ms | Allocations: 25081)
+
+
+Completed 200 OK in 61ms (Views: 8.2ms | ActiveRecord: 16.4ms | Allocations: 27074)
+
+
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Completed 200 OK in 82ms (Views: 0.4ms | ActiveRecord: 15.9ms | Allocations: 36600)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-10-20 18:08:46 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 831)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:08:47 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 244.5ms | Allocations: 3232)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.2ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.4ms | Allocations: 998)
+  Rendered layout layouts/application.html.erb (Duration: 621.7ms | Allocations: 24411)
+Completed 200 OK in 631ms (Views: 625.3ms | ActiveRecord: 0.0ms | Allocations: 25324)
+
+
+Started GET "/" for 172.20.0.1 at 2022-10-20 18:08:50 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 279)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-10-20 18:08:50 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 242.8ms | Allocations: 3256)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.9ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.2ms | Allocations: 993)
+  Rendered layout layouts/application.html.erb (Duration: 606.0ms | Allocations: 24426)
+Completed 200 OK in 607ms (Views: 606.8ms | ActiveRecord: 0.0ms | Allocations: 24840)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-10-20 18:08:50 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/revenues?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:08:50 +0000
+Started GET "/api/v1/expenses?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:08:50 +0000
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:08:50 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+Processing by Api::V1::ExpensesController#index as HTML
+  [1m[36mCategory Load (1.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+Processing by Api::V1::RevenuesController#index as HTML
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"paid_after"=>"1664596800"}
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+  Parameters: {"paid_after"=>"1664596800"}
+  Parameters: {"month"=>"October 2022"}
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+Completed 200 OK in 8ms (Views: 4.6ms | ActiveRecord: 1.9ms | Allocations: 2972)
+
+
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 8ms (Views: 4.9ms | ActiveRecord: 0.6ms | Allocations: 2993)
+
+
+  [1m[36mRevenue Load (0.8ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  [1m[35m (2.0ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  ↳ app/controllers/api/v1/revenues_controller.rb:13:in `index'
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+Completed 200 OK in 8ms (Views: 5.4ms | ActiveRecord: 0.8ms | Allocations: 3006)
+
+
+  [1m[35m (1.4ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-10-20 18:08:50 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Completed 200 OK in 20ms (Views: 0.3ms | ActiveRecord: 5.9ms | Allocations: 7237)
+
+
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 840)
+
+
+Started GET "/budget" for 172.20.0.1 at 2022-10-20 18:08:51 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by BudgetController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering budget/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered budget/index.html.erb within layouts/application (Duration: 252.3ms | Allocations: 3065)
+  Rendered layouts/_image_paths.html.erb (Duration: 13.0ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 13.9ms | Allocations: 998)
+  Rendered layout layouts/application.html.erb (Duration: 616.4ms | Allocations: 24242)
+Completed 200 OK in 625ms (Views: 619.5ms | ActiveRecord: 0.0ms | Allocations: 25163)
+
+
+Started GET "/" for 172.20.0.1 at 2022-10-20 18:08:54 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 275)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-10-20 18:08:54 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 250.7ms | Allocations: 3256)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.1ms | Allocations: 993)
+  Rendered layout layouts/application.html.erb (Duration: 614.3ms | Allocations: 24428)
+Completed 200 OK in 616ms (Views: 615.2ms | ActiveRecord: 0.0ms | Allocations: 24839)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-10-20 18:08:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/revenues?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:08:55 +0000
+Started GET "/api/v1/expenses?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:08:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:08:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CategoriesController#index as HTML
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+Processing by Api::V1::ReportsController#month as HTML
+Processing by Api::V1::RevenuesController#index as HTML
+Processing by Api::V1::ExpensesController#index as HTML
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+  Parameters: {"month"=>"October 2022"}
+  Parameters: {"paid_after"=>"1664596800"}
+  Parameters: {"paid_after"=>"1664596800"}
+Completed 200 OK in 8ms (Views: 5.3ms | ActiveRecord: 0.6ms | Allocations: 2735)
+
+
+  [1m[36mRevenue Load (1.2ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  [1m[35m (2.5ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  [1m[36mExpense Load (1.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/revenues_controller.rb:13:in `index'
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+Completed 200 OK in 6ms (Views: 3.6ms | ActiveRecord: 1.2ms | Allocations: 2355)
+
+
+  [1m[35m (1.2ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+Completed 200 OK in 7ms (Views: 4.4ms | ActiveRecord: 1.3ms | Allocations: 2742)
+
+
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Completed 200 OK in 20ms (Views: 0.4ms | ActiveRecord: 6.2ms | Allocations: 6805)
+
+
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-10-20 18:08:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 827)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:09:00 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 237.7ms | Allocations: 3175)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.6ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 13.5ms | Allocations: 993)
+  Rendered layout layouts/application.html.erb (Duration: 597.0ms | Allocations: 24346)
+Completed 200 OK in 598ms (Views: 597.8ms | ActiveRecord: 0.0ms | Allocations: 24738)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-10-20 18:09:08 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 238.6ms | Allocations: 3322)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.3ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 13.8ms | Allocations: 998)
+  Rendered layout layouts/application.html.erb (Duration: 602.9ms | Allocations: 24495)
+Completed 200 OK in 615ms (Views: 606.2ms | ActiveRecord: 0.5ms | Allocations: 26720)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-10-20 18:09:08 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:09:08 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+Processing by Api::V1::ReportsController#month as HTML
+  [1m[35m (1.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 1124500.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  Parameters: {"month"=>"October 2022"}
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  [1m[35m (1.2ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (1.4ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  [1m[35m (1.4ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+Completed 200 OK in 23ms (Views: 4.0ms | ActiveRecord: 6.4ms | Allocations: 5798)
+
+
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Completed 200 OK in 21ms (Views: 0.6ms | ActiveRecord: 3.9ms | Allocations: 5889)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:09:15 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 236.6ms | Allocations: 3181)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 13.6ms | Allocations: 993)
+  Rendered layout layouts/application.html.erb (Duration: 594.6ms | Allocations: 24356)
+Completed 200 OK in 596ms (Views: 595.5ms | ActiveRecord: 0.0ms | Allocations: 24766)
+
+
+Started GET "/insights" for 172.20.0.1 at 2022-10-20 18:09:17 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by InsightsController#index as HTML
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/insights_controller.rb:3:in `index'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/insights_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering insights/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered insights/index.html.erb within layouts/application (Duration: 235.1ms | Allocations: 3210)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.8ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 13.4ms | Allocations: 982)
+  Rendered layout layouts/application.html.erb (Duration: 623.3ms | Allocations: 24371)
+Completed 200 OK in 629ms (Views: 624.1ms | ActiveRecord: 0.6ms | Allocations: 26070)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-10-20 18:09:18 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:09:18 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"October 2022"}
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+  [1m[35m (1.4ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 1124500.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  [1m[35m (1.1ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  [1m[35m (0.5ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 200 OK in 16ms (Views: 2.7ms | ActiveRecord: 4.9ms | Allocations: 5592)
+
+
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Completed 200 OK in 17ms (Views: 0.4ms | ActiveRecord: 4.0ms | Allocations: 6463)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:09:29 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 191.5ms | Allocations: 3175)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.7ms | Allocations: 982)
+  Rendered layout layouts/application.html.erb (Duration: 549.8ms | Allocations: 24334)
+Completed 200 OK in 551ms (Views: 550.6ms | ActiveRecord: 0.0ms | Allocations: 24733)
+
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."firstname" = $1[0m  [["firstname", "Firstname"]]
+  [1m[36mBudget Load (0.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 254]]
+  [1m[36mUser::HABTM_Budgets Destroy (4.5ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND "budgets_users"."budget_id" = $2[0m  [["user_id", 254], ["budget_id", 80]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 254]]
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 254]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Destroy (0.3ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."budget_id" = $1[0m  [["budget_id", 80]]
+  [1m[36mBudget Destroy (0.5ms)[0m  [1m[31mDELETE FROM "budgets" WHERE "budgets"."id" = $1[0m  [["id", 80]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 254]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 254]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 255]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 255]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 255]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 255]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 255]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 256]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.7ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 256]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 256]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 256]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 256]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$VqS6TTBUOwQpIFY28iA2uu1dffYIs6Uydd3mGPblaNKJSosrbmEHq"], ["created_at", "2022-10-20 18:12:39.683477"], ["updated_at", "2022-10-20 18:12:39.683477"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$qqKb8/zC8unIw3Bd0FsFsO.5n6I76iqP3RRLqDK6UJbgXhOPaDqpW"], ["created_at", "2022-10-20 18:12:39.855267"], ["updated_at", "2022-10-20 18:12:39.855267"], ["email", "email2@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$c4vXWKBeGSKUUU3zF1S.lO5/573E.uay.QQFD60BPbUI1gtTTDVIC"], ["created_at", "2022-10-20 18:12:40.027945"], ["updated_at", "2022-10-20 18:12:40.027945"], ["email", "email3@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."name" = $1[0m  [["name", "test"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget Create (1.0ms)[0m  [1m[32mINSERT INTO "budgets" ("name", "description", "owner_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "test"], ["description", "Budget Test"], ["owner_id", 257], ["created_at", "2022-10-20 18:12:40.038581"], ["updated_at", "2022-10-20 18:12:40.038581"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.3ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 81], ["user_id", 257]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.7ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 81], ["user_id", 258]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.2ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 81], ["user_id", 259]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE ("categories"."name" = $1 OR "categories"."name" = $2 OR "categories"."name" = $3 OR "categories"."name" = $4) ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["name", "food"], ["name", "salary"], ["name", "Shoes sales"], ["name", "T-Shirt sales"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 319]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.2ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 320]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 321]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 322]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "food"], ["color", "red"], ["created_at", "2022-10-20 18:12:40.094718"], ["updated_at", "2022-10-20 18:12:40.094718"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "salary"], ["color", "purple"], ["created_at", "2022-10-20 18:12:40.098953"], ["updated_at", "2022-10-20 18:12:40.098953"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Shoes sales"], ["color", "green"], ["created_at", "2022-10-20 18:12:40.103122"], ["updated_at", "2022-10-20 18:12:40.103122"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "T-Shirt sales"], ["color", "blue"], ["created_at", "2022-10-20 18:12:40.107110"], ["updated_at", "2022-10-20 18:12:40.107110"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRevenue Load (0.4ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE ("revenues"."description" = $1 OR "revenues"."description" = $2)[0m  [["description", "Supreme T-Shirt Sales"], ["description", "Sneaker Sales"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRevenue Destroy (0.3ms)[0m  [1m[31mDELETE FROM "revenues" WHERE "revenues"."id" = $1[0m  [["id", 159]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRevenue Destroy (0.2ms)[0m  [1m[31mDELETE FROM "revenues" WHERE "revenues"."id" = $1[0m  [["id", 160]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 326], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.4ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Supreme T-Shirt Sales"], ["amount", 1000000], ["category_id", 326], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 325], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.2ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Sneaker Sales"], ["amount", 500000], ["category_id", 325], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE ("expenses"."description" = $1 OR "expenses"."description" = $2 OR "expenses"."description" = $3 OR "expenses"."description" = $4)[0m  [["description", "Breakfast"], ["description", "Lunch"], ["description", "IT Salary"], ["description", "Human Resources Salary"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 320]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 321]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 322]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 323]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 323], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.3ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Breakfast"], ["amount", 5000], ["category_id", 323], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 323], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Lunch"], ["amount", 10000], ["category_id", 323], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 324], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "IT Salary"], ["amount", 500000], ["category_id", 324], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 324], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Human Resources Salary"], ["amount", 250000], ["category_id", 324], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 172.20.0.1 at 2022-10-20 18:12:54 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#new as HTML
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as :require_no_login rendered or redirected
+Completed 302 Found in 20ms (ActiveRecord: 0.0ms | Allocations: 1301)
+
+
+Started GET "/dashboard" for 172.20.0.1 at 2022-10-20 18:12:55 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 276.5ms | Allocations: 3824)
+Started GET "/dashboard" for 172.20.0.1 at 2022-10-20 18:12:57 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  Rendered layouts/_image_paths.html.erb (Duration: 22.6ms | Allocations: 4501)
+  Rendered layouts/_navbar.html.erb (Duration: 15.8ms | Allocations: 1647)
+  Rendered layout layouts/application.html.erb (Duration: 2871.5ms | Allocations: 2350932)
+Completed 200 OK in 2911ms (Views: 2893.3ms | ActiveRecord: 0.0ms | Allocations: 2353468)
+
+
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 242.4ms | Allocations: 5824)
+  Rendered layouts/_image_paths.html.erb (Duration: 11.8ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.0ms | Allocations: 982)
+  Rendered layout layouts/application.html.erb (Duration: 592.7ms | Allocations: 26989)
+Completed 200 OK in 594ms (Views: 593.8ms | ActiveRecord: 0.0ms | Allocations: 27400)
+
+
+Started GET "/api/v1/categories" for 172.20.0.1 at 2022-10-20 18:12:58 +0000
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:12:58 +0000
+Started GET "/api/v1/revenues?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:12:58 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/expenses?paid_after=1664596800" for 172.20.0.1 at 2022-10-20 18:12:58 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RevenuesController#index as HTML
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"paid_after"=>"1664596800"}
+Processing by Api::V1::CategoriesController#index as HTML
+Processing by Api::V1::ExpensesController#index as HTML
+  Parameters: {"month"=>"October 2022"}
+  Parameters: {"paid_after"=>"1664596800"}
+  [1m[36mRevenue Load (1.3ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/revenues_controller.rb:13:in `index'
+Completed 200 OK in 54ms (Views: 13.4ms | ActiveRecord: 3.9ms | Allocations: 10356)
+
+
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE (paid_at >= '2022-10-01 04:00:00')[0m
+  ↳ app/controllers/api/v1/expenses_controller.rb:18:in `index'
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  [1m[35m (2.7ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:4:in `index'
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+Completed 200 OK in 54ms (Views: 8.9ms | ActiveRecord: 15.5ms | Allocations: 25646)
+
+
+  [1m[35m (6.7ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+Completed 200 OK in 45ms (Views: 8.0ms | ActiveRecord: 16.5ms | Allocations: 26389)
+
+
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Started GET "/api/v1/goals" for 172.20.0.1 at 2022-10-20 18:12:58 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Completed 200 OK in 79ms (Views: 0.4ms | ActiveRecord: 22.0ms | Allocations: 39094)
+
+
+Processing by Api::V1::GoalsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/goals_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 835)
+
+
+Started GET "/projections" for 172.20.0.1 at 2022-10-20 18:13:00 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ProjectionsController#index as HTML
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" ORDER BY "expenses"."paid_at" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/projections_controller.rb:3:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "expenses"[0m
+  ↳ app/controllers/projections_controller.rb:6:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering projections/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered projections/index.html.erb within layouts/application (Duration: 239.0ms | Allocations: 3317)
+  Rendered layouts/_image_paths.html.erb (Duration: 12.5ms | Allocations: 499)
+  Rendered layouts/_navbar.html.erb (Duration: 14.5ms | Allocations: 998)
+  Rendered layout layouts/application.html.erb (Duration: 599.1ms | Allocations: 24491)
+Completed 200 OK in 612ms (Views: 602.4ms | ActiveRecord: 0.6ms | Allocations: 26750)
+
+
+Started GET "/api/v1/reports/year?year=2022" for 172.20.0.1 at 2022-10-20 18:13:00 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/reports/month?month=October+2022" for 172.20.0.1 at 2022-10-20 18:13:00 +0000
+Cannot render console from 172.20.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ReportsController#year as HTML
+  Parameters: {"year"=>"2022"}
+  [1m[35m (0.4ms)[0m  [1m[34m
+        select sum(expenses.amount) as amount
+        from expenses
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:4:in `year'
+Processing by Api::V1::ReportsController#month as HTML
+  Parameters: {"month"=>"October 2022"}
+  [1m[35m (1.2ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) / 1124500.0 AS percentage
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by percentage;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:11:in `year'
+  [1m[35m (1.2ms)[0m  [1m[34m
+        select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-10-01'
+        and paid_at < '2022-11-01'
+        group by categories.rank, categories.id
+        order by categories.rank asc, categories.id asc[0m
+  [1m[35m (0.8ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount, categories.color as color
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by categories.id
+        order by amount desc;
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:78:in `month'
+  ↳ app/controllers/api/v1/reports_controller.rb:21:in `year'
+  [1m[35m (0.7ms)[0m  [1m[34m
+        select categories.name AS category, to_char(date_trunc('month', paid_at), 'Mon') AS month, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2023-01-01'
+        group by month, categories.id
+        order by categories.rank asc, categories.id asc
+      [0m
+  [1m[35m (1.3ms)[0m  [1m[35m(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '2022-10-01' 
+        and paid_at < '2022-11-01' 
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'revenues' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id)[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:31:in `year'
+  ↳ app/controllers/api/v1/reports_controller.rb:80:in `month'
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  [1m[35m (0.6ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories"."id", "categories"."name", "categories"."color" FROM "categories" ORDER BY "categories"."rank" ASC, "categories"."id" ASC, "categories"."name" ASC[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:41:in `year'
+  [1m[35m (0.9ms)[0m  [1m[34m
+        select categories.name AS category, sum(expenses.amount) AS amount
+        from expenses
+        join categories on expenses.category_id = categories.id
+        where paid_at >= '2022-01-01'
+        and paid_at < '2022-10-01'
+        group by categories.id
+      [0m
+Completed 200 OK in 18ms (Views: 2.5ms | ActiveRecord: 4.0ms | Allocations: 5010)
+
+
+  ↳ app/controllers/api/v1/reports_controller.rb:100:in `average_by_category'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE (paid_at >= '2022-10-01' and paid_at < '2022-11-01')[0m
+  ↳ app/controllers/api/v1/reports_controller.rb:88:in `month'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reports_controller.rb:89:in `month'
+Completed 200 OK in 20ms (Views: 0.4ms | ActiveRecord: 4.8ms | Allocations: 6198)
+
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4419603485512784835)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4419603485512784835)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."firstname" = $1[0m  [["firstname", "Firstname"]]
+  [1m[36mBudget Load (0.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 257]]
+  [1m[36mUser::HABTM_Budgets Destroy (4.8ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND "budgets_users"."budget_id" = $2[0m  [["user_id", 257], ["budget_id", 81]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 257]]
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 257]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Destroy (0.3ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."budget_id" = $1[0m  [["budget_id", 81]]
+  [1m[36mBudget Destroy (0.8ms)[0m  [1m[31mDELETE FROM "budgets" WHERE "budgets"."id" = $1[0m  [["id", 81]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 257]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 257]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 258]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 258]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 258]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 258]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 258]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" INNER JOIN "budgets_users" ON "budgets"."id" = "budgets_users"."budget_id" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 259]]
+  [1m[36mUser::HABTM_Budgets Destroy (0.3ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1 AND 1=0[0m  [["user_id", 259]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "budgets" WHERE "budgets"."owner_id" = $1[0m  [["owner_id", 259]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser::HABTM_Budgets Destroy (0.2ms)[0m  [1m[31mDELETE FROM "budgets_users" WHERE "budgets_users"."user_id" = $1[0m  [["user_id", 259]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 259]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$RLjmdXzxDDWN5RQi8xePM.4EJJHIwZLqdAMN0hZrWUto8rC20s/Jm"], ["created_at", "2022-10-20 18:14:22.477005"], ["updated_at", "2022-10-20 18:14:22.477005"], ["email", "email@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$D1cLubQvX2gy3aZ7QD/3ceKgrky1FQBTzebiaQMsHl3JKAQHDS2IC"], ["created_at", "2022-10-20 18:14:22.645279"], ["updated_at", "2022-10-20 18:14:22.645279"], ["email", "email2@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "password", "created_at", "updated_at", "email", "firstname", "lastname", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "$2a$12$vWdd52kX6c1Eh0byF16l..G96Cg06HskjfGOHPTHy1Ruli6N8m5ay"], ["password", "$2a$12$D0L/pAelmxcfEuFrCZtFde7JeY9Bx3cKN1Fg5nvWJ5a9w1hY34fJq"], ["created_at", "2022-10-20 18:14:22.814955"], ["updated_at", "2022-10-20 18:14:22.814955"], ["email", "email3@example.com"], ["firstname", "Firstname"], ["lastname", "Lastname"], ["phone", "555-555-5555"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."name" = $1[0m  [["name", "test"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget Create (0.4ms)[0m  [1m[32mINSERT INTO "budgets" ("name", "description", "owner_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "test"], ["description", "Budget Test"], ["owner_id", 260], ["created_at", "2022-10-20 18:14:22.825539"], ["updated_at", "2022-10-20 18:14:22.825539"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.4ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 82], ["user_id", 260]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.3ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 82], ["user_id", 261]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBudget::HABTM_Users Create (0.8ms)[0m  [1m[32mINSERT INTO "budgets_users" ("budget_id", "user_id") VALUES ($1, $2)[0m  [["budget_id", 82], ["user_id", 262]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE ("categories"."name" = $1 OR "categories"."name" = $2 OR "categories"."name" = $3 OR "categories"."name" = $4) ORDER BY "categories"."rank" ASC, "categories"."id" ASC[0m  [["name", "food"], ["name", "salary"], ["name", "Shoes sales"], ["name", "T-Shirt sales"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 323]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 324]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 325]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Destroy (0.3ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 326]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "food"], ["color", "red"], ["created_at", "2022-10-20 18:14:22.887893"], ["updated_at", "2022-10-20 18:14:22.887893"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "salary"], ["color", "purple"], ["created_at", "2022-10-20 18:14:22.892816"], ["updated_at", "2022-10-20 18:14:22.892816"], ["is_revenue", 0]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Shoes sales"], ["color", "green"], ["created_at", "2022-10-20 18:14:22.897745"], ["updated_at", "2022-10-20 18:14:22.897745"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "color", "created_at", "updated_at", "is_revenue") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "T-Shirt sales"], ["color", "blue"], ["created_at", "2022-10-20 18:14:22.903083"], ["updated_at", "2022-10-20 18:14:22.903083"], ["is_revenue", 1]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRevenue Load (0.4ms)[0m  [1m[34mSELECT "revenues".* FROM "revenues" WHERE ("revenues"."description" = $1 OR "revenues"."description" = $2)[0m  [["description", "Supreme T-Shirt Sales"], ["description", "Sneaker Sales"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRevenue Destroy (0.3ms)[0m  [1m[31mDELETE FROM "revenues" WHERE "revenues"."id" = $1[0m  [["id", 161]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRevenue Destroy (0.2ms)[0m  [1m[31mDELETE FROM "revenues" WHERE "revenues"."id" = $1[0m  [["id", 162]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 330], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.4ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Supreme T-Shirt Sales"], ["amount", 1000000], ["category_id", 330], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 329], ["LIMIT", 1]]
+  [1m[36mRevenue Create (0.3ms)[0m  [1m[32mINSERT INTO "revenues" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Sneaker Sales"], ["amount", 500000], ["category_id", 329], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE ("expenses"."description" = $1 OR "expenses"."description" = $2 OR "expenses"."description" = $3 OR "expenses"."description" = $4)[0m  [["description", "Breakfast"], ["description", "Lunch"], ["description", "IT Salary"], ["description", "Human Resources Salary"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.3ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 324]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 325]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 326]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mExpense Destroy (0.2ms)[0m  [1m[31mDELETE FROM "expenses" WHERE "expenses"."id" = $1[0m  [["id", 327]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 327], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.3ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Breakfast"], ["amount", 5000], ["category_id", 327], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 327], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Lunch"], ["amount", 10000], ["category_id", 327], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 328], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "IT Salary"], ["amount", 500000], ["category_id", 328], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 ORDER BY "categories"."rank" ASC, "categories"."id" ASC LIMIT $2[0m  [["id", 328], ["LIMIT", 1]]
+  [1m[36mExpense Create (0.2ms)[0m  [1m[32mINSERT INTO "expenses" ("description", "amount", "category_id", "paid_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["description", "Human Resources Salary"], ["amount", 250000], ["category_id", 328], ["paid_at", "2022-10-20 00:00:00"], ["created_at", "2022-10-20 00:00:00"], ["updated_at", "2022-10-20 00:00:00"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
