@@ -1,5 +1,5 @@
 import React from 'react'
-import AddBudgetModal from '../budget/AddBudgetModal';
+import FormBudgetModal from '../budget/AddBudgetModal';
 import { Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
@@ -32,6 +32,7 @@ class Main extends React.Component {
             ],
             idSelectedBudget: 0,
             showBudgetCreate: false,
+            showBudgetUpdate: false,
         };
     }
 
@@ -39,13 +40,39 @@ class Main extends React.Component {
         this.reloadData();
     }
 
-    onBudgetSave = () => {
+    onBudgetCreateSave = () => {
         this.closeBudgetCreate();
+        this.reloadData();
+    }
+
+    onBudgetUpdateSave = () => {
+        this.closeBudgetUpdate();
+        this.reloadData();
+    }
+
+    onBudgetDelete = () => {
+        this.setState({ idSelectedBudget: 0});
         this.reloadData();
     }
     openBudgetCreate = () => { this.setState({ showBudgetCreate: true }); }
     closeBudgetCreate = () => { this.setState({ showBudgetCreate: false }); }
+    openBudgetUpdate = () => { this.setState({ showBudgetUpdate: true }); }
+    closeBudgetUpdate = () => { this.setState({ showBudgetUpdate: false }); }
     changeSelectedBudget = async (id) => { this.setState({ idSelectedBudget: id }) }
+
+    deleteBudget = async (id) => {
+        Alerts.genericDelete('budget').then((result) => {
+            if (!result.value) { return; }
+            Budgets.delete(id).then(
+              () => { this.onBudgetDelete(); },
+              () => { Alerts.genericError(); },
+            );
+          });
+    }
+
+    updateBudget = async (id) => {
+        console.log("update")
+    }
 
     reloadData = () => {
         this.loadBudgets();
@@ -60,8 +87,16 @@ class Main extends React.Component {
 
     renderBudgetCreateModal() {
         if (!this.state.showBudgetCreate) { return ''; }
-        return <AddBudgetModal onClose={this.closeBudgetCreate} onSave={this.onBudgetSave} />;
-        //return <AddBudgetModal onClose={this.closeBudgetCreate} />;
+        return <FormBudgetModal onClose={this.closeBudgetCreate} onSave={this.onBudgetCreateSave} />;
+    }
+
+    renderBudgetEditModal() {
+        if (!this.state.showBudgetUpdate) { return ''; }
+        return <FormBudgetModal 
+        onClose={this.closeBudgetCreate}
+        onSave={this.onBudgetUpdateSave} 
+        budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))}
+        />;
     }
 
 
@@ -93,6 +128,13 @@ class Main extends React.Component {
         if (this.state.idSelectedBudget === 0) { return 'Select a budget'; }
         return (
             <div className="content">
+                <h3>
+                    {budget.name}
+                    &nbsp; <a onClick={() => this.openBudgetUpdate()} className="dim-til-hover"><i className="fa fa-edit" /></a>
+                </h3>
+                <p className="table_title">
+                    {budget.description}
+                </p>
                 <div className="overflow-x bg-gray p-10">
                     <table className="table">
                         <thead>
@@ -129,7 +171,8 @@ class Main extends React.Component {
                             style={{ cursor: 'pointer' }}
                             className={budget.id == this.state.idSelectedBudget ? 'input-group text-bold' : 'input-group'}
                         >
-                            {budget.name}
+                            <a onClick={() => this.deleteBudget(budget.id)} className="dim-til-hover text-right"><i className="fa fa-times" /></a>
+                            &nbsp; {budget.name} 
                         </li>))}
                     </ul>
                     <br />
@@ -148,6 +191,7 @@ class Main extends React.Component {
         return (
             <div className='container wide'>
                 {this.renderBudgetCreateModal()}
+                {this.renderBudgetEditModal()}
                 {this.renderBudgets()}
             </div>
         )
