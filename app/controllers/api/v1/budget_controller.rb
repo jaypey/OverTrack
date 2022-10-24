@@ -13,7 +13,7 @@ module Api; module V1
 
         def update
             budget = ::Budget.find(params[:id])
-            successful = budget.update(name: params[:name], description: params[:description], owner_id: params[:owner_id])
+            successful = budget.update(name: params[:name], description: params[:description], owner_id: cookies.signed[:user_id])
             render json: budget, status: successful ? 200 : 500
         end
 
