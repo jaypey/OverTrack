@@ -1,47 +1,67 @@
 import React from 'react'
 import AddBudgetModal from '../budget/AddBudgetModal';
+import { Budgets } from '../../api/main';
+import { Alerts } from '../../helpers/main';
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            //Mocking the data 
             budgets: [
-                {
-                    id: 1, name: 'Perso', users: [
-                        { id: 1, firstname: 'Laurent', lastname: 'Brochu' },
-                    ]
-                },
-                {
-                    id: 2, name: 'Famille', users: [
-                        { id: 2, firstname: 'Laurent', lastname: 'Brochu' },
-                        { id: 3, firstname: 'Maxime', lastname: 'Lefebvre' },
-                        { id: 4, firstname: 'Karl', lastname: 'Mainville' },
-                        { id: 5, firstname: 'Louis', lastname: 'Garceau' }
-                    ]
-                },
-                {
-                    id: 3, name: 'Entreprise Planto', users: [
-                        { id: 6, firstname: 'Laurent', lastname: 'Brochu' },
-                        { id: 7, firstname: 'Maxime', lastname: 'Aubin' },
-                        { id: 8, firstname: 'Jean-Philippe', lastname: 'Belval' }
-                    ]
-                }
+                // {
+                //     id: 1, name: 'Perso', users: [
+                //         { id: 1, firstname: 'Laurent', lastname: 'Brochu' },
+                //     ]
+                // },
+                // {
+                //     id: 2, name: 'Famille', users: [
+                //         { id: 2, firstname: 'Laurent', lastname: 'Brochu' },
+                //         { id: 3, firstname: 'Maxime', lastname: 'Lefebvre' },
+                //         { id: 4, firstname: 'Karl', lastname: 'Mainville' },
+                //         { id: 5, firstname: 'Louis', lastname: 'Garceau' }
+                //     ]
+                // },
+                // {
+                //     id: 3, name: 'Entreprise Planto', users: [
+                //         { id: 6, firstname: 'Laurent', lastname: 'Brochu' },
+                //         { id: 7, firstname: 'Maxime', lastname: 'Aubin' },
+                //         { id: 8, firstname: 'Jean-Philippe', lastname: 'Belval' }
+                //     ]
+                // }
             ],
             idSelectedBudget: 0,
             showBudgetCreate: false,
         };
     }
 
+    componentDidMount() {
+        this.reloadData();
+    }
+
+    onBudgetSave = () => {
+        this.closeBudgetCreate();
+        this.reloadData();
+    }
     openBudgetCreate = () => { this.setState({ showBudgetCreate: true }); }
     closeBudgetCreate = () => { this.setState({ showBudgetCreate: false }); }
     changeSelectedBudget = async (id) => { this.setState({ idSelectedBudget: id }) }
 
+    reloadData = () => {
+        this.loadBudgets();
+    }
+
+    loadBudgets = () => {
+        Budgets.list().then(
+          (cResp) => { this.setState({ budgets: cResp }); },
+          () => { Alerts.error("Budget didn't load correctly"); }
+        );
+    }
+
     renderBudgetCreateModal() {
         if (!this.state.showBudgetCreate) { return ''; }
-        //return <AddBudgetModal onClose={this.closeBudgetCreate} onSave={this.onBudgetSave} />;
-        return <AddBudgetModal onClose={this.closeBudgetCreate} />;
+        return <AddBudgetModal onClose={this.closeBudgetCreate} onSave={this.onBudgetSave} />;
+        //return <AddBudgetModal onClose={this.closeBudgetCreate} />;
     }
 
 
