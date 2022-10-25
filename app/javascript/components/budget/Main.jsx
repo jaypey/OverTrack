@@ -60,6 +60,11 @@ class Main extends React.Component {
         this.setState({ idSelectedBudget: 0});
         this.reloadData();
     }
+
+    onRemoveUser = () => {
+        this.reloadData();
+    }
+
     openBudgetCreate = () => { this.setState({ showBudgetCreate: true }); }
     closeBudgetCreate = () => { this.setState({ showBudgetCreate: false }); }
     openBudgetUpdate = () => { this.setState({ showBudgetUpdate: true }); }
@@ -76,6 +81,16 @@ class Main extends React.Component {
               () => { Alerts.genericError(); },
             );
           });
+    }
+
+    handleUserRemove = async (id, budgetId) => {
+        Alerts.genericRemove('user').then((result) => {
+            if(!result.value) {return;}
+            Budgets.removeuser({id: budgetId, userid: id}).then(
+                () => { this.onRemoveUser(); },
+                () => { Alerts.genericError(); }
+            );
+        });
     }
 
     updateBudget = async (id) => {
@@ -115,7 +130,7 @@ class Main extends React.Component {
 
     renderBudgetUsers(user) {
         return (
-            <tr key={user.id}>
+            <tr id={user.id} key={user.id}>
                 <td className="input-group">
                     <label className="bg-gray-slight-contrast">{user.firstname + " " + user.lastname}</label>
                 </td>
@@ -131,7 +146,7 @@ class Main extends React.Component {
                 </td>
 
                 <td>
-                    <a onClick={() => this.handleUserRemove(user.id, this.state.budgetId)} className="dim-til-hover"><i className="fa fa-times" /></a>
+                    <a onClick={() => this.handleUserRemove(user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
                 </td>
             </tr>
         );

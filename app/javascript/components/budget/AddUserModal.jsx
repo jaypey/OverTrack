@@ -18,26 +18,21 @@ class FormAddUserModal extends React.Component {
       }
 
 
-  handleEmailChange = (e) => { this.setState({ name: e.target.value }); }
+  handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
   handleErrors = (key, errs) => { this.setState({ errors: Object.assign(this.state.errors, { [key]: errs }) }); }
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ submitted: true });
     if (Object.values(this.state.errors).flat().length) { return; }
 
-    //TODO: Modifier pour call les users
+    let apiCall = null;
 
-    // let apiCall = null;
-    // if (this.props.budget.id) {
-    //   apiCall = Budgets.update(this.props.budget.id, { description: this.state.description.trim(), name: this.state.name.trim() });
-    // } else {
-    //   apiCall = Budgets.create({ description: this.state.description.trim(), name: this.state.name.trim() });
-    // }
+    apiCall = Budgets.adduser({budgetid: this.props.budget.id, email: this.state.email});
 
-    // apiCall.then(
-    //   (resp) => { this.props.onSave(resp); },
-    //   () => { Alerts.genericError(); },
-    // );
+    apiCall.then(
+      (resp) => { this.props.onSave(resp); },
+      (error) => { error.status == 408 ? Alerts.genericConflict('User already added!') : error.status == 409 ? Alerts.genericConflict('User doesnt exist!') : Alerts.genericError(); },
+    );
   }
 
   renderForm() {
@@ -48,7 +43,7 @@ class FormAddUserModal extends React.Component {
           <input type="text" value={this.state.email} onChange={this.handleEmailChange} />
           <FieldErrors
             label="Email"
-            val={this.state.name}
+            val={this.state.email}
             validations={{ required: true }}
             show={this.state.submitted} handleErrors={this.handleErrors}
           />
