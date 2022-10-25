@@ -4,6 +4,7 @@ import ExpenseFormModal from '../expenses/FormModal';
 import { Categories, Revenues, Expenses, Goals, Reports } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 import ProjectionsChart from './ProjectionsChart';
+import NumberPicker from "react-widgets/NumberPicker";
 
 class Main extends React.Component {
   constructor(props) {
@@ -128,10 +129,12 @@ class Main extends React.Component {
     if (!this.state.loaded) { return ''; }
     return (
       <div className='container'>
+        <NumberPicker defaultValue={1} />;
+        <NumberPicker defaultValue={1} />;
         <h1>Predictions for the next few months</h1>
         <br></br>
         <br></br>
-      {<ProjectionsChart categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} expenses={this.state.expenses} /> }
+      {<ProjectionsChart categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} expenses={this.state.expenses} revenues={this.state.revenues} /> }
       </div>
     );
   }

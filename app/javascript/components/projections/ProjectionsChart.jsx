@@ -14,37 +14,12 @@ class ProjectionsChart extends React.Component {
       totalPerMonth: [],
       variationPerMonth: [],
       averageVariationPerMonth: 0,
-      totalPerNextMonthsPredictions: []
+      totalPerNextMonthsPredictions: [],
+      totalPerMonthRevenues: [],
+      variationPerMonthRevenues: [],
+      averageVariationPerMonthRevenues: 0,
+      totalPerNextMonthsPredictionsRevenues: []
     };
-  }
-
-
-  getexpense() {
-    {this.props.categoriesWithExpensesAndSpend.map(category => {
-      category.expenses.map(expense =>  {
-        // if (expense.description == "Breakfast")
-        // {
-          // this.setState(prevState => ({
-          //   expensestest: [...prevState.expensestest, expense]
-          // }))
-          console.log(expense.id)
-        // }
-      }
-      )
-    })}
-  }
-
-  getcategories() {
-    {this.props.categoriesWithExpensesAndSpend.map((category) =>
-      (console.log(category.name)))}
-
-
-  //   for (let expensesss of this.props.categoriesWithExpensesAndSpend) {
-  //     if (expensesss.name == "T-Shirt sales")
-  //     {
-  //       console.log(expensesss.name)
-  //     }
-  // }
   }
 
   getDistinctExpenses() {
@@ -103,10 +78,56 @@ class ProjectionsChart extends React.Component {
     }
   }
 
+  getTotalMonthlyAmountRevenues() {
+    for (let i = 0; i < 5; i++)
+    {
+      this.state.totalPerMonthRevenues[i] = 0;
+      for (let revenue of this.props.revenues) {
+        var d = new Date(revenue.paid_at);
+        var currentTime = new Date();
+        if (d.getMonth() == (currentTime.getMonth() - 1 - i))
+        {
+          this.state.totalPerMonthRevenues[i] += (revenue.amount / 100);
+        }
+      }
+    }
+  }
+
+  getAverageVariationPerMonthRevenues() {
+    for (let i = this.state.totalPerMonthRevenues.length - 2; i > -1; i--) {
+      this.state.variationPerMonthRevenues[i] = (this.state.totalPerMonthRevenues[i] - this.state.totalPerMonthRevenues[i + 1]);
+    }
+    const sum = this.state.variationPerMonthRevenues.reduce((partialSum, a) => partialSum + a, 0);
+    this.state.averageVariationPerMonthRevenues = sum / this.state.variationPerMonthRevenues.length;
+  }
+
+
+  getTotalRevenuesProjections() {
+    for (let i = 0; i < 5; i++)
+    {
+      if (i == 0)
+      {
+        this.state.totalPerNextMonthsPredictionsRevenues[i] = this.state.totalPerMonthRevenues[0] + this.state.averageVariationPerMonthRevenues;
+      }
+      else
+      {
+        this.state.totalPerNextMonthsPredictionsRevenues[i] = this.state.totalPerNextMonthsPredictionsRevenues[i - 1] + this.state.averageVariationPerMonthRevenues;
+      }
+    }
+  }
+
+
+
+
+
+
   render() {
     this.getTotalMonthlyAmount();
     this.getAverageVariationPerMonth();
     this.getTotalExpensesProjections();
+    this.getTotalMonthlyAmountRevenues();
+    this.getAverageVariationPerMonthRevenues();
+    this.getTotalRevenuesProjections();
     const d = new Date();
     const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June",
@@ -212,6 +233,98 @@ class ProjectionsChart extends React.Component {
       <div>
         <p>{monthNames[(d.getMonth() + index)]}</p>
         <p>{value}</p></div>))} */}
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+      <h3>Total revenues of the last few months</h3>
+
+<table className='table'>
+  <thead>
+  <tr>
+    <th>Month</th>
+    <th>Total revenues</th>
+    <th>Difference from last month</th>
+  </tr>
+  </thead>
+  <tbody>
+  {this.state.totalPerMonthRevenues.map((value, index) => 
+(
+  <tr>
+    <td>{monthNames[(d.getMonth() - index - 1)]}</td>
+    <td>{value}$</td>
+    {index + 1 != this.state.totalPerMonthRevenues.length && this.state.variationPerMonthRevenues[index] < 0 &&
+  <td className='red-text'>-{this.state.variationPerMonthRevenues[index]}$</td>}
+  {index + 1 != this.state.totalPerMonthRevenues.length && this.state.variationPerMonthRevenues[index] >= 0 &&
+    <td className='green-text'>+{this.state.variationPerMonthRevenues[index]}$</td>
+}
+  </tr>))}
+  </tbody>
+</table>
+
+
+{/* {this.state.totalPerMonth.map((value, index) => 
+(
+<div>
+  <p>{monthNames[(d.getMonth() - index - 1)]}</p>
+  <p>{value}</p></div>))}
+
+  {this.state.variationPerMonth.map((value, index) => (
+    <div>
+      <p>Change from {monthNames[(d.getMonth() - index - 2)]} to {monthNames[(d.getMonth() - index - 1)]}</p>
+      {value >= 0 &&
+  <p>+{value}</p>
+}
+  {value < 0 &&
+  <p>-{value}</p>
+}
+    </div>
+  ))} */}
+
+<br></br>
+<br></br>
+  
+{this.state.averageVariationPerMonthRevenues < 0 &&
+  <h3>Average variation per month : <span className='red-text'>-{this.state.averageVariationPerMonthRevenues}$</span></h3>}
+  {this.state.averageVariationPerMonthRevenues >= 0 &&
+    <h3>Average variation per month : <span className='green-text'>+{this.state.averageVariationPerMonthRevenues}$</span></h3>
+}
+
+<br></br>
+<br></br>
+
+<h3>Projection of the total revenues for the next few months</h3>
+
+<table className='table'>
+  <thead>
+  <tr>
+    <th>Month</th>
+    <th>Total revenues</th>
+    <th>Difference from last month</th>
+  </tr>
+  </thead>
+  <tbody>
+  {this.state.totalPerNextMonthsPredictionsRevenues.map((value, index) => 
+(
+  <tr>
+    <td>{monthNames[(d.getMonth() + index)]}</td>
+    <td>{value}$</td>
+    {this.state.averageVariationPerMonthRevenues < 0 &&
+  <td className='red-text'>-{this.state.averageVariationPerMonthRevenues}$</td>}
+  {this.state.averageVariationPerMonthRevenues >= 0 &&
+    <td className='green-text'>+{this.state.averageVariationPerMonthRevenues}$</td>
+}
+  </tr>))}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+        
 
 <br></br>
 <br></br>

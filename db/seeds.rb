@@ -104,7 +104,41 @@ revenues = Revenue.create([{
     paid_at: Date.today,
     created_at: Date.today,
     updated_at: Date.today
-}])
+},
+,
+{
+    category_id: categories3.id,
+    description: "Boot Sales",
+    amount: 400000,
+    paid_at: (DateTime.now.month - 1.month),
+    created_at: Date.today,
+    updated_at: Date.today
+},
+{
+    category_id: categories3.id,
+    description: "Crocks Sales",
+    amount: 130000,
+    paid_at: (DateTime.now.month - 2.month),
+    created_at: Date.today,
+    updated_at: Date.today
+},
+{
+    category_id: categories4.id,
+    description: "Hoodie Sales",
+    amount: 320000,
+    paid_at: (DateTime.now.month - 3.month),
+    created_at: Date.today,
+    updated_at: Date.today
+},
+{
+    category_id: categories4.id,
+    description: "Coat Sales",
+    amount: 730000,
+    paid_at: DateTime.strptime("09/14/2022 8:00", "%m/%d/%Y %H:%M"),
+    created_at: Date.today,
+    updated_at: Date.today
+}
+])
 
 # Expense's seed
 Expense.where(description: "Breakfast")
