@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     user = User.where(email: email).first
 
     unless user
-      # flash[:error] = "No user found"
+      flash[:error] = "Incorrect login"
       redirect_to :root and return
     end
 
