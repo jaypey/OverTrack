@@ -10,16 +10,15 @@ class UserController < ApplicationController
     end
 
     def create
-        user = User.new(params.require(:user).permit(:email, :firstname, :lastname, :phone, :password))
+        user = User.new(params.require(:user).permit(:email, :firstname, :lastname, :phone, :password, :password_confirmation))
         respond_to do |format|
             format.html do
                 if user.save
                     flash[:success] = "User created successfully"
                     redirect_to :root
-                  else
-                    flash.now[:error] = "Error: User could not be created"
+                else
                     render :register, locals: { user: user }
-                  end
+                end
             end
           end
       end
