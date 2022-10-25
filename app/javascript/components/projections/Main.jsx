@@ -1,11 +1,9 @@
 import React from 'react';
 import moment from 'moment';
-import Overview from './Overview';
-import CategoriesList from './CategoriesList';
 import ExpenseFormModal from '../expenses/FormModal';
-import PieChart from '../shared/PieChart';
 import { Categories, Revenues, Expenses, Goals, Reports } from '../../api/main';
 import { Alerts } from '../../helpers/main';
+import ProjectionsChart from './ProjectionsChart';
 
 class Main extends React.Component {
   constructor(props) {
@@ -13,6 +11,7 @@ class Main extends React.Component {
     this.state = {
       categories: [],
       expenses: [],
+      expensesWithPredictions: [],
       sumExpenses: 0,
       revenues: [],
       sumRevenues: 0,
@@ -24,6 +23,7 @@ class Main extends React.Component {
       colors: [],
     };
   }
+
 
   componentDidMount() {
     this.reloadData();
@@ -51,7 +51,7 @@ class Main extends React.Component {
   }
 
   loadExpensesData = () => {
-    Expenses.list({ paid_after: moment().startOf('month').unix() }).then(
+    Expenses.list().then(
       (eResp) => {
         this.setState({ expenses: eResp });
         Goals.list().then(
@@ -126,30 +126,13 @@ class Main extends React.Component {
 
   render() {
     if (!this.state.loaded) { return ''; }
-
     return (
-      <h1>Allo</h1>
-      // <div>
-      //   {this.renderExpenseCreateModal()}
-      //   <div className="container">
-      //     <Overview categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} monthlyGoal={this.state.monthlyGoal} onChange={this.reloadData} />
-      //   </div>
-
-      //   <div className="container mt-100">
-      //     <div className="chart-container-short">
-      //       <PieChart labels={this.state.labels} data={this.state.data} colors={this.state.colors} />
-      //     </div>
-      //   </div>
-
-      //   <div className="bg-art mt-150">
-      //     <div className="container">
-      //       <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openExpenseCreate}>+ add an expense</button>
-      //     </div>
-      //     <div className="container pv-100 mh-350">
-      //       <CategoriesList categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} onChange={this.reloadData} />
-      //     </div>
-      //   </div>
-      // </div>
+      <div className='container'>
+        <h1>Predictions for the next few months</h1>
+        <br></br>
+        <br></br>
+      {<ProjectionsChart categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} expenses={this.state.expenses} /> }
+      </div>
     );
   }
 }
