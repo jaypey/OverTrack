@@ -4,6 +4,7 @@ const Categories = {
   list(params, opts = {}) {
     return Base.get('/categories', params, opts || {});
   },
+
   listExpenses(params, opts = {}) {
     return Base.get('/categories/listExpenses', params, opts || {});
   },

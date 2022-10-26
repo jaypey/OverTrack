@@ -47,6 +47,8 @@ Rails.application.routes.draw do
 
       resources :budget, only: [:index, :create, :update, :destroy] do
         collection do
+          post :adduser
+          post :removeuser
           get :listBudgets
           post :selectbudget
           get :getbudgetname

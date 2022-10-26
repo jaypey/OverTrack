@@ -3,7 +3,7 @@ module Api; module V1
     def index
       render json: ::Category.where({budget_id: cookies.signed[:selectedBudget]}).order(:name)
     end
-
+    
     def listExpenses
       categories = ::Category.where({is_revenue: 0, budget_id: cookies.signed[:selectedBudget]}).order(:name)
       render json: categories

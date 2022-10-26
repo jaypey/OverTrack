@@ -12,13 +12,27 @@ module Api; module V1
       revenues = revenues.paginate(params[:page], params[:per_page]) if params[:page]
       revenues = revenues.order(normalized_sort(params[:sort], params[:sort_desc])).order(id: :desc) if params[:sort]
             
-      render json: revenues
+      if params[:page]
+        opts = {}
+        opts = { include: :category } if params[:include_category] == true.to_s
+        paginate(revenues, opts)
+      else
+        render json: revenues
+      end
     end
         
     def create
       revenue = Revenue.new(description: params[:description], category_id: params[:category_id], amount: params[:amount], paid_at: params[:paid_at])
       successful = revenue.save
       render json: revenue, status: successful ? 200 : 500
+    end
+
+    def bulk_create
+      Revenue.transaction do
+        params[:revenues].each_with_index do |revenue, idx|
+          Revenue.create!(amount: revenue['amount'], category_id: revenue['category_id'], description: revenue['description'], paid_at: revenue['paid_at'])
+        end
+      end
     end
 
     def destroy
@@ -36,6 +50,15 @@ module Api; module V1
         amount: params.fetch(:amount, revenue.amount),
       )
       render json: nil, status: successful ? 200 : 500
+    end
+
+    private
+
+    def normalized_sort(key, sort_desc)
+      cols = { paid_at: "paid_at", amount: "amount" }
+      col = cols[key.to_sym] || "paid_at"
+      dir = sort_desc == "true" ? "DESC" : "ASC"
+      "#{col} #{dir}"
     end
   end
 end; end
