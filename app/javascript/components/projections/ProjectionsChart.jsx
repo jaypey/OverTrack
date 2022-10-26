@@ -5,10 +5,7 @@ import { Numerics } from '../../helpers/main';
 import Progress from '../shared/Progress';
 import GoalFormModal from '../goals/FormModal';
 
-class ProjectionsChart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const initialState = {
       distinctExpenses: [],
       totalMonthlyChangePrediction: 0,
       totalPerMonth: [],
@@ -19,7 +16,47 @@ class ProjectionsChart extends React.Component {
       variationPerMonthRevenues: [],
       averageVariationPerMonthRevenues: 0,
       totalPerNextMonthsPredictionsRevenues: []
+};
+
+class ProjectionsChart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = 
+    {
+      distinctExpenses: [],
+      totalMonthlyChangePrediction: 0,
+      totalPerMonth: [],
+      variationPerMonth: [],
+      averageVariationPerMonth: 0,
+      totalPerNextMonthsPredictions: [],
+      totalPerMonthRevenues: [],
+      variationPerMonthRevenues: [],
+      averageVariationPerMonthRevenues: 0,
+      totalPerNextMonthsPredictionsRevenues: []
+    }
     };
+
+  reset() {
+    // this.setState({ distinctExpenses: [] })
+    // this.setState({ totalPerMonth: [] })
+    // this.setState({ variationPerMonth: [] })
+    // this.setState({ totalPerNextMonthsPredictions: [] })
+    // this.setState({ totalPerMonthRevenues: [] })
+    // this.setState({ variationPerMonthRevenues: [] })
+    // this.setState({ totalPerNextMonthsPredictionsRevenues: [] })
+    // this.setState({ totalMonthlyChangePrediction: 0 })
+    // this.setState({ averageVariationPerMonth: 0 })
+    // this.setState({ averageVariationPerMonthRevenues: 0 })
+    this.state.distinctExpenses = [];
+    this.state.totalPerMonth = [];
+    this.state.variationPerMonth = [];
+    this.state.totalPerNextMonthsPredictions = [];
+    this.state.totalPerMonthRevenues = [];
+    this.state.variationPerMonthRevenues = [];
+    this.state.totalPerNextMonthsPredictionsRevenues = [];
+    this.state.totalMonthlyChangePrediction = 0;
+    this.state.averageVariationPerMonth = 0;
+    this.state.averageVariationPerMonthRevenues = 0;
   }
 
   getDistinctExpenses() {
@@ -41,7 +78,7 @@ class ProjectionsChart extends React.Component {
   }
 
   getTotalMonthlyAmount() {
-    for (let i = 0; i < 5; i++)
+    for (let i = 0; i < this.props.studiedMonths; i++)
     {
       this.state.totalPerMonth[i] = 0;
       for (let expense of this.props.expenses) {
@@ -65,7 +102,7 @@ class ProjectionsChart extends React.Component {
 
 
   getTotalExpensesProjections() {
-    for (let i = 0; i < 5; i++)
+    for (let i = 0; i < this.props.projectedMonths; i++)
     {
       if (i == 0)
       {
@@ -79,7 +116,7 @@ class ProjectionsChart extends React.Component {
   }
 
   getTotalMonthlyAmountRevenues() {
-    for (let i = 0; i < 5; i++)
+    for (let i = 0; i < this.props.studiedMonths; i++)
     {
       this.state.totalPerMonthRevenues[i] = 0;
       for (let revenue of this.props.revenues) {
@@ -103,7 +140,7 @@ class ProjectionsChart extends React.Component {
 
 
   getTotalRevenuesProjections() {
-    for (let i = 0; i < 5; i++)
+    for (let i = 0; i < this.props.projectedMonths; i++)
     {
       if (i == 0)
       {
@@ -122,12 +159,16 @@ class ProjectionsChart extends React.Component {
 
 
   render() {
+    this.reset();
+    //this.setState({ distinctExpenses: [] })
     this.getTotalMonthlyAmount();
     this.getAverageVariationPerMonth();
     this.getTotalExpensesProjections();
     this.getTotalMonthlyAmountRevenues();
     this.getAverageVariationPerMonthRevenues();
     this.getTotalRevenuesProjections();
+    console.log(this.props.studiedMonths);
+    console.log(this.props.projectedMonths);
     const d = new Date();
     const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June",

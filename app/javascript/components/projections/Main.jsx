@@ -4,7 +4,6 @@ import ExpenseFormModal from '../expenses/FormModal';
 import { Categories, Revenues, Expenses, Goals, Reports } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 import ProjectionsChart from './ProjectionsChart';
-import NumberPicker from "react-widgets/NumberPicker";
 
 class Main extends React.Component {
   constructor(props) {
@@ -22,9 +21,10 @@ class Main extends React.Component {
       data: [],
       labels: [],
       colors: [],
+      count: 3,
+      project: 3,
     };
   }
-
 
   componentDidMount() {
     this.reloadData();
@@ -129,12 +129,24 @@ class Main extends React.Component {
     if (!this.state.loaded) { return ''; }
     return (
       <div className='container'>
-        <NumberPicker defaultValue={1} />;
-        <NumberPicker defaultValue={1} />;
+        <button onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count + 1, 3)) })}>
+          Increase studied months
+        </button>
+        <button onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count - 1, 3)) })}>
+          Decrease studied months
+        </button>
+        <button onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project + 1, 3)) })}>
+          Increase projected months
+        </button>
+        <button onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project - 1, 3)) })}>
+          Decrease projected months
+        </button>
+        <br></br>
+        <br></br>
         <h1>Predictions for the next few months</h1>
         <br></br>
         <br></br>
-      {<ProjectionsChart categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} expenses={this.state.expenses} revenues={this.state.revenues} /> }
+      {<ProjectionsChart studiedMonths={this.state.count} projectedMonths={this.state.project} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} expenses={this.state.expenses} revenues={this.state.revenues} /> }
       </div>
     );
   }
