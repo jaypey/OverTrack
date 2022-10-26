@@ -85,7 +85,7 @@ class Main extends React.Component {
     );
   }
   handleRevenueDelete = (id) => {
-    Alerts.genericDelete('expense').then((result) => {
+    Alerts.genericDelete('revenue').then((result) => {
       if (!result.value) { return; }
       Revenues.delete(id).then(
         () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
