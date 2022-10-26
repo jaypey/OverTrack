@@ -60,6 +60,23 @@ class Main extends React.Component {
       );
     });
   }
+
+  updateRevenue = (id, updates) => {
+    Revenues.update(id, updates).then(
+      () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
+      () => { Alerts.genericError(); },
+    );
+  }
+  handleRevenueDelete = (id) => {
+    Alerts.genericDelete('expense').then((result) => {
+      if (!result.value) { return; }
+      Revenues.delete(id).then(
+        () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
+        () => { Alerts.genericError(); },
+      );
+    });
+  }
+
   handleTimeframeChangeExpense = (e) => {
     const timeframeExpense = e.target.value;
     const [minPaidAtExpense, maxPaidAtExpense] = this.minAndMaxForTimeframe(timeframeExpense, 0);
@@ -228,7 +245,7 @@ class Main extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.revenues.map((exp) => this.renderExpense(exp))}
+                {this.state.revenues.map((exp) => this.renderRevenue(exp))}
               </tbody>
             </table>
           </div>
@@ -276,6 +293,39 @@ class Main extends React.Component {
 
         <td>
           <a onClick={() => this.handleExpenseDelete(expense.id)} className="dim-til-hover"><i className="fa fa-times" /></a>
+        </td>
+      </tr>
+    );
+  }
+
+  renderRevenue(revenue) {
+    return (
+      <tr key={revenue.id}>
+        <td className="input-group mw-120">
+          <DatePicker onChange={(val) => this.updateRevenue(revenue.id, { paid_at: val })} value={new Date(revenue.paid_at)} className="bg-gray-slight-contrast" />
+        </td>
+
+        <td className="input-group mw-150">
+          <select defaultValue={revenue.category_id} onChange={(e) => this.updateRevenue(revenue.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">
+            {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+          </select>
+        </td>
+
+        <td className="input-group mw-100">
+          <CurrencyInput
+            initialValue={revenue.amount}
+            onBlur={(val) => this.updateRevenue(revenue.id, { amount: val })}
+            className="bg-gray-slight-contrast"
+            allowNegative
+          />
+        </td>
+
+        <td className="input-group">
+          <input defaultValue={revenue.description} onBlur={(e) => { if (e.target.value.trim() != revenue.description) { this.updateRevenue(expense.id, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" />
+        </td>
+
+        <td>
+          <a onClick={() => this.handleRevenueDelete(revenue.id)} className="dim-til-hover"><i className="fa fa-times" /></a>
         </td>
       </tr>
     );
