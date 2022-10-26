@@ -18,6 +18,8 @@ class Main extends React.Component {
     this.state = {
       expenses: [],
       revenues: [],
+      expenseCategories :[],
+      revenueCategories :[],
       minPaidAtExpense,
       maxPaidAtExpense,
       minPaidAtRevenue,
@@ -31,6 +33,17 @@ class Main extends React.Component {
       timeframeRevenue: defaultTimeframe,
       search: '',
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("it works")
+    
+    const revenues = props.categories.filter(cat => {
+      return cat.is_revenue === 1;});
+    const expenses = props.categories.filter(cat => {
+        return cat.is_revenue === 0;});
+    
+    return {revenueCategories: revenues, expenseCategories: expenses};
   }
 
   onLoadExpenses = (payload) => { this.setState({ expenses: payload.items }); }
@@ -149,7 +162,7 @@ class Main extends React.Component {
         <div className="sidebar input-group">
           <select onChange={this.handleCategoryFilterChange} defaultValue={this.state.categoryId}>
             <option value="">All categories</option>
-            {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {this.state.expenseCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
 
           <select className="mt-10" onChange={this.handleTimeframeChangeExpense} defaultValue={this.state.timeframeExpense}>
@@ -210,7 +223,7 @@ class Main extends React.Component {
         <div className="sidebar input-group">
           <select onChange={this.handleCategoryFilterChange} defaultValue={this.state.categoryId}>
             <option value="">All categories</option>
-            {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {this.state.revenueCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
 
           <select className="mt-10" onChange={this.handleTimeframeChangeRevenue} defaultValue={this.state.timeframeRevenue}>
@@ -274,7 +287,7 @@ class Main extends React.Component {
 
         <td className="input-group mw-150">
           <select defaultValue={expense.category_id} onChange={(e) => this.updateExpense(expense.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">
-            {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {this.state.expenseCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </td>
 
@@ -307,7 +320,7 @@ class Main extends React.Component {
 
         <td className="input-group mw-150">
           <select defaultValue={revenue.category_id} onChange={(e) => this.updateRevenue(revenue.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">
-            {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {this.state.revenueCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </td>
 
