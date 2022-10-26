@@ -32,7 +32,8 @@ class Main extends React.Component {
       reloadPageTrigger: 0,
       timeframeExpense: defaultTimeframe,
       timeframeRevenue: defaultTimeframe,
-      search: '',
+      searchExpenses: '',
+      searchRevenues: '',
     };
   }
 
@@ -106,8 +107,12 @@ class Main extends React.Component {
     this.setState({ timeframeRevenue, minPaidAtRevenue, maxPaidAtRevenue });
   }
 
-  handleSearchChange = Util.debounce((search) => {
-    this.setState({ search });
+  handleSearchChangeExpenses = Util.debounce((search) => {
+    this.setState({ searchExpenses: search });
+  }, 500);
+
+  handleSearchChangeRevenues = Util.debounce((search) => {
+    this.setState({ searchRevenues: search });
   }, 500);
 
   minAndMaxForTimeframe = (timeframe, is_revenue) => {
@@ -128,13 +133,13 @@ class Main extends React.Component {
   };
 
   urlExpenses() {
-    return `/expenses?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdExpenses}&sort=${this.state.sort}&sort_desc=${this.state.sortDesc}&search=${this.state.search}`;
+    return `/expenses?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdExpenses}&sort=${this.state.sort}&sort_desc=${this.state.sortDesc}&search=${this.state.searchExpenses}`;
   }
 
   // ToDo: Fix url : error raised in paginator loaddata
   // sort is raising error
   urlRevenues() {
-    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtRevenue}&paid_after=${this.state.minPaidAtRevenue}&category_id=${this.state.categoryIdRevenues}`;
+    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtRevenue}&paid_after=${this.state.minPaidAtRevenue}&category_id=${this.state.categoryIdRevenues}&search=${this.state.searchRevenues}`; 
   }
 
   renderSort(key) {
@@ -183,7 +188,7 @@ class Main extends React.Component {
             </div>
           )}
 
-          <input className="mt-10" placeholder="Search for description" onChange={e => this.handleSearchChange(e.target.value)} />
+          <input className="mt-10" placeholder="Search for description" onChange={e => this.handleSearchChangeExpenses(e.target.value)} />
         </div>
 
         <div className="content">
@@ -244,7 +249,7 @@ class Main extends React.Component {
             </div>
           )}
 
-          <input className="mt-10" placeholder="Search for description" onChange={e => this.handleSearchChange(e.target.value)} />
+          <input className="mt-10" placeholder="Search for description" onChange={e => this.handleSearchChangeRevenues(e.target.value)} />
         </div>
 
         <div className="content">
