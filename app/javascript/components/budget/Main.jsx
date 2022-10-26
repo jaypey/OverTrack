@@ -1,136 +1,53 @@
 import React from 'react'
-import FormBudgetModal from '../budget/AddBudgetModal';
-import FormAddUserModal from './AddUserModal';
-import { Budgets } from '../../api/main';
-import { Alerts } from '../../helpers/main';
+import AddBudgetModal from '../budget/AddBudgetModal';
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            //Mocking the data 
             budgets: [
-                // {
-                //     id: 1, name: 'Perso', users: [
-                //         { id: 1, firstname: 'Laurent', lastname: 'Brochu' },
-                //     ]
-                // },
-                // {
-                //     id: 2, name: 'Famille', users: [
-                //         { id: 2, firstname: 'Laurent', lastname: 'Brochu' },
-                //         { id: 3, firstname: 'Maxime', lastname: 'Lefebvre' },
-                //         { id: 4, firstname: 'Karl', lastname: 'Mainville' },
-                //         { id: 5, firstname: 'Louis', lastname: 'Garceau' }
-                //     ]
-                // },
-                // {
-                //     id: 3, name: 'Entreprise Planto', users: [
-                //         { id: 6, firstname: 'Laurent', lastname: 'Brochu' },
-                //         { id: 7, firstname: 'Maxime', lastname: 'Aubin' },
-                //         { id: 8, firstname: 'Jean-Philippe', lastname: 'Belval' }
-                //     ]
-                // }
+                {
+                    id: 1, name: 'Perso', users: [
+                        { id: 1, firstname: 'Laurent', lastname: 'Brochu' },
+                    ]
+                },
+                {
+                    id: 2, name: 'Famille', users: [
+                        { id: 2, firstname: 'Laurent', lastname: 'Brochu' },
+                        { id: 3, firstname: 'Maxime', lastname: 'Lefebvre' },
+                        { id: 4, firstname: 'Karl', lastname: 'Mainville' },
+                        { id: 5, firstname: 'Louis', lastname: 'Garceau' }
+                    ]
+                },
+                {
+                    id: 3, name: 'Entreprise Planto', users: [
+                        { id: 6, firstname: 'Laurent', lastname: 'Brochu' },
+                        { id: 7, firstname: 'Maxime', lastname: 'Aubin' },
+                        { id: 8, firstname: 'Jean-Philippe', lastname: 'Belval' }
+                    ]
+                }
             ],
             idSelectedBudget: 0,
             showBudgetCreate: false,
-            showBudgetUpdate: false,
         };
-    }
-
-    componentDidMount() {
-        this.reloadData();
-    }
-
-    onBudgetCreateSave = () => {
-        this.closeBudgetCreate();
-        this.reloadData();
-    }
-
-    onBudgetUpdateSave = () => {
-        this.closeBudgetUpdate();
-        this.reloadData();
-    }
-
-    onAddUser = () => {
-        this.closeUserAdd();
-        this.reloadData();
-    }
-
-    onBudgetDelete = () => {
-        this.setState({ idSelectedBudget: 0});
-        this.reloadData();
-    }
-
-    onRemoveUser = () => {
-        this.reloadData();
     }
 
     openBudgetCreate = () => { this.setState({ showBudgetCreate: true }); }
     closeBudgetCreate = () => { this.setState({ showBudgetCreate: false }); }
-    openBudgetUpdate = () => { this.setState({ showBudgetUpdate: true }); }
-    closeBudgetUpdate = () => { this.setState({ showBudgetUpdate: false }); }
     changeSelectedBudget = async (id) => { this.setState({ idSelectedBudget: id }) }
-    openUserAdd = () => { this.setState({ showUserAdd: true});}
-    closeUserAdd = () => { this.setState({ showUserAdd: false});}
-
-    deleteBudget = async (id) => {
-        Alerts.genericDelete('budget').then((result) => {
-            if (!result.value) { return; }
-            Budgets.delete(id).then(
-              () => { this.onBudgetDelete(); },
-              () => { Alerts.genericError(); },
-            );
-          });
-    }
-
-    handleUserRemove = async (id, budgetId) => {
-        Alerts.genericRemove('user').then((result) => {
-            if(!result.value) {return;}
-            Budgets.removeuser({id: budgetId, userid: id}).then(
-                () => { this.onRemoveUser(); },
-                () => { Alerts.genericError(); }
-            );
-        });
-    }
-
-    updateBudget = async (id) => {
-        console.log("update")
-    }
-
-    reloadData = () => {
-        this.loadBudgets();
-    }
-
-    loadBudgets = () => {
-        Budgets.list().then(
-          (cResp) => { this.setState({ budgets: cResp }); },
-          () => { Alerts.error("Budget didn't load correctly"); }
-        );
-    }
 
     renderBudgetCreateModal() {
         if (!this.state.showBudgetCreate) { return ''; }
-        return <FormBudgetModal onClose={this.closeBudgetCreate} onSave={this.onBudgetCreateSave} />;
-    }
-
-    renderBudgetEditModal() {
-        if (!this.state.showBudgetUpdate) { return ''; }
-        return <FormBudgetModal 
-        onClose={this.closeBudgetCreate}
-        onSave={this.onBudgetUpdateSave} 
-        budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))}
-        />;
-    }
-
-    renderUserAddModal() {
-        if(!this.state.showUserAdd) {return '';}
-        return <FormAddUserModal onClose={this.closeUserAdd} onSave={this.onAddUser} budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))}/>
+        //return <AddBudgetModal onClose={this.closeBudgetCreate} onSave={this.onBudgetSave} />;
+        return <AddBudgetModal onClose={this.closeBudgetCreate} />;
     }
 
 
     renderBudgetUsers(user) {
         return (
-            <tr id={user.id} key={user.id}>
+            <tr key={user.id}>
                 <td className="input-group">
                     <label className="bg-gray-slight-contrast">{user.firstname + " " + user.lastname}</label>
                 </td>
@@ -146,7 +63,7 @@ class Main extends React.Component {
                 </td>
 
                 <td>
-                    <a onClick={() => this.handleUserRemove(user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
+                    <a onClick={() => this.handleUserRemove(user.id, this.state.budgetId)} className="dim-til-hover"><i className="fa fa-times" /></a>
                 </td>
             </tr>
         );
@@ -156,13 +73,6 @@ class Main extends React.Component {
         if (this.state.idSelectedBudget === 0) { return 'Select a budget'; }
         return (
             <div className="content">
-                <h3>
-                    {budget.name}
-                    &nbsp; <a onClick={() => this.openBudgetUpdate()} className="dim-til-hover"><i className="fa fa-edit" /></a>
-                </h3>
-                <p className="table_title">
-                    {budget.description}
-                </p>
                 <div className="overflow-x bg-gray p-10">
                     <table className="table">
                         <thead>
@@ -176,11 +86,10 @@ class Main extends React.Component {
                             {budget.users.map((user) => this.renderBudgetUsers(user))}
                         </tbody>
                     </table>
-                    <button onClick={() => this.openUserAdd()} className='btn btn-round btn-accept'><i className='text-light fa fa-plus'></i></button>
                 </div>
                 <br/>
                 <div>
-                    <button className='btn btn-round pos-abs mt-neg-20 z-5'>Select</button>
+                    <button className='btn btn-round btn-accept pos-abs mt-neg-20 z-5'>Select</button>
                 </div>
             </div>
         )
@@ -200,8 +109,7 @@ class Main extends React.Component {
                             style={{ cursor: 'pointer' }}
                             className={budget.id == this.state.idSelectedBudget ? 'input-group text-bold' : 'input-group'}
                         >
-                            <a onClick={() => this.deleteBudget(budget.id)} className="dim-til-hover text-right"><i className="fa fa-times" /></a>
-                            &nbsp; {budget.name} 
+                            {budget.name}
                         </li>))}
                     </ul>
                     <br />
@@ -220,8 +128,6 @@ class Main extends React.Component {
         return (
             <div className='container wide'>
                 {this.renderBudgetCreateModal()}
-                {this.renderBudgetEditModal()}
-                {this.renderUserAddModal()}
                 {this.renderBudgets()}
             </div>
         )

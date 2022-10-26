@@ -44,25 +44,15 @@ Rails.application.routes.draw do
         post :destroy, on: :collection
         post :update, on: :collection
       end
-
-      resources :budget, only: [:index, :create, :update, :destroy] do
-        collection do
-          post :adduser
-          post :removeuser
-          get :listBudgets
-        end
-      end
       #get "/revenues", to: "/revenues#index"
       #post "/revenues", to: "/revenues#create"
       #post "/revenues", to: "/revenues#destroy"
       #post "/revenues", to: "/revenues#update"
     end
   end
-
   
   get "budget", to: "budget#index"
-  get 'user/register', to: 'user#register', as: 'register_user' # new
-  post 'user', to: 'user#create' # create
+  get "register", to: "sessions#register"
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#not_found"
   get "/500", to: "errors#not_found"
