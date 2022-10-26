@@ -116,7 +116,7 @@ class Main extends React.Component {
     renderBudgetEditModal() {
         if (!this.state.showBudgetUpdate) { return ''; }
         return <FormBudgetModal 
-        onClose={this.closeBudgetCreate}
+        onClose={this.closeBudgetUpdate}
         onSave={this.onBudgetUpdateSave} 
         budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))}
         />;
