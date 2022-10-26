@@ -1,5 +1,6 @@
 import React from 'react'
 import FormBudgetModal from '../budget/AddBudgetModal';
+import FormAddUserModal from './AddUserModal';
 import { Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
@@ -50,15 +51,27 @@ class Main extends React.Component {
         this.reloadData();
     }
 
+    onAddUser = () => {
+        this.closeUserAdd();
+        this.reloadData();
+    }
+
     onBudgetDelete = () => {
         this.setState({ idSelectedBudget: 0});
         this.reloadData();
     }
+
+    onRemoveUser = () => {
+        this.reloadData();
+    }
+
     openBudgetCreate = () => { this.setState({ showBudgetCreate: true }); }
     closeBudgetCreate = () => { this.setState({ showBudgetCreate: false }); }
     openBudgetUpdate = () => { this.setState({ showBudgetUpdate: true }); }
     closeBudgetUpdate = () => { this.setState({ showBudgetUpdate: false }); }
     changeSelectedBudget = async (id) => { this.setState({ idSelectedBudget: id }) }
+    openUserAdd = () => { this.setState({ showUserAdd: true});}
+    closeUserAdd = () => { this.setState({ showUserAdd: false});}
 
     deleteBudget = async (id) => {
         Alerts.genericDelete('budget').then((result) => {
@@ -68,6 +81,16 @@ class Main extends React.Component {
               () => { Alerts.genericError(); },
             );
           });
+    }
+
+    handleUserRemove = async (id, budgetId) => {
+        Alerts.genericRemove('user').then((result) => {
+            if(!result.value) {return;}
+            Budgets.removeuser({id: budgetId, userid: id}).then(
+                () => { this.onRemoveUser(); },
+                () => { Alerts.genericError(); }
+            );
+        });
     }
 
     updateBudget = async (id) => {
@@ -99,10 +122,15 @@ class Main extends React.Component {
         />;
     }
 
+    renderUserAddModal() {
+        if(!this.state.showUserAdd) {return '';}
+        return <FormAddUserModal onClose={this.closeUserAdd} onSave={this.onAddUser} budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))}/>
+    }
+
 
     renderBudgetUsers(user) {
         return (
-            <tr key={user.id}>
+            <tr id={user.id} key={user.id}>
                 <td className="input-group">
                     <label className="bg-gray-slight-contrast">{user.firstname + " " + user.lastname}</label>
                 </td>
@@ -118,7 +146,7 @@ class Main extends React.Component {
                 </td>
 
                 <td>
-                    <a onClick={() => this.handleUserRemove(user.id, this.state.budgetId)} className="dim-til-hover"><i className="fa fa-times" /></a>
+                    <a onClick={() => this.handleUserRemove(user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
                 </td>
             </tr>
         );
@@ -148,10 +176,11 @@ class Main extends React.Component {
                             {budget.users.map((user) => this.renderBudgetUsers(user))}
                         </tbody>
                     </table>
+                    <button onClick={() => this.openUserAdd()} className='btn btn-round btn-accept'><i className='text-light fa fa-plus'></i></button>
                 </div>
                 <br/>
                 <div>
-                    <button className='btn btn-round btn-accept pos-abs mt-neg-20 z-5'>Select</button>
+                    <button className='btn btn-round pos-abs mt-neg-20 z-5'>Select</button>
                 </div>
             </div>
         )
@@ -192,6 +221,7 @@ class Main extends React.Component {
             <div className='container wide'>
                 {this.renderBudgetCreateModal()}
                 {this.renderBudgetEditModal()}
+                {this.renderUserAddModal()}
                 {this.renderBudgets()}
             </div>
         )
