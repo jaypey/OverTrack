@@ -228,8 +228,7 @@ class Main extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                // ToDo : change for revenues
-                {this.state.expenses.map((exp) => this.renderExpense(exp))}
+                {this.state.revenues.map((exp) => this.renderExpense(exp))}
               </tbody>
             </table>
           </div>
@@ -238,8 +237,8 @@ class Main extends React.Component {
             <Paginator
               // url = loaddata directly from controller
               // ToDo : Change for urlRevenues and onLoadRevenues
-              url={this.urlExpenses()}
-              onLoad={this.onLoadExpenses}
+              url={this.urlRevenues()}
+              onLoad={this.onLoadRevenues}
               reloadTrigger={this.state.reloadTrigger}
               reloadPageTrigger={this.state.reloadPageTrigger}
             />
