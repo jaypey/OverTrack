@@ -24,7 +24,8 @@ class Main extends React.Component {
       maxPaidAtExpense,
       minPaidAtRevenue,
       maxPaidAtRevenue,
-      categoryId: this.props.categoryId || '',
+      categoryIdExpenses: this.props.categoryId || '',
+      categoryIdRevenues: this.props.categoryId || '',
       sort: 'paid_at',
       sortDesc: true,
       reloadTrigger: 0,
@@ -55,7 +56,9 @@ class Main extends React.Component {
   handlePaidAtMinRevenueChange = (val) => { this.setState({ minPaidAtRevenue: moment(val).unix() }); }
   handlePaidAtMaxRevenueChange = (val) => { this.setState({ maxPaidAtRevenue: moment(val).unix() }); }
   
-  handleCategoryFilterChange = (e) => { this.setState({ categoryId: e.target.value }); }
+  handleCategoryFilterChangeExpenses = (e) => { this.setState({ categoryIdExpenses: e.target.value }); }
+  handleCategoryFilterChangeRevenues = (e) => { this.setState({ categoryIdRevenues: e.target.value }); }
+
   toggleSortDir = () => { this.setState({ sortDesc: !this.state.sortDesc }); }
   changeSort = (s) => { this.setState({ sort: s, sortDesc: true }); }
   updateExpense = (id, updates) => {
@@ -125,13 +128,13 @@ class Main extends React.Component {
   };
 
   urlExpenses() {
-    return `/expenses?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryId}&sort=${this.state.sort}&sort_desc=${this.state.sortDesc}&search=${this.state.search}`;
+    return `/expenses?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdExpenses}&sort=${this.state.sort}&sort_desc=${this.state.sortDesc}&search=${this.state.search}`;
   }
 
   // ToDo: Fix url : error raised in paginator loaddata
   // sort is raising error
   urlRevenues() {
-    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryId}`;
+    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdRevenues}`;
   }
 
   renderSort(key) {
@@ -160,7 +163,7 @@ class Main extends React.Component {
     return (
       <div className="content-with-sidebar mt-30">
         <div className="sidebar input-group">
-          <select onChange={this.handleCategoryFilterChange} defaultValue={this.state.categoryId}>
+          <select onChange={this.handleCategoryFilterChangeExpenses} defaultValue={this.state.categoryIdExpenses}>
             <option value="">All categories</option>
             {this.state.expenseCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
@@ -221,7 +224,7 @@ class Main extends React.Component {
     return (
       <div className="content-with-sidebar mt-30">
         <div className="sidebar input-group">
-          <select onChange={this.handleCategoryFilterChange} defaultValue={this.state.categoryId}>
+          <select onChange={this.handleCategoryFilterChangeRevenues} defaultValue={this.state.categoryIdRevenues}>
             <option value="">All categories</option>
             {this.state.revenueCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
