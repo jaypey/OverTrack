@@ -134,7 +134,7 @@ class Main extends React.Component {
   // ToDo: Fix url : error raised in paginator loaddata
   // sort is raising error
   urlRevenues() {
-    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdRevenues}`;
+    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtRevenue}&paid_after=${this.state.minPaidAtRevenue}&category_id=${this.state.categoryIdRevenues}`;
   }
 
   renderSort(key) {
