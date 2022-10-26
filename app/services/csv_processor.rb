@@ -18,19 +18,19 @@ class CsvProcessor
   private
 
   def description_index
-    @config.dig('descriptions', 'index') || raise('Missing description index')
+    @config.dig('descriptions', 'index').to_i || raise('Missing description index')
   end
 
   def category_index
-    @config.dig('categories', 'index') || raise('Missing category index')
+    @config.dig('categories', 'index').to_i || raise('Missing category index')
   end
 
   def amount_index
-    @config.dig('amounts', 'index') || raise('Missing amount index')
+    @config.dig('amounts', 'index').to_i || raise('Missing amount index')
   end
 
   def date_index
-    @config.dig('timestamps', 'index') || raise('Missing date index')
+    @config.dig('timestamps', 'index').to_i || raise('Missing date index')
   end
 
   def description_substrings_to_ignore

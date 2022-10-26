@@ -86,3 +86,20 @@
     padding: 5px 10px 5px 10px;
     margin: 0px 0px 10px 0px;
 }
+
+.config-button-container{
+    width: 100%;
+    display: flex;
+}
+
+.config-button-container .btn{
+    margin:auto;
+}
+
+#config-back{
+    background-color:rgb(255, 194, 194);
+}
+
+#config-submit{
+    background-color:#b5d0e282;
+}

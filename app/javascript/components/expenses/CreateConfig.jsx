@@ -1,9 +1,7 @@
 import React from 'react';
-import FieldErrors from '../shared/FieldErrors';
 import GenericList from './GenericList';
-import { useRef } from 'react';
-
-
+import { CsvConfig } from '../../api/main';
+import { Alerts } from '../../helpers/main';
 
 class CreateConfig extends React.Component {
   constructor(props) {
@@ -21,13 +19,74 @@ class CreateConfig extends React.Component {
       spendIsNegative: false,
       skipNonSpend: false,
       defaultCategory: "Uncategorized",
+      isValid: false,
     };
 
   }
 
+  onSave = (response) => {
+    if (response.id != null) {
+      console.log(`Saved config ${response.name}(${response.id}) successfully`);
+      Alerts.success(`Config ${response.name}(${response.id}) saved successfully!`)
+    }
+    else {
+      Alerts.genericError();
+    }
+
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    var name = this.state.configName.trim();
+
+    if (name.length < 1) {
+      return;
+    }
+
+    var config_json = {
+      has_header: this.state.hasHeader,
+      descriptions: {
+        index: this.state.descriptionIdx,
+        ignore_substrings: this.state.ignoredSubstring
+      },
+      categories: {
+        index: this.state.categoryIdx,
+        mappings: {}
+      },
+      amounts: {
+        index: this.state.amountIdx,
+        spend_is_negative: this.state.spendIsNegative,
+        skip_non_spend: this.state.skipNonSpend
+      },
+      timestamps: {
+        index: this.state.dateIdx
+      },
+      auto_detect: {
+        filename_substring: "N/A",
+        default_category: this.state.defaultCategory
+      }
+    }
+
+    config_json = JSON.stringify(config_json);
+
+    let apiCall = null;
+
+    apiCall = CsvConfig.create({
+      name: name,
+      config_json: config_json
+    });
+
+
+    apiCall.then(
+      (resp) => { this.onSave(resp); },
+      () => { Alerts.genericError(); },
+    );
+  }
+
   handleRemoveSubstring = (substringToDelete) => {
 
-    var stringToDelete = substringToDelete.trim();
+    var stringToDelete = substringToDelete;
 
     if (stringToDelete != "")
       this.setState(({ ignoredSubstring: this.state.ignoredSubstring.filter(e => e !== stringToDelete) }));
@@ -35,7 +94,7 @@ class CreateConfig extends React.Component {
 
   handleAddSubstring = () => {
 
-    var currentString = this.state.currentSubstring.trim();
+    var currentString = this.state.currentSubstring;
 
     if (currentString != "") {
       this.setState(prevState =>
@@ -54,34 +113,33 @@ class CreateConfig extends React.Component {
     }
   }
 
+  handleNameChange = (e) => {
+    this.setState({ isValid: e.target.value.trim().length > 0 });
+    this.setState({ configName: e.target.value });
+  }
+
   handleDescriptionIdxChange = (e) => { this.setState({ descriptionIdx: e.target.value }); }
   handleCategoryIdxChange = (e) => { this.setState({ categoryIdx: e.target.value }); }
   handleAmountIdxChange = (e) => { this.setState({ amountIdx: e.target.value }); }
   handleDateIdxChange = (e) => { this.setState({ dateIdx: e.target.value }); }
-  handleNameChange = (e) => { this.setState({ configName: e.target.value }); }
   handleHasHeaderChange = (e) => { this.setState({ hasHeader: e.target.checked }); }
   handleDefaultCategoryChange = (e) => { this.setState({ defaultCategory: e.target.value }); }
   handleSpendIsNegativeChange = (e) => { this.setState({ spendIsNegative: e.target.checked }); }
   handleSkipNonSpendChange = (e) => { this.setState({ skipNonSpend: e.target.checked }); }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting: ");
-    console.log(this.state);
-  }
-
   render() {
     return (
 
       <form id="config-form"
-        onKeyDown={(e) => {e.key ==='Enter' && e.preventDefault(); }}
+        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
         onSubmit={this.handleSubmit}>
-        <h1>CSV Configuration Creator</h1>
+        <h1>CSV Configuration Manager</h1>
         <div className='config-group'>
           <h2>Basic information</h2>
           <div className='input-group'>
             <label className='required'>Config name</label>
             <input
+              id='config-name-input'
               value={this.state.configName}
               onChange={this.handleNameChange} type="text" />
           </div>
@@ -101,7 +159,7 @@ class CreateConfig extends React.Component {
               value={this.state.descriptionIdx}
               onChange={this.handleDescriptionIdxChange} />
           </div>
-          <label>Ignored text</label>
+          <label>Ignore rows with descriptions containing: </label>
           <div className='config-list-input-container'>
             <div className='config-list-input'>
               <div className='input-and-button'>
@@ -129,7 +187,7 @@ class CreateConfig extends React.Component {
               value={this.state.categoryIdx}
               onChange={this.handleCategoryIdxChange} />
           </div>
-          <div className="input-group">
+          <div className="input-group" hidden>
             <label data-toggle="tooltip" data-placement="top" title="Default category to use if the category of the row isn't registered in OverTrack" className="required">Default category</label>
             <input className="config-input" type="text"
               value={this.state.defaultCategory}
@@ -172,9 +230,12 @@ class CreateConfig extends React.Component {
           </div>
         </div>
 
-        <button type="submit" className='btn btn-primary'>Create</button>
-
+        <div className='config-button-container'>
+          <button id="config-submit" disabled={!this.state.isValid} type="submit" className='btn btn-primary'>Create</button>
+          <a id="config-back" className='btn' href='/expense_uploads/new'>Back</a>
+        </div>
       </form>
+
     );
   }
 }

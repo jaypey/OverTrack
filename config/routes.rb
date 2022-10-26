@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         end
       end
       resources :categories, only: [:index, :create, :update, :destroy]
+      resources :csv_config, only: [:create]
       resources :reports do
         get :year, on: :collection
         get :month, on: :collection
