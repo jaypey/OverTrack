@@ -12,13 +12,17 @@ class Main extends React.Component {
     super(props);
     this.state = {
       categories: [],
+      expenseCategories: [],
+      revenueCategories: [],
       expenses: [],
-      sumExpenses: 0,
       revenues: [],
+      sumExpenses: 0,
       sumRevenues: 0,
-      loaded: false,
+      loadedexpenses: false,
+      loadedrevenues: false,
       monthlyGoal: 0,
       showExpenseCreateModal: false,
+      showRevenueCreateModal: false,
       data: [],
       labels: [],
       colors: [],
@@ -31,21 +35,40 @@ class Main extends React.Component {
 
   openExpenseCreate = () => { this.setState({ showExpenseCreateModal: true }); }
   closeExpenseCreate = () => { this.setState({ showExpenseCreateModal: false }); }
+  openRevenueCreate = () => { this.setState({ showRevenueCreateModal: true }); }
+  closeRevenueCreate = () => { this.setState({ showRevenueCreateModal: false }); }
   onExpenseSave = () => {
     this.closeExpenseCreate();
+    this.closeRevenueCreate();
     this.reloadData();
   }
 
   reloadData = () => {
-    this.loadCategory();
+    this.loadCategories();
+    this.loadExpensesCategories();
+    this.loadRevenuesCategories();
     this.loadExpensesData();
     this.loadRevenueData();
     this.loadPieChartData(moment().format('MMMM YYYY'));
   }
 
-  loadCategory = () => {
+  loadCategories = () => {
     Categories.list().then(
       (cResp) => { this.setState({ categories: cResp }); },
+      () => { Alerts.error("Categories didn't load correctly"); }
+    );
+  }
+
+  loadExpensesCategories = () => {
+    Categories.listExpenses().then(
+      (cResp) => { this.setState({ expenseCategories: cResp }); },
+      () => { Alerts.error("Categories didn't load correctly"); }
+    );
+  }
+
+  loadRevenuesCategories = () => {
+    Categories.listRevenues().then(
+      (cResp) => { this.setState({ revenueCategories: cResp }); },
       () => { Alerts.error("Categories didn't load correctly"); }
     );
   }
@@ -63,6 +86,15 @@ class Main extends React.Component {
     );
   }
 
+  loadRevenueData = () => {
+    Revenues.list({ paid_after: moment().startOf('month').unix() }).then(
+      (rResp) => {
+        this.setState({ revenues: rResp});
+      },
+      () => { Alerts.error("Revenues didn't load correctly!") }
+    );
+  }
+
   categoriesWithExpensesAndSpend() {
     const categories = [];
     this.state.categories.forEach((category) => {
@@ -73,18 +105,34 @@ class Main extends React.Component {
     return categories;
   }
 
-  renderExpenseCreateModal() {
-    if (!this.state.showExpenseCreateModal) { return ''; }
-    return <ExpenseFormModal categories={this.state.categories} onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
+  EcategoriesWithExpensesAndSpend() {
+    const categories = [];
+    this.state.expenseCategories.forEach((category) => {
+      category.expenses = this.state.expenses.filter((expense) => expense.category_id == category.id);
+      category.spend = category.expenses.reduce((sum, exp) => sum + exp.amount, 0);
+      categories.push(category);
+    });
+    return categories;
   }
 
-  loadRevenueData = () => {
-    Revenues.list({ paid_after: moment().startOf('month').unix() }).then(
-      (rResp) => {
-        this.setState({ revenues: rResp});
-      },
-      () => { Alerts.error("Revenues didn't load correctly!") }
-    );
+  RcategoriesWithExpensesAndSpend() {
+    const categories = [];
+    this.state.revenueCategories.forEach((category) => {
+      category.revenues = this.state.revenues.filter((expense) => expense.category_id == category.id);
+      category.spend = category.revenues.reduce((sum, exp) => sum + exp.amount, 0);
+      categories.push(category);
+    });
+    return categories;
+  }
+
+  renderExpenseCreateModal() {
+    if (!this.state.showExpenseCreateModal) { return ''; }
+    return <ExpenseFormModal categories={this.state.expenseCategories} title="Add an expense" onClose={this.closeExpenseCreate} onSave={this.onExpenseSave} />;
+  }
+
+  renderRevenueCreateModal() {
+    if (!this.state.showRevenueCreateModal) { return ''; }
+    return <ExpenseFormModal AddRevenue={1} categories={this.state.revenueCategories} title="Add a revenue" onClose={this.closeRevenueCreate} onSave={this.onExpenseSave} />;
   }
 
   loadSum = () => {
@@ -130,6 +178,7 @@ class Main extends React.Component {
     return (
       <div>
         {this.renderExpenseCreateModal()}
+        {this.renderRevenueCreateModal()}
         <div className="container">
           <Overview categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} monthlyGoal={this.state.monthlyGoal} onChange={this.reloadData} />
         </div>
@@ -140,14 +189,24 @@ class Main extends React.Component {
           </div>
         </div>
 
-        <div className="bg-art mt-150">
+        <div className="bg-art-2">
           <div className="container">
             <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openExpenseCreate}>+ add an expense</button>
           </div>
-          <div className="container pv-100 mh-350">
-            <CategoriesList categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} onChange={this.reloadData} />
+          <div className="container pv-100">
+            <CategoriesList categoriesWithExpensesAndSpend={this.EcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
           </div>
         </div>
+
+        <div className="bg-art top-border">
+          <div className="container">
+            <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openRevenueCreate}>+ add a revenue</button> {}
+          </div>
+          <div className="container pv-100">
+            <CategoriesList is_revenue={1} categoriesWithExpensesAndSpend={this.RcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
+          </div>
+        </div>
+
       </div>
     );
   }

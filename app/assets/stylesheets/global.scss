@@ -33,6 +33,15 @@ b, span {
   background: #EEF0F5 !important;
 }
 
+.bg-art-2 {
+  background-image: url(asset_path('background_2.jpg'));
+  background-repeat: repeat;
+}
+
+.top-border {
+  border-top: medium solid #b8b4b4
+}
+
 .bg-gray-slight-contrast {
   background: #fbfbfb !important;
 }

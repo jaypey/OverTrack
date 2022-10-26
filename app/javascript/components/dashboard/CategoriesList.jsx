@@ -7,7 +7,7 @@ import CategoryFormModal from '../categories/FormModal';
 class CategoriesList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showCategoryCreateModal: false };
+    this.state = { showCategoryCreateModal: false, is_revenue: this.props.is_revenue }
   }
 
   openCategoryCreate = () => { this.setState({ showCategoryCreateModal: true }); }
@@ -28,7 +28,7 @@ class CategoriesList extends React.Component {
 
   renderCategoryCreateModal() {
     if (!this.state.showCategoryCreateModal) { return ''; }
-    return <CategoryFormModal colorsToSkip={this.colorsToSkip()} onClose={this.closeCategoryCreate} onSave={this.onCategorySave} />;
+    return <CategoryFormModal is_revenue={this.state.is_revenue} colorsToSkip={this.colorsToSkip()} onClose={this.closeCategoryCreate} onSave={this.onCategorySave} />;
   }
 
   renderCategory(category, idx) {
@@ -72,9 +72,11 @@ class CategoriesList extends React.Component {
 
 CategoriesList.defaultProps = {
   categoriesWithExpensesAndSpend: [],
+  is_revenue: 0
 };
 
 CategoriesList.propTypes = {
+  is_revenue: PropTypes.number,
   categoriesWithExpensesAndSpend: PropTypes.array,
   onChange: PropTypes.func.isRequired,
 };
