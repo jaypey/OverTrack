@@ -26,8 +26,10 @@ class Main extends React.Component {
       maxPaidAtRevenue,
       categoryIdExpenses: this.props.categoryId || '',
       categoryIdRevenues: this.props.categoryId || '',
-      sort: 'paid_at',
-      sortDesc: true,
+      sortRevenues: 'paid_at',
+      sortDescRevenues: true,
+      sortExpenses: 'paid_at',
+      sortDescExpenses: true,
       reloadTrigger: 0,
       reloadPageTrigger: 0,
       timeframeExpense: defaultTimeframe,
@@ -58,8 +60,12 @@ class Main extends React.Component {
   handleCategoryFilterChangeExpenses = (e) => { this.setState({ categoryIdExpenses: e.target.value }); }
   handleCategoryFilterChangeRevenues = (e) => { this.setState({ categoryIdRevenues: e.target.value }); }
 
-  toggleSortDir = () => { this.setState({ sortDesc: !this.state.sortDesc }); }
-  changeSort = (s) => { this.setState({ sort: s, sortDesc: true }); }
+  toggleSortDirRevenues = () => { this.setState({ sortDescRevenues: !this.state.sortDescRevenues }); }
+  toggleSortDirExpenses = () => { this.setState({ sortDescExpenses: !this.state.sortDescExpenses }); }
+  
+  changeSortRevenues = (s) => { this.setState({ sortRevenues: s, sortDescRevenues: true }); }
+  changeSortExpenses = (s) => { this.setState({ sortExpenses: s, sortDescExpenses: true }); }
+
   updateExpense = (id, updates) => {
     Expenses.update(id, updates).then(
       () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
@@ -131,20 +137,28 @@ class Main extends React.Component {
   };
 
   urlExpenses() {
-    return `/expenses?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdExpenses}&sort=${this.state.sort}&sort_desc=${this.state.sortDesc}&search=${this.state.searchExpenses}`;
+    return `/expenses?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdExpenses}&sort=${this.state.sortExpenses}&sort_desc=${this.state.sortDescExpenses}&search=${this.state.searchExpenses}`;
   }
 
   // ToDo: Fix url : error raised in paginator loaddata
   // sort is raising error
   urlRevenues() {
-    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtRevenue}&paid_after=${this.state.minPaidAtRevenue}&category_id=${this.state.categoryIdRevenues}&search=${this.state.searchRevenues}`; 
+    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtRevenue}&paid_after=${this.state.minPaidAtRevenue}&category_id=${this.state.categoryIdRevenues}&sort=${this.state.sortRevenues}&sort_desc=${this.state.sortDescRevenues}&search=${this.state.searchRevenues}`; 
   }
 
-  renderSort(key) {
-    if (this.state.sort == key) {
-      return <i onClick={this.toggleSortDir} className={`fas fa-sort-${this.state.sortDesc ? 'down' : 'up'} ml-2 hover-pointer`} />;
+  renderSortRevenues(key) {
+    if (this.state.sortRevenues == key) {
+      return <i onClick={this.toggleSortDirRevenues} className={`fas fa-sort-${this.state.sortDescRevenues ? 'down' : 'up'} ml-2 hover-pointer`} />;
     } else {
-      return <i onClick={() => { this.changeSort(key); }} className="fas fa-sort ml-2 hover-pointer" />;
+      return <i onClick={() => { this.changeSortRevenues(key); }} className="fas fa-sort ml-2 hover-pointer" />;
+    }
+  }
+
+  renderSortExpenses(key) {
+    if (this.state.sortExpenses == key) {
+      return <i onClick={this.toggleSortDirExpenses} className={`fas fa-sort-${this.state.sortDescExpenses ? 'down' : 'up'} ml-2 hover-pointer`} />;
+    } else {
+      return <i onClick={() => { this.changeSortExpenses(key); }} className="fas fa-sort ml-2 hover-pointer" />;
     }
   }
 
@@ -195,9 +209,9 @@ class Main extends React.Component {
             <caption>Expenses</caption>
               <thead>
                 <tr>
-                  <th>Date {this.renderSort('paid_at')}</th>
+                  <th>Date {this.renderSortExpenses('paid_at')}</th>
                   <th>Category</th>
-                  <th>Amount {this.renderSort('amount')}</th>
+                  <th>Amount {this.renderSortExpenses('amount')}</th>
                   <th>Description</th>
                   <th />
                 </tr>
@@ -256,9 +270,9 @@ class Main extends React.Component {
             <caption>Revenues</caption>
               <thead>
                 <tr>
-                  <th>Date {this.renderSort('paid_at')}</th>
+                  <th>Date {this.renderSortRevenues('paid_at')}</th>
                   <th>Category</th>
-                  <th>Amount {this.renderSort('amount')}</th>
+                  <th>Amount {this.renderSortRevenues('amount')}</th>
                   <th>Description</th>
                   <th />
                 </tr>
