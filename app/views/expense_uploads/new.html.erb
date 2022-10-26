@@ -1,6 +1,6 @@
 <div class="container pb-100">
 
-<%= button_to "Create a new CSV config",create_config_expense_uploads_path, method: "get" %>  
+<%= button_to "Create a new CSV config",create_config_expense_uploads_path, method: "get", class: "btn", id: "new-config-button" %>  
 
   <%= form_tag preview_expense_uploads_path, multipart: true do %>
     <div class="row">

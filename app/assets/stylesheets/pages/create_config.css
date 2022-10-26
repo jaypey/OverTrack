@@ -1,0 +1,88 @@
+#config-form {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    /* border: 1px blue solid; */
+    width: 95%;
+}
+
+#config-form input{
+    border: gray 1px solid;
+    border-radius: 2px;
+}
+
+.config-checkbox-group{
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.config-list{
+    display:block;
+    margin-top:16px;
+}
+
+.input-and-button{
+    display: flex;
+}
+
+.config-list-input{
+    display: block;
+}
+
+.config-list-textbox{
+    width: 90%;
+}
+
+.config-list-input-container{
+    margin-top:16px;
+}
+
+.config-add-substring{
+    margin: auto;
+    margin-right:10px;
+    font-size: 16pt;
+    color:green;
+    width:fit-content;
+    text-align: right;
+}
+
+.config-add-substring:hover{
+    cursor: pointer;
+    color: rgb(2, 79, 2);
+}
+
+.generic-item-container{
+    /* border:#82909b 1px solid; */
+    background-color: #b5d0e264;
+    border-radius: 5px;
+    padding:5px 0px 5px 10px;
+    margin: 2px 0px 2px 0px;
+    height: fit-content;
+    display: flex;
+}
+
+.generic-item-text{
+    width:90%;
+    word-wrap: break-word;
+    justify-content: left;
+}
+
+.generic-item-delete{
+    margin: auto;
+    margin-right:10px;
+    font-size: 16pt;
+    color:red;
+    width:fit-content;
+    text-align: right;
+}
+
+.generic-item-delete:hover{
+    cursor: pointer;
+    color: brown;
+}
+
+.config-group{
+    border:#b5d0e282 2px solid;
+    background-color: #9bc5e124;
+    padding: 5px 10px 5px 10px;
+    margin: 0px 0px 10px 0px;
+}

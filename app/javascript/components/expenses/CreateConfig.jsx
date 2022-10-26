@@ -1,159 +1,182 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import DatePicker from '../shared/DatePicker';
-import CurrencyInput from '../shared/CurrencyInput';
-import { Expenses } from '../../api/main';
-import { Alerts } from '../../helpers/main';
+import FieldErrors from '../shared/FieldErrors';
+import GenericList from './GenericList';
+import { useRef } from 'react';
+
+
 
 class CreateConfig extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   expenses: props.expenses,
-    //   submitting: false,
-    // };
+
+    this.state = {
+      configName: "",
+      descriptionIdx: 0,
+      categoryIdx: 0,
+      amountIdx: 0,
+      dateIdx: 0,
+      ignoredSubstring: [],
+      currentSubstring: "",
+      hasHeader: false,
+      spendIsNegative: false,
+      skipNonSpend: false,
+      defaultCategory: "Uncategorized",
+    };
+
   }
 
-  // handleExpenseDelete = (idx) => {
-  //   const modifiedExpenses = [...this.state.expenses]; // Make a copy
-  //   modifiedExpenses.splice(idx, 1);
-  //   this.setState({ expenses: modifiedExpenses });
-  // }
+  handleRemoveSubstring = (substringToDelete) => {
 
-  // updateExpense = (idx, updates) => {
-  //   const modifiedExpenses = [...this.state.expenses]; // Make a copy
-  //   const modifiedExpense = Object.assign({ ...modifiedExpenses[idx] }, updates);
-  //   modifiedExpenses[idx] = modifiedExpense;
-  //   this.setState({ expenses: modifiedExpenses });
-  // }
+    var stringToDelete = substringToDelete.trim();
 
-  // renderEmptyState() {
-  //   if (this.props.expenses.length) { return ''; }
-  //   return (
-  //     <div className="empty-or-error-status mt-30">
-  //       <div className="status-text">
-  //         <h2>Nothing to import!</h2>
-  //         <div>There are no expenses to import from your CSV.</div>
-  //         <div className="mt-10">
-  //           <a href="/expense_uploads/new" className="btn btn-dark">Go back</a>
-  //         </div>
-  //       </div>
-  //       <img className="status-image" src={window.historian} />
-  //     </div>
-  //   );
-  // }
+    if (stringToDelete != "")
+      this.setState(({ ignoredSubstring: this.state.ignoredSubstring.filter(e => e !== stringToDelete) }));
+  }
 
-  // cancel() {
-  //   window.location = '/expense_uploads/new';
-  // }
+  handleAddSubstring = () => {
 
-  // submit = () => {
-  //   this.setState({ submitting: true });
+    var currentString = this.state.currentSubstring.trim();
 
-  //   Expenses.bulkCreate({ expenses: this.state.expenses }).then(
-  //     () => {
-  //       this.setState({ submitting: false });
-  //       Alerts.success('Your import was successful.', () => { window.location = '/expenses'; });
-  //     },
-  //     () => {
-  //       this.setState({ submitting: false });
-  //       Alerts.error('Something went wrong! Double check that your inputs are all valid.');
-  //     },
-  //   );
-  // }
+    if (currentString != "") {
+      this.setState(prevState =>
+      ({
+        ignoredSubstring: [...prevState.ignoredSubstring
+          .filter(e => e !== currentString), ...currentString].sort()
+      }));
+      this.setState({ currentSubstring: "" });
+    }
 
-  // renderExpense(expense, idx) {
-  //   return (
-  //     <tr key={`${expense.paid_at}-${expense.amount}-${expense.description}-${idx}`}>
-  //       <td className="input-group mw-150">
-  //         <DatePicker onChange={(val) => this.updateExpense(idx, { paid_at: val })} value={new Date(expense.paid_at)} className="bg-gray-slight-contrast" />
-  //       </td>
+  }
 
-  //       <td className="input-group mw-200">
-  //         <select defaultValue={expense.category_id} onChange={(e) => this.updateExpense(idx, { category_id: e.target.value })} className="bg-gray-slight-contrast">
-  //           {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-  //         </select>
-  //       </td>
+  handleAddSubtringKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      this.handleAddSubstring();
+    }
+  }
 
-  //       <td className="input-group mw-100">
-  //         <CurrencyInput
-  //           initialValue={expense.amount}
-  //           onBlur={(val) => this.updateExpense(idx, { amount: val })}
-  //           allowNegative
-  //           className="bg-gray-slight-contrast"
-  //         />
-  //       </td>
+  handleDescriptionIdxChange = (e) => { this.setState({ descriptionIdx: e.target.value }); }
+  handleCategoryIdxChange = (e) => { this.setState({ categoryIdx: e.target.value }); }
+  handleAmountIdxChange = (e) => { this.setState({ amountIdx: e.target.value }); }
+  handleDateIdxChange = (e) => { this.setState({ dateIdx: e.target.value }); }
+  handleNameChange = (e) => { this.setState({ configName: e.target.value }); }
+  handleHasHeaderChange = (e) => { this.setState({ hasHeader: e.target.checked }); }
+  handleDefaultCategoryChange = (e) => { this.setState({ defaultCategory: e.target.value }); }
+  handleSpendIsNegativeChange = (e) => { this.setState({ spendIsNegative: e.target.checked }); }
+  handleSkipNonSpendChange = (e) => { this.setState({ skipNonSpend: e.target.checked }); }
 
-  //       <td className="input-group mw-300">
-  //         <input defaultValue={expense.description} onBlur={(e) => { if (e.target.value.trim() != expense.description) { this.updateExpense(idx, { description: e.target.value.trim() }); } }} className="bg-gray-slight-contrast" />
-  //       </td>
-
-  //       <td>
-  //         <a onClick={() => this.handleExpenseDelete(idx)} className="dim-til-hover"><i className="fa fa-times" /></a>
-  //       </td>
-  //     </tr>
-  //   );
-  // }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitting: ");
+    console.log(this.state);
+  }
 
   render() {
     return (
-      // <div className="container pb-100">
-      //   {this.renderEmptyState()}
 
-      //   {this.props.expenses.length > 0 && (
-      //     <>
-      //       <h1>Review import ({this.state.expenses.length} items)</h1>
-      //       <div>
-      //         <div className="mt-30 mb-10">
-      //           <em className="text-muted">Make any changes you want before submitting at the bottom of the page.</em>
-      //         </div>
-      //         <div className="overflow-x bg-gray p-10">
-      //           <table className="table">
-      //             <thead>
-      //               <tr>
-      //                 <th>Date</th>
-      //                 <th>Category</th>
-      //                 <th>Amount</th>
-      //                 <th>Description</th>
-      //                 <th />
-      //               </tr>
-      //             </thead>
-      //             <tbody>
-      //               {this.state.expenses.map((exp, idx) => this.renderExpense(exp, idx))}
-      //             </tbody>
-      //           </table>
-      //         </div>
-      //       </div>
+      <form id="config-form"
+        onKeyDown={(e) => {e.key ==='Enter' && e.preventDefault(); }}
+        onSubmit={this.handleSubmit}>
+        <h1>CSV Configuration Creator</h1>
+        <div className='config-group'>
+          <h2>Basic information</h2>
+          <div className='input-group'>
+            <label className='required'>Config name</label>
+            <input
+              value={this.state.configName}
+              onChange={this.handleNameChange} type="text" />
+          </div>
+          <div className='config-checkbox-group'>
+            <label data-toggle="tooltip" data-placement="top" title="Skip the first row of the CSV file (check this box if your file has a header)">Skip first row?</label>
+            <input
+              value={this.state.hasHeader}
+              onChange={this.handleHasHeaderChange} type="checkbox" />
+          </div>
+        </div>
 
-      //       <div className="form-actions">
-      //         <button
-      //           type="submit"
-      //           className="btn btn-dark"
-      //           onClick={this.submit}
-      //           disabled={this.state.submitting}
-      //         >
-      //           {this.state.submitting ? 'Submitting...' : 'Submit'}
-      //         </button>
-      //         <button type="button" className="btn" onClick={this.cancel}>Cancel</button>
-      //       </div>
-      //     </>
-      //   )}
-      // </div>
-      <>
-      Config Form for CSV
-      </>
+        <div className="config-description-container config-group">
+          <h3>Description</h3>
+          <div className="input-group config-idx">
+            <label className="required">Index</label>
+            <input className="config-input config-idx-input" type="number" min="0"
+              value={this.state.descriptionIdx}
+              onChange={this.handleDescriptionIdxChange} />
+          </div>
+          <label>Ignored text</label>
+          <div className='config-list-input-container'>
+            <div className='config-list-input'>
+              <div className='input-and-button'>
+                <input className='config-input config-list-textbox'
+                  onChange={(e) => this.setState({ currentSubstring: e.target.value })}
+                  onKeyDown={this.handleAddSubtringKeyPress}
+                  value={this.state.currentSubstring}
+                  type="text" />
+                <span
+                  onClick={this.handleAddSubstring}
+                  className="config-add-substring fa fa-plus"></span>
+              </div>
+            </div>
+            <div className='config-list'>
+              {this.state.ignoredSubstring.length > 0 && <GenericList handleDelete={this.handleRemoveSubstring} list={this.state.ignoredSubstring} />}
+            </div>
+          </div>
+        </div>
+
+        <div className="config-category-container config-group">
+          <h3>Category</h3>
+          <div className="input-group config-idx">
+            <label className="required">Index</label>
+            <input className="config-input config-idx-input" type="number" min="0"
+              value={this.state.categoryIdx}
+              onChange={this.handleCategoryIdxChange} />
+          </div>
+          <div className="input-group">
+            <label data-toggle="tooltip" data-placement="top" title="Default category to use if the category of the row isn't registered in OverTrack" className="required">Default category</label>
+            <input className="config-input" type="text"
+              value={this.state.defaultCategory}
+              onChange={this.handleDefaultCategoryChange} />
+          </div>
+        </div>
+
+        <div className='config-amount-container config-group'>
+          <h3>Amount</h3>
+          <div className="input-group config-idx">
+            <label className="required">Index</label>
+            <input className="config-input config-idx-input" type="number" min="0"
+              value={this.state.amountIdx}
+              onChange={this.handleAmountIdxChange} />
+          </div>
+
+          <div className='config-checkbox-group'>
+            <label data-toggle="tooltip" data-placement="top" title="Amounts that starts with a minus (-) is considered a spending">Spend is negative?</label>
+            <input
+              value={this.state.spendIsNegative}
+              onChange={this.handleSpendIsNegativeChange} type="checkbox" />
+          </div>
+
+          <div className='config-checkbox-group'>
+            <label data-toggle="tooltip" data-placement="top" title="Skip all amounts that aren't considered a spending">Skip non spend?</label>
+            <input
+              value={this.state.skipNonSpend}
+              onChange={this.handleSkipNonSpendChange} type="checkbox" />
+          </div>
+        </div>
+
+
+        <div className='config-date-container config-group'>
+          <h3>Date</h3>
+          <div className="input-group config-idx">
+            <label className="required">Index</label>
+            <input className="config-input config-idx-input" type="number" min="0"
+              value={this.state.dateIdx}
+              onChange={this.handleDateIdxChange} />
+          </div>
+        </div>
+
+        <button type="submit" className='btn btn-primary'>Create</button>
+
+      </form>
     );
   }
 }
-
-// CreateConfig.defaultProps = {
-//   categories: [],
-//   expenses: [],
-// };
-
-// CreateConfig.propTypes = {
-//   categories: PropTypes.array,
-//   expenses: PropTypes.array,
-// };
 
 export default CreateConfig;
