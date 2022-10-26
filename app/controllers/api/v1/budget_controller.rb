@@ -37,5 +37,19 @@ module Api; module V1
             render json: budget, status: successful ? 200 : 500
         end
 
+        def selectbudget
+            cookies.signed[:selectedBudget] = params[:id]
+            render json: nil, status: 200
+        end
+
+        def getbudgetname
+            budget = ::Budget.find(cookies.signed[:selectedBudget])
+            successful = false
+            if budget != nil
+                successful = true
+            end
+            render json: budget.name, status: successful ? 200 : 500
+        end
+
     end
 end; end

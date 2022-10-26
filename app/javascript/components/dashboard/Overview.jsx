@@ -4,11 +4,18 @@ import moment from 'moment';
 import { Numerics } from '../../helpers/main';
 import Progress from '../shared/Progress';
 import GoalFormModal from '../goals/FormModal';
+import { Budgets } from '../../api/main';
 
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showGoalModal: false };
+
+    this.state = { showGoalModal: false, selectedBudgetName: ""};
+
+  }
+
+  componentDidMount(){
+    this.getSelectedBudgetName();
   }
 
   openGoal = () => { this.setState({ showGoalModal: true }); }
@@ -42,12 +49,24 @@ class Overview extends React.Component {
     return <GoalFormModal onClose={this.closeGoal} onSave={this.onGoalSave} goals={{ monthly: this.props.monthlyGoal }} />;
   }
 
+  getSelectedBudgetName = async() =>{
+    const selectedBudget = await Budgets.getSelectedBudgetName()
+    .then(
+      (resp) => {return resp;},
+      () => {return '';}
+      );
+
+    this.setState({selectedBudgetName: selectedBudget});
+  }
+
+
   render() {
     const today = moment();
     const daysLeftInMonth = moment().endOf('month').diff(today, 'days');
 
     return (
       <div>
+        <h2>{this.state.selectedBudgetName}</h2>
         <div className="mb-10">{today.format('MMMM')} ({daysLeftInMonth} days left)</div>
 
         <div className="flex row-flex flex-space-between flex-baseline mb-10">
