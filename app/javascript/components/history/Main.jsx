@@ -37,9 +37,7 @@ class Main extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
-    console.log("it works")
-    
+  static getDerivedStateFromProps(props, state) { 
     const revenues = props.categories.filter(cat => {
       return cat.is_revenue === 1;});
     const expenses = props.categories.filter(cat => {
