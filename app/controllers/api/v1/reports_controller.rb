@@ -4,8 +4,10 @@ module Api; module V1
       total = ActiveRecord::Base.connection.execute(%{
         select sum(expenses.amount) as amount
         from expenses
+        join categories on expenses.category_id = categories.id
         where paid_at >= '#{params[:year].to_i}-01-01'
         and paid_at < '#{params[:year].to_i + 1}-01-01'
+        and budget_id = '#{cookies.signed[:selectedBudget]}'
       }).first['amount']
 
       category_percentages = ActiveRecord::Base.connection.execute(%{
@@ -14,6 +16,7 @@ module Api; module V1
         join categories on expenses.category_id = categories.id
         where paid_at >= '#{params[:year].to_i}-01-01'
         and paid_at < '#{params[:year].to_i + 1}-01-01'
+        and budget_id = '#{cookies.signed[:selectedBudget]}'
         group by categories.id
         order by percentage;
       })
@@ -24,6 +27,7 @@ module Api; module V1
         join categories on expenses.category_id = categories.id
         where paid_at >= '#{params[:year].to_i}-01-01'
         and paid_at < '#{params[:year].to_i + 1}-01-01'
+        and budget_id = '#{cookies.signed[:selectedBudget]}'
         group by categories.id
         order by amount desc;
       })
@@ -34,6 +38,7 @@ module Api; module V1
         join categories on expenses.category_id = categories.id
         where paid_at >= '#{params[:year].to_i}-01-01'
         and paid_at < '#{params[:year].to_i + 1}-01-01'
+        and budget_id = '#{cookies.signed[:selectedBudget]}'
         group by month, categories.id
         order by categories.rank asc, categories.id asc
       })
@@ -44,7 +49,7 @@ module Api; module V1
         category_amounts_by_month: category_amounts_by_month,
         category_averages_for_year: average_by_category(params[:year].to_i),
         total: total,
-        categories: Category.all.select(:id, :name, :color).order(:name)
+        categories: Category.where(budget_id: cookies.signed[:selectedBudget]).select(:id, :name, :color).order(:name)
       }
     end
 
@@ -52,22 +57,46 @@ module Api; module V1
       start_date = Date.strptime(params[:month], '%B %Y')
       end_date = start_date + 1.month
 
-      category_totals = ActiveRecord::Base.connection.execute(%{
+      barChart_query = "
         select categories.name AS category, categories.monthly_goal as monthly_goal, sum(expenses.amount) AS spend
         from expenses
         join categories on expenses.category_id = categories.id
         where paid_at >= '#{start_date}'
         and paid_at < '#{end_date}'
+        and budget_id = '#{cookies.signed[:selectedBudget]}'
         group by categories.rank, categories.id
-        order by categories.rank asc, categories.id asc
-      })
+        order by categories.rank asc, categories.id asc";
+        
+      pieChart_query = "(
+        select categories.name AS category, categories.color AS color, sum(expenses.amount)/100 AS spend 
+        from expenses 
+        join categories on expenses.category_id = categories.id 
+        where paid_at >= '#{start_date}' 
+        and paid_at < '#{end_date}'
+        and budget_id = '#{cookies.signed[:selectedBudget]}'
+        group by categories.rank, categories.id 
+        order by categories.rank asc, categories.id asc) 
+        UNION ALL
+        (select 'leftovers' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        from categories 
+        full outer join expenses on categories.id = expenses.category_id 
+        full outer join revenues on categories.id = revenues.category_id
+        where budget_id = '#{cookies.signed[:selectedBudget]}')";
+        
+      category_totals = ActiveRecord::Base.connection.execute(barChart_query)
+
+      category_pourcentage = ActiveRecord::Base.connection.execute(pieChart_query)
 
       averages = average_by_category(start_date.year)
 
+      expensesTotal = Expense.where("paid_at >= '#{start_date}' and paid_at < '#{end_date}'")
+      expensesTotal = expensesTotal.where(category_id: ::Category.where(budget_id: cookies.signed[:selectedBudget]).ids).sum(:amount)
+
       render json: {
         category_totals: category_totals,
+        category_pourcentage: category_pourcentage,
         category_averages_for_year: average_by_category(start_date.year),
-        total: Expense.where("paid_at >= '#{start_date}' and paid_at < '#{end_date}'").sum(:amount),
+        total: expensesTotal,
         monthly_goal: User.first.monthly_goal
       }
     end
@@ -85,6 +114,7 @@ module Api; module V1
         join categories on expenses.category_id = categories.id
         where paid_at >= '#{start_date}'
         and paid_at < '#{end_date}'
+        and budget_id = '#{cookies.signed[:selectedBudget]}'
         group by categories.id
       })
 
