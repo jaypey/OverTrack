@@ -78,7 +78,7 @@
         <% end %>
       </div>
       <div class="form-actions">
-        <%= f.submit "Create", id: "ButtonSubmit", class: "btn btn-dark btn-full btn-round" %> 
+        <%= f.submit "Create", id: "ButtonSubmit", class: "btn btn-dark btn-full btn-round", disabled: true %> 
       </div>
       <div style="margin-left:5%;">
         <%= link_to "Back", root_path, class: "linkto" %>
@@ -99,8 +99,10 @@
         document.getElementById('MessagePasswordErreur').insertAdjacentText('beforeend', 'Password needs minimum 8 characters, an uppercase and lowercase letter, a number and a special character');
       }
     }else{
-      document.getElementById("ButtonSubmit").disabled = false;
-      document.getElementById("MessagePasswordErreur").innerHTML = '';
+      if(document.getElementById("PasswordConfirm").value != ""){
+        document.getElementById("ButtonSubmit").disabled = false;
+        document.getElementById("MessagePasswordErreur").innerHTML = '';
+      }
     }
   })
 
