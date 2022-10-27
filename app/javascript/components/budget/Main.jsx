@@ -97,13 +97,20 @@ class Main extends React.Component {
         console.log("update")
     }
 
+    updateSelectedBudget = () => {
+        Budgets.updateSelectBudget({id: this.state.idSelectedBudget}).then(
+            (cResp) => { Alerts.success("Selected budget");},
+            () => {Alerts.error("Couldnt select budget");}
+        );
+    }
+
     reloadData = () => {
         this.loadBudgets();
     }
 
     loadBudgets = () => {
         Budgets.list().then(
-          (cResp) => { this.setState({ budgets: cResp }); },
+          (cResp) => { this.setState({ budgets: cResp}); },
           () => { Alerts.error("Budget didn't load correctly"); }
         );
     }
@@ -180,7 +187,7 @@ class Main extends React.Component {
                 </div>
                 <br/>
                 <div>
-                    <button className='btn btn-round pos-abs mt-neg-20 z-5'>Select</button>
+                    <button onClick={() => this.updateSelectedBudget()} className='btn btn-round btn-accept pos-abs mt-neg-20 z-5'>Select</button>
                 </div>
             </div>
         )

@@ -14,8 +14,16 @@ class UserController < ApplicationController
         respond_to do |format|
             format.html do
                 if user.save
-                    flash[:success] = "User created successfully"
-                    redirect_to :root
+                    initialBudget = ::Budget.new(name: user.firstname + "'s budget", description: "Your own personal budget", owner_id: user.id)
+                    initialBudget.users << user
+                    successful = initialBudget.save
+                    if !successful
+                        flash[:error] = "Error: Initial budget could not be created"
+                        render :register, locals: { user: user}
+                    else
+                        flash[:success] = "User created successfully"
+                        redirect_to :root
+                    end
                   else
                     flash.now[:error] = "Error: User could not be created"
                     render :register, locals: { user: user }

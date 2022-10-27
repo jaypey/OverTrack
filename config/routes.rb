@@ -50,6 +50,8 @@ Rails.application.routes.draw do
           post :adduser
           post :removeuser
           get :listBudgets
+          post :selectbudget
+          get :getbudgetname
         end
       end
       #get "/revenues", to: "/revenues#index"

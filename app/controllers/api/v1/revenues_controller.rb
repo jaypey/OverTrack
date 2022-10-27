@@ -1,10 +1,12 @@
 module Api; module V1
   class RevenuesController < BaseController
     def index
+
       revenues = ::Revenue.all
       revenues = revenues.where('paid_at >= ?', Time.at(params[:paid_after].to_i).to_datetime) if params[:paid_after].present?
       revenues = revenues.where('paid_at <= ?', Time.at(params[:paid_before].to_i).to_datetime) if params[:paid_before].present?
       revenues = revenues.where("lower(description) LIKE ?", "%#{params[:search].strip}%") if params[:search]&.strip.present?
+      revenues = revenues.where(category_id: ::Category.where(budget_id: cookies.signed[:selectedBudget]).ids)
       revenues = revenues.where(category_id: params[:category_id]) if params[:category_id].present?
       revenues = revenues.includes(:category) if params[:include_category] == true.to_s
       revenues = revenues.paginate(params[:page], params[:per_page]) if params[:page]
