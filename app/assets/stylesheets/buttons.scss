@@ -62,3 +62,20 @@ button[disabled].btn {
     cursor: not-allowed;
   }
 }
+
+.button-width-left {
+  width:30%;
+  margin-right:10%;
+  margin-left:10%;
+}
+.button-width-right {
+  width:30%;
+  margin-right:10%;
+  margin-left:10%;
+}
+.more-button {
+  background-color: #97c6d4;
+}
+.less-button {
+  background-color: #d86a6a;
+}

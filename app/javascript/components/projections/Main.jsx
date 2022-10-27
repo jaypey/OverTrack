@@ -129,22 +129,24 @@ class Main extends React.Component {
     if (!this.state.loaded) { return ''; }
     return (
       <div className='container'>
-        <button className='btn' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count + 1, 3)) })}>
-          Increase studied months
-        </button>
-        <button className='btn' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count - 1, 3)) })}>
-          Decrease studied months
-        </button>
+        <h2>Personalise your projections</h2>
         <br></br>
-        <button className='btn' onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project + 1, 3)) })}>
-          Increase projected months
+        <br></br>
+        <button className='btn button-width-left more-button' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count + 1, 3)) })}>
+          + previous months
         </button>
-        <button className='btn' onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project - 1, 3)) })}>
-          Decrease projected months
+        <button className='btn button-width-right more-button' onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project + 1, 3)) })}>
+          + upcoming months
         </button>
         <br></br>
         <br></br>
-        <h1>Predictions for the next few months</h1>
+        <button className='btn button-width-left less-button' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count - 1, 3)) })}>
+          - previous months
+        </button>
+        <button className='btn button-width-right less-button' onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project - 1, 3)) })}>
+          - upcoming months
+        </button>
+        <br></br>
         <br></br>
         <br></br>
       {<ProjectionsChart studiedMonths={this.state.count} projectedMonths={this.state.project} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} expenses={this.state.expenses} revenues={this.state.revenues} /> }

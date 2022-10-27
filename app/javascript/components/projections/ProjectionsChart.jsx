@@ -59,24 +59,6 @@ class ProjectionsChart extends React.Component {
     this.state.averageVariationPerMonthRevenues = 0;
   }
 
-  getDistinctExpenses() {
-    {this.props.expenses.map((expense) =>
-      { 
-        var d = new Date(expense.paid_at);
-        if (this.state.distinctExpenses.filter(e => e.id === expense.id).length == 0)
-        {
-          this.setState(prevState => ({
-            distinctExpenses: [...prevState.distinctExpenses, expense]
-          }))
-          //console.log(d.toString());
-        }
-        })}
-        for (let expense of this.state.distinctExpenses)
-        {
-          //console.log(expense.description)
-        }
-  }
-
   getTotalMonthlyAmount() {
     for (let i = 0; i < this.props.studiedMonths; i++)
     {
@@ -87,6 +69,13 @@ class ProjectionsChart extends React.Component {
         if (d.getMonth() == (currentTime.getMonth() - 1 - i))
         {
           this.state.totalPerMonth[i] += (expense.amount / 100);
+        }
+        if((currentTime.getMonth() - 1 - i) < 0)
+        {
+          if ((d.getMonth() == (currentTime.getMonth() - 1 - i + 12)) && (d.getFullYear() != currentTime.getFullYear()))
+          {
+            this.state.totalPerMonth[i] += (expense.amount / 100);
+          }
         }
       }
     }
@@ -126,6 +115,13 @@ class ProjectionsChart extends React.Component {
         {
           this.state.totalPerMonthRevenues[i] += (revenue.amount / 100);
         }
+        if((currentTime.getMonth() - 1 - i) < 0)
+        {
+          if ((d.getMonth() == (currentTime.getMonth() - 1 - i + 12)) && (d.getFullYear() != currentTime.getFullYear()))
+          {
+            this.state.totalPerMonthRevenues[i] += (revenue.amount / 100);
+          }
+        }
       }
     }
   }
@@ -160,7 +156,6 @@ class ProjectionsChart extends React.Component {
 
   render() {
     this.reset();
-    //this.setState({ distinctExpenses: [] })
     this.getTotalMonthlyAmount();
     this.getAverageVariationPerMonth();
     this.getTotalExpensesProjections();
@@ -188,7 +183,11 @@ class ProjectionsChart extends React.Component {
     monthNames[-12] = "January"
     return (
     <div>
-      <h3>Total expenses of the last few months</h3>
+      <h2>Expenses</h2>
+      <br></br>
+      <br></br>
+
+      <h3>Total expenses of the previous months</h3>
 
       <table className='table'>
         <thead>
@@ -205,46 +204,26 @@ class ProjectionsChart extends React.Component {
           <td>{monthNames[(d.getMonth() - index - 1)]}</td>
           <td>{value}$</td>
           {index + 1 != this.state.totalPerMonth.length && this.state.variationPerMonth[index] < 0 &&
-        <td className='red-text'>{this.state.variationPerMonth[index]}$</td>}
+        <td className='green-text'>{this.state.variationPerMonth[index]}$</td>}
         {index + 1 != this.state.totalPerMonth.length && this.state.variationPerMonth[index] >= 0 &&
-          <td className='green-text'>+{this.state.variationPerMonth[index]}$</td>
+          <td className='red-text'>+{this.state.variationPerMonth[index]}$</td>
       }
         </tr>))}
         </tbody>
       </table>
-
-
-      {/* {this.state.totalPerMonth.map((value, index) => 
-      (
-      <div>
-        <p>{monthNames[(d.getMonth() - index - 1)]}</p>
-        <p>{value}</p></div>))}
-
-        {this.state.variationPerMonth.map((value, index) => (
-          <div>
-            <p>Change from {monthNames[(d.getMonth() - index - 2)]} to {monthNames[(d.getMonth() - index - 1)]}</p>
-            {value >= 0 &&
-        <p>+{value}</p>
-      }
-        {value < 0 &&
-        <p>-{value}</p>
-      }
-          </div>
-        ))} */}
-
       <br></br>
       <br></br>
         
       {this.state.averageVariationPerMonth < 0 &&
-        <h3>Average variation per month : <span className='red-text'>{this.state.averageVariationPerMonth}$</span></h3>}
+        <h3>Average variation per month : <span className='green-text'>{this.state.averageVariationPerMonth}$</span></h3>}
         {this.state.averageVariationPerMonth >= 0 &&
-          <h3>Average variation per month : <span className='green-text'>+{this.state.averageVariationPerMonth}$</span></h3>
+          <h3>Average variation per month : <span className='red-text'>+{this.state.averageVariationPerMonth}$</span></h3>
       }
 
       <br></br>
       <br></br>
 
-      <h3>Projection of the total expenses for the next few months</h3>
+      <h3>Projection of the total expenses for the upcoming months</h3>
 
       <table className='table'>
         <thead>
@@ -261,24 +240,19 @@ class ProjectionsChart extends React.Component {
           <td>{monthNames[(d.getMonth() + index)]}</td>
           <td>{value}$</td>
           {this.state.averageVariationPerMonth < 0 &&
-        <td className='red-text'>{this.state.averageVariationPerMonth}$</td>}
+        <td className='green-text'>{this.state.averageVariationPerMonth}$</td>}
         {this.state.averageVariationPerMonth >= 0 &&
-          <td className='green-text'>+{this.state.averageVariationPerMonth}$</td>
+          <td className='red-text'>+{this.state.averageVariationPerMonth}$</td>
       }
         </tr>))}
         </tbody>
       </table>
-
-      {/* {this.state.totalPerNextMonthsPredictions.map((value, index) => 
-      (
-      <div>
-        <p>{monthNames[(d.getMonth() + index)]}</p>
-        <p>{value}</p></div>))} */}
 <br></br>
 <br></br>
-<br></br>
-<br></br>
-      <h3>Total revenues of the last few months</h3>
+<h2>Revenues</h2>
+      <br></br>
+      <br></br>
+      <h3>Total revenues of the previous months</h3>
 
 <table className='table'>
   <thead>
@@ -302,26 +276,6 @@ class ProjectionsChart extends React.Component {
   </tr>))}
   </tbody>
 </table>
-
-
-{/* {this.state.totalPerMonth.map((value, index) => 
-(
-<div>
-  <p>{monthNames[(d.getMonth() - index - 1)]}</p>
-  <p>{value}</p></div>))}
-
-  {this.state.variationPerMonth.map((value, index) => (
-    <div>
-      <p>Change from {monthNames[(d.getMonth() - index - 2)]} to {monthNames[(d.getMonth() - index - 1)]}</p>
-      {value >= 0 &&
-  <p>+{value}</p>
-}
-  {value < 0 &&
-  <p>-{value}</p>
-}
-    </div>
-  ))} */}
-
 <br></br>
 <br></br>
   
@@ -334,7 +288,7 @@ class ProjectionsChart extends React.Component {
 <br></br>
 <br></br>
 
-<h3>Projection of the total revenues for the next few months</h3>
+<h3>Projection of the total revenues for the upcoming months</h3>
 
 <table className='table'>
   <thead>
