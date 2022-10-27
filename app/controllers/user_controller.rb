@@ -24,10 +24,9 @@ class UserController < ApplicationController
                         flash[:success] = "User created successfully"
                         redirect_to :root
                     end
-                  else
-                    flash.now[:error] = "Error: User could not be created"
+                else
                     render :register, locals: { user: user }
-                  end
+                end
             end
           end
       end

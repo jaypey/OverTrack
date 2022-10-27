@@ -2,42 +2,120 @@
 <div class="login">
   <div class="flex flex-space-between">
     <%= form_with model: user, url: user_path, method: :post, local: true, scope: :user do |f| %>
+      
       <% if flash[:success] %>
         <div class="success"><%= flash[:success] %></div>
       <% end %>
       <% if flash[:error] %>
-        <div class="error"><%= flash[:error] %></div>
+        <div style="padding: 20px; background-color: #f44336; color: white; border-radius: 25px; text-align:center" class="error"><%= flash[:error] %></div>
       <% end %>
+      
 
-      <div class="input-group">
+      <div style="margin-top: 10px;" class="input-group">
+        <% invalid = user.errors.include?(:email) %>
         <%= f.label :email %>
         <%= f.text_field :email %>
+        <% if invalid %>
+          <div style="color: red;" class="error">
+            <% user.errors.full_messages_for(:email).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <div class="input-group">
+        <% invalid = user.errors.include?(:firstname) %>
         <%= f.label :firstname %>
         <%= f.text_field :firstname %>
+        <% if invalid %>
+          <div style="color: red;" class="error">
+            <% user.errors.full_messages_for(:firstname).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <div class="input-group">
+       <% invalid = user.errors.include?(:lastname) %>
         <%= f.label :lastname %>
         <%= f.text_field :lastname %>
+        <% if invalid %>
+          <div style="color: red;" class="error">
+            <% user.errors.full_messages_for(:lastname).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <div class="input-group">
         <%= f.label :phone %>
         <%= f.text_field :phone %>
       </div>
       <div class="input-group">
+        <% invalid = user.errors.include?(:password) %>
         <%= f.label :password %>
-        <%= f.password_field :password %>
+        <%= f.password_field :password, { :id => 'Password'} %>
+        <div id="MessagePasswordErreur" style="color: red;" class="error"></div>
+        <% if invalid %>
+          <div style="color: red;" class="error">
+            <% user.errors.full_messages_for(:password).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <div class="input-group">
-        <label>Confirm password</label>
-        <input type="password"/>
+        <% invalid = user.errors.include?(:password_confirmation) %>
+        <%=f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, { :id => 'PasswordConfirm'} %>
+        <div id="MessageErreur" style="color: red;" class="error"></div>
+        <% if invalid %>
+          <div style="color: red;" class="error">
+            <% user.errors.full_messages_for(:password_confirmation).each do |error_message| %>
+              <%= error_message %>.
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <div class="form-actions">
-        <%= f.submit "Create", class: "btn btn-dark btn-full btn-round" %>
+        <%= f.submit "Create", id: "ButtonSubmit", class: "btn btn-dark btn-full btn-round" %> 
+      </div>
+      <div style="margin-left:5%;">
+        <%= link_to "Back", root_path, class: "linkto" %>
       </div>
     <% end %>
 
     <%= image_tag "coins.png" %>
   </div>
 </div>
+
+<script>
+  document.getElementById("Password").addEventListener("change", function(){
+    var node = document.getElementById("Password").value;
+    var found = node.match(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/gm)
+    if(found == undefined){
+      document.getElementById("ButtonSubmit").disabled = true;
+      if(document.getElementById("MessagePasswordErreur").innerHTML != 'Password needs minimum 8 characters, an uppercase and lowercase letter, a number and a special character'){
+        document.getElementById('MessagePasswordErreur').insertAdjacentText('beforeend', 'Password needs minimum 8 characters, an uppercase and lowercase letter, a number and a special character');
+      }
+    }else{
+      document.getElementById("ButtonSubmit").disabled = false;
+      document.getElementById("MessagePasswordErreur").innerHTML = '';
+    }
+  })
+
+  document.getElementById("PasswordConfirm").addEventListener("change", function(){
+    var passwordConfirmValue = document.getElementById("PasswordConfirm").value;
+    var passwordValue = document.getElementById("Password").value;
+
+    if(passwordConfirmValue != passwordValue){
+      document.getElementById("ButtonSubmit").disabled = true;
+      if(document.getElementById("MessageErreur").innerHTML != 'Password and Password confirmation are not the same'){
+        document.getElementById('MessageErreur').insertAdjacentText('beforeend', 'Password and Password confirmation are not the same');
+      }
+    }else{
+      document.getElementById("ButtonSubmit").disabled = false;
+      document.getElementById("MessageErreur").innerHTML = '';
+    }
+  });
+</script>
