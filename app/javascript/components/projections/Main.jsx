@@ -129,16 +129,17 @@ class Main extends React.Component {
     if (!this.state.loaded) { return ''; }
     return (
       <div className='container'>
-        <button onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count + 1, 3)) })}>
+        <button className='btn' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count + 1, 3)) })}>
           Increase studied months
         </button>
-        <button onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count - 1, 3)) })}>
+        <button className='btn' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count - 1, 3)) })}>
           Decrease studied months
         </button>
-        <button onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project + 1, 3)) })}>
+        <br></br>
+        <button className='btn' onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project + 1, 3)) })}>
           Increase projected months
         </button>
-        <button onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project - 1, 3)) })}>
+        <button className='btn' onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project - 1, 3)) })}>
           Decrease projected months
         </button>
         <br></br>
