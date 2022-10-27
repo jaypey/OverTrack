@@ -126,11 +126,40 @@ class Main extends React.Component {
   }
 
   render() {
+    var currentTime = new Date();
+    var thisYear = currentTime.getFullYear().toString();
+    var lastYear = (currentTime.getFullYear() - 1).toString();
+    var nextYear = (currentTime.getFullYear() + 1).toString();
+
+    const monthNames = ["January " + thisYear, "February " + thisYear,"March " + thisYear, "April " + thisYear,
+    "May " + thisYear, "June " + thisYear, "July " + thisYear, "August " + thisYear,
+    "September " + thisYear, "October " + thisYear, "November "  + thisYear, "December " + thisYear,
+    "January "  + nextYear, "February "  + nextYear, "March "  + nextYear, "April "  + nextYear,
+    "May "  + nextYear, "June "  + nextYear, "July "  + nextYear, "August "  + nextYear,
+     "September "  + nextYear, "October "  + nextYear, "November "  + nextYear, "December "  + nextYear
+      ];
+      monthNames[-1] = "December "  + lastYear
+      monthNames[-2] = "November " + lastYear
+      monthNames[-3] = "October " + lastYear
+      monthNames[-4] = "September " + lastYear
+      monthNames[-5] = "August " + lastYear
+      monthNames[-6] = "July " + lastYear
+      monthNames[-7] = "June " + lastYear
+      monthNames[-8] = "May " + lastYear
+      monthNames[-9] = "April " + lastYear
+      monthNames[-10] = "March " + lastYear
+      monthNames[-11] = "February " + lastYear
+      monthNames[-12] = "January " + lastYear
     if (!this.state.loaded) { return ''; }
     return (
       <div className='container'>
         <h2>Personalise your projections</h2>
         <br></br>
+        <br></br>
+        <div className='month-container'>
+          <div className='previous-months'>{monthNames[currentTime.getMonth() - this.state.count - 1]} - {monthNames[currentTime.getMonth() - 1]}</div>
+          <div className='upcoming-months'>{monthNames[currentTime.getMonth()]} - {monthNames[currentTime.getMonth() + this.state.project]}</div>
+        </div>
         <br></br>
         <button className='btn button-width-left more-button' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count + 1, 3)) })}>
           + previous months

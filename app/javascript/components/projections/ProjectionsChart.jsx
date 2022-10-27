@@ -37,16 +37,6 @@ class ProjectionsChart extends React.Component {
     };
 
   reset() {
-    // this.setState({ distinctExpenses: [] })
-    // this.setState({ totalPerMonth: [] })
-    // this.setState({ variationPerMonth: [] })
-    // this.setState({ totalPerNextMonthsPredictions: [] })
-    // this.setState({ totalPerMonthRevenues: [] })
-    // this.setState({ variationPerMonthRevenues: [] })
-    // this.setState({ totalPerNextMonthsPredictionsRevenues: [] })
-    // this.setState({ totalMonthlyChangePrediction: 0 })
-    // this.setState({ averageVariationPerMonth: 0 })
-    // this.setState({ averageVariationPerMonthRevenues: 0 })
     this.state.distinctExpenses = [];
     this.state.totalPerMonth = [];
     this.state.variationPerMonth = [];
@@ -165,22 +155,29 @@ class ProjectionsChart extends React.Component {
     console.log(this.props.studiedMonths);
     console.log(this.props.projectedMonths);
     const d = new Date();
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", , "November", "December"
-    ];
-    monthNames[-1] = "December"
-    monthNames[-2] = "November"
-    monthNames[-3] = "October"
-    monthNames[-4] = "September"
-    monthNames[-5] = "August"
-    monthNames[-6] = "July"
-    monthNames[-7] = "June"
-    monthNames[-8] = "May"
-    monthNames[-9] = "April"
-    monthNames[-10] = "March"
-    monthNames[-11] = "February"
-    monthNames[-12] = "January"
+    var thisYear = d.getFullYear().toString();
+    var lastYear = (d.getFullYear() - 1).toString();
+    var nextYear = (d.getFullYear() + 1).toString();
+
+    const monthNames = ["January " + thisYear, "February " + thisYear,"March " + thisYear, "April " + thisYear,
+    "May " + thisYear, "June " + thisYear, "July " + thisYear, "August " + thisYear,
+    "September " + thisYear, "October " + thisYear, "November "  + thisYear, "December " + thisYear,
+    "January "  + nextYear, "February "  + nextYear, "March "  + nextYear, "April "  + nextYear,
+    "May "  + nextYear, "June "  + nextYear, "July "  + nextYear, "August "  + nextYear,
+     "September "  + nextYear, "October "  + nextYear, "November "  + nextYear, "December "  + nextYear
+      ];
+      monthNames[-1] = "December "  + lastYear
+      monthNames[-2] = "November " + lastYear
+      monthNames[-3] = "October " + lastYear
+      monthNames[-4] = "September " + lastYear
+      monthNames[-5] = "August " + lastYear
+      monthNames[-6] = "July " + lastYear
+      monthNames[-7] = "June " + lastYear
+      monthNames[-8] = "May " + lastYear
+      monthNames[-9] = "April " + lastYear
+      monthNames[-10] = "March " + lastYear
+      monthNames[-11] = "February " + lastYear
+      monthNames[-12] = "January " + lastYear
     return (
     <div>
       <h2>Expenses</h2>
@@ -202,11 +199,14 @@ class ProjectionsChart extends React.Component {
       (
         <tr>
           <td>{monthNames[(d.getMonth() - index - 1)]}</td>
-          <td>{value}$</td>
+          <td>{value.toFixed(2)}$</td>
           {index + 1 != this.state.totalPerMonth.length && this.state.variationPerMonth[index] < 0 &&
-        <td className='green-text'>{this.state.variationPerMonth[index]}$</td>}
-        {index + 1 != this.state.totalPerMonth.length && this.state.variationPerMonth[index] >= 0 &&
-          <td className='red-text'>+{this.state.variationPerMonth[index]}$</td>
+        <td className='green-text'>{this.state.variationPerMonth[index].toFixed(2)}$</td>}
+        {index + 1 != this.state.totalPerMonth.length && this.state.variationPerMonth[index] > 0 &&
+          <td className='red-text'>+{this.state.variationPerMonth[index].toFixed(2)}$</td>
+      }
+      {index + 1 != this.state.totalPerMonth.length && this.state.variationPerMonth[index] == 0 &&
+          <td>{this.state.variationPerMonth[index].toFixed(2)}$</td>
       }
         </tr>))}
         </tbody>
@@ -215,9 +215,12 @@ class ProjectionsChart extends React.Component {
       <br></br>
         
       {this.state.averageVariationPerMonth < 0 &&
-        <h3>Average variation per month : <span className='green-text'>{this.state.averageVariationPerMonth}$</span></h3>}
-        {this.state.averageVariationPerMonth >= 0 &&
-          <h3>Average variation per month : <span className='red-text'>+{this.state.averageVariationPerMonth}$</span></h3>
+        <h3>Average variation per month : <span className='green-text'>{this.state.averageVariationPerMonth.toFixed(2)}$</span></h3>}
+        {this.state.averageVariationPerMonth > 0 &&
+          <h3>Average variation per month : <span className='red-text'>+{this.state.averageVariationPerMonth.toFixed(2)}$</span></h3>
+      }
+      {this.state.averageVariationPerMonth == 0 &&
+          <h3>Average variation per month : <span>{this.state.averageVariationPerMonth.toFixed(2)}$</span></h3>
       }
 
       <br></br>
@@ -238,11 +241,14 @@ class ProjectionsChart extends React.Component {
       (
         <tr>
           <td>{monthNames[(d.getMonth() + index)]}</td>
-          <td>{value}$</td>
+          <td>{value.toFixed(2)}$</td>
           {this.state.averageVariationPerMonth < 0 &&
-        <td className='green-text'>{this.state.averageVariationPerMonth}$</td>}
-        {this.state.averageVariationPerMonth >= 0 &&
-          <td className='red-text'>+{this.state.averageVariationPerMonth}$</td>
+        <td className='green-text'>{this.state.averageVariationPerMonth.toFixed(2)}$</td>}
+        {this.state.averageVariationPerMonth > 0 &&
+          <td className='red-text'>+{this.state.averageVariationPerMonth.toFixed(2)}$</td>
+      }
+      {this.state.averageVariationPerMonth == 0 &&
+          <td>{this.state.averageVariationPerMonth.toFixed(2)}$</td>
       }
         </tr>))}
         </tbody>
@@ -267,11 +273,14 @@ class ProjectionsChart extends React.Component {
 (
   <tr>
     <td>{monthNames[(d.getMonth() - index - 1)]}</td>
-    <td>{value}$</td>
+    <td>{value.toFixed(2)}$</td>
     {index + 1 != this.state.totalPerMonthRevenues.length && this.state.variationPerMonthRevenues[index] < 0 &&
-  <td className='red-text'>{this.state.variationPerMonthRevenues[index]}$</td>}
-  {index + 1 != this.state.totalPerMonthRevenues.length && this.state.variationPerMonthRevenues[index] >= 0 &&
-    <td className='green-text'>+{this.state.variationPerMonthRevenues[index]}$</td>
+  <td className='red-text'>{this.state.variationPerMonthRevenues[index].toFixed(2)}$</td>}
+  {index + 1 != this.state.totalPerMonthRevenues.length && this.state.variationPerMonthRevenues[index] > 0 &&
+    <td className='green-text'>+{this.state.variationPerMonthRevenues[index].toFixed(2)}$</td>
+}
+{index + 1 != this.state.totalPerMonthRevenues.length && this.state.variationPerMonthRevenues[index] == 0 &&
+    <td>{this.state.variationPerMonthRevenues[index].toFixed(2)}$</td>
 }
   </tr>))}
   </tbody>
@@ -280,9 +289,12 @@ class ProjectionsChart extends React.Component {
 <br></br>
   
 {this.state.averageVariationPerMonthRevenues < 0 &&
-  <h3>Average variation per month : <span className='red-text'>{this.state.averageVariationPerMonthRevenues}$</span></h3>}
-  {this.state.averageVariationPerMonthRevenues >= 0 &&
-    <h3>Average variation per month : <span className='green-text'>+{this.state.averageVariationPerMonthRevenues}$</span></h3>
+  <h3>Average variation per month : <span className='red-text'>{this.state.averageVariationPerMonthRevenues.toFixed(2)}$</span></h3>}
+  {this.state.averageVariationPerMonthRevenues > 0 &&
+    <h3>Average variation per month : <span className='green-text'>+{this.state.averageVariationPerMonthRevenues.toFixed(2)}$</span></h3>
+}
+{this.state.averageVariationPerMonthRevenues == 0 &&
+    <h3>Average variation per month : <span>{this.state.averageVariationPerMonthRevenues.toFixed(2)}$</span></h3>
 }
 
 <br></br>
@@ -303,11 +315,14 @@ class ProjectionsChart extends React.Component {
 (
   <tr>
     <td>{monthNames[(d.getMonth() + index)]}</td>
-    <td>{value}$</td>
+    <td>{value.toFixed(2)}$</td>
     {this.state.averageVariationPerMonthRevenues < 0 &&
-  <td className='red-text'>{this.state.averageVariationPerMonthRevenues}$</td>}
-  {this.state.averageVariationPerMonthRevenues >= 0 &&
-    <td className='green-text'>+{this.state.averageVariationPerMonthRevenues}$</td>
+  <td className='red-text'>{this.state.averageVariationPerMonthRevenues.toFixed(2)}$</td>}
+  {this.state.averageVariationPerMonthRevenues > 0 &&
+    <td className='green-text'>+{this.state.averageVariationPerMonthRevenues.toFixed(2)}$</td>
+}
+{this.state.averageVariationPerMonthRevenues == 0 &&
+    <td>{this.state.averageVariationPerMonthRevenues.toFixed(2)}$</td>
 }
   </tr>))}
   </tbody>
