@@ -1,18 +1,19 @@
 module Api; module V1
     class BudgetController < BaseController
         def index 
-            render json: User.find(params[:id]).budgets
+            render json: User.find(cookies.signed[:user_id]).budgets.to_json(include: {users: { only: [:firstname, :lastname, :email, :id]}})
         end
 
         def create
-            budget = ::Budget.new(name: params[:name], description: params[:description], owner_id: params[:owner_id])
+            budget = ::Budget.new(name: params[:name], description: params[:description], owner_id: cookies.signed[:user_id])
+            budget.users << User.find(cookies.signed[:user_id])
             successful = budget.save
             render json: budget, status: successful ? 200 : 500
         end
 
         def update
             budget = ::Budget.find(params[:id])
-            successful = budget.update(name: params[:name], description: params[:description], owner_id: params[:owner_id])
+            successful = budget.update(name: params[:name], description: params[:description], owner_id: cookies.signed[:user_id])
             render json: budget, status: successful ? 200 : 500
         end
 
@@ -23,8 +24,13 @@ module Api; module V1
         end
 
         def adduser
-            budget = ::Budget.find(params[:id])
-            budget.users << ::User.find(params[:userid])
+            budget = ::Budget.includes(:users).find(params[:budgetid])
+            userAdd = ::User.find_by(email: params[:email])
+            
+            render json: nil, status: 408 and return if budget.users.include?(userAdd)
+            render json: nil, status: 409 and return if userAdd == nil
+
+            budget.users << userAdd
             successful = budget.save
             render json: budget, status: successful ? 200 : 500
         end
@@ -34,6 +40,20 @@ module Api; module V1
             budget.users.delete(budget.users.find(params[:userid]))
             successful = budget.save
             render json: budget, status: successful ? 200 : 500
+        end
+
+        def selectbudget
+            cookies.signed[:selectedBudget] = params[:id]
+            render json: nil, status: 200
+        end
+
+        def getbudgetname
+            budget = ::Budget.find(cookies.signed[:selectedBudget])
+            successful = false
+            if budget != nil
+                successful = true
+            end
+            render json: budget.name, status: successful ? 200 : 500
         end
 
     end

@@ -2,6 +2,11 @@
 <div class="login">
   <div class="flex flex-space-between">
     <%= form_tag sessions_path do %>
+      <div class="input-group"> 
+        <% if flash[:error] %>
+          <div class="error"><%= flash[:error] %></div>
+        <% end %>
+      </div>
       <div class="input-group">
         <label>Email</label>
         <%= text_field_tag :email, nil, autocomplete: "off" %>

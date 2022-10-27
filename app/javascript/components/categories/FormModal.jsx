@@ -16,7 +16,7 @@ class FormModal extends React.Component {
       goal: this.props.category.monthly_goal || 0,
       name: this.props.category.name,
       submitted: false,
-      is_revenue: 0
+      is_revenue: this.props.is_revenue
     };
   }
 
@@ -27,16 +27,6 @@ class FormModal extends React.Component {
   handleNameChange = (e) => { this.setState({ name: e.target.value }); }
   handleGoalChange = (num) => { this.setState({ goal: num }); }
   handleColorChange = (color) => { this.setState({ color }); }
-
-  handleRevenueChange = event => {
-    if (event.target.checked) {
-      this.state.is_revenue = 1;
-    } else {
-      this.state.is_revenue = 0;
-    }
-    setIsRevenue(current => !current);
-  }
-
   handleErrors = (key, errs) => { this.setState({ errors: Object.assign(this.state.errors, { [key]: errs }) }); }
   handleDelete = () => {
     Alerts.genericDelete('category').then((result) => {
@@ -70,6 +60,11 @@ class FormModal extends React.Component {
     return 'Update';
   }
 
+  type() {
+    if(this.props.is_revenue == 1) {return 'revenue'; }
+    return 'expense'
+  }
+
   renderDelete() {
     if (!this.props.category.id) { return ''; }
     return <a className="link-danger" onClick={this.handleDelete}>Delete</a>;
@@ -77,7 +72,7 @@ class FormModal extends React.Component {
 
   render() {
     return (
-      <Modal onClose={this.props.onClose} title={`${this.action()} Category`}>
+      <Modal onClose={this.props.onClose} title={`${this.action()} ${this.type()} category`}>
         <form onSubmit={this.handleSubmit}>
           <div className="row row-flex">
             <div className="input-group eight columns">
@@ -109,20 +104,6 @@ class FormModal extends React.Component {
               <CurrencyInput initialValue={this.state.goal} onChange={this.handleGoalChange} />
             </div>
           </div>
-
-          <div className="input-group">
-            <label htmlFor="isRevenue">
-              <input
-                type="checkbox"
-                value={this.state.isRevenue}
-                onChange={this.handleRevenueChange}
-                id="isRevenue"
-                name="isRevenue"
-              />
-              Is this a revenue?
-            </label>
-          </div>
-
           <div className="form-actions">
             <button className="btn btn-dark" type="submit">Save</button>
             {this.renderDelete()}
@@ -144,6 +125,7 @@ FormModal.defaultProps = {
 };
 
 FormModal.propTypes = {
+  is_revenue: PropTypes.number,
   category: PropTypes.object,
   colorsToSkip: PropTypes.array,
   onClose: PropTypes.func.isRequired,

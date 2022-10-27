@@ -5,35 +5,67 @@ import Paginator from '../shared/Paginator';
 import DatePicker from '../shared/DatePicker';
 import CurrencyInput from '../shared/CurrencyInput';
 import { Alerts, Util } from '../../helpers/main';
-import { Expenses } from '../../api/main';
+import { Expenses, Revenues } from '../../api/main';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
 
     const defaultTimeframe = 'last_90_days';
-    const [minPaidAt, maxPaidAt] = this.minAndMaxForTimeframe(defaultTimeframe);
+    const [minPaidAtExpense, maxPaidAtExpense] = this.minAndMaxForTimeframe(defaultTimeframe, 0);
+    const [minPaidAtRevenue, maxPaidAtRevenue] = this.minAndMaxForTimeframe(defaultTimeframe, 1);
 
     this.state = {
       expenses: [],
-      minPaidAt,
-      maxPaidAt,
-      categoryId: this.props.categoryId || '',
-      sort: 'paid_at',
-      sortDesc: true,
+      revenues: [],
+      expenseCategories :[],
+      revenueCategories :[],
+      minPaidAtExpense,
+      maxPaidAtExpense,
+      minPaidAtRevenue,
+      maxPaidAtRevenue,
+      categoryIdExpenses: this.props.categoryId || '',
+      categoryIdRevenues: this.props.categoryId || '',
+      sortRevenues: 'paid_at',
+      sortDescRevenues: true,
+      sortExpenses: 'paid_at',
+      sortDescExpenses: true,
       reloadTrigger: 0,
       reloadPageTrigger: 0,
-      timeframe: defaultTimeframe,
-      search: '',
+      timeframeExpense: defaultTimeframe,
+      timeframeRevenue: defaultTimeframe,
+      searchExpenses: '',
+      searchRevenues: '',
     };
   }
 
-  onLoad = (payload) => { this.setState({ expenses: payload.items }); }
-  handlePaidAtMinChange = (val) => { this.setState({ minPaidAt: moment(val).unix() }); }
-  handlePaidAtMaxChange = (val) => { this.setState({ maxPaidAt: moment(val).unix() }); }
-  handleCategoryFilterChange = (e) => { this.setState({ categoryId: e.target.value }); }
-  toggleSortDir = () => { this.setState({ sortDesc: !this.state.sortDesc }); }
-  changeSort = (s) => { this.setState({ sort: s, sortDesc: true }); }
+  static getDerivedStateFromProps(props, state) { 
+    const revenues = props.categories.filter(cat => {
+      return cat.is_revenue === 1;});
+    const expenses = props.categories.filter(cat => {
+        return cat.is_revenue === 0;});
+    
+    return {revenueCategories: revenues, expenseCategories: expenses};
+  }
+
+  onLoadExpenses = (payload) => { this.setState({ expenses: payload.items }); }
+  onLoadRevenues = (payload) => { this.setState({ revenues: payload.items }); }
+
+  handlePaidAtMinExpenseChange = (val) => { this.setState({ minPaidAtExpense: moment(val).unix() }); }
+  handlePaidAtMaxExpenseChange = (val) => { this.setState({ maxPaidAtExpense: moment(val).unix() }); }
+
+  handlePaidAtMinRevenueChange = (val) => { this.setState({ minPaidAtRevenue: moment(val).unix() }); }
+  handlePaidAtMaxRevenueChange = (val) => { this.setState({ maxPaidAtRevenue: moment(val).unix() }); }
+  
+  handleCategoryFilterChangeExpenses = (e) => { this.setState({ categoryIdExpenses: e.target.value }); }
+  handleCategoryFilterChangeRevenues = (e) => { this.setState({ categoryIdRevenues: e.target.value }); }
+
+  toggleSortDirRevenues = () => { this.setState({ sortDescRevenues: !this.state.sortDescRevenues }); }
+  toggleSortDirExpenses = () => { this.setState({ sortDescExpenses: !this.state.sortDescExpenses }); }
+  
+  changeSortRevenues = (s) => { this.setState({ sortRevenues: s, sortDescRevenues: true }); }
+  changeSortExpenses = (s) => { this.setState({ sortExpenses: s, sortDescExpenses: true }); }
+
   updateExpense = (id, updates) => {
     Expenses.update(id, updates).then(
       () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
@@ -49,16 +81,45 @@ class Main extends React.Component {
       );
     });
   }
-  handleTimeframeChange = (e) => {
-    const timeframe = e.target.value;
-    const [minPaidAt, maxPaidAt] = this.minAndMaxForTimeframe(timeframe);
 
-    this.setState({ timeframe, minPaidAt, maxPaidAt });
+  updateRevenue = (id, updates) => {
+    Revenues.update(id, updates).then(
+      () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
+      () => { Alerts.genericError(); },
+    );
   }
-  handleSearchChange = Util.debounce((search) => {
-    this.setState({ search });
+  handleRevenueDelete = (id) => {
+    Alerts.genericDelete('revenue').then((result) => {
+      if (!result.value) { return; }
+      Revenues.delete(id).then(
+        () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
+        () => { Alerts.genericError(); },
+      );
+    });
+  }
+
+  handleTimeframeChangeExpense = (e) => {
+    const timeframeExpense = e.target.value;
+    const [minPaidAtExpense, maxPaidAtExpense] = this.minAndMaxForTimeframe(timeframeExpense, 0);
+
+    this.setState({ timeframeExpense, minPaidAtExpense, maxPaidAtExpense });
+  }
+  handleTimeframeChangeRevenue = (e) => {
+    const timeframeRevenue = e.target.value;
+    const [minPaidAtRevenue, maxPaidAtRevenue] = this.minAndMaxForTimeframe(timeframeRevenue, 0);
+
+    this.setState({ timeframeRevenue, minPaidAtRevenue, maxPaidAtRevenue });
+  }
+
+  handleSearchChangeExpenses = Util.debounce((search) => {
+    this.setState({ searchExpenses: search });
   }, 500);
-  minAndMaxForTimeframe = (timeframe) => {
+
+  handleSearchChangeRevenues = Util.debounce((search) => {
+    this.setState({ searchRevenues: search });
+  }, 500);
+
+  minAndMaxForTimeframe = (timeframe, is_revenue) => {
     switch (timeframe) {
     case 'current_month':
       return [moment().startOf('month').unix(), moment().unix()];
@@ -67,19 +128,37 @@ class Main extends React.Component {
     case 'ytd':
       return [moment().startOf('year').unix(), moment().unix()];
     case 'custom':
-      return [this.state.minPaidAt, this.state.maxPaidAt];
+      if (is_revenue == 0) {
+        return [this.state.minPaidAtExpense, this.state.maxPaidAtExpense];
+      } else {
+        return [this.state.minPaidAtExpense, this.state.maxPaidAtRevenue];
+      }
     }
   };
 
-  url() {
-    return `/expenses?include_category=true&paid_before=${this.state.maxPaidAt}&paid_after=${this.state.minPaidAt}&category_id=${this.state.categoryId}&sort=${this.state.sort}&sort_desc=${this.state.sortDesc}&search=${this.state.search}`;
+  urlExpenses() {
+    return `/expenses?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdExpenses}&sort=${this.state.sortExpenses}&sort_desc=${this.state.sortDescExpenses}&search=${this.state.searchExpenses}`;
   }
 
-  renderSort(key) {
-    if (this.state.sort == key) {
-      return <i onClick={this.toggleSortDir} className={`fas fa-sort-${this.state.sortDesc ? 'down' : 'up'} ml-2 hover-pointer`} />;
+  // ToDo: Fix url : error raised in paginator loaddata
+  // sort is raising error
+  urlRevenues() {
+    return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtRevenue}&paid_after=${this.state.minPaidAtRevenue}&category_id=${this.state.categoryIdRevenues}&sort=${this.state.sortRevenues}&sort_desc=${this.state.sortDescRevenues}&search=${this.state.searchRevenues}`; 
+  }
+
+  renderSortRevenues(key) {
+    if (this.state.sortRevenues == key) {
+      return <i onClick={this.toggleSortDirRevenues} className={`fas fa-sort-${this.state.sortDescRevenues ? 'down' : 'up'} ml-2 hover-pointer`} />;
     } else {
-      return <i onClick={() => { this.changeSort(key); }} className="fas fa-sort ml-2 hover-pointer" />;
+      return <i onClick={() => { this.changeSortRevenues(key); }} className="fas fa-sort ml-2 hover-pointer" />;
+    }
+  }
+
+  renderSortExpenses(key) {
+    if (this.state.sortExpenses == key) {
+      return <i onClick={this.toggleSortDirExpenses} className={`fas fa-sort-${this.state.sortDescExpenses ? 'down' : 'up'} ml-2 hover-pointer`} />;
+    } else {
+      return <i onClick={() => { this.changeSortExpenses(key); }} className="fas fa-sort ml-2 hover-pointer" />;
     }
   }
 
@@ -96,42 +175,43 @@ class Main extends React.Component {
     );
   }
 
-  renderTable() {
+  renderExpensesTable() {
     if (!this.props.hasData) { return ''; }
     return (
       <div className="content-with-sidebar mt-30">
         <div className="sidebar input-group">
-          <select onChange={this.handleCategoryFilterChange} defaultValue={this.state.categoryId}>
+          <select onChange={this.handleCategoryFilterChangeExpenses} defaultValue={this.state.categoryIdExpenses}>
             <option value="">All categories</option>
-            {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {this.state.expenseCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
 
-          <select className="mt-10" onChange={this.handleTimeframeChange} defaultValue={this.state.timeframe}>
+          <select className="mt-10" onChange={this.handleTimeframeChangeExpense} defaultValue={this.state.timeframeExpense}>
             <option value='current_month'>Current month</option>
             <option value='last_90_days'>Last 90 days</option>
             <option value='ytd'>Year to date</option>
             <option value='custom'>Custom timeframe</option>
           </select>
 
-          {this.state.timeframe === 'custom' && (
+          {this.state.timeframeExpense === 'custom' && (
             <div className="mt-10">
-              <DatePicker onChange={this.handlePaidAtMinChange} value={moment.unix(this.state.minPaidAt).toDate()} />
+              <DatePicker onChange={this.handlePaidAtMinExpenseChange} value={moment.unix(this.state.minPaidAtExpense).toDate()} />
               <div className="text-center">to</div>
-              <DatePicker onChange={this.handlePaidAtMaxChange} value={moment.unix(this.state.maxPaidAt).toDate()} />
+              <DatePicker onChange={this.handlePaidAtMaxExpenseChange} value={moment.unix(this.state.maxPaidAtExpense).toDate()} />
             </div>
           )}
 
-          <input className="mt-10" placeholder="Search for description" onChange={e => this.handleSearchChange(e.target.value)} />
+          <input className="mt-10" placeholder="Search for description" onChange={e => this.handleSearchChangeExpenses(e.target.value)} />
         </div>
 
         <div className="content">
-          <div className="overflow-x bg-gray p-10">
+          <div className="overflow-x bg-art-2 p-10">
             <table className="table">
+            <caption>Expenses</caption>
               <thead>
                 <tr>
-                  <th>Date {this.renderSort('paid_at')}</th>
+                  <th>Date {this.renderSortExpenses('paid_at')}</th>
                   <th>Category</th>
-                  <th>Amount {this.renderSort('amount')}</th>
+                  <th>Amount {this.renderSortExpenses('amount')}</th>
                   <th>Description</th>
                   <th />
                 </tr>
@@ -144,8 +224,71 @@ class Main extends React.Component {
 
           <div className="mt-20">
             <Paginator
-              url={this.url()}
-              onLoad={this.onLoad}
+              // url = loaddata directly from controller
+              url={this.urlExpenses()}
+              onLoad={this.onLoadExpenses}
+              reloadTrigger={this.state.reloadTrigger}
+              reloadPageTrigger={this.state.reloadPageTrigger}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderRevenuesTable() {
+    if (!this.props.hasData) { return ''; }
+    return (
+      <div className="content-with-sidebar mt-30">
+        <div className="sidebar input-group">
+          <select onChange={this.handleCategoryFilterChangeRevenues} defaultValue={this.state.categoryIdRevenues}>
+            <option value="">All categories</option>
+            {this.state.revenueCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+          </select>
+
+          <select className="mt-10" onChange={this.handleTimeframeChangeRevenue} defaultValue={this.state.timeframeRevenue}>
+            <option value='current_month'>Current month</option>
+            <option value='last_90_days'>Last 90 days</option>
+            <option value='ytd'>Year to date</option>
+            <option value='custom'>Custom timeframe</option>
+          </select>
+
+          {this.state.timeframeRevenue === 'custom' && (
+            <div className="mt-10">
+              <DatePicker onChange={this.handlePaidAtMinRevenueChange} value={moment.unix(this.state.minPaidAtExpense).toDate()} />
+              <div className="text-center">to</div>
+              <DatePicker onChange={this.handlePaidAtMaxRevenueChange} value={moment.unix(this.state.maxPaidAtExpense).toDate()} />
+            </div>
+          )}
+
+          <input className="mt-10" placeholder="Search for description" onChange={e => this.handleSearchChangeRevenues(e.target.value)} />
+        </div>
+
+        <div className="content">
+          <div className="overflow-x bg-art p-10">
+            <table className="table">
+            <caption>Revenues</caption>
+              <thead>
+                <tr>
+                  <th>Date {this.renderSortRevenues('paid_at')}</th>
+                  <th>Category</th>
+                  <th>Amount {this.renderSortRevenues('amount')}</th>
+                  <th>Description</th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.revenues.map((exp) => this.renderRevenue(exp))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-20">
+            <Paginator
+              // url = loaddata directly from controller
+              // ToDo : Change for urlRevenues and onLoadRevenues
+              url={this.urlRevenues()}
+              onLoad={this.onLoadRevenues}
               reloadTrigger={this.state.reloadTrigger}
               reloadPageTrigger={this.state.reloadPageTrigger}
             />
@@ -164,7 +307,7 @@ class Main extends React.Component {
 
         <td className="input-group mw-150">
           <select defaultValue={expense.category_id} onChange={(e) => this.updateExpense(expense.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">
-            {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {this.state.expenseCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </td>
 
@@ -188,11 +331,45 @@ class Main extends React.Component {
     );
   }
 
+  renderRevenue(revenue) {
+    return (
+      <tr key={revenue.id}>
+        <td className="input-group mw-120">
+          <DatePicker onChange={(val) => this.updateRevenue(revenue.id, { paid_at: val })} value={new Date(revenue.paid_at)} className="bg-gray-slight-contrast" />
+        </td>
+
+        <td className="input-group mw-150">
+          <select defaultValue={revenue.category_id} onChange={(e) => this.updateRevenue(revenue.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">
+            {this.state.revenueCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+          </select>
+        </td>
+
+        <td className="input-group mw-100">
+          <CurrencyInput
+            initialValue={revenue.amount}
+            onBlur={(val) => this.updateRevenue(revenue.id, { amount: val })}
+            className="bg-gray-slight-contrast"
+            allowNegative
+          />
+        </td>
+
+        <td className="input-group">
+          <input defaultValue={revenue.description} onBlur={(e) => { if (e.target.value.trim() != revenue.description) { this.updateRevenue(expense.id, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" />
+        </td>
+
+        <td>
+          <a onClick={() => this.handleRevenueDelete(revenue.id)} className="dim-til-hover"><i className="fa fa-times" /></a>
+        </td>
+      </tr>
+    );
+  }
+
   render() {
     return (
       <div className="container wide">
         {this.renderEmptyState()}
-        {this.renderTable()}
+        {this.renderExpensesTable()}
+        {this.renderRevenuesTable()}
       </div>
     );
   }

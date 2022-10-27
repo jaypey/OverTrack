@@ -47,6 +47,7 @@ class Paginator extends React.Component {
   }
 
   loadData() {
+    // Raises error if revenue
     if (!this.props.url.length) { return; }
     Base.get(this.props.url, { page: this.state.selectedPage, per_page: this.state.itemsPerPage }).then(
       (resp) => {
@@ -135,7 +136,7 @@ class Paginator extends React.Component {
 }
 
 Paginator.defaultProps = {
-  itemsPerPage: 10,
+  itemsPerPage: 5,
   url: '',
   reloadTrigger: 0,
   reloadPageTrigger: 0,
