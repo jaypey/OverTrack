@@ -3,7 +3,7 @@ require 'csv'
 class ExpenseUploadsController < ApplicationController
   def new
     @categories = ::Category.where({budget_id: cookies.signed[:selectedBudget]}).order(:name)
-    @csv_configs = CsvConfig.all.order(:name)
+    @csv_configs = ::CsvConfig.where({users_id: cookies.signed[:user_id]}).order(:name)
 
     @auto_detect_data = @csv_configs.map do |c|
       config = JSON.parse(c.config_json)
