@@ -1,3 +1,4 @@
 tmp/
 log/development.log
 node_modules
+public/packs
