@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2031_42_15_561245) do
     t.text "config_json", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_csv_configs_on_users_id"
   end
 
   create_table "expenses", force: :cascade do |t|
@@ -94,4 +96,5 @@ ActiveRecord::Schema.define(version: 2031_42_15_561245) do
 
   add_foreign_key "budgets", "users", column: "owner_id"
   add_foreign_key "categories", "budgets"
+  add_foreign_key "csv_configs", "users", column: "users_id"
 end
