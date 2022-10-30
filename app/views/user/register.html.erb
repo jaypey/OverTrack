@@ -54,8 +54,8 @@
       <div class="input-group">
         <% invalid = user.errors.include?(:password) %>
         <%= f.label :password %>
-        <%= f.password_field :password, { :id => 'Password'} %>
-        <div id="MessagePasswordErreur" style="color: red;" class="error"></div>
+        <%= f.password_field :password %>
+        <div style="color: red;" class="error"></div>
         <% if invalid %>
           <div style="color: red;" class="error">
             <% user.errors.full_messages_for(:password).each do |error_message| %>
@@ -67,8 +67,8 @@
       <div class="input-group">
         <% invalid = user.errors.include?(:password_confirmation) %>
         <%=f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, { :id => 'PasswordConfirm'} %>
-        <div id="MessageErreur" style="color: red;" class="error"></div>
+        <%= f.password_field :password_confirmation %>
+        <div style="color: red;" class="error"></div>
         <% if invalid %>
           <div style="color: red;" class="error">
             <% user.errors.full_messages_for(:password_confirmation).each do |error_message| %>
@@ -78,7 +78,7 @@
         <% end %>
       </div>
       <div class="form-actions">
-        <%= f.submit "Create", id: "ButtonSubmit", class: "btn btn-dark btn-full btn-round" %> 
+        <%= f.submit "Create", class: "btn btn-dark btn-full btn-round" %> 
       </div>
       <div style="margin-left:5%;">
         <%= link_to "Back", root_path, class: "linkto" %>
@@ -88,34 +88,3 @@
     <%= image_tag "coins.png" %>
   </div>
 </div>
-
-<script>
-  document.getElementById("Password").addEventListener("change", function(){
-    var node = document.getElementById("Password").value;
-    var found = node.match(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/gm)
-    if(found == undefined){
-      document.getElementById("ButtonSubmit").disabled = true;
-      if(document.getElementById("MessagePasswordErreur").innerHTML != 'Password needs minimum 8 characters, an uppercase and lowercase letter, a number and a special character'){
-        document.getElementById('MessagePasswordErreur').insertAdjacentText('beforeend', 'Password needs minimum 8 characters, an uppercase and lowercase letter, a number and a special character');
-      }
-    }else{
-      document.getElementById("ButtonSubmit").disabled = false;
-      document.getElementById("MessagePasswordErreur").innerHTML = '';
-    }
-  })
-
-  document.getElementById("PasswordConfirm").addEventListener("change", function(){
-    var passwordConfirmValue = document.getElementById("PasswordConfirm").value;
-    var passwordValue = document.getElementById("Password").value;
-
-    if(passwordConfirmValue != passwordValue){
-      document.getElementById("ButtonSubmit").disabled = true;
-      if(document.getElementById("MessageErreur").innerHTML != 'Password and Password confirmation are not the same'){
-        document.getElementById('MessageErreur').insertAdjacentText('beforeend', 'Password and Password confirmation are not the same');
-      }
-    }else{
-      document.getElementById("ButtonSubmit").disabled = false;
-      document.getElementById("MessageErreur").innerHTML = '';
-    }
-  });
-</script>
