@@ -67,9 +67,10 @@ class Overview extends React.Component {
 
     return (
       <div>
-         <BudgetSelector
-         onChange={this.reloadData()}
-         />
+        <h1>{this.props.selectedBudgetName}</h1>
+         {/* <BudgetSelector
+         onChange={this.props.onChange}
+         /> */}
         
         <div className="mb-10">{today.format('MMMM')} ({daysLeftInMonth} days left)</div>
         <div className="flex row-flex flex-space-between flex-baseline mb-10">

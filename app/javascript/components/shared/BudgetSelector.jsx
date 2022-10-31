@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
@@ -26,7 +27,7 @@ class BudgetSelector extends React.Component {
     changeSelectedBudget = async(id) => {
         this.setState({idSelectedBudget: id});
         this.updateSelectedBudget();
-        this.props.onChange();
+        this.props.onChange;
     }
 
     updateSelectedBudget = () => {
@@ -51,5 +52,8 @@ class BudgetSelector extends React.Component {
     }
 }
 
+BudgetSelector.propTypes = {
+    onChange: PropTypes.func.isRequired,
+  };
 
 export default BudgetSelector
