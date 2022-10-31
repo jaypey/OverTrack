@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :expense_uploads, only: [:new] do
     collection do
       post :preview
+      get :create_config
     end
   end
 
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
           post :bulk_create
         end
       end
+      resources :csv_config, only: [:create]
       
       resources :categories, only: [:index, :create, :update, :destroy] do
         collection do
