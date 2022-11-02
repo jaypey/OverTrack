@@ -185,7 +185,8 @@ class ProjectionsChart extends React.Component {
       <br></br>
 
       <h3>Total expenses of the previous months</h3>
-
+      <br></br>
+      <div className='overflow-x bg-gray p-10 table-borders'>
       <table className='table'>
         <thead>
         <tr>
@@ -211,6 +212,7 @@ class ProjectionsChart extends React.Component {
         </tr>))}
         </tbody>
       </table>
+      </div>
       <br></br>
       <br></br>
         
@@ -227,7 +229,8 @@ class ProjectionsChart extends React.Component {
       <br></br>
 
       <h3>Projection of the total expenses for the upcoming months</h3>
-
+      <br></br>
+      <div className='overflow-x bg-gray p-10 table-borders'>
       <table className='table'>
         <thead>
         <tr>
@@ -253,13 +256,15 @@ class ProjectionsChart extends React.Component {
         </tr>))}
         </tbody>
       </table>
+      </div>
 <br></br>
 <br></br>
 <h2>Revenues</h2>
       <br></br>
       <br></br>
       <h3>Total revenues of the previous months</h3>
-
+      <br></br>
+<div className='overflow-x bg-gray p-10 table-borders'>
 <table className='table'>
   <thead>
   <tr>
@@ -285,6 +290,7 @@ class ProjectionsChart extends React.Component {
   </tr>))}
   </tbody>
 </table>
+</div>
 <br></br>
 <br></br>
   
@@ -301,7 +307,8 @@ class ProjectionsChart extends React.Component {
 <br></br>
 
 <h3>Projection of the total revenues for the upcoming months</h3>
-
+<br></br>
+<div className='overflow-x bg-gray p-10 table-borders'>
 <table className='table'>
   <thead>
   <tr>
@@ -327,15 +334,7 @@ class ProjectionsChart extends React.Component {
   </tr>))}
   </tbody>
 </table>
-
-
-
-
-
-
-
-        
-
+</div>
 <br></br>
 <br></br>
 <br></br>
