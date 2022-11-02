@@ -1,8 +1,9 @@
 class CsvProcessor
-  def initialize(csv_rows, csv_config, default_category_id = nil)
+  def initialize(csv_rows, csv_config, default_category_id = nil, default_income_category_id = nil)
     @csv_rows = csv_rows
     @config = csv_config
     @default_category_id = default_category_id
+    @default_income_category_id = default_income_category_id
     @categories_ids_by_lower_name = Category.all.index_by { |c| c.name.to_s.downcase }.transform_values { |c| c.id }
   end
 
@@ -25,10 +26,6 @@ class CsvProcessor
     @config.dig('categories', 'index').to_i || raise('Missing category index')
   end
 
-  def amount_index
-    @config.dig('amounts', 'index').to_i || raise('Missing amount index')
-  end
-
   def date_index
     @config.dig('timestamps', 'index').to_i || raise('Missing date index')
   end
@@ -41,20 +38,24 @@ class CsvProcessor
     @config.dig('categories', 'mappings') || {}
   end
 
-  def amount_skip_non_spend
-    @config.dig('amounts', 'skip_non_spend') || false
+  def spends_index
+    @config.dig('spends', 'index').to_i || raise('Missing spends index')
   end
 
-  def amount_is_negative
-    @config.dig('amounts', 'spend_is_negative') || false
+  def skip_non_spend
+    @config.dig('spends', 'skip_non_spend') || false
+  end
+
+  def incomes_index
+    @config.dig('incomes', 'index').to_i || raise('Missing incomes index')
+  end
+
+  def skip_non_income
+    @config.dig('incomes', 'skip_non_income') || false
   end
 
   def has_header
     @config['has_header'] || false
-  end
-
-  def spend_multiplier
-    amount_is_negative ? -1 : 1
   end
 
   def skip_row?(row, index)
@@ -66,7 +67,11 @@ class CsvProcessor
       return true
     end
 
-    if amount_skip_non_spend && row[amount_index].to_f > 0
+    if skip_non_spend && row[spends_index].to_f <= 0
+      return true
+    end
+
+    if skip_non_income && row[incomes_index].to_f <= 0
       return true
     end
 
@@ -74,23 +79,37 @@ class CsvProcessor
   end
 
   def process_row(row)
-    category_id = get_category_id(row)
     date = row[date_index]
     description = row[description_index]
-    amount = row[amount_index]
+    is_spend = false
+    
+    if row[spends_index].to_f > 0 
+      amount = row[spends_index]
+      is_spend = true
+    else
+      amount = row[incomes_index]
+      is_spend = false
+    end
+  
+    category_id = get_category_id(row, is_spend)
 
     {
       paid_at: Chronic.parse(date),
       description: format_description(description),
       category_id: category_id,
-      amount: amount.to_f * 100 * spend_multiplier,
+      amount: (amount.to_f * 100).abs,
     }
   end
 
-  def get_category_id(row)
+  def get_category_id(row, is_spend)
     category = row[category_index]
     mapped_category = category_mappings[category] || category
-    @categories_ids_by_lower_name[mapped_category.to_s.downcase] || @default_category_id
+
+    if is_spend
+      return @categories_ids_by_lower_name[mapped_category.to_s.downcase] || @default_category_id
+    else
+      return @categories_ids_by_lower_name[mapped_category.to_s.downcase] || @default_income_category_id
+    end
   end
 
   def format_description(s)
