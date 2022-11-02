@@ -13,6 +13,18 @@ const Budgets = {
   delete(id, params, opts = {}) {
     return Base.delete(`/budget/${id}`, params, opts || {});
   },
+  updateSelectBudget(data, opts = {}){
+    return Base.post(`/budget/selectbudget`, data, opts || {});
+  },
+  getSelectedBudgetName(data, opts = {}){
+    return Base.get(`/budget/getbudgetname`, data, opts || {});
+  },
+  adduser(data, opts = {}){
+    return Base.post(`/budget/adduser`, data, opts || {});
+  },
+  removeuser(data, opts = {}){
+    return Base.post(`/budget/removeuser`, data, opts || {});
+  }
 };
 
 export default Budgets;

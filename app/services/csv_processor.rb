@@ -3,7 +3,7 @@ class CsvProcessor
     @csv_rows = csv_rows
     @config = csv_config
     @default_category_id = default_category_id
-    @categories_ids_by_lower_name = Category.all.index_by { |c| c.name.downcase }.transform_values { |c| c.id }
+    @categories_ids_by_lower_name = Category.all.index_by { |c| c.name.to_s.downcase }.transform_values { |c| c.id }
   end
 
   def process!
@@ -18,19 +18,19 @@ class CsvProcessor
   private
 
   def description_index
-    @config.dig('descriptions', 'index') || raise('Missing description index')
+    @config.dig('descriptions', 'index').to_i || raise('Missing description index')
   end
 
   def category_index
-    @config.dig('categories', 'index') || raise('Missing category index')
+    @config.dig('categories', 'index').to_i || raise('Missing category index')
   end
 
   def amount_index
-    @config.dig('amounts', 'index') || raise('Missing amount index')
+    @config.dig('amounts', 'index').to_i || raise('Missing amount index')
   end
 
   def date_index
-    @config.dig('timestamps', 'index') || raise('Missing date index')
+    @config.dig('timestamps', 'index').to_i || raise('Missing date index')
   end
 
   def description_substrings_to_ignore
@@ -90,13 +90,13 @@ class CsvProcessor
   def get_category_id(row)
     category = row[category_index]
     mapped_category = category_mappings[category] || category
-    @categories_ids_by_lower_name[mapped_category.downcase] || @default_category_id
+    @categories_ids_by_lower_name[mapped_category.to_s.downcase] || @default_category_id
   end
 
   def format_description(s)
     desc = s.gsub(/(\W|\d)/, ' ') # strip non word chars
     desc = desc.gsub(/\s+/, ' ').strip # normalize multiple spaces
-    desc = desc.split.map { |d| d.downcase.capitalize }.join(' ') # titleize
+    desc = desc.split.map { |d| d.to_s.downcase.capitalize }.join(' ') # titleize
     desc
   end
 end

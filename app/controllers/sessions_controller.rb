@@ -12,16 +12,17 @@ class SessionsController < ApplicationController
 
     email = params[:email]
 
-    user = User.where(email: email).first
+    user = User.includes(:budgets).where(email: email).first
 
     unless user
       flash[:error] = "Incorrect login"
       redirect_to :root and return
     end
 
-    if BCrypt::Password.new(user.password) == params[:password] && user.email == params[:email]
+    if user.authenticate(params[:password])
       cookies.signed[:logged_in] = true
       cookies.signed[:user_id] = user.id
+      cookies.signed[:selectedBudget] = user.budgets.first().id
       
     else
       flash[:error] = "Incorrect login"
@@ -33,6 +34,7 @@ class SessionsController < ApplicationController
   def logout
     cookies.signed[:logged_in] = false
     cookies.delete :user_id
+    cookies.delete :selectedBudget
     redirect_to :root
   end
 end

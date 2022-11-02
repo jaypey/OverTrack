@@ -4,12 +4,17 @@
   border-collapse: collapse;
   overflow-x: scroll;
 
+  caption {
+    font-weight: 900;
+    font-size: larger;
+  }
+
   th {
     font-weight: 900;
   }
 
   th, td {
-    border-bottom: 2px solid #CFDBE2;
+    border-bottom: 2px solid lightgray;
     padding: 15px;
   }
 

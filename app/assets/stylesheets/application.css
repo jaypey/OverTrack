@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+ #new-config-button{
+    margin-bottom: 16px;
+ }

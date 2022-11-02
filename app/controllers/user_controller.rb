@@ -10,16 +10,23 @@ class UserController < ApplicationController
     end
 
     def create
-        user = User.new(params.require(:user).permit(:email, :firstname, :lastname, :phone, :password))
+        user = User.new(params.require(:user).permit(:email, :firstname, :lastname, :phone, :password, :password_confirmation))
         respond_to do |format|
             format.html do
                 if user.save
-                    flash[:success] = "User created successfully"
-                    redirect_to :root
-                  else
-                    flash.now[:error] = "Error: User could not be created"
+                    initialBudget = ::Budget.new(name: user.firstname + "'s budget", description: "Your own personal budget", owner_id: user.id)
+                    initialBudget.users << user
+                    successful = initialBudget.save
+                    if !successful
+                        flash[:error] = "Error: Initial budget could not be created"
+                        render :register, locals: { user: user}
+                    else
+                        flash[:success] = "User created successfully"
+                        redirect_to :root
+                    end
+                else
                     render :register, locals: { user: user }
-                  end
+                end
             end
           end
       end
