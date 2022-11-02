@@ -2,6 +2,11 @@
 <div class="login">
   <div class="flex flex-space-between">
     <%= form_tag sessions_path do %>
+      <div class="input-group"> 
+        <% if flash[:error] %>
+          <div class="error"><%= flash[:error] %></div>
+        <% end %>
+      </div>
       <div class="input-group">
         <label>Email</label>
         <%= text_field_tag :email, nil, autocomplete: "off" %>
@@ -15,7 +20,7 @@
       <div class="form-actions">
         <%= submit_tag "Submit", class: "btn btn-dark btn-full btn-round" %>
       </div>
-      <%= link_to "Register", "register", class: "linkto" %>  
+      <%= link_to "Register", register_user_path, class: "linkto" %>  
     <% end %>
 
     <%= image_tag "money-pile.jpg" %>
