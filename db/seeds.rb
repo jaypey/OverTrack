@@ -9,7 +9,8 @@
 ### User seed
 if (User.where(firstname: 'Firstname') == []) then
     user1 = User.create!(
-        password: 'user',
+        password: 'Qwerty123!',
+        password_confirmation: 'Qwerty123!',
         email: 'email@example.com',
         firstname: 'Firstname',
         lastname: 'Lastname',
@@ -17,7 +18,8 @@ if (User.where(firstname: 'Firstname') == []) then
     )
         
     user2 = User.create(
-    password: 'user',
+        password: 'Qwerty123!',
+        password_confirmation: 'Qwerty123!',
     email: 'email2@example.com',
     firstname: 'Firstname',
     lastname: 'Lastname',
@@ -26,7 +28,8 @@ if (User.where(firstname: 'Firstname') == []) then
     
     
     user3 = User.create(
-        password: 'user',
+        password: 'Qwerty123!',
+        password_confirmation: 'Qwerty123!',
         email: 'email3@example.com',
         firstname: 'Firstname',
         lastname: 'Lastname',
