@@ -56,7 +56,9 @@ Rails.application.routes.draw do
           get :getbudgetname
         end
       end
-      #get "/revenues", to: "/revenues#index"
+
+      resources :task, only: [:index]
+      # get "/tasks", to: "/tasks#index"
       #post "/revenues", to: "/revenues#create"
       #post "/revenues", to: "/revenues#destroy"
       #post "/revenues", to: "/revenues#update"
