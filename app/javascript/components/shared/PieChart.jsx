@@ -27,14 +27,7 @@ const PieChart = ({ data, labels, colors }) => {
           callbacks: {
             label: t => `${labels[t.index]}: ${data[t.index]}%`
           },
-        },
-        legend: {
-          display: true,
-          position: 'right',
-          labels: {
-            
-          },
-        },
+        }
       },
     }
 
