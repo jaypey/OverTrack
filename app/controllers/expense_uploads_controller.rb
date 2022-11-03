@@ -39,8 +39,8 @@ class ExpenseUploadsController < ApplicationController
       category_id = data[:category_id]
       is_spend = data[:is_spend]
 
-      next if is_spend && skip_existing && Expense.exists?({amout: amount, paid_at: paid_at, description: description})
-      next if !is_spend && skip_existing && Revenue.exists?({amout: amount, paid_at: paid_at, description: description})
+      next if is_spend && skip_existing && Expense.exists?({amount: amount, paid_at: paid_at, description: description})
+      next if !is_spend && skip_existing && Revenue.exists?({amount: amount, paid_at: paid_at, description: description})
 
       rows << { amount: amount, paid_at: paid_at, description: description, category_id: category_id, is_spend: is_spend }
     end
