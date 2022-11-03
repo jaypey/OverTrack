@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       end
       resources :csv_config, only: [:create]
       
+      resources :task, only: [:index, :create, :update, :destroy]
+
       resources :categories, only: [:index, :create, :update, :destroy] do
         collection do
           get :listExpenses
@@ -57,7 +59,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :task, only: [:index, :create, :update, :destroy]
+      
       # get "/tasks", to: "/tasks#index"
       #post "/revenues", to: "/revenues#create"
       #post "/revenues", to: "/revenues#destroy"

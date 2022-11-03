@@ -1,3 +1,4 @@
 class Task < ApplicationRecord
-  belongs_to :budgets
+  belongs_to :budget
+  #optional: true
 end
