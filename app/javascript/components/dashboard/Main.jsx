@@ -12,6 +12,7 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      reloadMain: false,
       categories: [],
       expenseCategories: [],
       revenueCategories: [],
@@ -51,6 +52,17 @@ class Main extends React.Component {
     this.loadExpensesData();
     this.loadRevenueData();
     this.loadPieChartData(moment().format('MMMM YYYY'));
+  }
+
+  reloadMain = () => {
+    if (this.state.reloadMain == true)
+    {
+      this.setState({ reloadMain: false });
+    }
+    else
+    {
+      this.setState({ reloadMain: true });
+    }
   }
 
   loadCategories = () => {
@@ -173,23 +185,18 @@ class Main extends React.Component {
     );
   }
 
-  render() {
-    if (!this.state.loaded) { return ''; }
-
+  renderMain = (keyMain) => {
     return (
-      <div>
-        <BudgetSelector
-         onChange={this.reloadData}
-         />
+      <div key={keyMain} id={keyMain.toString()}>
         {this.renderExpenseCreateModal()}
         {this.renderRevenueCreateModal()}
         <div className="container">
-          <Overview categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} monthlyGoal={this.state.monthlyGoal} onChange={this.reloadData} />
+          <Overview key={keyMain} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} monthlyGoal={this.state.monthlyGoal} onChange={this.reloadData} />
         </div>
 
         <div className="container mt-100">
           <div className="chart-container-short">
-            <PieChart labels={this.state.labels} data={this.state.data} colors={this.state.colors} />
+            <PieChart key={keyMain} labels={this.state.labels} data={this.state.data} colors={this.state.colors} />
           </div>
         </div>
 
@@ -198,7 +205,7 @@ class Main extends React.Component {
             <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openExpenseCreate}>+ add an expense</button>
           </div>
           <div className="container pv-100">
-            <CategoriesList categoriesWithExpensesAndSpend={this.EcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
+            <CategoriesList key={keyMain} categoriesWithExpensesAndSpend={this.EcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
           </div>
         </div>
 
@@ -207,9 +214,26 @@ class Main extends React.Component {
             <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openRevenueCreate}>+ add a revenue</button> {}
           </div>
           <div className="container pv-100">
-            <CategoriesList is_revenue={1} categoriesWithExpensesAndSpend={this.RcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
+            <CategoriesList key={keyMain} is_revenue={1} categoriesWithExpensesAndSpend={this.RcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
           </div>
         </div>
+
+      </div>
+    );
+  }
+
+  render() {
+    if (!this.state.loaded) { return ''; }
+
+    return (
+      <div>
+        <div className='container'>
+          <h3>Current Budget</h3>
+          <BudgetSelector
+          onChange={this.reloadMain}
+          />
+         </div>
+        {this.renderMain(this.state.reloadMain)}
 
       </div>
     );

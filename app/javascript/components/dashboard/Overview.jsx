@@ -16,7 +16,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount(){
-    this.getSelectedBudgetName();
+    this.getSelectedBudgetId();
   }
 
   openGoal = () => { this.setState({ showGoalModal: true }); }
@@ -50,8 +50,8 @@ class Overview extends React.Component {
     return <GoalFormModal onClose={this.closeGoal} onSave={this.onGoalSave} goals={{ monthly: this.props.monthlyGoal }} />;
   }
 
-  getSelectedBudgetName = async() =>{
-    const selectedBudget = await Budgets.getSelectedBudgetName()
+  getSelectedBudgetId = async() =>{
+    const selectedBudget = await Budgets.getSelectedBudgetId()
     .then(
       (resp) => {return resp;},
       () => {return '';}
@@ -67,10 +67,6 @@ class Overview extends React.Component {
 
     return (
       <div>
-        {/* <h2>{this.state.selectedBudgetName}</h2> */}
-         {/* <BudgetSelector
-         onChange={this.props.onChange}
-         /> */}
         
         <div className="mb-10">{today.format('MMMM')} ({daysLeftInMonth} days left)</div>
         <div className="flex row-flex flex-space-between flex-baseline mb-10">

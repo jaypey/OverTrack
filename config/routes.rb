@@ -53,7 +53,7 @@ Rails.application.routes.draw do
           post :removeuser
           get :listBudgets
           post :selectbudget
-          get :getbudgetname
+          get :getbudgetid
         end
       end
       #get "/revenues", to: "/revenues#index"
