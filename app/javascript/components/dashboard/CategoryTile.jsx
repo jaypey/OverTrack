@@ -30,7 +30,7 @@ class CategoryTile extends React.Component {
 
     const diff = this.goalDiff();
 
-    return (diff < 0) ? `${Numerics.centsToDollars(Math.abs(diff))} over` : (this.props.categoryWithExpensesAndSpend.is_revenue == 0) ? `${Numerics.centsToDollars(diff)} remaining` : `${Numerics.centsToDollars(diff)} under revenue goal`;
+    return (diff < 0) ? `${Numerics.centsToDollars(Math.abs(diff))} over` : (this.props.categoryWithExpensesAndSpend.is_revenue == 0) ? `${Numerics.centsToDollars(diff)} remaining` : `${Numerics.centsToDollars(diff)} under goal`;
   }
 
   normalizedPercentage() {
