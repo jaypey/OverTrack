@@ -1,10 +1,10 @@
 class CsvProcessor
-  def initialize(csv_rows, csv_config, default_category_id = nil, default_income_category_id = nil)
+  def initialize(csv_rows, csv_config, default_category_id = nil, default_income_category_id = nil, cookies)
     @csv_rows = csv_rows
     @config = csv_config
     @default_category_id = default_category_id
     @default_income_category_id = default_income_category_id
-    @categories_ids_by_lower_name = Category.all.index_by { |c| c.name.to_s.downcase }.transform_values { |c| c.id }
+    @categories_ids_by_lower_name = Category.where({budget_id: cookies.signed[:selectedBudget]}).index_by { |c| c.name.to_s.downcase }.transform_values { |c| c.id }
   end
 
   def process!

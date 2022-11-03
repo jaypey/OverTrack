@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import DatePicker from '../shared/DatePicker';
 import CurrencyInput from '../shared/CurrencyInput';
 import { Expenses } from '../../api/main';
+import { Revenues } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
 class UploadPreview extends React.Component {
@@ -51,14 +52,16 @@ class UploadPreview extends React.Component {
     this.setState({ submitting: true });
 
     Expenses.bulkCreate({ expenses: this.state.expenses }).then(
-      () => {
-        this.setState({ submitting: false });
-        Alerts.success('Your import was successful.', () => { window.location = '/expenses'; });
-      },
-      () => {
-        this.setState({ submitting: false });
-        Alerts.error('Something went wrong! Double check that your inputs are all valid.');
-      },
+      Revenues.bulkCreate({ revenues: this.state.expenses }).then(
+        () => {
+          this.setState({ submitting: false });
+          Alerts.success('Your import was successful.', () => { window.location = '/expenses'; });
+        },
+        () => {
+          this.setState({ submitting: false });
+          Alerts.error('Something went wrong! Double check that your inputs are all valid.');
+        },
+      )
     );
   }
 
@@ -85,7 +88,7 @@ class UploadPreview extends React.Component {
         </td>
 
         <td className="input-group mw-300">
-          <input defaultValue={expense.description} onBlur={(e) => { if (e.target.value.trim() != expense.description) { this.updateExpense(idx, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" />
+          <input defaultValue={expense.description} onBlur={(e) => { if (e.target.value.trim() != expense.description) { this.updateExpense(idx, { description: e.target.value.trim() }); } }} className="bg-gray-slight-contrast" />
         </td>
 
         <td>
