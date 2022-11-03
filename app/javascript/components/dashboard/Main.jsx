@@ -183,22 +183,42 @@ class Main extends React.Component {
     }
   }
 
+  calculateNumber = (spend, revenues) => {
+    var item = Number.parseFloat((spend/revenues)*100).toFixed(3);
+    if (item === NaN) {
+      item = 0;
+    }
+    else if (item < 0.000) {
+      item = 0;
+    }
+    else if (item > 100.000) {
+      item = 100;
+    }
+    return item;
+  }
+
   loadPieChartData = (month) => {
     Reports.month({ month }).then(
       (resp) => {
 
         const revenue = this.loadSum();
         
-        const data = resp.category_pourcentage.map((r) => 
-          Number.parseFloat((r.spend/revenue)*100).toFixed(3)
-        )
-        const labels = resp.category_pourcentage.map((r) => r.category)
         const colors = resp.category_pourcentage.map((r) => r.color)
+        const labels = resp.category_pourcentage.map((r) => r.category)
+        const data = resp.category_pourcentage.map((r) =>
+          this.calculateNumber(r.spend, revenue)
+        )
+
+        if (data.length === 0) {
+          colors = ['gray']
+          labels = ['Empty']
+          data = [100.000]
+        }
 
         this.setState({ data: data });
         this.setState({ labels: labels });
         this.setState({ colors: colors });
-
+        
         return true;
       },
       () => { Alerts.error("The data for the pie chart didn't load correctly!") }
