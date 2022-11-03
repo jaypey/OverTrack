@@ -9,24 +9,30 @@ const PieChart = ({ data, labels, colors }) => {
   useEffect(() => {
     instance?.destroy();
 
-    const size = data.length;
+    const chartData =  {
+      datasets: [{
+          label: labels,
+          data: data, 
+          backgroundColor: colors
+        }]
+    };
 
     const config = {
       type: 'pie',
-      data: {
-        datasets: [{ data, backgroundColor: colors }],
-        labels,
-      },
+      data: chartData,
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        legend: {
-          display:true,
-          position:'right'
-        },
         tooltips: {
           callbacks: {
-            label: t => `${labels[t.index]}: ${data[t.index]}%`,
+            label: t => `${labels[t.index]}: ${data[t.index]}%`
+          },
+        },
+        legend: {
+          display: true,
+          position: 'right',
+          labels: {
+            
           },
         },
       },
@@ -35,11 +41,11 @@ const PieChart = ({ data, labels, colors }) => {
     const newInstance = new Chart(document.getElementById(randomId), config);
 
     setInstance(newInstance);
-  }, [data, labels]);
+  }, [data, labels, colors]);
 
   return (
     <div>
-      <canvas id={randomId} />
+      <canvas id={randomId} style={{ width: '50%' }} />
     </div>
   );
 };
