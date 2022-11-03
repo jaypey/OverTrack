@@ -98,6 +98,7 @@ class CsvProcessor
       description: format_description(description),
       category_id: category_id,
       amount: (amount.to_f * 100).abs,
+      is_spend: is_spend,
     }
   end
 

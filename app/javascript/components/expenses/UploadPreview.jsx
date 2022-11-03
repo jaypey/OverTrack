@@ -51,8 +51,25 @@ class UploadPreview extends React.Component {
   submit = () => {
     this.setState({ submitting: true });
 
-    Expenses.bulkCreate({ expenses: this.state.expenses }).then(
-      Revenues.bulkCreate({ revenues: this.state.expenses }).then(
+    var submittedExpenses = [];
+    var submittedRevenues = [];
+
+    console.log(this.state.expenses);
+
+    this.state.expenses.map((data) => {
+      if (data.is_spend)
+        submittedExpenses.push(data);
+      else
+        submittedRevenues.push(data);
+    });
+
+    console.log(submittedExpenses);
+    console.log(submittedRevenues);
+
+
+
+    Expenses.bulkCreate({ expenses: submittedExpenses }).then(
+      Revenues.bulkCreate({ revenues: submittedRevenues }).then(
         () => {
           this.setState({ submitting: false });
           Alerts.success('Your import was successful.', () => { window.location = '/expenses'; });

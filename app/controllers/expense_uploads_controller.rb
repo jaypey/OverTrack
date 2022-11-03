@@ -32,18 +32,20 @@ class ExpenseUploadsController < ApplicationController
     processed_csv = CsvProcessor.new(csv, config_hash, default_category_id, default_income_category_id, cookies).process!
 
     rows = []
-    processed_csv.each do |expense_data|
-      amount = expense_data[:amount]
-      paid_at = expense_data[:paid_at]
-      description = expense_data[:description]
-      category_id = expense_data[:category_id]
+    processed_csv.each do |data|
+      amount = data[:amount]
+      paid_at = data[:paid_at]
+      description = data[:description]
+      category_id = data[:category_id]
+      is_spend = data[:is_spend]
 
-      next if skip_existing && Expense.exists?(amount: amount, paid_at: paid_at, description: description)
+      next if is_spend && skip_existing && Expense.exists?({amout: amount, paid_at: paid_at, description: description})
+      next if !is_spend && skip_existing && Revenue.exists?({amout: amount, paid_at: paid_at, description: description})
 
-      rows << { amount: amount, paid_at: paid_at, description: description, category_id: category_id }
+      rows << { amount: amount, paid_at: paid_at, description: description, category_id: category_id, is_spend: is_spend }
     end
 
-    @categories = Category.all.order(:name).to_json
+    @categories = Category.where({budget_id: cookies.signed[:selectedBudget]}).order(:name).to_json
     @rows = rows.to_json
   end
 
