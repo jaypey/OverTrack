@@ -6,6 +6,7 @@ import ExpenseFormModal from '../expenses/FormModal';
 import PieChart from '../shared/PieChart';
 import { Categories, Revenues, Expenses, Goals, Reports } from '../../api/main';
 import { Alerts } from '../../helpers/main';
+import BudgetSelector from '../shared/BudgetSelector'
 
 class Main extends React.Component {
   constructor(props) {
@@ -177,6 +178,9 @@ class Main extends React.Component {
 
     return (
       <div>
+        <BudgetSelector
+         onChange={this.reloadData}
+         />
         {this.renderExpenseCreateModal()}
         {this.renderRevenueCreateModal()}
         <div className="container">

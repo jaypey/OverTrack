@@ -67,7 +67,7 @@ class Overview extends React.Component {
 
     return (
       <div>
-        <h1>{this.props.selectedBudgetName}</h1>
+        {/* <h2>{this.state.selectedBudgetName}</h2> */}
          {/* <BudgetSelector
          onChange={this.props.onChange}
          /> */}
