@@ -95,10 +95,12 @@ class ProjectionsChart extends React.Component {
   }
 
   getTotalMonthlyAmountRevenues() {
+    console.log("Test")
     for (let i = 0; i < this.props.studiedMonths; i++)
     {
       this.state.totalPerMonthRevenues[i] = 0;
       for (let revenue of this.props.revenues) {
+        console.log(revenue.description)
         var d = new Date(revenue.paid_at);
         var currentTime = new Date();
         if (d.getMonth() == (currentTime.getMonth() - 1 - i))
@@ -152,8 +154,8 @@ class ProjectionsChart extends React.Component {
     this.getTotalMonthlyAmountRevenues();
     this.getAverageVariationPerMonthRevenues();
     this.getTotalRevenuesProjections();
-    console.log(this.props.studiedMonths);
-    console.log(this.props.projectedMonths);
+    //console.log(this.props.studiedMonths);
+    //console.log(this.props.projectedMonths);
     const d = new Date();
     var thisYear = d.getFullYear().toString();
     var lastYear = (d.getFullYear() - 1).toString();

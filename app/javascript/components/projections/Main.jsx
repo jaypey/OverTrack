@@ -80,7 +80,7 @@ class Main extends React.Component {
   }
 
   loadRevenueData = () => {
-    Revenues.list({ paid_after: moment().startOf('month').unix() }).then(
+    Revenues.list().then(
       (rResp) => {
         this.setState({ revenues: rResp});
       },
