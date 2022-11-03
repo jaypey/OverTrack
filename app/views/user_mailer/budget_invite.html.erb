@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @recipientUser.firstname %>,</h1>
+    <p>
+      <%= @senderUser.firstname %> <%= @senderUser.lastname %> invited you to join his budget:<br>
+      <b></b>
+    </p>
+    <p>
+      Follow this link to join the budget: <%= @confirmationUrl %>.
+    </p>
+    <p>If you didn't request to join this budget, simply ignore this message.</p>
+  </body>
+</html>

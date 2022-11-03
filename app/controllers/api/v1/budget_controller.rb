@@ -26,12 +26,20 @@ module Api; module V1
         def adduser
             budget = ::Budget.includes(:users).find(params[:budgetid])
             userAdd = ::User.find_by(email: params[:email])
+            userAdder = ::User.find(cookies.signed[:user_id])
             
             render json: nil, status: 408 and return if budget.users.include?(userAdd)
             render json: nil, status: 409 and return if userAdd == nil
 
+
+
             budget.users << userAdd
             successful = budget.save
+
+            if successful
+                UserMailer.with(recipientUser: userAdd, senderUser: userAdder).budget_invite.deliver_later
+            end
+
             render json: budget, status: successful ? 200 : 500
         end
 
