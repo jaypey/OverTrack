@@ -57,7 +57,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :task, only: [:index]
+      resources :task, only: [:index, :create, :update, :destroy]
       # get "/tasks", to: "/tasks#index"
       #post "/revenues", to: "/revenues#create"
       #post "/revenues", to: "/revenues#destroy"
