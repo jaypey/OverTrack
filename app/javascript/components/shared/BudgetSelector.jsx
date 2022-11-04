@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
+const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
 
 class BudgetSelector extends React.Component {
     constructor(props) {
@@ -33,17 +36,18 @@ class BudgetSelector extends React.Component {
         )
     }
 
+
     changeSelectedBudget = async (id) => {
-        console.log(id)
         this.setState({ idSelectedBudget: id });
         this.updateSelectedBudget(id);
+        await delay(20);
         this.props.onChange();
+
     }
 
     updateSelectedBudget = (id) => {
-        console.log(id + " selected budget")
         Budgets.updateSelectBudget({ id: id }).then(
-            (cResp) => { Alerts.success("Selected budget"); },
+            (cResp) => { },
             () => { Alerts.error("Couldnt select budget"); }
         );
     }

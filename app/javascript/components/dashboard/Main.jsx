@@ -55,14 +55,8 @@ class Main extends React.Component {
   }
 
   reloadMain = () => {
-    if (this.state.reloadMain == true)
-    {
-      this.setState({ reloadMain: false });
-    }
-    else
-    {
-      this.setState({ reloadMain: true });
-    }
+    this.state.reloadMain == true ? this.setState({ reloadMain: false }) : this.setState({ reloadMain: true })
+    this.reloadData();
   }
 
   loadCategories = () => {
@@ -187,7 +181,7 @@ class Main extends React.Component {
 
   renderMain = (keyMain) => {
     return (
-      <div key={keyMain} id={keyMain.toString()}>
+      <div key={keyMain}>
         {this.renderExpenseCreateModal()}
         {this.renderRevenueCreateModal()}
         <div className="container">
