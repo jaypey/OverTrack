@@ -8,6 +8,7 @@ module Api; module V1
 
         def create
             budget = ::Budget.new(name: params[:name], description: params[:description], owner_id: cookies.signed[:user_id])
+            budget.save
             budget.users << User.find(cookies.signed[:user_id])
             successful = budget.save
             render json: budget, status: successful ? 200 : 500

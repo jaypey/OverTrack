@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       resources :revenues do
         get :index, on: :collection
         post :create, on: :collection
+        post :bulk_create, on: :collection
         post :destroy, on: :collection
         post :update, on: :collection
       end
