@@ -11,13 +11,14 @@ class CreateConfig extends React.Component {
       configName: "",
       descriptionIdx: 0,
       categoryIdx: 0,
-      amountIdx: 0,
+      spendIdx: 0,
+      incomeIdx: 0,
       dateIdx: 0,
       ignoredSubstring: [],
       currentSubstring: "",
       hasHeader: false,
-      spendIsNegative: false,
       skipNonSpend: false,
+      skipNonIncome: false,
       defaultCategory: "Uncategorized",
       isValid: false,
     };
@@ -54,10 +55,13 @@ class CreateConfig extends React.Component {
         index: this.state.categoryIdx,
         mappings: {}
       },
-      amounts: {
-        index: this.state.amountIdx,
-        spend_is_negative: this.state.spendIsNegative,
+      spends: {
+        index: this.state.spendIdx,
         skip_non_spend: this.state.skipNonSpend
+      },
+      incomes: {
+        index: this.state.incomeIdx,
+        skip_non_income: this.state.skipNonIncome
       },
       timestamps: {
         index: this.state.dateIdx
@@ -120,12 +124,13 @@ class CreateConfig extends React.Component {
 
   handleDescriptionIdxChange = (e) => { this.setState({ descriptionIdx: e.target.value }); }
   handleCategoryIdxChange = (e) => { this.setState({ categoryIdx: e.target.value }); }
-  handleAmountIdxChange = (e) => { this.setState({ amountIdx: e.target.value }); }
   handleDateIdxChange = (e) => { this.setState({ dateIdx: e.target.value }); }
   handleHasHeaderChange = (e) => { this.setState({ hasHeader: e.target.checked }); }
   handleDefaultCategoryChange = (e) => { this.setState({ defaultCategory: e.target.value }); }
-  handleSpendIsNegativeChange = (e) => { this.setState({ spendIsNegative: e.target.checked }); }
+  handleSpendIdxChange = (e) => { this.setState({ spendIdx: e.target.value }); }
   handleSkipNonSpendChange = (e) => { this.setState({ skipNonSpend: e.target.checked }); }
+  handleIncomeIdxChange = (e) => { this.setState({ incomeIdx: e.target.value }); }
+  handleSkipNonIncomeChange = (e) => { this.setState({ skipNonIncome: e.target.checked }); }
 
   render() {
     return (
@@ -195,27 +200,37 @@ class CreateConfig extends React.Component {
           </div>
         </div>
 
-        <div className='config-amount-container config-group'>
-          <h3>Amount</h3>
+        <div className='config-spend-container config-group'>
+          <h3>Spending</h3>
           <div className="input-group config-idx">
             <label className="required">Index</label>
             <input className="config-input config-idx-input" type="number" min="0"
-              value={this.state.amountIdx}
-              onChange={this.handleAmountIdxChange} />
+              value={this.state.spendIdx}
+              onChange={this.handleSpendIdxChange} />
           </div>
 
           <div className='config-checkbox-group'>
-            <label data-toggle="tooltip" data-placement="top" title="Amounts that starts with a minus (-) is considered a spending">Spend is negative?</label>
-            <input
-              value={this.state.spendIsNegative}
-              onChange={this.handleSpendIsNegativeChange} type="checkbox" />
-          </div>
-
-          <div className='config-checkbox-group'>
-            <label data-toggle="tooltip" data-placement="top" title="Skip all amounts that aren't considered a spending">Skip non spend?</label>
+            <label data-toggle="tooltip" data-placement="top" title="Skip all entries without a spending amount">Skip non spend?</label>
             <input
               value={this.state.skipNonSpend}
               onChange={this.handleSkipNonSpendChange} type="checkbox" />
+          </div>
+        </div>
+
+        <div className='config-spend-container config-group'>
+          <h3>Income</h3>
+          <div className="input-group config-idx">
+            <label className="required">Index</label>
+            <input className="config-input config-idx-input" type="number" min="0"
+              value={this.state.incomeIdx}
+              onChange={this.handleIncomeIdxChange} />
+          </div>
+
+          <div className='config-checkbox-group'>
+            <label data-toggle="tooltip" data-placement="top" title="Skip all entries without a income amount">Skip non income?</label>
+            <input
+              value={this.state.skipNonIncome}
+              onChange={this.handleSkipNonIncomeChange} type="checkbox" />
           </div>
         </div>
 

@@ -7,6 +7,9 @@ const Revenues = {
   create(data, opts = {}) {
     return Base.post('/revenues', data, opts || {});
   },
+  bulkCreate(data, opts = {}) {
+    return Base.post('/revenues/bulk_create', data, opts || {});
+  },
   delete(id, params, opts = {}) {
     return Base.delete(`/revenues/${id}`, params, opts || {});
   },
