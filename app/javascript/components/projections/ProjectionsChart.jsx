@@ -95,12 +95,10 @@ class ProjectionsChart extends React.Component {
   }
 
   getTotalMonthlyAmountRevenues() {
-    console.log("Test")
     for (let i = 0; i < this.props.studiedMonths; i++)
     {
       this.state.totalPerMonthRevenues[i] = 0;
       for (let revenue of this.props.revenues) {
-        console.log(revenue.description)
         var d = new Date(revenue.paid_at);
         var currentTime = new Date();
         if (d.getMonth() == (currentTime.getMonth() - 1 - i))
@@ -141,7 +139,31 @@ class ProjectionsChart extends React.Component {
     }
   }
 
+  checkEnoughDataExpenses() {
+    let numberOfMonthWithData = 0;
+    for (let i = 0; i < this.props.studiedMonths; i++)
+    {
+      if (this.state.totalPerMonth[i] > 0)
+        numberOfMonthWithData++;
+    }
+    console.log(numberOfMonthWithData)
+    if (numberOfMonthWithData > 2)
+      return true;
+    return false;
+  }
 
+  checkEnoughDataRevenues() {
+    let numberOfMonthWithData = 0;
+    for (let i = 0; i < this.props.studiedMonths; i++)
+    {
+      if (this.state.totalPerMonthRevenues[i] > 0)
+        numberOfMonthWithData++;
+    }
+    console.log(numberOfMonthWithData)
+    if (numberOfMonthWithData > 2)
+      return true;
+    return false;
+  }
 
 
 
@@ -185,6 +207,8 @@ class ProjectionsChart extends React.Component {
       <h2>Expenses</h2>
       <br></br>
       <br></br>
+      {this.checkEnoughDataExpenses() &&
+      <div>
 
       <h3>Total expenses of the previous months</h3>
       <br></br>
@@ -259,11 +283,20 @@ class ProjectionsChart extends React.Component {
         </tbody>
       </table>
       </div>
-<br></br>
+</div>
+  }
+  {(!(this.checkEnoughDataExpenses())) &&
+      <div>
+        <h2 className='center-text'>Sorry, we don't have enough data to make the expenses predictions</h2>
+        </div>
+  }
+  <br></br>
 <br></br>
 <h2>Revenues</h2>
       <br></br>
       <br></br>
+{this.checkEnoughDataExpenses() &&
+<div>
       <h3>Total revenues of the previous months</h3>
       <br></br>
 <div className='overflow-x bg-gray p-10 table-borders'>
@@ -337,12 +370,19 @@ class ProjectionsChart extends React.Component {
   </tbody>
 </table>
 </div>
+</div>
+  }
+  {(!(this.checkEnoughDataRevenues())) &&
+      <div>
+        <h2 className='center-text'>Sorry, we don't have enough data to make the revenues predictions</h2>
+        </div>
+  }
+  <br></br>
 <br></br>
 <br></br>
 <br></br>
-<br></br>
-        
     </div>
+    
     );
   }
 }

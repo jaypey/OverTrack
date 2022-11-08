@@ -4,6 +4,7 @@ import ExpenseFormModal from '../expenses/FormModal';
 import { Categories, Revenues, Expenses, Goals, Reports } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 import ProjectionsChart from './ProjectionsChart';
+import Modal from './Modal';
 
 class Main extends React.Component {
   constructor(props) {
@@ -23,8 +24,15 @@ class Main extends React.Component {
       colors: [],
       count: 3,
       project: 3,
+      show: false
     };
   }
+
+  showModal = e => {
+    this.setState({
+      show: !this.state.show
+    });
+  };
 
   componentDidMount() {
     this.reloadData();
@@ -153,9 +161,20 @@ class Main extends React.Component {
     if (!this.state.loaded) { return ''; }
     return (
       <div className='container'>
+        <button className='btn' onClick={e => {
+              this.showModal();
+         }}
+          > How does it work? </button>
+          <Modal show={this.state.show}/>
+        <br></br>
+        <br></br>
         <h2>Personalise your projections</h2>
         <br></br>
         <br></br>
+        <div className='month-container'>
+          <h4 className='previous-months'>Months to calculate</h4>
+          <h4 className='upcoming-months'>Months to project</h4>
+        </div>
         <div className='month-container'>
           <div className='previous-months'>{monthNames[currentTime.getMonth() - this.state.count - 1]} - {monthNames[currentTime.getMonth() - 1]}</div>
           <div className='upcoming-months'>{monthNames[currentTime.getMonth()]} - {monthNames[currentTime.getMonth() + this.state.project]}</div>
