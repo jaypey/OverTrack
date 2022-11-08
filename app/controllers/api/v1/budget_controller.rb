@@ -1,5 +1,7 @@
 module Api; module V1
     class BudgetController < BaseController
+        include Rails.application.routes.url_helpers
+
         def index 
             render json: User.find(cookies.signed[:user_id]).budgets.to_json(include: {users: { only: [:firstname, :lastname, :email, :id]}})
         end
@@ -37,7 +39,10 @@ module Api; module V1
             successful = budget.save
 
             if successful
-                UserMailer.with(recipientUser: userAdd, senderUser: userAdder).budget_invite.deliver_later
+                userToken = SecureRandom.uuid
+                confUrl = request.host_with_port + '/confirmation'+ '?token='+userToken
+                successful = budget.budget_users.where(user_id: userAdd.id).first().update(token: userToken)
+                UserMailer.with(invitedBudget: budget, recipientUser: userAdd, senderUser: userAdder, confirmationUrl: confUrl).budget_invite.deliver_later
             end
 
             render json: budget, status: successful ? 200 : 500
@@ -63,6 +68,8 @@ module Api; module V1
             end
             render json: budget.name, status: successful ? 200 : 500
         end
+
+        
 
     end
 end; end

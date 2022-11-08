@@ -10,6 +10,6 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true
 
   has_many :budget_users
-  has_many :budgets, through: :budget_users
+  has_many :budgets, -> { where('confirmed = ?', true) }, through: :budget_users
 
 end

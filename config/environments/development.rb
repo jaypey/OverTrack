@@ -40,8 +40,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     port: 587,
     address: 'smtp-relay.sendinblue.com',
-    user_name: 'overtrack.noreply@gmail.com',
-    password: '',
+    user_name: Rails.application.credentials.emailsender[:user_name],
+    password: Rails.application.credentials.emailsender[:password],
     authentication: 'login',
     enable_starttls_auto: true
   }

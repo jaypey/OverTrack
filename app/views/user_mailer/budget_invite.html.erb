@@ -10,7 +10,7 @@
       <b></b>
     </p>
     <p>
-      Follow this link to join the budget: <%= @confirmationUrl %>.
+      Follow this link to join <%= @budgetLinked.name %>: <a href="<%= @confirmationUrl %>"><%= @confirmationUrl %></a>.
     </p>
     <p>If you didn't request to join this budget, simply ignore this message.</p>
   </body>
