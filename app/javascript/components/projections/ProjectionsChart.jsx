@@ -4,6 +4,7 @@ import moment from 'moment';
 import { Numerics } from '../../helpers/main';
 import Progress from '../shared/Progress';
 import GoalFormModal from '../goals/FormModal';
+import BarChart from '../shared/BarChart';
 
 const initialState = {
       distinctExpenses: [],
@@ -15,7 +16,7 @@ const initialState = {
       totalPerMonthRevenues: [],
       variationPerMonthRevenues: [],
       averageVariationPerMonthRevenues: 0,
-      totalPerNextMonthsPredictionsRevenues: []
+      totalPerNextMonthsPredictionsRevenues: [],
 };
 
 class ProjectionsChart extends React.Component {
@@ -32,7 +33,11 @@ class ProjectionsChart extends React.Component {
       totalPerMonthRevenues: [],
       variationPerMonthRevenues: [],
       averageVariationPerMonthRevenues: 0,
-      totalPerNextMonthsPredictionsRevenues: []
+      totalPerNextMonthsPredictionsRevenues: [],
+      testvalues: [6, 1, 2, 3],
+      testlabels: ['test1', 'test2', 'test3', 'test4'],
+      totalExpensesStudiedAndProjected: [],
+      monthsStudiedAndProjected: []
     }
     };
 
@@ -47,6 +52,8 @@ class ProjectionsChart extends React.Component {
     this.state.totalMonthlyChangePrediction = 0;
     this.state.averageVariationPerMonth = 0;
     this.state.averageVariationPerMonthRevenues = 0;
+    this.state.totalExpensesStudiedAndProjected = [];
+    this.state.monthsStudiedAndProjected = [];
   }
 
   getTotalMonthlyAmount() {
@@ -146,7 +153,7 @@ class ProjectionsChart extends React.Component {
       if (this.state.totalPerMonth[i] > 0)
         numberOfMonthWithData++;
     }
-    console.log(numberOfMonthWithData)
+    //console.log(numberOfMonthWithData)
     if (numberOfMonthWithData > 2)
       return true;
     return false;
@@ -159,13 +166,53 @@ class ProjectionsChart extends React.Component {
       if (this.state.totalPerMonthRevenues[i] > 0)
         numberOfMonthWithData++;
     }
-    console.log(numberOfMonthWithData)
+    //console.log(numberOfMonthWithData)
     if (numberOfMonthWithData > 2)
       return true;
     return false;
   }
 
+  getTotalExpensesStudiedAndProjected() {
+    const d = new Date();
+    var thisYear = d.getFullYear().toString();
+    var lastYear = (d.getFullYear() - 1).toString();
+    var nextYear = (d.getFullYear() + 1).toString();
+    const monthNames = ["January " + thisYear, "February " + thisYear,"March " + thisYear, "April " + thisYear,
+    "May " + thisYear, "June " + thisYear, "July " + thisYear, "August " + thisYear,
+    "September " + thisYear, "October " + thisYear, "November "  + thisYear, "December " + thisYear,
+    "January "  + nextYear, "February "  + nextYear, "March "  + nextYear, "April "  + nextYear,
+    "May "  + nextYear, "June "  + nextYear, "July "  + nextYear, "August "  + nextYear,
+     "September "  + nextYear, "October "  + nextYear, "November "  + nextYear, "December "  + nextYear
+      ];
+      monthNames[-1] = "December "  + lastYear
+      monthNames[-2] = "November " + lastYear
+      monthNames[-3] = "October " + lastYear
+      monthNames[-4] = "September " + lastYear
+      monthNames[-5] = "August " + lastYear
+      monthNames[-6] = "July " + lastYear
+      monthNames[-7] = "June " + lastYear
+      monthNames[-8] = "May " + lastYear
+      monthNames[-9] = "April " + lastYear
+      monthNames[-10] = "March " + lastYear
+      monthNames[-11] = "February " + lastYear
+      monthNames[-12] = "January " + lastYear
+    console.log(monthNames)
 
+
+    for (let i = 0; i < this.state.totalPerMonth.length;i++)
+    {
+      this.state.totalExpensesStudiedAndProjected[i] = this.state.totalPerMonth[this.state.totalPerMonth.length - i - 1];
+      this.state.monthsStudiedAndProjected[i] = monthNames[(d.getMonth() - (this.state.totalPerMonth.length - i))];
+    }
+    for (let i = this.state.totalPerMonth.length; i < (this.state.totalPerNextMonthsPredictions.length + this.state.totalPerMonth.length); i++)
+    {
+      this.state.totalExpensesStudiedAndProjected[i] = this.state.totalPerNextMonthsPredictions[i - this.state.totalPerMonth.length];
+      this.state.monthsStudiedAndProjected[i] = monthNames[(d.getMonth() + i - this.state.totalPerMonth.length)]
+    }
+
+    console.log(this.state.totalExpensesStudiedAndProjected)
+    console.log(this.state.monthsStudiedAndProjected)
+  }
 
 
   render() {
@@ -176,6 +223,7 @@ class ProjectionsChart extends React.Component {
     this.getTotalMonthlyAmountRevenues();
     this.getAverageVariationPerMonthRevenues();
     this.getTotalRevenuesProjections();
+    this.getTotalExpensesStudiedAndProjected();
     //console.log(this.props.studiedMonths);
     //console.log(this.props.projectedMonths);
     const d = new Date();
@@ -202,8 +250,35 @@ class ProjectionsChart extends React.Component {
       monthNames[-10] = "March " + lastYear
       monthNames[-11] = "February " + lastYear
       monthNames[-12] = "January " + lastYear
+      const barChartDatasets = [];
+
+  
+        let value1 = Numerics.centsToFloat(0 || 0)
+        let value2 = Numerics.centsToFloat(0 || 0)
+        let value3 = Numerics.centsToFloat(0 || 0)
+
+        let valuetest = []
+        for (let i = 0; i < this.state.totalExpensesStudiedAndProjected.length; i++)
+        {
+          valuetest[i] = Numerics.centsToFloat(this.state.totalExpensesStudiedAndProjected[i] * 100 || 0);
+        }
+
+        let value = [Numerics.centsToFloat(this.state.totalPerMonth[0] * 100 || 0), value1, value2, value3]
+        barChartDatasets[0] = { label: "test", data: valuetest, backgroundColor: '#899b9c' };
+      //console.log(barChartDatasets)
+      // .map((c) => {
+      //   const dataPoints = barChartLabels.map((mon) => {
+      //     const amount = resp.category_amounts_by_month.find((a) => a.month == mon && a.category == c.name)?.amount;
+      //     return Numerics.centsToFloat(amount || 0);
+      //   });
+      //   return { label: c.name, data: dataPoints, backgroundColor: c.color };
+      // });
     return (
     <div>
+      <div className="chart-container">
+      <BarChart labels={this.state.monthsStudiedAndProjected} data={barChartDatasets} hideLegend
+          stacked />
+          </div>
       <h2>Expenses</h2>
       <br></br>
       <br></br>
