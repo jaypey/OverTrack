@@ -69,6 +69,7 @@ Rails.application.routes.draw do
 
   
   get "budget", to: "budget#index"
+  get "projections", to: "projections#index"
   get 'user/register', to: 'user#register', as: 'register_user' # new
   post 'user', to: 'user#create' # create
   get "/404", to: "errors#not_found"
