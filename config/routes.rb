@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options :host => "localhost:3000"
+
   root to: "sessions#new"
 
   resources :sessions, only: [:new, :create] do
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: [:index]
+  resources :confirmation, only: [:index]
   resources :insights, only: [:index]
   resources :expenses, only: [:index]
   resources :expense_uploads, only: [:new] do
