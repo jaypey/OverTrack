@@ -37,6 +37,7 @@ class ProjectionsChart extends React.Component {
       testvalues: [6, 1, 2, 3],
       testlabels: ['test1', 'test2', 'test3', 'test4'],
       totalExpensesStudiedAndProjected: [],
+      totalRevenuesStudiedAndProjected: [],
       monthsStudiedAndProjected: []
     }
     };
@@ -54,6 +55,7 @@ class ProjectionsChart extends React.Component {
     this.state.averageVariationPerMonthRevenues = 0;
     this.state.totalExpensesStudiedAndProjected = [];
     this.state.monthsStudiedAndProjected = [];
+    this.state.totalRevenuesStudiedAndProjected = [];
   }
 
   getTotalMonthlyAmount() {
@@ -209,9 +211,20 @@ class ProjectionsChart extends React.Component {
       this.state.totalExpensesStudiedAndProjected[i] = this.state.totalPerNextMonthsPredictions[i - this.state.totalPerMonth.length];
       this.state.monthsStudiedAndProjected[i] = monthNames[(d.getMonth() + i - this.state.totalPerMonth.length)]
     }
+  }
 
-    console.log(this.state.totalExpensesStudiedAndProjected)
-    console.log(this.state.monthsStudiedAndProjected)
+  getTotalRevenuesStudiedAndProjected() {
+    const d = new Date();
+
+    for (let i = 0; i < this.state.totalPerMonthRevenues.length;i++)
+    {
+      this.state.totalRevenuesStudiedAndProjected[i] = this.state.totalPerMonthRevenues[this.state.totalPerMonthRevenues.length - i - 1];
+    }
+    for (let i = this.state.totalPerMonthRevenues.length; i < (this.state.totalPerNextMonthsPredictionsRevenues.length + this.state.totalPerMonthRevenues.length); i++)
+    {
+      this.state.totalRevenuesStudiedAndProjected[i] = this.state.totalPerNextMonthsPredictionsRevenues[i - this.state.totalPerMonthRevenues.length];
+    }
+    console.log(this.state.totalRevenuesStudiedAndProjected)
   }
 
 
@@ -224,6 +237,8 @@ class ProjectionsChart extends React.Component {
     this.getAverageVariationPerMonthRevenues();
     this.getTotalRevenuesProjections();
     this.getTotalExpensesStudiedAndProjected();
+    this.getTotalRevenuesStudiedAndProjected();
+
     //console.log(this.props.studiedMonths);
     //console.log(this.props.projectedMonths);
     const d = new Date();
@@ -250,40 +265,61 @@ class ProjectionsChart extends React.Component {
       monthNames[-10] = "March " + lastYear
       monthNames[-11] = "February " + lastYear
       monthNames[-12] = "January " + lastYear
-      const barChartDatasets = [];
+      const barChartDatasetsExpenses = [];
 
-  
-        let value1 = Numerics.centsToFloat(0 || 0)
-        let value2 = Numerics.centsToFloat(0 || 0)
-        let value3 = Numerics.centsToFloat(0 || 0)
-
-        let valuetest = []
+        let valuesStudied = []
+        let valuesProjected = []
         for (let i = 0; i < this.state.totalExpensesStudiedAndProjected.length; i++)
         {
-          valuetest[i] = Numerics.centsToFloat(this.state.totalExpensesStudiedAndProjected[i] * 100 || 0);
+          valuesStudied[i] = 0
+          valuesProjected[i] = 0
+          if (i < this.state.totalPerMonth.length)
+          {
+            valuesStudied[i] = Numerics.centsToFloat(this.state.totalExpensesStudiedAndProjected[i] * 100 || 0);
+          }
+          else
+          {
+            valuesProjected[i] = Numerics.centsToFloat(this.state.totalExpensesStudiedAndProjected[i] * 100 || 0);
+          }
         }
 
-        let value = [Numerics.centsToFloat(this.state.totalPerMonth[0] * 100 || 0), value1, value2, value3]
-        barChartDatasets[0] = { label: "test", data: valuetest, backgroundColor: '#899b9c' };
-      //console.log(barChartDatasets)
-      // .map((c) => {
-      //   const dataPoints = barChartLabels.map((mon) => {
-      //     const amount = resp.category_amounts_by_month.find((a) => a.month == mon && a.category == c.name)?.amount;
-      //     return Numerics.centsToFloat(amount || 0);
-      //   });
-      //   return { label: c.name, data: dataPoints, backgroundColor: c.color };
-      // });
+        barChartDatasetsExpenses[0] = { label: "Previous", data: valuesStudied, backgroundColor: '#ff3300' };
+        barChartDatasetsExpenses[1] = { label: "Projected", data: valuesProjected, backgroundColor: '#ffcc00' };
+
+        const barChartDatasetsRevenues = [];
+
+        let valuesStudiedRevenues = []
+        let valuesProjectedRevenues = []
+        for (let i = 0; i < this.state.totalRevenuesStudiedAndProjected.length; i++)
+        {
+          valuesStudiedRevenues[i] = 0
+          valuesProjectedRevenues[i] = 0
+          if (i < this.state.totalPerMonthRevenues.length)
+          {
+            valuesStudiedRevenues[i] = Numerics.centsToFloat(this.state.totalRevenuesStudiedAndProjected[i] * 100 || 0);
+          }
+          else
+          {
+            valuesProjectedRevenues[i] = Numerics.centsToFloat(this.state.totalRevenuesStudiedAndProjected[i] * 100 || 0);
+          }
+        }
+
+        barChartDatasetsRevenues[0] = { label: "Previous", data: valuesStudiedRevenues, backgroundColor: '#00cc00' };
+        barChartDatasetsRevenues[1] = { label: "Projected", data: valuesProjectedRevenues, backgroundColor: '#3399ff' };
     return (
     <div>
-      <div className="chart-container">
-      <BarChart labels={this.state.monthsStudiedAndProjected} data={barChartDatasets} hideLegend
-          stacked />
-          </div>
       <h2>Expenses</h2>
       <br></br>
       <br></br>
       {this.checkEnoughDataExpenses() &&
       <div>
+        <br></br>
+<div className="chart-container">
+      <BarChart labels={this.state.monthsStudiedAndProjected} data={barChartDatasetsExpenses}
+          stacked />
+          </div>
+        <br></br>
+        <br></br>
 
       <h3>Total expenses of the previous months</h3>
       <br></br>
@@ -370,8 +406,15 @@ class ProjectionsChart extends React.Component {
 <h2>Revenues</h2>
       <br></br>
       <br></br>
-{this.checkEnoughDataExpenses() &&
+{this.checkEnoughDataRevenues() &&
 <div>
+<br></br>
+<div className="chart-container">
+      <BarChart labels={this.state.monthsStudiedAndProjected} data={barChartDatasetsRevenues}
+          stacked />
+          </div>
+        <br></br>
+        <br></br>
       <h3>Total revenues of the previous months</h3>
       <br></br>
 <div className='overflow-x bg-gray p-10 table-borders'>

@@ -83,7 +83,7 @@
           "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
           "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-f05e7d403b7e5721a029.js",
           "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-033d49523d99be93cd81.js",
-          "/packs/js/projections-b9a25772eaf609a4a35a.js"
+          "/packs/js/projections-b01867a7784816a6915c.js"
         ]
       }
     },
@@ -112,7 +112,7 @@
   "js/dashboard-378247cf7985a8af5311.js.map": "/packs/js/dashboard-378247cf7985a8af5311.js.map",
   "js/history-a8f9b9f596061f819454.js.map": "/packs/js/history-a8f9b9f596061f819454.js.map",
   "js/insights-380818970df96a053e12.js.map": "/packs/js/insights-380818970df96a053e12.js.map",
-  "js/projections-b9a25772eaf609a4a35a.js.map": "/packs/js/projections-b9a25772eaf609a4a35a.js.map",
+  "js/projections-b01867a7784816a6915c.js.map": "/packs/js/projections-b01867a7784816a6915c.js.map",
   "js/runtime-cd31353a17a0505265f4.js.map": "/packs/js/runtime-cd31353a17a0505265f4.js.map",
   "js/upload_preview-b40d5cb73bcf75a8f97b.js.map": "/packs/js/upload_preview-b40d5cb73bcf75a8f97b.js.map",
   "js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js": "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
@@ -125,7 +125,7 @@
   "js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js.map": "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js.map",
   "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
   "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js.map": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js.map",
-  "projections.js": "/packs/js/projections-b9a25772eaf609a4a35a.js",
+  "projections.js": "/packs/js/projections-b01867a7784816a6915c.js",
   "runtime.js": "/packs/js/runtime-cd31353a17a0505265f4.js",
   "upload_preview.js": "/packs/js/upload_preview-b40d5cb73bcf75a8f97b.js"
 }
