@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     collection do
       post :preview
       get :create_config
+      get :config_list
     end
   end
 
