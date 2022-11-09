@@ -2,7 +2,7 @@
   "application.js": "/packs/js/application-bb859c936b81fe913e43.js",
   "budget.js": "/packs/js/budget-326c1acf34f1c247e3df.js",
   "create_config.js": "/packs/js/create_config-fbbbe7a2d0f381650c4a.js",
-  "dashboard.js": "/packs/js/dashboard-efdbe81b0bf65589ac62.js",
+  "dashboard.js": "/packs/js/dashboard-66d3a2a0e6c353ad47f8.js",
   "entrypoints": {
     "application": {
       "assets": {
@@ -44,7 +44,7 @@
           "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
           "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js",
           "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-261c02fcece6aaa39981.js",
-          "/packs/js/dashboard-efdbe81b0bf65589ac62.js"
+          "/packs/js/dashboard-66d3a2a0e6c353ad47f8.js"
         ]
       }
     },
@@ -92,7 +92,7 @@
   "js/application-bb859c936b81fe913e43.js.map": "/packs/js/application-bb859c936b81fe913e43.js.map",
   "js/budget-326c1acf34f1c247e3df.js.map": "/packs/js/budget-326c1acf34f1c247e3df.js.map",
   "js/create_config-fbbbe7a2d0f381650c4a.js.map": "/packs/js/create_config-fbbbe7a2d0f381650c4a.js.map",
-  "js/dashboard-efdbe81b0bf65589ac62.js.map": "/packs/js/dashboard-efdbe81b0bf65589ac62.js.map",
+  "js/dashboard-66d3a2a0e6c353ad47f8.js.map": "/packs/js/dashboard-66d3a2a0e6c353ad47f8.js.map",
   "js/history-a8f9b9f596061f819454.js.map": "/packs/js/history-a8f9b9f596061f819454.js.map",
   "js/insights-88567fc7a38d21018020.js.map": "/packs/js/insights-88567fc7a38d21018020.js.map",
   "js/runtime-cd31353a17a0505265f4.js.map": "/packs/js/runtime-cd31353a17a0505265f4.js.map",
