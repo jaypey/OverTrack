@@ -7,10 +7,12 @@ module Api; module V1
         end
 
         def create
+            user = User.find(cookies.signed[:user_id])
             budget = ::Budget.new(name: params[:name], description: params[:description], owner_id: cookies.signed[:user_id])
-            budget.save
-            budget.users << User.find(cookies.signed[:user_id])
             successful = budget.save
+            budget.users << user
+            successful = budget.save
+            BudgetUser.where(budget_id: budget.id, user_id: user.id).first().update(confirmed: true)
             render json: budget, status: successful ? 200 : 500
         end
 
