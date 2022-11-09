@@ -142,19 +142,66 @@ class Main extends React.Component {
     return <ExpenseFormModal AddRevenue={1} categories={this.state.revenueCategories} title="Add a revenue" onClose={this.closeRevenueCreate} onSave={this.onExpenseSave} />;
   }
 
-  loadSum = () => {
-    var indexRev = 0;
+  getTotalRevenue = () => {
+    var totalRevenue = 0;
 
     this.state.categories.forEach((category) => {
       if (category.is_revenue == 1) {
         category.revenues = this.state.revenues.filter((revenue) => revenue.category_id == category.id);
         category.revenues.forEach((revenue) => {
-          indexRev += revenue.amount;
+          totalRevenue += revenue.amount;
         });
       }
     });
 
-    return (indexRev/100);
+    return (totalRevenue/100);
+  }
+
+  getTotalExpense = () => {
+    var totalExpense = 0;
+
+    this.state.categories.forEach((category) => {
+      if (category.is_revenue == 0) {
+        category.expenses = this.state.expenses.filter((expense) => expense.category_id == category.id);
+        category.expenses.forEach((expense) => {
+          totalExpense += expense.amount;
+        });
+      }
+    });
+
+    return (totalExpense/100);
+  }
+
+  loadSum = () => {
+    var totalExpense = this.getTotalExpense();
+    var totalRevenue = this.getTotalRevenue();
+
+    console.log("Expense: " + totalExpense);
+    console.log("Revenue: " + totalRevenue);
+
+    if (totalRevenue > totalExpense) {
+      return totalRevenue;
+    }
+    else if (totalExpense > totalRevenue) {
+      return totalExpense;
+    }
+    else {
+      return totalRevenue;
+    }
+  }
+
+  calculateNumber = (spend, revenues) => {
+    var item = Number.parseFloat((spend/revenues)*100).toFixed(3);
+    if (item === NaN) {
+      item = 0;
+    }
+    else if (item < 0.000) {
+      item = 0;
+    }
+    else if (item > 100.000) {
+      item = 100;
+    }
+    return item;
   }
 
   loadPieChartData = (month) => {
@@ -163,16 +210,22 @@ class Main extends React.Component {
 
         const revenue = this.loadSum();
         
-        const data = resp.category_pourcentage.map((r) => 
-          Number.parseFloat((r.spend/revenue)*100).toFixed(3)
-        )
-        const labels = resp.category_pourcentage.map((r) => r.category)
         const colors = resp.category_pourcentage.map((r) => r.color)
+        const labels = resp.category_pourcentage.map((r) => r.category)
+        const data = resp.category_pourcentage.map((r) =>
+          this.calculateNumber(r.spend, revenue)
+        )
+
+        if (data.length === 0) {
+          colors = ['gray']
+          labels = ['Empty']
+          data = [100.000]
+        }
 
         this.setState({ data: data });
         this.setState({ labels: labels });
         this.setState({ colors: colors });
-
+        
         return true;
       },
       () => { Alerts.error("The data for the pie chart didn't load correctly!") }
