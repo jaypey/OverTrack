@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
     email = params[:email]
 
-    user = User.includes(:budgets).where(email: email).first
+    user = User.includes(:budget_users).where(email: email).first
 
     unless user
       flash[:error] = "Incorrect login"
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
     if user.authenticate(params[:password])
       cookies.signed[:logged_in] = true
       cookies.signed[:user_id] = user.id
-      cookies.signed[:selectedBudget] = user.budgets.first().id
+      cookies.signed[:selectedBudget] = user.budget_users.first().budget.id
       
     else
       flash[:error] = "Incorrect login"
