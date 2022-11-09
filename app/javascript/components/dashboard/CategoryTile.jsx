@@ -29,7 +29,8 @@ class CategoryTile extends React.Component {
     if (!this.props.categoryWithExpensesAndSpend.monthly_goal) { return 'No goal set'; }
 
     const diff = this.goalDiff();
-    return (diff >= 0) ? `${Numerics.centsToDollars(diff)} remaining` : `${Numerics.centsToDollars(Math.abs(diff))} over`;
+
+    return (diff < 0) ? `${Numerics.centsToDollars(Math.abs(diff))} over` : (this.props.categoryWithExpensesAndSpend.is_revenue == 0) ? `${Numerics.centsToDollars(diff)} remaining` : `${Numerics.centsToDollars(diff)} under goal`;
   }
 
   normalizedPercentage() {
@@ -51,6 +52,13 @@ class CategoryTile extends React.Component {
 
   render() {
     const category = this.props.categoryWithExpensesAndSpend;
+    let icon;
+    if(category.is_revenue == 0) {
+      icon = <i className="fas fa-exclamation-circle mr-4" />
+    } else {
+      icon = <i className="fas fa-sack-dollar mr-4" />
+    }
+
     return (
       <>
         <div
@@ -62,9 +70,9 @@ class CategoryTile extends React.Component {
 
           <div className="text-right">
             <h2 className={category.spend > 0 ? '' : 'text-muted'}>{Numerics.centsToDollars(category.spend)}</h2>
-            <div className={this.goalDiff() < 0 ? 'text-warning' : 'text-muted'}>
-              {this.goalDiff() < 0 && (
-                <i className="fas fa-exclamation-circle mr-4" />
+            <div className={this.goalDiff() > 0 ? 'text-muted' : category.is_revenue == 1 ? 'text-success' : 'text-warning'}>
+              {(this.goalDiff() < 0) && (
+                icon
               )}
               {this.goalComparisonDisplay()}
             </div>

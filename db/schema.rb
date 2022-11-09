@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2031_42_15_562248) do
+ActiveRecord::Schema.define(version: 2031_42_15_562250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2031_42_15_562248) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "budget_users", force: :cascade do |t|
+    t.bigint "budget_id"
+    t.bigint "user_id"
+    t.string "token"
+    t.boolean "confirmed", default: false
+    t.index ["budget_id"], name: "index_budget_users_on_budget_id"
+    t.index ["user_id"], name: "index_budget_users_on_user_id"
+  end
+
   create_table "budgets", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -28,13 +37,6 @@ ActiveRecord::Schema.define(version: 2031_42_15_562248) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["owner_id"], name: "index_budgets_on_owner_id"
-  end
-
-  create_table "budgets_users", id: false, force: :cascade do |t|
-    t.bigint "budget_id", null: false
-    t.bigint "user_id", null: false
-    t.index ["budget_id"], name: "index_budgets_users_on_budget_id"
-    t.index ["user_id"], name: "index_budgets_users_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -83,6 +85,18 @@ ActiveRecord::Schema.define(version: 2031_42_15_562248) do
     t.index ["paid_at"], name: "index_revenues_on_paid_at"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.boolean "is_done"
+    t.string "title"
+    t.text "description"
+    t.date "due_date"
+    t.integer "category_id"
+    t.bigint "budgets_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["budgets_id"], name: "index_tasks_on_budgets_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -97,4 +111,5 @@ ActiveRecord::Schema.define(version: 2031_42_15_562248) do
   add_foreign_key "budgets", "users", column: "owner_id"
   add_foreign_key "categories", "budgets"
   add_foreign_key "csv_configs", "users", column: "users_id"
+  add_foreign_key "tasks", "budgets", column: "budgets_id"
 end
