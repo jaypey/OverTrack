@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options :host => "localhost:3000"
+
   root to: "sessions#new"
 
   resources :sessions, only: [:new, :create] do
@@ -6,12 +8,14 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: [:index]
+  resources :confirmation, only: [:index]
   resources :insights, only: [:index]
   resources :expenses, only: [:index]
   resources :expense_uploads, only: [:new] do
     collection do
       post :preview
       get :create_config
+      get :config_list
     end
   end
 
@@ -22,7 +26,7 @@ Rails.application.routes.draw do
           post :bulk_create
         end
       end
-      resources :csv_config, only: [:create]
+      resources :csv_config, only: [:index, :create]
       
       resources :categories, only: [:index, :create, :update, :destroy] do
         collection do
@@ -43,6 +47,7 @@ Rails.application.routes.draw do
       resources :revenues do
         get :index, on: :collection
         post :create, on: :collection
+        post :bulk_create, on: :collection
         post :destroy, on: :collection
         post :update, on: :collection
       end
@@ -53,7 +58,7 @@ Rails.application.routes.draw do
           post :removeuser
           get :listBudgets
           post :selectbudget
-          get :getbudgetname
+          get :getbudgetid
         end
       end
 
@@ -69,6 +74,7 @@ Rails.application.routes.draw do
   
   get "budget", to: "budget#index"
   get "user", to: "user#index"
+  get "projections", to: "projections#index"
   get 'user/register', to: 'user#register', as: 'register_user' # new
   post 'user', to: 'user#create' # create
   get "/404", to: "errors#not_found"

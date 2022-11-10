@@ -11,6 +11,7 @@
         <li class="<%= controller_name == "expense_uploads" ? "active" : '' %>"><%= link_to "import", new_expense_upload_path %></li>
         <li class="<%= controller_name == "expenses" ? "active" : '' %>"><%= link_to "history", expenses_path %></li>
         <li class="<%= controller_name == "insights" ? "active" : '' %>"><%= link_to "insights", insights_path %></li>
+        <li class="<%= controller_name == "projections" ? "active" : '' %>"><%= link_to "projections", projections_path %></li>
 
         <li>
           <div class="dropdown">
@@ -21,7 +22,7 @@
             </button>
             <div class="dropdown-content">
               <%= link_to "user", user_path%>
-              <%= link_to "budget", budget_path %>
+              <%= link_to "budgets", budget_path %>
               <%= link_to "logout", logout_sessions_path %>
             </div>
           </div>
@@ -39,6 +40,7 @@
       <li class="border-bot <%= controller_name == "dashboard" ? "active" : '' %>"><%= link_to "dashboard", root_path %></li>
       <li class="border-bot <%= controller_name == "expenses" ? "active" : '' %>"><%= link_to "history", expenses_path %></li>
       <li class="border-bot <%= controller_name == "insights" ? "active" : '' %>"><%= link_to "insights", insights_path %></li>
+      <li class="border-bot <%= controller_name == "projections" ? "active" : '' %>"><%= link_to "projections", projections_path %></li>
       <li><%= link_to "logout", logout_sessions_path %></li>
   </ul>
 </div>
