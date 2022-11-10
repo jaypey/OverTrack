@@ -1,8 +1,8 @@
 {
   "application.js": "/packs/js/application-bb859c936b81fe913e43.js",
   "budget.js": "/packs/js/budget-aa99f33c82f7805cca79.js",
-  "config_list.js": "/packs/js/config_list-415e2b5a543211e5ca72.js",
-  "create_config.js": "/packs/js/create_config-722bb4e752603c8a830f.js",
+  "config_list.js": "/packs/js/config_list-84fe010192b671307a9b.js",
+  "create_config.js": "/packs/js/create_config-2804963a700c7bd47627.js",
   "dashboard.js": "/packs/js/dashboard-f7f54588bd6ac248abac.js",
   "entrypoints": {
     "application": {
@@ -31,7 +31,7 @@
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
           "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
-          "/packs/js/config_list-415e2b5a543211e5ca72.js"
+          "/packs/js/config_list-84fe010192b671307a9b.js"
         ]
       }
     },
@@ -42,7 +42,7 @@
           "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
           "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
           "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-04febdf28a411a9bf275.js",
-          "/packs/js/create_config-722bb4e752603c8a830f.js"
+          "/packs/js/create_config-2804963a700c7bd47627.js"
         ]
       }
     },
@@ -107,8 +107,8 @@
   "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-04febdf28a411a9bf275.js.map": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-04febdf28a411a9bf275.js.map",
   "js/application-bb859c936b81fe913e43.js.map": "/packs/js/application-bb859c936b81fe913e43.js.map",
   "js/budget-aa99f33c82f7805cca79.js.map": "/packs/js/budget-aa99f33c82f7805cca79.js.map",
-  "js/config_list-415e2b5a543211e5ca72.js.map": "/packs/js/config_list-415e2b5a543211e5ca72.js.map",
-  "js/create_config-722bb4e752603c8a830f.js.map": "/packs/js/create_config-722bb4e752603c8a830f.js.map",
+  "js/config_list-84fe010192b671307a9b.js.map": "/packs/js/config_list-84fe010192b671307a9b.js.map",
+  "js/create_config-2804963a700c7bd47627.js.map": "/packs/js/create_config-2804963a700c7bd47627.js.map",
   "js/dashboard-f7f54588bd6ac248abac.js.map": "/packs/js/dashboard-f7f54588bd6ac248abac.js.map",
   "js/history-ac55e18780134e944fbd.js.map": "/packs/js/history-ac55e18780134e944fbd.js.map",
   "js/insights-c2e3d12d85251ebe1cdc.js.map": "/packs/js/insights-c2e3d12d85251ebe1cdc.js.map",

@@ -14,6 +14,78 @@
  *= require_self
  */
 
- #manage-config-button{
-    margin-bottom: 16px;
- }
+#manage-config-button {
+   margin-bottom: 16px;
+}
+
+#config-form{
+   margin-bottom: 25px;
+}
+
+#config-list {
+   display: block;
+   margin: 0px 10px 0px 10px;
+   border: #50616c 2px double;
+   background-color: #b5d0e250;
+   border-radius: 10px;
+   padding: 16px;
+}
+
+#config-index {}
+
+#create-config-button {
+   color: green;
+   font-size: x-large;
+   margin-left: 5px;
+   margin-bottom: 20px;
+}
+
+
+#config-list-title-container {
+   display: flex;
+   width: 100%;
+   margin-bottom: 10px;
+}
+
+#config-list-title {
+   margin: auto;
+}
+
+.config-item-container {
+   border-radius: 2px;
+   width: 98%;
+   display: flex;
+   border: black 1px solid;
+   padding: 5px;
+   padding-left: 10px;
+   margin: auto;
+   margin-bottom: 5px;
+   background-color: white;
+}
+
+.config-item-title {
+   margin-left: 10px;
+}
+
+.config-item-options {
+   margin: auto;
+   margin-right: 10px;
+}
+
+.config-item-options span {
+   font-size: x-large;
+   margin-left: 15px;
+}
+
+.config-item-modify {
+   color: #b5d0e2;
+}
+
+.config-item-delete {
+   color: red;
+}
+
+.options-button:hover {
+   cursor: pointer;
+   filter: brightness(.7) !important;
+}
