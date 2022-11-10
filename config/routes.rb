@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options :host => "localhost:3000"
+
   root to: "sessions#new"
 
   resources :sessions, only: [:new, :create] do
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: [:index]
+  resources :confirmation, only: [:index]
   resources :insights, only: [:index]
   resources :expenses, only: [:index]
   resources :expense_uploads, only: [:new] do
@@ -55,7 +58,7 @@ Rails.application.routes.draw do
           post :removeuser
           get :listBudgets
           post :selectbudget
-          get :getbudgetname
+          get :getbudgetid
         end
       end
       #get "/revenues", to: "/revenues#index"
@@ -67,6 +70,7 @@ Rails.application.routes.draw do
 
   
   get "budget", to: "budget#index"
+  get "projections", to: "projections#index"
   get 'user/register', to: 'user#register', as: 'register_user' # new
   post 'user', to: 'user#create' # create
   get "/404", to: "errors#not_found"

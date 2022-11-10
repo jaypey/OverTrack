@@ -16,8 +16,8 @@ const Budgets = {
   updateSelectBudget(data, opts = {}){
     return Base.post(`/budget/selectbudget`, data, opts || {});
   },
-  getSelectedBudgetName(data, opts = {}){
-    return Base.get(`/budget/getbudgetname`, data, opts || {});
+  getSelectedBudgetId(data, opts = {}){
+    return Base.get(`/budget/getbudgetid`, data, opts || {});
   },
   adduser(data, opts = {}){
     return Base.post(`/budget/adduser`, data, opts || {});
