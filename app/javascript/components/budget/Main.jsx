@@ -10,26 +10,7 @@ class Main extends React.Component {
 
         this.state = {
             budgets: [
-                // {
-                //     id: 1, name: 'Perso', users: [
-                //         { id: 1, firstname: 'Laurent', lastname: 'Brochu' },
-                //     ]
-                // },
-                // {
-                //     id: 2, name: 'Famille', users: [
-                //         { id: 2, firstname: 'Laurent', lastname: 'Brochu' },
-                //         { id: 3, firstname: 'Maxime', lastname: 'Lefebvre' },
-                //         { id: 4, firstname: 'Karl', lastname: 'Mainville' },
-                //         { id: 5, firstname: 'Louis', lastname: 'Garceau' }
-                //     ]
-                // },
-                // {
-                //     id: 3, name: 'Entreprise Planto', users: [
-                //         { id: 6, firstname: 'Laurent', lastname: 'Brochu' },
-                //         { id: 7, firstname: 'Maxime', lastname: 'Aubin' },
-                //         { id: 8, firstname: 'Jean-Philippe', lastname: 'Belval' }
-                //     ]
-                // }
+                
             ],
             idSelectedBudget: 0,
             showBudgetCreate: false,
@@ -106,6 +87,7 @@ class Main extends React.Component {
 
     reloadData = () => {
         this.loadBudgets();
+        //this.getselectBudget();
     }
 
     loadBudgets = () => {
@@ -114,6 +96,14 @@ class Main extends React.Component {
           () => { Alerts.error("Budget didn't load correctly"); }
         );
     }
+
+    // getselectBudget = () => {
+    //     Budgets.getSelectedBudgetId().then(
+    //         (cResp) => { this.setState({ idSelectedBudget: cResp }); },
+    //         () => { Alerts.error("Budget didn't load correctly"); }
+    //     )
+    //     console.log(this.state.idSelectedBudget)
+    // }
 
     renderBudgetCreateModal() {
         if (!this.state.showBudgetCreate) { return ''; }

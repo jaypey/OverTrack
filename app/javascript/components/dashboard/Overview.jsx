@@ -5,6 +5,7 @@ import { Numerics } from '../../helpers/main';
 import Progress from '../shared/Progress';
 import GoalFormModal from '../goals/FormModal';
 import { Budgets } from '../../api/main';
+import BudgetSelector from '../shared/BudgetSelector'
 
 class Overview extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount(){
-    this.getSelectedBudgetName();
+    this.getSelectedBudgetId();
   }
 
   openGoal = () => { this.setState({ showGoalModal: true }); }
@@ -49,8 +50,8 @@ class Overview extends React.Component {
     return <GoalFormModal onClose={this.closeGoal} onSave={this.onGoalSave} goals={{ monthly: this.props.monthlyGoal }} />;
   }
 
-  getSelectedBudgetName = async() =>{
-    const selectedBudget = await Budgets.getSelectedBudgetName()
+  getSelectedBudgetId = async() =>{
+    const selectedBudget = await Budgets.getSelectedBudgetId()
     .then(
       (resp) => {return resp;},
       () => {return '';}
@@ -66,9 +67,8 @@ class Overview extends React.Component {
 
     return (
       <div>
-        <h2>{this.state.selectedBudgetName}</h2>
+        
         <div className="mb-10">{today.format('MMMM')} ({daysLeftInMonth} days left)</div>
-
         <div className="flex row-flex flex-space-between flex-baseline mb-10">
           <div><h1>{Numerics.centsToDollars(this.totalSpend())}</h1></div>
           {!this.props.monthlyGoal && (
