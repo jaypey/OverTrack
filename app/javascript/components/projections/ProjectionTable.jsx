@@ -91,11 +91,17 @@ getTotalExpensesProjections() {
   {
     if (i == 0)
     {
-      this.state.totalPerNextMonthsPredictions[i] = this.state.totalPerMonth[0] + this.state.averageVariationPerMonth;
+      if (this.state.totalPerMonth[0] + this.state.averageVariationPerMonth < 0)
+        this.state.totalPerNextMonthsPredictions[i] = 0;
+      else
+        this.state.totalPerNextMonthsPredictions[i] = this.state.totalPerMonth[0] + this.state.averageVariationPerMonth;
     }
     else
     {
-      this.state.totalPerNextMonthsPredictions[i] = this.state.totalPerNextMonthsPredictions[i - 1] + this.state.averageVariationPerMonth;
+      if (this.state.totalPerNextMonthsPredictions[i - 1] + this.state.averageVariationPerMonth < 0)
+        this.state.totalPerNextMonthsPredictions[i] = 0;
+      else
+        this.state.totalPerNextMonthsPredictions[i] = this.state.totalPerNextMonthsPredictions[i - 1] + this.state.averageVariationPerMonth;
     }
   }
 }

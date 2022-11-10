@@ -94,11 +94,17 @@ class ProjectionsChart extends React.Component {
     {
       if (i == 0)
       {
-        this.state.totalPerNextMonthsPredictions[i] = this.state.totalPerMonth[0] + this.state.averageVariationPerMonth;
+        if (this.state.totalPerMonth[0] + this.state.averageVariationPerMonth < 0)
+          this.state.totalPerNextMonthsPredictions[i] = 0;
+        else
+          this.state.totalPerNextMonthsPredictions[i] = this.state.totalPerMonth[0] + this.state.averageVariationPerMonth;
       }
       else
       {
-        this.state.totalPerNextMonthsPredictions[i] = this.state.totalPerNextMonthsPredictions[i - 1] + this.state.averageVariationPerMonth;
+        if (this.state.totalPerNextMonthsPredictions[i - 1] + this.state.averageVariationPerMonth < 0)
+          this.state.totalPerNextMonthsPredictions[i] = 0;
+        else
+          this.state.totalPerNextMonthsPredictions[i] = this.state.totalPerNextMonthsPredictions[i - 1] + this.state.averageVariationPerMonth;
       }
     }
   }
@@ -139,11 +145,17 @@ class ProjectionsChart extends React.Component {
     {
       if (i == 0)
       {
-        this.state.totalPerNextMonthsPredictionsRevenues[i] = this.state.totalPerMonthRevenues[0] + this.state.averageVariationPerMonthRevenues;
+        if (this.state.totalPerMonthRevenues[0] + this.state.averageVariationPerMonthRevenues < 0)
+          this.state.totalPerNextMonthsPredictionsRevenues[i] = 0;
+        else
+          this.state.totalPerNextMonthsPredictionsRevenues[i] = this.state.totalPerMonthRevenues[0] + this.state.averageVariationPerMonthRevenues;
       }
       else
       {
-        this.state.totalPerNextMonthsPredictionsRevenues[i] = this.state.totalPerNextMonthsPredictionsRevenues[i - 1] + this.state.averageVariationPerMonthRevenues;
+        if (this.state.totalPerNextMonthsPredictionsRevenues[i - 1] + this.state.averageVariationPerMonthRevenues < 0)
+          this.state.totalPerNextMonthsPredictionsRevenues[i] = 0;
+        else
+          this.state.totalPerNextMonthsPredictionsRevenues[i] = this.state.totalPerNextMonthsPredictionsRevenues[i - 1] + this.state.averageVariationPerMonthRevenues;
       }
     }
   }
