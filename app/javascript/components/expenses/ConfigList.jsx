@@ -1,4 +1,5 @@
 import React from 'react';
+import { CsvConfig } from '../../api/main';
 
 class ConfigList extends React.Component {
     constructor(props) {
@@ -6,6 +7,11 @@ class ConfigList extends React.Component {
 
         this.state = {
         };
+
+        CsvConfig.list("").then((response)=>{
+
+            console.log(response);
+        });
     }
     render() {
         return (

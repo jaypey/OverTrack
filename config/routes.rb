@@ -23,7 +23,7 @@ Rails.application.routes.draw do
           post :bulk_create
         end
       end
-      resources :csv_config, only: [:create]
+      resources :csv_config, only: [:index, :create]
       
       resources :categories, only: [:index, :create, :update, :destroy] do
         collection do
