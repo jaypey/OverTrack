@@ -40,9 +40,10 @@ class CsvConfig < ApplicationRecord
       ['descriptions', 'ignore_substrings'],
       ['categories', 'index'],
       ['categories', 'mappings'],
-      ['amounts', 'index'],
-      ['amounts', 'spend_is_negative'],
-      ['amounts', 'skip_non_spend'],
+      ['spends', 'index'],
+      ['spends', 'skip_non_spend'],
+      ['incomes', 'index'],
+      ['incomes', 'skip_non_income'],
       ['timestamps', 'index'],
     ]
 
