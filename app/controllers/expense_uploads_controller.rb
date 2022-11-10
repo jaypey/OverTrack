@@ -51,4 +51,7 @@ class ExpenseUploadsController < ApplicationController
 
   def create_config
   end
+
+  def config_list
+  end
 end
