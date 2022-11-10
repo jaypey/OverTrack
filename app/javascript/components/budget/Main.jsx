@@ -135,11 +135,11 @@ class Main extends React.Component {
     }
 
 
-    renderBudgetUsers(user) {
+    renderBudgetUsers(budget_user) {
         return (
-            <tr id={user.id} key={user.id}>
+            <tr id={budget_user.user.id} key={budget_user.user.id}>
                 <td className="input-group">
-                    <label className="bg-gray-slight-contrast">{user.firstname + " " + user.lastname}</label>
+                    <label className="bg-gray-slight-contrast">{budget_user.user.firstname + " " + budget_user.user.lastname}</label>
                 </td>
 
                 <td className="input-group mw-150">
@@ -153,7 +153,7 @@ class Main extends React.Component {
                 </td>
 
                 <td>
-                    <a onClick={() => this.handleUserRemove(user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
+                    <a onClick={() => this.handleUserRemove(budget_user.user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
                 </td>
             </tr>
         );
@@ -180,7 +180,7 @@ class Main extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {budget.users.map((user) => this.renderBudgetUsers(user))}
+                            {budget.budget_users.map((budget_user) => this.renderBudgetUsers(budget_user))}
                         </tbody>
                     </table>
                     <button onClick={() => this.openUserAdd()} className='btn btn-round btn-accept'><i className='text-light fa fa-plus'></i></button>

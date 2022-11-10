@@ -3,7 +3,7 @@ module Api; module V1
         include Rails.application.routes.url_helpers
 
         def index 
-            render json: User.find(cookies.signed[:user_id]).budgets.to_json(include: {users: { only: [:firstname, :lastname, :email, :id]}})
+            render json: User.find(cookies.signed[:user_id]).budgets.to_json(:include => {:budget_users => {:include => {:user => {:only => [:firstname, :lastname, :email, :id]}}}})
         end
 
         def create
