@@ -4,7 +4,7 @@ import Overview from './Overview';
 import CategoriesList from './CategoriesList';
 import ExpenseFormModal from '../expenses/FormModal';
 import PieChart from '../shared/PieChart';
-import { Categories, Revenues, Expenses, Goals, Reports } from '../../api/main';
+import { Categories, Revenues, Expenses, Goals, Reports, Tasks} from '../../api/main';
 import { Alerts } from '../../helpers/main';
 import BudgetSelector from '../shared/BudgetSelector'
 
@@ -29,10 +29,15 @@ class Main extends React.Component {
       labels: [],
       colors: [],
     };
+    this.testTask();  
   }
 
   componentDidMount() {
     this.reloadData();
+  }
+
+  testTask = () => {
+    console.log(Tasks.list());
   }
 
   openExpenseCreate = () => { this.setState({ showExpenseCreateModal: true }); }

@@ -28,7 +28,8 @@ class CreateConfig extends React.Component {
   onSave = (response) => {
     if (response.id != null) {
       console.log(`Saved config ${response.name}(${response.id}) successfully`);
-      Alerts.success(`Config ${response.name}(${response.id}) saved successfully!`)
+      //Alerts.success(`Config ${response.name}(${response.id}) saved successfully!`)
+      window.location.href='/expense_uploads/config_list';
     }
     else {
       Alerts.genericError();
@@ -247,7 +248,7 @@ class CreateConfig extends React.Component {
 
         <div className='config-button-container'>
           <button id="config-submit" disabled={!this.state.isValid} type="submit" className='btn btn-primary'>Create</button>
-          <a id="config-back" className='btn' href='/expense_uploads/new'>Back</a>
+          <a id="config-back" className='btn' href='/expense_uploads/config_list'>Back</a>
         </div>
       </form>
 
