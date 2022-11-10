@@ -60,3 +60,27 @@ ul {
   list-style: none;
   padding-left: 0;
 }
+
+.Details {
+  background: #EEF0F5;
+  max-width: 600px;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 2px 2px #d0d0d0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+
+  p{
+    margin: 30px;
+    font-size: larger;
+  }
+
+  form {
+    width: 60%;
+  }
+
+  img {
+    border-radius: 10px;
+  }
+}

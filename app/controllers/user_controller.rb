@@ -28,7 +28,11 @@ class UserController < ApplicationController
                     render :register, locals: { user: user }
                 end
             end
-          end
-      end
+        end
+    end
+
+    def index
+        
+    end
 end
   
