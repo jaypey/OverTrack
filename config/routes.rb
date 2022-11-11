@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: [:index]
-  resources :confirmation, only: [:index]
+  resources :confirmation, only: [:index] do
+    get :account, on: :collection
+  end
   resources :insights, only: [:index]
   resources :expenses, only: [:index]
   resources :expense_uploads, only: [:new] do

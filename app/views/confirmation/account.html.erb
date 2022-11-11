@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OnTrack</title>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <%= favicon_link_tag asset_path('favicon.ico'), rel: 'icon', type: "image/x-icon" %>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+
+  <body>
+<div class="login" style="margin-top:15vh;">
+  <div class="flex flex-space-between">
+    
+        <div class="status-text">
+            <h1>Confirmed!</h2>
+            <h4>You successfully confirmed your account!</h4>
+            <a href="<%= url_for controller:'sessions', action:'new' %>">Log in</a>
+            <%= image_tag "historian.png" %>
+        </div>
+  </div>
+</div>
+  </body>
+</html>
+
+
+

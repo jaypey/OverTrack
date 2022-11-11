@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2031_42_15_562251) do
+ActiveRecord::Schema.define(version: 2031_42_15_562252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 2031_42_15_562251) do
     t.string "lastname", null: false
     t.string "phone"
     t.string "password_digest"
+    t.string "token"
+    t.boolean "confirmed"
   end
 
   add_foreign_key "budgets", "users", column: "owner_id"
