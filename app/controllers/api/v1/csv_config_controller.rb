@@ -10,7 +10,8 @@ module Api; module V1
         render json: csvconfig, status: successful ? 200 : 500
     end
     def destroy
-      csvconfig = ::CsvConfig.find(params[:id])
+      csvconfig = ::CsvConfig.where(users_id: cookies.signed[:user_id])
+      csvconfig = csvconfig.find(params[:id])
       successful = csvconfig.destroy
       render json: params[:id], status: successful ? 200 : 500
     end
