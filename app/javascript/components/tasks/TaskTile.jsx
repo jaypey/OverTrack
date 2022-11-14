@@ -10,7 +10,8 @@ class TaskTile extends React.Component {
   }
 
   updateTask = (id, updates) => {
-    Tasks.update(id, updates)
+    Tasks.update(id, updates).then(
+        () => { this.props.onChange()})
   }
 
   render() {
@@ -41,7 +42,7 @@ TaskTile.defaultProps = {
 TaskTile.propTypes = {
     task: PropTypes.object,
     taskCategory: PropTypes.object,
-    // onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 
 export default TaskTile;

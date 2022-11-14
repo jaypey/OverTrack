@@ -15,7 +15,7 @@ class TasksList extends React.Component {
         return (
           <div>
             {this.props.tasks.map((task) => (
-                <TaskTile task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})}/>
+                <TaskTile task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})} onChange={this.props.onChange}/>
             ))}
           </div>
         );
@@ -30,7 +30,7 @@ TasksList.defaultProps = {
 TasksList.propTypes = {
     categories : PropTypes.array,
     tasks: PropTypes.array,
-    // onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired
 };
 
 export default TasksList
