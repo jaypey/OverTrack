@@ -50,8 +50,8 @@ class Main extends React.Component {
     return (
       <div className='container'>
         <h1>Tasks page</h1>
-        <div className="container pv-100">
-          <TasksList tasks={this.state.tasks} onChange={this.reloadData} />
+        <div className="container">
+          <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
         </div>
       </div>
       

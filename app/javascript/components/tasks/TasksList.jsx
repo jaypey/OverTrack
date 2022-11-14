@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
+import TaskTile from './TaskTile';
 
 class TasksList extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class TasksList extends React.Component {
         return (
           <div>
             {this.props.tasks.map((task) => (
-                <p>{task.description}</p>
+                <TaskTile task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})}/>
             ))}
           </div>
         );
@@ -22,12 +23,14 @@ class TasksList extends React.Component {
 }
 
 TasksList.defaultProps = {
-    tasks: []
+    tasks: [],
+    categories: [],
   };
   
 TasksList.propTypes = {
+    categories : PropTypes.array,
     tasks: PropTypes.array,
-    onChange: PropTypes.func.isRequired
+    // onChange: PropTypes.func.isRequired
 };
 
 export default TasksList
