@@ -9,5 +9,10 @@ module Api; module V1
         successful = csvconfig.save
         render json: csvconfig, status: successful ? 200 : 500
     end
+    def destroy
+      csvconfig = ::CsvConfig.find(params[:id])
+      successful = csvconfig.destroy
+      render json: params[:id], status: successful ? 200 : 500
+    end
   end
 end; end

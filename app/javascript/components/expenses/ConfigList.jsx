@@ -1,6 +1,7 @@
 import React from 'react';
 import { CsvConfig } from '../../api/main';
 import ConfigItem from './ConfigItem';
+import Alerts from '../../helpers/alerts';
 
 class ConfigList extends React.Component {
     constructor(props) {
@@ -12,9 +13,21 @@ class ConfigList extends React.Component {
 
         CsvConfig.list("").then((response) => {
 
-            console.log(response);
             this.setState({ configs: response });
         });
+    }
+
+
+    handleDelete = (id) => {
+        Alerts.genericDelete("csv config").then((result) => {
+            if (result.value) {
+                CsvConfig.delete(id).then((response) => {
+                    if (response != null) {
+                        this.setState({ configs: this.state.configs.filter(x => x.id != response) });
+                    }
+                });
+            }
+        })
     }
 
 
@@ -29,13 +42,14 @@ class ConfigList extends React.Component {
                     <span
                         id="create-config-button"
                         className="fa fa-plus options-button"
-                        onClick={() => { window.location.href ="/expense_uploads/create_config?";}}
+                        onClick={() => { window.location.href = "/expense_uploads/create_config?"; }}
                     />
                     {
                         this.state.configs.map((config) => (
                             <ConfigItem
                                 key={config.id}
                                 config={config}
+                                handleDelete={this.handleDelete}
                             />
                         ))
                     }

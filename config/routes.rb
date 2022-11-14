@@ -26,7 +26,7 @@ Rails.application.routes.draw do
           post :bulk_create
         end
       end
-      resources :csv_config, only: [:index, :create]
+      resources :csv_config, only: [:index, :create, :destroy]
       
       resources :task, only: [:index, :create, :update, :destroy]
 
