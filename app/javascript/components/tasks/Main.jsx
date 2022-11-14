@@ -1,6 +1,5 @@
 import React from 'react';
-import moment from 'moment';
-import ExpenseFormModal from '../expenses/FormModal';
+import TasksList from './TasksList';
 import { Categories, Revenues, Expenses, Goals, Reports, Tasks } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
@@ -51,7 +50,11 @@ class Main extends React.Component {
     return (
       <div className='container'>
         <h1>Tasks page</h1>
+        <div className="container pv-100">
+          <TasksList tasks={this.state.tasks} onChange={this.reloadData} />
+        </div>
       </div>
+      
     );
   }
 }
