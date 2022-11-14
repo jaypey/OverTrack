@@ -28,7 +28,8 @@ Rails.application.routes.draw do
       end
       resources :csv_config, only: [:index, :create]
       
-      resources :task, only: [:index, :create, :update, :destroy]
+      resources :task, only: [:index, :create, :update, :destroy] do
+      end
 
       resources :categories, only: [:index, :create, :update, :destroy] do
         collection do
