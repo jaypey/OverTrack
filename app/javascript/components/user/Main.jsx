@@ -31,8 +31,8 @@ class Main extends React.Component{
         Users.list().then(
           (cResp) => { this.setState({ id: cResp.id,
                                         firstname: cResp.firstname,
-                                        lastname: cResp.lastname,
                                         email: cResp.email,
+                                        lastname: cResp.lastname,
                                         phone: cResp.phone }); },
           () => { Alerts.error("User didn't load correctly"); }
         );
@@ -40,7 +40,6 @@ class Main extends React.Component{
 
     handleErrors = (key, errs) => { this.setState({ errors: Object.assign(this.state.errors, { [key]: errs }) }); }
 
-    handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
     handleFirstnameChange = (e) => { this.setState({ firstname: e.target.value }); }
     handleLastnameChange = (e) => { this.setState({ lastname: e.target.value }); }
     handlePhoneChange = (e) => { this.setState({ phone: e.target.value }); }
@@ -51,8 +50,8 @@ class Main extends React.Component{
     
         let apiCall = null;
         apiCall = Users.update(this.state.id,
-                                {email: this.state.email, 
-                                firstname: this.state.firstname, 
+                                {firstname: this.state.firstname,
+                                email: this.state.email, 
                                 lastname: this.state.lastname,
                                 phone: this.state.phone});
     
@@ -88,16 +87,6 @@ class Main extends React.Component{
                             <FieldErrors
                                 label="Lastname"
                                 val={this.state.lastname}
-                                validations={{ required: true }}
-                                show={this.state.submitted} handleErrors={this.handleErrors}
-                            />
-                        </div>
-                        <div className="input-group">
-                            <label className="required">Email</label>
-                            <input style={{width: "200%"}} type="text" value={this.state.email} onChange={this.handleEmailChange} />
-                            <FieldErrors
-                                label="Email"
-                                val={this.state.email}
                                 validations={{ required: true }}
                                 show={this.state.submitted} handleErrors={this.handleErrors}
                             />

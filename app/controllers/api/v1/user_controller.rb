@@ -6,7 +6,7 @@ module Api; module V1
 
         def update
             user = ::User.find(params[:id])
-            successful = user.update(firstname: params[:firstname], lastname: params[:lastname], phone: params[:phone], email: params[:email])
+            successful = user.update(firstname: params[:firstname], lastname: params[:lastname], phone: params[:phone])
             render json: user, status: successful ? 200 : 501
         end
     end
