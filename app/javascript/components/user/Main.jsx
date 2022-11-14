@@ -25,7 +25,7 @@ class Main extends React.Component{
     }
 
     openEdit = () => { this.setState({ edit: true }); }
-    closeEdit = () => { this.setState({ edit: false }); }
+    closeEdit = () => { this.setState({ edit: false }); this.loadUser(); }
 
     loadUser = () => {
         Users.list().then(
@@ -57,9 +57,8 @@ class Main extends React.Component{
     
         apiCall.then(
           (resp) => { this.loadUser(); this.setState({ edit: false }); },
-          (error) => { error.status == 408 ? Alerts.genericConflict('User informations invalid!') : Alerts.genericError(); },
+          (error) => { error.status == 408 ? Alerts.genericConflict('User informations invalid!') : error.status == 502 ? Alerts.genericConflict('Phone number invalid!') : Alerts.genericError(); },
         );
-        this.setState({ edit: false });
       }
 
     renderUsersEdit() {
