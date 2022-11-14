@@ -1,8 +1,9 @@
 {
   "application.js": "/packs/js/application-bb859c936b81fe913e43.js",
-  "budget.js": "/packs/js/budget-91e4fb586ffde803b11d.js",
-  "create_config.js": "/packs/js/create_config-06016652614e5744bd02.js",
-  "dashboard.js": "/packs/js/dashboard-8551e6e99f65a24de51d.js",
+  "budget.js": "/packs/js/budget-8994427ce33468a184f5.js",
+  "config_list.js": "/packs/js/config_list-abcd34ac27a0453aed9c.js",
+  "create_config.js": "/packs/js/create_config-5cf3d40c7818d3748a3f.js",
+  "dashboard.js": "/packs/js/dashboard-afac07013d20d6161742.js",
   "entrypoints": {
     "application": {
       "assets": {
@@ -16,11 +17,21 @@
       "assets": {
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
-          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+          "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
           "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js",
-          "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-b595ce3ae3debdff0888.js",
-          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js",
-          "/packs/js/budget-91e4fb586ffde803b11d.js"
+          "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js",
+          "/packs/js/budget-8994427ce33468a184f5.js"
+        ]
+      }
+    },
+    "config_list": {
+      "assets": {
+        "js": [
+          "/packs/js/runtime-cd31353a17a0505265f4.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+          "/packs/js/config_list-abcd34ac27a0453aed9c.js"
         ]
       }
     },
@@ -28,9 +39,10 @@
       "assets": {
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
-          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
-          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js",
-          "/packs/js/create_config-06016652614e5744bd02.js"
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+          "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js",
+          "/packs/js/create_config-5cf3d40c7818d3748a3f.js"
         ]
       }
     },
@@ -38,14 +50,15 @@
       "assets": {
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
-          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+          "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
           "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js",
-          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-e9d792991c76575fea95.js",
+          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
           "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
-          "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-b595ce3ae3debdff0888.js",
-          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js",
-          "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-7b54fdac1d11b3116163.js",
-          "/packs/js/dashboard-8551e6e99f65a24de51d.js"
+          "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js",
+          "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-ccf103b1a1b55ed71c73.js",
+          "/packs/js/dashboard-afac07013d20d6161742.js"
         ]
       }
     },
@@ -53,11 +66,12 @@
       "assets": {
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
-          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+          "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
           "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js",
-          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-e9d792991c76575fea95.js",
-          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js",
-          "/packs/js/history-8d21b6a71e7b6cb82050.js"
+          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js",
+          "/packs/js/history-762eb8c4e137a14e9381.js"
         ]
       }
     },
@@ -65,11 +79,12 @@
       "assets": {
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
-          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+          "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
           "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js",
           "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
-          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js",
-          "/packs/js/insights-3e897d3e8831cb324eb6.js"
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js",
+          "/packs/js/insights-42c508c0c1b706a24f2e.js"
         ]
       }
     },
@@ -77,12 +92,14 @@
       "assets": {
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
-          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+          "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
           "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js",
-          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-e9d792991c76575fea95.js",
-          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js",
-          "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-7b54fdac1d11b3116163.js",
-          "/packs/js/projections-758902a2d6c943d0cbff.js"
+          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+          "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js",
+          "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-ccf103b1a1b55ed71c73.js",
+          "/packs/js/projections-22b4dda2de95ff8e8ef0.js"
         ]
       }
     },
@@ -90,41 +107,45 @@
       "assets": {
         "js": [
           "/packs/js/runtime-cd31353a17a0505265f4.js",
-          "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
+          "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+          "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
           "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js",
-          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-e9d792991c76575fea95.js",
-          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js",
-          "/packs/js/upload_preview-245c1f629da49e35cae4.js"
+          "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+          "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js",
+          "/packs/js/upload_preview-245abb12e62933593cfe.js"
         ]
       }
     }
   },
-  "history.js": "/packs/js/history-8d21b6a71e7b6cb82050.js",
-  "insights.js": "/packs/js/insights-3e897d3e8831cb324eb6.js",
-  "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js",
-  "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js.map": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-a3c347db10051b0a0338.js.map",
-  "js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-7b54fdac1d11b3116163.js": "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-7b54fdac1d11b3116163.js",
-  "js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-7b54fdac1d11b3116163.js.map": "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-7b54fdac1d11b3116163.js.map",
+  "history.js": "/packs/js/history-762eb8c4e137a14e9381.js",
+  "insights.js": "/packs/js/insights-42c508c0c1b706a24f2e.js",
+  "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js",
+  "js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js.map": "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-7f88bca54c21b898dbd0.js.map",
+  "js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-ccf103b1a1b55ed71c73.js": "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-ccf103b1a1b55ed71c73.js",
+  "js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-ccf103b1a1b55ed71c73.js.map": "/packs/js/app_javascript_components_expenses_FormModal_jsx-app_javascript_components_goals_FormModal_js-20b2f7-ccf103b1a1b55ed71c73.js.map",
   "js/application-bb859c936b81fe913e43.js.map": "/packs/js/application-bb859c936b81fe913e43.js.map",
-  "js/budget-91e4fb586ffde803b11d.js.map": "/packs/js/budget-91e4fb586ffde803b11d.js.map",
-  "js/create_config-06016652614e5744bd02.js.map": "/packs/js/create_config-06016652614e5744bd02.js.map",
-  "js/dashboard-8551e6e99f65a24de51d.js.map": "/packs/js/dashboard-8551e6e99f65a24de51d.js.map",
-  "js/history-8d21b6a71e7b6cb82050.js.map": "/packs/js/history-8d21b6a71e7b6cb82050.js.map",
-  "js/insights-3e897d3e8831cb324eb6.js.map": "/packs/js/insights-3e897d3e8831cb324eb6.js.map",
-  "js/projections-758902a2d6c943d0cbff.js.map": "/packs/js/projections-758902a2d6c943d0cbff.js.map",
+  "js/budget-8994427ce33468a184f5.js.map": "/packs/js/budget-8994427ce33468a184f5.js.map",
+  "js/config_list-abcd34ac27a0453aed9c.js.map": "/packs/js/config_list-abcd34ac27a0453aed9c.js.map",
+  "js/create_config-5cf3d40c7818d3748a3f.js.map": "/packs/js/create_config-5cf3d40c7818d3748a3f.js.map",
+  "js/dashboard-afac07013d20d6161742.js.map": "/packs/js/dashboard-afac07013d20d6161742.js.map",
+  "js/history-762eb8c4e137a14e9381.js.map": "/packs/js/history-762eb8c4e137a14e9381.js.map",
+  "js/insights-42c508c0c1b706a24f2e.js.map": "/packs/js/insights-42c508c0c1b706a24f2e.js.map",
+  "js/projections-22b4dda2de95ff8e8ef0.js.map": "/packs/js/projections-22b4dda2de95ff8e8ef0.js.map",
   "js/runtime-cd31353a17a0505265f4.js.map": "/packs/js/runtime-cd31353a17a0505265f4.js.map",
-  "js/upload_preview-245c1f629da49e35cae4.js.map": "/packs/js/upload_preview-245c1f629da49e35cae4.js.map",
-  "js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js": "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js",
-  "js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js.map": "/packs/js/vendors-node_modules_axios_index_js-node_modules_moment_locale_af_js-node_modules_moment_loca-6cbc58-04b63c1cefb9e6334f69.js.map",
-  "js/vendors-node_modules_babel_runtime_regenerator_index_js-b595ce3ae3debdff0888.js": "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-b595ce3ae3debdff0888.js",
-  "js/vendors-node_modules_babel_runtime_regenerator_index_js-b595ce3ae3debdff0888.js.map": "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-b595ce3ae3debdff0888.js.map",
+  "js/upload_preview-245abb12e62933593cfe.js.map": "/packs/js/upload_preview-245abb12e62933593cfe.js.map",
+  "js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js": "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
+  "js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js.map": "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js.map",
+  "js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js": "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js",
+  "js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js.map": "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js.map",
   "js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js": "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js",
   "js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js.map": "/packs/js/vendors-node_modules_chart_js_dist_Chart_js-2f4d47fcf763590b8ca2.js.map",
+  "js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js": "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
+  "js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js.map": "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js.map",
   "js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js": "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js",
   "js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js.map": "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js.map",
-  "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-e9d792991c76575fea95.js": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-e9d792991c76575fea95.js",
-  "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-e9d792991c76575fea95.js.map": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-e9d792991c76575fea95.js.map",
-  "projections.js": "/packs/js/projections-758902a2d6c943d0cbff.js",
+  "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js",
+  "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js.map": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js.map",
+  "projections.js": "/packs/js/projections-22b4dda2de95ff8e8ef0.js",
   "runtime.js": "/packs/js/runtime-cd31353a17a0505265f4.js",
-  "upload_preview.js": "/packs/js/upload_preview-245c1f629da49e35cae4.js"
+  "upload_preview.js": "/packs/js/upload_preview-245abb12e62933593cfe.js"
 }

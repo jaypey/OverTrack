@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     collection do
       post :preview
       get :create_config
+      get :config_list
     end
   end
 
@@ -25,8 +26,10 @@ Rails.application.routes.draw do
           post :bulk_create
         end
       end
-      resources :csv_config, only: [:create]
+      resources :csv_config, only: [:index, :create]
       
+      resources :task, only: [:index, :create, :update, :destroy]
+
       resources :categories, only: [:index, :create, :update, :destroy] do
         collection do
           get :listExpenses
@@ -64,7 +67,11 @@ Rails.application.routes.draw do
           get :getbudgetid
         end
       end
+
+      resources :user, only: [:index] do
+      end
       #get "/revenues", to: "/revenues#index"
+      # get "/tasks", to: "/tasks#index"
       #post "/revenues", to: "/revenues#create"
       #post "/revenues", to: "/revenues#destroy"
       #post "/revenues", to: "/revenues#update"
@@ -73,7 +80,9 @@ Rails.application.routes.draw do
 
   
   get "budget", to: "budget#index"
+  get "user", to: "user#index"
   get "projections", to: "projections#index"
+  get "tasks", to: "tasks#index"
   get 'user/register', to: 'user#register', as: 'register_user' # new
   post 'user', to: 'user#create' # create
   get "/404", to: "errors#not_found"

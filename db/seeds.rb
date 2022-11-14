@@ -137,3 +137,14 @@ if (Category.where(name: "T-Shirt sales") == []) then
         updated_at: Date.today
     }])
     end
+    
+    if (Task.where(id: 1) == []) then
+    
+        task = Task.create!(
+            title: "T-Shirt sales",
+            description: "blue",
+            due_date: Date.today,
+            category_id: categories4.id
+        )
+        end
+

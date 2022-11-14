@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2031_42_15_562252) do
+ActiveRecord::Schema.define(version: 2031_42_15_562250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 2031_42_15_562252) do
     t.bigint "role_value", null: false
     t.string "role_name", null: false
   end
+  create_table "tasks", force: :cascade do |t|
+    t.boolean "is_done"
+    t.string "title"
+    t.text "description"
+    t.date "due_date"
+    t.integer "category_id"
+    t.bigint "budget_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["budget_id"], name: "index_tasks_on_budget_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -106,4 +117,5 @@ ActiveRecord::Schema.define(version: 2031_42_15_562252) do
   add_foreign_key "budgets", "users", column: "owner_id"
   add_foreign_key "categories", "budgets"
   add_foreign_key "csv_configs", "users", column: "users_id"
+  add_foreign_key "tasks", "budgets"
 end
