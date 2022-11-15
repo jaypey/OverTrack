@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2031_42_15_562250) do
+ActiveRecord::Schema.define(version: 2031_42_15_562252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2031_42_15_562250) do
     t.bigint "role_value", null: false
     t.string "role_name", null: false
   end
+
   create_table "tasks", force: :cascade do |t|
     t.boolean "is_done"
     t.string "title"
