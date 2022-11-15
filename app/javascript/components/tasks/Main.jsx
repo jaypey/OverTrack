@@ -2,7 +2,8 @@ import React from 'react';
 import TasksList from './TasksList';
 import { Categories, Revenues, Expenses, Goals, Reports, Tasks } from '../../api/main';
 import { Alerts } from '../../helpers/main';
-import BudgetSelector from '../shared/BudgetSelector'
+import BudgetSelector from '../shared/BudgetSelector';
+import TaskFormModal from './FormModal';
 
 // Besoins (API)
 // Toutes les catégories
@@ -21,6 +22,7 @@ class Main extends React.Component {
     this.state = {
       categories: [],
       tasks: [],
+      showTaskCreateModal: false,
     };
   }
 
@@ -28,10 +30,18 @@ class Main extends React.Component {
     this.reloadData();
   }
 
+  onTaskSave = () => {
+    this.closeTaskCreate();
+    this.reloadData();
+  }
+
   reloadData = () => {
     this.loadCategories();
     this.loadTasks();
   }
+
+  openTaskCreate = () => { this.setState({ showTaskCreateModal: true }); }
+  closeTaskCreate = () => { this.setState({ showTaskCreateModal: false }); }
 
   loadCategories = () => {
     Categories.list().then(
@@ -47,18 +57,26 @@ class Main extends React.Component {
     );
   }
 
+  renderTaskCreateModal() {
+    if (!this.state.showTaskCreateModal) { return ''; }
+    return <TaskFormModal onClose={this.closeTaskCreate} onSave={this.onTaskSave} />;
+  }
+
   render() {
     return (
       <div className='container'>
+        {this.renderTaskCreateModal()}
         <h1>Tasks for</h1>
           <BudgetSelector
           onChange={this.reloadData}
           />
         <div className="container">
+          <button className="btn btn-round btn-dark mt-10" onClick={this.openTaskCreate}>+ add a task</button>
+        </div>
+        <div className="container">
           <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
         </div>
       </div>
-      
     );
   }
 }

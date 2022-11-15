@@ -14,7 +14,13 @@ module Api; module V1
 
         def update
             task = ::Task.find(params[:id])
-            successful = task.update(is_done: params[:is_done], title: params[:title], description: params[:description], due_date: params[:due_date], category_id: params[:category_id])
+            successful = task.update(
+                is_done: params.fetch(:is_done, task.is_done),
+                title: params.fetch(:title, task.title),
+                description: params.fetch(:description, task.description),
+                due_date: params.fetch(:due_date, task.due_date), 
+                category_id: params.fetch(:category_id, task.category_id),
+            )
             render json: task, status: successful ? 200 : 500
         end
 
