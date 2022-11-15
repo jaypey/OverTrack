@@ -1,7 +1,7 @@
 module Api; module V1
     class TaskController < ApplicationController
         def index
-            render json: ::Task.where({budget_id: cookies.signed[:selectedBudget]}).order(:due_date, :title)
+            render json: ::Task.where({budget_id: cookies.signed[:selectedBudget]}).order(:is_done, :due_date, :title)
             # add .order(:due_date)
         end
 

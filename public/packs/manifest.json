@@ -110,8 +110,9 @@
           "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
           "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-488603-fa694e01b8d4a60b228a.js",
           "/packs/js/vendors-node_modules_prop-types_index_js-b07f78e6e81c92a85b08.js",
+          "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-c87eeed88d7ad9ed371b.js",
           "/packs/js/app_javascript_api_main_js-app_javascript_helpers_main_js-node_modules_moment_locale_sync_rec-f85292-eae11ba8f708c828980e.js",
-          "/packs/js/tasks-5cb8edcb818455254e76.js"
+          "/packs/js/tasks-f3303a40dd9f382c842f.js"
         ]
       }
     },
@@ -144,7 +145,7 @@
   "js/insights-42c508c0c1b706a24f2e.js.map": "/packs/js/insights-42c508c0c1b706a24f2e.js.map",
   "js/projections-22b4dda2de95ff8e8ef0.js.map": "/packs/js/projections-22b4dda2de95ff8e8ef0.js.map",
   "js/runtime-cd31353a17a0505265f4.js.map": "/packs/js/runtime-cd31353a17a0505265f4.js.map",
-  "js/tasks-5cb8edcb818455254e76.js.map": "/packs/js/tasks-5cb8edcb818455254e76.js.map",
+  "js/tasks-f3303a40dd9f382c842f.js.map": "/packs/js/tasks-f3303a40dd9f382c842f.js.map",
   "js/upload_preview-245abb12e62933593cfe.js.map": "/packs/js/upload_preview-245abb12e62933593cfe.js.map",
   "js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js": "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js",
   "js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js.map": "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-47470756f11657e399e3.js.map",
@@ -160,6 +161,6 @@
   "js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js.map": "/packs/js/vendors-node_modules_react-datepicker_dist_react-datepicker_min_js-node_modules_react-text-ma-b62690-bee8d22cfcdf5860b44a.js.map",
   "projections.js": "/packs/js/projections-22b4dda2de95ff8e8ef0.js",
   "runtime.js": "/packs/js/runtime-cd31353a17a0505265f4.js",
-  "tasks.js": "/packs/js/tasks-5cb8edcb818455254e76.js",
+  "tasks.js": "/packs/js/tasks-f3303a40dd9f382c842f.js",
   "upload_preview.js": "/packs/js/upload_preview-245abb12e62933593cfe.js"
 }

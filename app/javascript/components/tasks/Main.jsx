@@ -2,6 +2,7 @@ import React from 'react';
 import TasksList from './TasksList';
 import { Categories, Revenues, Expenses, Goals, Reports, Tasks } from '../../api/main';
 import { Alerts } from '../../helpers/main';
+import BudgetSelector from '../shared/BudgetSelector'
 
 // Besoins (API)
 // Toutes les catégories
@@ -49,7 +50,10 @@ class Main extends React.Component {
   render() {
     return (
       <div className='container'>
-        <h1>Tasks page</h1>
+        <h1>Tasks for</h1>
+          <BudgetSelector
+          onChange={this.reloadData}
+          />
         <div className="container">
           <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
         </div>
