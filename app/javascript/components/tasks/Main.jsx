@@ -59,7 +59,7 @@ class Main extends React.Component {
 
   renderTaskCreateModal() {
     if (!this.state.showTaskCreateModal) { return ''; }
-    return <TaskFormModal onClose={this.closeTaskCreate} onSave={this.onTaskSave} />;
+    return <TaskFormModal onClose={this.closeTaskCreate} onSave={this.onTaskSave} categories={this.state.categories}/>;
   }
 
   render() {
@@ -70,12 +70,8 @@ class Main extends React.Component {
           <BudgetSelector
           onChange={this.reloadData}
           />
-        <div className="container">
-          <button className="btn btn-round btn-dark mt-10" onClick={this.openTaskCreate}>+ add a task</button>
-        </div>
-        <div className="container">
-          <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
-        </div>
+        <button className="btn btn-round btn-dark mt-10" onClick={this.openTaskCreate}>+ add a task</button>
+        <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
       </div>
     );
   }

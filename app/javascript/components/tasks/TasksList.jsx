@@ -15,7 +15,7 @@ class TasksList extends React.Component {
         return (
           <div>
             {this.props.tasks.map((task) => (
-                <TaskTile task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})} onChange={this.props.onChange}/>
+                <TaskTile task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})} onChange={this.props.onChange} categories={this.props.categories}/>
             ))}
           </div>
         );

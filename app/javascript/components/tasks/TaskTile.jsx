@@ -44,11 +44,13 @@ class TaskTile extends React.Component {
 TaskTile.defaultProps = {
   task: {},
   taskCategory: {},
+  categories: [],
 };
 
 TaskTile.propTypes = {
     task: PropTypes.object,
     taskCategory: PropTypes.object,
+    categories : PropTypes.array,
     onChange: PropTypes.func.isRequired,
 };
 
