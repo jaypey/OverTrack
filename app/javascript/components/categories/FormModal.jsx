@@ -88,7 +88,7 @@ class FormModal extends React.Component {
                 label="Name"
                 show={this.state.submitted}
                 val={this.state.name.trim()}
-                validations={{ required: true }}
+                validations={{ required: true }
               />
             </div>
 
