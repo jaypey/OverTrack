@@ -6,6 +6,7 @@ import CurrencyInput from '../shared/CurrencyInput';
 import FieldErrors from '../shared/FieldErrors';
 import { Tasks } from '../../api/main';
 import { Alerts } from '../../helpers/main';
+import moment from 'moment';
 
 class FormModal extends React.Component {
   constructor(props) {
@@ -22,6 +23,10 @@ class FormModal extends React.Component {
     };
   }
 
+  // componentDidMount() {
+  //   console.log(this.state.due_date)
+  // }
+
   handleTitleChange = (title) => { this.setState({ title: title.target.value });}
   handleDescriptionChange = (description) => { this.setState({ description: description.target.value }); }
   handleDueDateChange = (val) => { this.setState({ due_date: val }); }
@@ -33,7 +38,7 @@ class FormModal extends React.Component {
     Alerts.genericDelete('task').then((result) => {
       if (!result.value) { return; }
       Tasks.delete(this.props.task.id).then(
-        (resp) => { this.props.onClose(resp); },
+        (resp) => { this.props.onSave(resp); },
         () => { Alerts.genericError(); },
       );
     });
@@ -109,7 +114,14 @@ class FormModal extends React.Component {
             </div>
             <div className="input-group five columns">
               <label>Due date</label>
-              <DatePicker onChange={this.handleDueDateChange} />
+              <DatePicker onChange={this.handleDueDateChange} value={new Date(this.state.due_date)}/>
+              <FieldErrors
+              label="Due_date"
+              val={this.state.due_date}
+              validations={{ required: true }}
+              show={this.state.submitted} 
+              handleErrors={this.handleErrors}
+            />
             </div>
           </div>
           <div className="row row-flex">
@@ -138,7 +150,7 @@ FormModal.defaultProps = {
     is_done: false,
     title: "",
     description: "",
-    due_date: "",
+    due_date: moment().format("YYYY-MM-DD").toString(),
     category_id: 0,
   },
   category: {},

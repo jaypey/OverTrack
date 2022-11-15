@@ -3,15 +3,43 @@ import PropTypes from 'prop-types';
 import { Categories, Tasks } from '../../api/main';
 import { Numerics } from '../../helpers/main';
 import { Alerts } from '../../helpers/main';
+import TaskFormModal from './FormModal';
 
 class TaskTile extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showTaskEditModal: false,
+    }
   }
 
   updateTask = (id, updates) => {
     Tasks.update(id, updates).then(
         () => { this.props.onChange()})
+  }
+
+  openTaskEdit = () => { this.setState({ showTaskEditModal: true }); }
+  closeTaskEdit = () => { this.setState({ showTaskEditModal: false }); }
+  onTaskSave = () => {
+    this.closeTaskEdit();
+    this.props.onChange();
+  }
+
+  renderTaskEditModal() {
+    if (!this.state.showTaskEditModal) { return ''; }
+    return (
+      <TaskFormModal
+        task={this.props.task}
+        categories={this.props.categories}
+        category={this.props.category}
+        onClose={this.closeTaskEdit}
+        onSave={this.onTaskSave}
+      />
+    );
+  }
+
+  handleChildClick (e) {
+    e.stopPropagation();
   }
 
   render() {
@@ -21,8 +49,9 @@ class TaskTile extends React.Component {
         <div
             key={this.props.task.id}
             className="category-tile flex flex-space-between tint-on-hover hover-pointer"
+            onClick={this.openTaskEdit}
             style={{ borderColor: this.props.taskCategory.color || 'black'}} >
-            <span>
+            <span onClick={this.handleChildClick}>
               <label className="container-checkbox">
               <input id="chk" checked={this.props.task.is_done} type="checkbox" onChange={() => {{ this.updateTask(this.props.task.id, { is_done: !task.is_done})}}}/>
               <span className="checkmark"></span>
@@ -36,6 +65,7 @@ class TaskTile extends React.Component {
             Due: {task.due_date}
             </h3>
         </div>
+        {this.renderTaskEditModal()}
       </>
     );
   }
