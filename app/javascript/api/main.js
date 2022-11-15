@@ -6,8 +6,11 @@ import Goals from './modules/goals';
 import Reports from './modules/reports';
 import CsvConfig from './modules/csv_config';
 import Budgets from './modules/budgets';
+import Users from './modules/user'
+import Tasks from './modules/tasks';
 
 export {
+  Tasks,
   Budgets,
   Categories,
   Expenses,
@@ -16,4 +19,5 @@ export {
   Reports,
   CsvConfig,
   Base,
+  Users,
 };

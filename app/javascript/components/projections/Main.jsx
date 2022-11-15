@@ -4,6 +4,8 @@ import ExpenseFormModal from '../expenses/FormModal';
 import { Categories, Revenues, Expenses, Goals, Reports } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 import ProjectionsChart from './ProjectionsChart';
+import ProjectionTable from './ProjectionTable';
+import Modal from './Modal';
 
 class Main extends React.Component {
   constructor(props) {
@@ -23,8 +25,15 @@ class Main extends React.Component {
       colors: [],
       count: 3,
       project: 3,
+      show: false
     };
   }
+
+  showModal = e => {
+    this.setState({
+      show: !this.state.show
+    });
+  };
 
   componentDidMount() {
     this.reloadData();
@@ -153,9 +162,23 @@ class Main extends React.Component {
     if (!this.state.loaded) { return ''; }
     return (
       <div className='container'>
-        <h2>Personalise your projections</h2>
+        <button className='btn' onClick={e => {
+              this.showModal();
+         }}
+          > How does it work? </button>
+          <Modal show={this.state.show}/>
         <br></br>
         <br></br>
+        <h1>Expenses</h1>
+        <br></br>
+        <br></br>
+        <h2>Personalise your expenses projections</h2>
+        <br></br>
+        <br></br>
+        <div className='month-container'>
+          <h4 className='previous-months'>Months to calculate</h4>
+          <h4 className='upcoming-months'>Months to project</h4>
+        </div>
         <div className='month-container'>
           <div className='previous-months'>{monthNames[currentTime.getMonth() - this.state.count - 1]} - {monthNames[currentTime.getMonth() - 1]}</div>
           <div className='upcoming-months'>{monthNames[currentTime.getMonth()]} - {monthNames[currentTime.getMonth() + this.state.project]}</div>
@@ -176,9 +199,47 @@ class Main extends React.Component {
           - upcoming months
         </button>
         <br></br>
+        {<ProjectionTable studiedMonths={this.state.count} projectedMonths={this.state.project} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} data={this.state.expenses} name={"Expenses"} /> }
         <br></br>
         <br></br>
-      {<ProjectionsChart studiedMonths={this.state.count} projectedMonths={this.state.project} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} expenses={this.state.expenses} revenues={this.state.revenues} /> }
+        <br></br>
+        <h1>Revenues</h1>
+        <br></br>
+        <br></br>
+        <h2>Personalise your revenues projections</h2>
+        <br></br>
+        <br></br>
+        <div className='month-container'>
+          <h4 className='previous-months'>Months to calculate</h4>
+          <h4 className='upcoming-months'>Months to project</h4>
+        </div>
+        <div className='month-container'>
+          <div className='previous-months'>{monthNames[currentTime.getMonth() - this.state.count - 1]} - {monthNames[currentTime.getMonth() - 1]}</div>
+          <div className='upcoming-months'>{monthNames[currentTime.getMonth()]} - {monthNames[currentTime.getMonth() + this.state.project]}</div>
+        </div>
+        <br></br>
+        <button className='btn button-width-left more-button' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count + 1, 3)) })}>
+          + previous months
+        </button>
+        <button className='btn button-width-right more-button' onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project + 1, 3)) })}>
+          + upcoming months
+        </button>
+        <br></br>
+        <br></br>
+        <button className='btn button-width-left less-button' onClick={() => this.setState({ count: Math.min(12, Math.max(this.state.count - 1, 3)) })}>
+          - previous months
+        </button>
+        <button className='btn button-width-right less-button' onClick={() => this.setState({ project: Math.min(12, Math.max(this.state.project - 1, 3)) })}>
+          - upcoming months
+        </button>
+        <br></br>
+        {<ProjectionTable studiedMonths={this.state.count} projectedMonths={this.state.project} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} data={this.state.revenues} name={"Revenues"} /> }
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
+      {/* {<ProjectionsChart studiedMonths={this.state.count} projectedMonths={this.state.project} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} expenses={this.state.expenses} revenues={this.state.revenues} /> } */}
       </div>
     );
   }

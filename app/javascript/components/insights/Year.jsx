@@ -33,7 +33,8 @@ const Year = ({ availableYears }) => {
           });
           return { label: c.name, data: dataPoints, backgroundColor: c.color };
         });
-
+        console.log("THE DATA SET")
+        console.log(barChartDatasets)
         const pieChartDatasets = [];
         const pieChartLabels = [];
         const pieChartColors = [];
@@ -65,6 +66,10 @@ const Year = ({ availableYears }) => {
         </div>
       </div>
 
+      {console.log('this is the data')}
+        {console.log(barChartData)}
+        {console.log('this is the labels')}
+        {console.log(barChartLabels)}
       <div className="chart-container">
         <BarChart
           data={barChartData}
