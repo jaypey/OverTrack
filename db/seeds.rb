@@ -13,7 +13,7 @@ if (Role.where(role_name: 'owner')==[]) then
 end
 
 # Seed csv config
-if (CsvConfig.where(name: 'Desjardins'))
+if (!CsvConfig.exists?(name: 'Desjardins'))
         CsvConfig.create(
             name: 'Desjardins',
             config_json: '{"has_header":true,"descriptions":{"index":"5","ignore_substrings":[]},"categories":{"index":"5","mappings":{}},"spends":{"index":"7","skip_non_spend":false},"incomes":{"index":"8","skip_non_income":false},"timestamps":{"index":"3"},"auto_detect":{"filename_substring":"N/A","default_category":"Uncategorized"}}'
