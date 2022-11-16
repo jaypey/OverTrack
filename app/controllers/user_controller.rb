@@ -11,9 +11,17 @@ class UserController < ApplicationController
 
     def create
         user = User.new(params.require(:user).permit(:email, :firstname, :lastname, :phone, :password, :password_confirmation))
+        user.confirmed = false
+        user.token = SecureRandom.uuid
         respond_to do |format|
             format.html do
                 if user.save
+
+
+                    confUrl = request.host_with_port + '/confirmation/account'+ '?token='+user.token
+                    UserMailer.with(userToConfirm: user, confirmationUrl: confUrl).user_confirm.deliver_later
+
+
                     initialBudget = ::Budget.new(name: user.firstname + "'s budget", description: "Your own personal budget", owner_id: user.id)
                     initialBudget.users << user
                     successful = initialBudget.save

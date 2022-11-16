@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @userToConfirm.firstname %>,</h1>
+    <p>
+      Follow this link to complete your account creation: <a href="<%= @confirmationUrl %>">Confirm registration</a>.
+    </p>
+    <p>If you didn't create an account on OverTrack, simply ignore this message.</p>
+  </body>
+</html>
