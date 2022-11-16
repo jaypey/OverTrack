@@ -65,7 +65,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :user, only: [:index] do
+      resources :user, only: [:index, :update] do
       end
       #get "/revenues", to: "/revenues#index"
       # get "/tasks", to: "/tasks#index"
