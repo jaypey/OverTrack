@@ -8,7 +8,7 @@ const ConfigItem = ({ config, handleDelete, handleModify }) => {
             </div>
             <div className="config-item-options">
                 <span className='fa fa-tools config-item-modify options-button'></span>
-                <span className='fa fa-times config-item-delete options-button'></span>
+                <span onClick={() => handleDelete(config.id)} className='fa fa-times config-item-delete options-button'></span>
             </div>
         </div>
     )
