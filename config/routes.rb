@@ -66,7 +66,9 @@ Rails.application.routes.draw do
         end
       end
 
-      
+      resources :user, only: [:index] do
+      end
+      #get "/revenues", to: "/revenues#index"
       # get "/tasks", to: "/tasks#index"
       #post "/revenues", to: "/revenues#create"
       #post "/revenues", to: "/revenues#destroy"
@@ -76,6 +78,7 @@ Rails.application.routes.draw do
 
   
   get "budget", to: "budget#index"
+  get "user", to: "user#index"
   get "projections", to: "projections#index"
   get "tasks", to: "tasks#index"
   get 'user/register', to: 'user#register', as: 'register_user' # new
