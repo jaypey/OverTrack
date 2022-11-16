@@ -26,9 +26,10 @@ Rails.application.routes.draw do
           post :bulk_create
         end
       end
-      resources :csv_config, only: [:index, :create]
+      resources :csv_config, only: [:index, :create, :destroy]
       
-      resources :task, only: [:index, :create, :update, :destroy]
+      resources :task, only: [:index, :create, :update, :destroy] do
+      end
 
       resources :categories, only: [:index, :create, :update, :destroy] do
         collection do
@@ -68,7 +69,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :user, only: [:index] do
+      resources :user, only: [:index, :update] do
       end
       #get "/revenues", to: "/revenues#index"
       # get "/tasks", to: "/tasks#index"
