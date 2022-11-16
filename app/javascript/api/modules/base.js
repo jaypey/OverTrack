@@ -31,6 +31,9 @@ const Base = {
   put(path, data, opts) {
     return this.makeRequest({ url: path, data, method: 'PUT' }, opts);
   },
+  patch(path, data, opts) {
+    return this.makeRequest({ url: path, data, method: 'PATCH' }, opts);
+  },
 };
 
 export default Base;
