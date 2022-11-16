@@ -35,7 +35,7 @@ class FormBudgetModal extends React.Component {
 
     apiCall.then(
       (resp) => { this.props.onSave(resp); },
-      () => { Alerts.genericError(); },
+      (error) => {error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); },
     );
   }
 

@@ -4,7 +4,7 @@ class Budget < ApplicationRecord
     has_many :tasks, :dependent => :destroy
     has_many :categories, :dependent => :destroy
 
-    has_many :budget_users
+    has_many :budget_users, :dependent => :destroy
     has_many :users, through: :budget_users
 
 end

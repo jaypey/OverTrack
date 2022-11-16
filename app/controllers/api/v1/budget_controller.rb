@@ -3,7 +3,7 @@ module Api; module V1
         include Rails.application.routes.url_helpers
 
         def index 
-            render json: User.find(cookies.signed[:user_id]).budgets.to_json(include: {users: { only: [:firstname, :lastname, :email, :id]}})
+            render json: User.find(cookies.signed[:user_id]).budgets.to_json(:include => {:budget_users => {:include => {:user => {:only => [:firstname, :lastname, :email, :id]}}}})
         end
 
         def create
@@ -12,18 +12,26 @@ module Api; module V1
             successful = budget.save
             budget.users << user
             successful = budget.save
-            BudgetUser.where(budget_id: budget.id, user_id: user.id).first().update(confirmed: true)
+            BudgetUser.where(budget_id: budget.id, user_id: user.id).first().update(confirmed: true, role_value: 1)
             render json: budget, status: successful ? 200 : 500
         end
 
         def update
             budget = ::Budget.find(params[:id])
+            budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: budget.id).take
+
+            render json: nil, status: 403 and return if budget_user.role_value > 1
+
             successful = budget.update(name: params[:name], description: params[:description], owner_id: cookies.signed[:user_id])
             render json: budget, status: successful ? 200 : 500
         end
 
         def destroy
             budget = ::Budget.find(params[:id])
+            budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: budget.id).take
+
+            render json: nil, status: 403 and return if budget_user.role_value > 1
+            
             successful = budget.destroy
             render json: nil, status: successful ? 200 : 500
         end
@@ -44,7 +52,7 @@ module Api; module V1
             if successful
                 userToken = SecureRandom.uuid
                 confUrl = request.host_with_port + '/confirmation'+ '?token='+userToken
-                successful = budget.budget_users.where(user_id: userAdd.id).first().update(token: userToken)
+                successful = budget.budget_users.where(user_id: userAdd.id).first().update(token: userToken, role_value: 2)
                 UserMailer.with(invitedBudget: budget, recipientUser: userAdd, senderUser: userAdder, confirmationUrl: confUrl).budget_invite.deliver_later
             end
 
@@ -53,6 +61,10 @@ module Api; module V1
 
         def removeuser
             budget = ::Budget.find(params[:id])
+            budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: budget.id).take
+
+            render json: nil, status: 403 and return if budget_user.role_value > 1
+
             budget.users.delete(budget.users.find(params[:userid]))
             successful = budget.save
             render json: budget, status: successful ? 200 : 500

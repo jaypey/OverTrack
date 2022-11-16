@@ -1,7 +1,7 @@
 import React from 'react'
 import FormBudgetModal from '../budget/AddBudgetModal';
 import FormAddUserModal from './AddUserModal';
-import { Budgets } from '../../api/main';
+import { Budgets, Roles } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
 class Main extends React.Component {
@@ -10,11 +10,16 @@ class Main extends React.Component {
 
         this.state = {
             budgets: [
-                
+
+            ],
+            budget_role: [
+                // {role_name: "owner", role_value: 1},
+                //          {role_name: "member", role_value: 2}
             ],
             idSelectedBudget: 0,
             showBudgetCreate: false,
             showBudgetUpdate: false,
+            currentUserId: 0
         };
     }
 
@@ -38,7 +43,7 @@ class Main extends React.Component {
     }
 
     onBudgetDelete = () => {
-        this.setState({ idSelectedBudget: 0});
+        this.setState({ idSelectedBudget: 0 });
         this.reloadData();
     }
 
@@ -51,25 +56,25 @@ class Main extends React.Component {
     openBudgetUpdate = () => { this.setState({ showBudgetUpdate: true }); }
     closeBudgetUpdate = () => { this.setState({ showBudgetUpdate: false }); }
     changeSelectedBudget = async (id) => { this.setState({ idSelectedBudget: id }) }
-    openUserAdd = () => { this.setState({ showUserAdd: true});}
-    closeUserAdd = () => { this.setState({ showUserAdd: false});}
+    openUserAdd = () => { this.setState({ showUserAdd: true }); }
+    closeUserAdd = () => { this.setState({ showUserAdd: false }); }
 
     deleteBudget = async (id) => {
         Alerts.genericDelete('budget').then((result) => {
             if (!result.value) { return; }
             Budgets.delete(id).then(
-              () => { this.onBudgetDelete(); },
-              () => { Alerts.genericError(); },
+                () => { this.onBudgetDelete(); },
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); },
             );
-          });
+        });
     }
 
     handleUserRemove = async (id, budgetId) => {
         Alerts.genericRemove('user').then((result) => {
-            if(!result.value) {return;}
-            Budgets.removeuser({id: budgetId, userid: id}).then(
+            if (!result.value) { return; }
+            Budgets.removeuser({ id: budgetId, userid: id }).then(
                 () => { this.onRemoveUser(); },
-                () => { Alerts.genericError(); }
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); }
             );
         });
     }
@@ -79,31 +84,42 @@ class Main extends React.Component {
     }
 
     updateSelectedBudget = () => {
-        Budgets.updateSelectBudget({id: this.state.idSelectedBudget}).then(
-            (cResp) => { Alerts.success("Selected budget");},
-            () => {Alerts.error("Couldnt select budget");}
+        Budgets.updateSelectBudget({ id: this.state.idSelectedBudget }).then(
+            (cResp) => { Alerts.success("Selected budget"); },
+            () => { Alerts.error("Couldnt select budget"); }
+        );
+    }
+
+    updateRole = (userId, budgetId, roleValue) => {
+        console.log("UserId : " + userId + " BudgetId : " + budgetId + " RoleValue : " + roleValue);
+        Roles.update(roleValue, { user_id: userId, budget_id: budgetId }).then(
+            (cResp) => { Alerts.success("Role changed"); this.reloadData(); },
+            (error) => {
+                error.status == 408 ? Alerts.genericConflict('Can\'t change your own permissions')
+                : error.status == 403 ? Alerts.genericConflict('Insufficient permissions')
+                    : Alerts.genericError();
+            },
         );
     }
 
     reloadData = () => {
         this.loadBudgets();
-        //this.getselectBudget();
+        this.loadRoles();
+    }
+
+    loadRoles = () => {
+        Roles.list().then(
+            (cResp) => { this.setState({ budget_role: cResp }); },
+            () => { Alerts.error("Roles didn't load correctly"); }
+        );
     }
 
     loadBudgets = () => {
         Budgets.list().then(
-          (cResp) => { this.setState({ budgets: cResp}); },
-          () => { Alerts.error("Budget didn't load correctly"); }
+            (cResp) => { this.setState({ budgets: cResp }); },
+            () => { Alerts.error("Budget didn't load correctly"); }
         );
     }
-
-    // getselectBudget = () => {
-    //     Budgets.getSelectedBudgetId().then(
-    //         (cResp) => { this.setState({ idSelectedBudget: cResp }); },
-    //         () => { Alerts.error("Budget didn't load correctly"); }
-    //     )
-    //     console.log(this.state.idSelectedBudget)
-    // }
 
     renderBudgetCreateModal() {
         if (!this.state.showBudgetCreate) { return ''; }
@@ -112,38 +128,39 @@ class Main extends React.Component {
 
     renderBudgetEditModal() {
         if (!this.state.showBudgetUpdate) { return ''; }
-        return <FormBudgetModal 
-        onClose={this.closeBudgetUpdate}
-        onSave={this.onBudgetUpdateSave} 
-        budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))}
+        return <FormBudgetModal
+            onClose={this.closeBudgetUpdate}
+            onSave={this.onBudgetUpdateSave}
+            budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))}
         />;
     }
 
     renderUserAddModal() {
-        if(!this.state.showUserAdd) {return '';}
-        return <FormAddUserModal onClose={this.closeUserAdd} onSave={this.onAddUser} budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))}/>
+        if (!this.state.showUserAdd) { return ''; }
+        return <FormAddUserModal onClose={this.closeUserAdd} onSave={this.onAddUser} budget={(this.state.budgets.find((budget) => budget.id == this.state.idSelectedBudget))} />
     }
 
 
-    renderBudgetUsers(user) {
+    renderBudgetUsers(budget_user) {
         return (
-            <tr id={user.id} key={user.id}>
-                <td className="input-group">
-                    <label className="bg-gray-slight-contrast">{user.firstname + " " + user.lastname}</label>
+            <tr id={budget_user.id} key={budget_user.id}>
+                <td className="input-group mh-30 mw-150">
+                    <label className="bg-gray-slight-contrast">{budget_user.user.firstname + " " + budget_user.user.lastname}</label>
                 </td>
 
                 <td className="input-group mw-150">
-
-                    {/*À revoir lors de l'implémentation des rôles */}
-
-                    {/* <select defaultValue={user.category_id} onChange={(e) => this.updateExpense(expense.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">
-                        {this.props.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-                    </select> */}
-                    <select></select>
+                    <select defaultValue={budget_user.role_value} onChange={(e) => this.updateRole(budget_user.user_id, budget_user.budget_id,
+                        e.target.value)} className="bg-gray-slight-contrast">   
+                        {this.state.budget_role.map((c) =>
+                        <option key={c.role_value + budget_user.id} value={c.role_value}>
+                            {c.role_name}
+                        </option>
+                        )}
+                    </select>
                 </td>
 
                 <td>
-                    <a onClick={() => this.handleUserRemove(user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
+                    <a onClick={() => this.handleUserRemove(budget_user.user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
                 </td>
             </tr>
         );
@@ -170,12 +187,12 @@ class Main extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {budget.users.map((user) => this.renderBudgetUsers(user))}
+                            {budget.budget_users.map((budget_user) => this.renderBudgetUsers(budget_user))}
                         </tbody>
                     </table>
                     <button onClick={() => this.openUserAdd()} className='btn btn-round btn-accept'><i className='text-light fa fa-plus'></i></button>
                 </div>
-                <br/>
+                <br />
                 <div>
                     <button onClick={() => this.updateSelectedBudget()} className='btn btn-round btn-accept pos-abs mt-neg-20 z-5'>Select</button>
                 </div>
@@ -192,14 +209,14 @@ class Main extends React.Component {
                     <h3 className=''>Your budgets</h3>
                     <ul>
                         {this.state.budgets.map((budget) =>
-                        (<li key={budget.id}
-                            onClick={() => this.changeSelectedBudget(budget.id)}
-                            style={{ cursor: 'pointer' }}
-                            className={budget.id == this.state.idSelectedBudget ? 'input-group text-bold' : 'input-group'}
-                        >
-                            <a onClick={() => this.deleteBudget(budget.id)} className="dim-til-hover text-right"><i className="fa fa-times" /></a>
-                            &nbsp; {budget.name} 
-                        </li>))}
+                            <li key={budget.id}
+                                onClick={() => this.changeSelectedBudget(budget.id)}
+                                style={{ cursor: 'pointer' }}
+                                className={budget.id == this.state.idSelectedBudget ? 'input-group text-bold' : 'input-group'}
+                            >
+                                <a onClick={() => this.deleteBudget(budget.id)} className="dim-til-hover text-right"><i className="fa fa-times" /></a>
+                                &nbsp; {budget.name}
+                            </li>)}
                     </ul>
                     <br />
                     <div>
