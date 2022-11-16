@@ -26,7 +26,9 @@ ActiveRecord::Schema.define(version: 2031_42_15_562252) do
     t.bigint "user_id"
     t.string "token"
     t.boolean "confirmed", default: false
+    t.bigint "role_value"
     t.index ["budget_id"], name: "index_budget_users_on_budget_id"
+    t.index ["role_value"], name: "index_budget_users_on_role_value"
     t.index ["user_id"], name: "index_budget_users_on_user_id"
   end
 
@@ -83,6 +85,11 @@ ActiveRecord::Schema.define(version: 2031_42_15_562252) do
     t.index ["amount"], name: "index_revenues_on_amount"
     t.index ["category_id"], name: "index_revenues_on_category_id"
     t.index ["paid_at"], name: "index_revenues_on_paid_at"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.bigint "role_value", null: false
+    t.string "role_name", null: false
   end
 
   create_table "tasks", force: :cascade do |t|

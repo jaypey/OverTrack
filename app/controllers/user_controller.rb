@@ -25,7 +25,7 @@ class UserController < ApplicationController
                     initialBudget = ::Budget.new(name: user.firstname + "'s budget", description: "Your own personal budget", owner_id: user.id)
                     initialBudget.users << user
                     successful = initialBudget.save
-                    BudgetUser.where(budget_id: initialBudget.id, user_id: user.id).first().update(confirmed: true)
+                    BudgetUser.where(budget_id: initialBudget.id, user_id: user.id).first().update(confirmed: true, role_value: 1)
                     if !successful
                         flash[:error] = "Error: Initial budget could not be created"
                         render :register, locals: { user: user}

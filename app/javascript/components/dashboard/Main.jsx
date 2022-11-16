@@ -30,15 +30,10 @@ class Main extends React.Component {
       labels: [],
       colors: [],
     };
-    this.testTask();  
   }
 
   componentDidMount() {
     this.reloadData();
-  }
-
-  testTask = () => {
-    console.log(Tasks.list());
   }
 
   openExpenseCreate = () => { this.setState({ showExpenseCreateModal: true }); }

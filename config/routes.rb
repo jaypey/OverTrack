@@ -49,6 +49,10 @@ Rails.application.routes.draw do
         put :update, on: :collection
       end
 
+      resources :roles, only: [:index, :update] do
+        
+      end
+
       resources :revenues do
         get :index, on: :collection
         post :create, on: :collection
