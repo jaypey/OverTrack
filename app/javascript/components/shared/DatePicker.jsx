@@ -5,7 +5,9 @@ import DatePicker from 'react-datepicker';
 class Picker extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { startDate: this.props.value };
+    this.state = { 
+      startDate: this.props.value 
+    };
   }
 
   handleChange = (val) => {
