@@ -6,7 +6,10 @@ const CsvConfig = {
   },
   list(params, opts = {}) {
     return Base.get('/csv_config', params, opts || {});
-  }
+  },
+  delete(id, params, opts = {}) {
+    return Base.delete(`/csv_config/${id}`, params, opts || {});
+  },
 };
 
 export default CsvConfig;
