@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2031_42_15_562251) do
+ActiveRecord::Schema.define(version: 2031_42_15_562252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,9 @@ ActiveRecord::Schema.define(version: 2031_42_15_562251) do
     t.bigint "user_id"
     t.string "token"
     t.boolean "confirmed", default: false
+    t.bigint "role_value"
     t.index ["budget_id"], name: "index_budget_users_on_budget_id"
+    t.index ["role_value"], name: "index_budget_users_on_role_value"
     t.index ["user_id"], name: "index_budget_users_on_user_id"
   end
 
@@ -85,6 +87,11 @@ ActiveRecord::Schema.define(version: 2031_42_15_562251) do
     t.index ["paid_at"], name: "index_revenues_on_paid_at"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.bigint "role_value", null: false
+    t.string "role_name", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.boolean "is_done"
     t.string "title"
@@ -106,6 +113,8 @@ ActiveRecord::Schema.define(version: 2031_42_15_562251) do
     t.string "lastname", null: false
     t.string "phone"
     t.string "password_digest"
+    t.string "token"
+    t.boolean "confirmed"
   end
 
   add_foreign_key "budgets", "users", column: "owner_id"

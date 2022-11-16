@@ -8,4 +8,11 @@ class UserMailer < ApplicationMailer
         @budgetLinked = params[:invitedBudget]
         mail(to: @recipientUser.email, subject: '[OverTrack] Join ' + @senderUser.firstname + '\'s budget!')
     end
+
+    def user_confirm
+        @userToConfirm = params[:userToConfirm]
+        @confirmationUrl = params[:confirmationUrl]
+        mail(to: @userToConfirm.email, subject: '[OverTrack] Confirm registration')
+    end
+
 end

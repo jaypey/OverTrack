@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import Overview from './Overview';
 import CategoriesList from './CategoriesList';
@@ -23,21 +23,17 @@ class Main extends React.Component {
       loadedexpenses: false,
       loadedrevenues: false,
       monthlyGoal: 0,
+      monthlyGoalRevenues: 0,
       showExpenseCreateModal: false,
       showRevenueCreateModal: false,
       data: [],
       labels: [],
       colors: [],
     };
-    this.testTask();  
   }
 
   componentDidMount() {
     this.reloadData();
-  }
-
-  testTask = () => {
-    console.log(Tasks.list());
   }
 
   openExpenseCreate = () => { this.setState({ showExpenseCreateModal: true }); }
@@ -52,56 +48,101 @@ class Main extends React.Component {
 
   reloadData = () => {
     this.loadCategories();
-    this.loadExpensesCategories();
-    this.loadRevenuesCategories();
-    this.loadExpensesData();
-    this.loadRevenueData();
-    this.loadPieChartData(moment().format('MMMM YYYY'));
   }
 
   reloadMain = () => {
-    this.state.reloadMain == true ? this.setState({ reloadMain: false }) : this.setState({ reloadMain: true })
-    this.reloadData();
+    this.state.reloadMain == true ? 
+    this.setState({ reloadMain: false }, () => {
+      setTimeout(function() {
+        this.reloadData();
+      }.bind(this), 200)
+    }) :
+    this.setState({ reloadMain: true }, () => {
+      setTimeout(function() {
+        this.reloadData();
+      }.bind(this), 200)
+    });
   }
 
-  loadCategories = () => {
+  loadCategories = async () => {
     Categories.list().then(
-      (cResp) => { this.setState({ categories: cResp }); },
+      (cResp) => { 
+        this.setState({ 
+          categories: cResp 
+        }, 
+        () => {  
+          this.state.categories.forEach((item) => { console.log(item) });
+          this.loadExpensesCategories();
+        });
+      },
       () => { Alerts.error("Categories didn't load correctly"); }
     );
   }
 
-  loadExpensesCategories = () => {
+  loadExpensesCategories = async () => {
     Categories.listExpenses().then(
-      (cResp) => { this.setState({ expenseCategories: cResp }); },
+      (cResp) => { 
+        this.setState(
+          { expenseCategories: cResp },
+          () => {
+            this.state.expenseCategories.forEach((item) => { console.log(item) });
+            this.loadRevenuesCategories();
+          });
+        
+      },
       () => { Alerts.error("Categories didn't load correctly"); }
     );
   }
 
-  loadRevenuesCategories = () => {
+  loadRevenuesCategories = async () => {
     Categories.listRevenues().then(
-      (cResp) => { this.setState({ revenueCategories: cResp }); },
+      (cResp) => { 
+        this.setState(
+          {revenueCategories: cResp},
+          () => {
+            this.state.revenueCategories.forEach((item) => { console.log(item) });
+            this.loadExpensesData();
+          });
+      },
       () => { Alerts.error("Categories didn't load correctly"); }
     );
   }
 
-  loadExpensesData = () => {
+  loadExpensesData = async () => {
     Expenses.list({ paid_after: moment().startOf('month').unix() }).then(
       (eResp) => {
         this.setState({ expenses: eResp });
         Goals.list().then(
-          (gResp) => { this.setState({ loaded: true, monthlyGoal: gResp.monthly }); },
+          (gResp) => { 
+            this.setState({ monthlyGoal: gResp.monthly }); 
+          },
           () => { Alerts.error("Goal of expenses didn't load!"); },
+        ).then(
+          () => {
+            this.state.expenses.forEach((item) => { console.log(item); });
+            this.loadRevenueData();
+          }
         );
       },
       () => { Alerts.error("Expenses didn't load correctly!"); },
     );
   }
 
-  loadRevenueData = () => {
+  loadRevenueData = async () => {
     Revenues.list({ paid_after: moment().startOf('month').unix() }).then(
       (rResp) => {
         this.setState({ revenues: rResp});
+        Goals.list().then(
+          (gResp) => {
+            this.setState({ loaded: true, monthlyGoalRevenues: gResp.montly });
+          },
+          () => { Alerts.error("Goal of revenues didn't load!"); }
+        ).then(
+          () => {
+            this.state.revenues.forEach((item) => { console.log(item); });
+            this.loadPieChartData(moment().format('MMMM YYYY'))
+          }
+        );
       },
       () => { Alerts.error("Revenues didn't load correctly!") }
     );

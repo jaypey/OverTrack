@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
       redirect_to :root and return
     end
 
-    if user.authenticate(params[:password])
+    if user.confirmed && user.authenticate(params[:password])
       cookies.signed[:logged_in] = true
       cookies.signed[:user_id] = user.id
       cookies.signed[:selectedBudget] = user.budget_users.first().budget.id

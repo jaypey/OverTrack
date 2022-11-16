@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   end
 
   resources :dashboard, only: [:index]
-  resources :confirmation, only: [:index]
+  resources :confirmation, only: [:index] do
+    get :account, on: :collection
+  end
   resources :insights, only: [:index]
   resources :expenses, only: [:index]
   resources :expense_uploads, only: [:new] do
@@ -26,9 +28,10 @@ Rails.application.routes.draw do
           post :bulk_create
         end
       end
-      resources :csv_config, only: [:index, :create]
+      resources :csv_config, only: [:index, :create, :destroy]
       
-      resources :task, only: [:index, :create, :update, :destroy]
+      resources :task, only: [:index, :create, :update, :destroy] do
+      end
 
       resources :categories, only: [:index, :create, :update, :destroy] do
         collection do
@@ -44,6 +47,10 @@ Rails.application.routes.draw do
 
       resources :goals, only: [:index] do
         put :update, on: :collection
+      end
+
+      resources :roles, only: [:index, :update] do
+        
       end
 
       resources :revenues do
@@ -64,7 +71,9 @@ Rails.application.routes.draw do
         end
       end
 
-      
+      resources :user, only: [:index, :update] do
+      end
+      #get "/revenues", to: "/revenues#index"
       # get "/tasks", to: "/tasks#index"
       #post "/revenues", to: "/revenues#create"
       #post "/revenues", to: "/revenues#destroy"
@@ -74,6 +83,7 @@ Rails.application.routes.draw do
 
   
   get "budget", to: "budget#index"
+  get "user", to: "user#index"
   get "projections", to: "projections#index"
   get "tasks", to: "tasks#index"
   get 'user/register', to: 'user#register', as: 'register_user' # new
