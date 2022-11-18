@@ -21,6 +21,7 @@ class CreateConfig extends React.Component {
       skipNonIncome: false,
       defaultCategory: "Uncategorized",
       isValid: false,
+      isSaving: false,
     };
 
   }
@@ -29,7 +30,7 @@ class CreateConfig extends React.Component {
     if (response.id != null) {
       console.log(`Saved config ${response.name}(${response.id}) successfully`);
       //Alerts.success(`Config ${response.name}(${response.id}) saved successfully!`)
-      window.location.href='/expense_uploads/config_list';
+      window.location.href = '/expense_uploads/config_list';
     }
     else {
       Alerts.genericError();
@@ -39,6 +40,7 @@ class CreateConfig extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({ isSaving: true });
 
     var name = this.state.configName.trim();
 
@@ -247,7 +249,7 @@ class CreateConfig extends React.Component {
         </div>
 
         <div className='config-button-container'>
-          <button id="config-submit" disabled={!this.state.isValid} type="submit" className='btn btn-primary'>Create</button>
+          <button id="config-submit" disabled={!this.state.isValid || this.state.isSaving} type="submit" className='btn btn-primary'>Create</button>
           <a id="config-back" className='btn' href='/expense_uploads/config_list'>Back</a>
         </div>
       </form>
