@@ -104,7 +104,19 @@ class CsvProcessor
 
   def get_category_id(row, is_spend)
     category = row[category_index]
+
+
     mapped_category = category_mappings[category] || category
+
+    category_mappings.each do |key,value|
+        if category.to_s.downcase.include? key.to_s.downcase 
+          mapped_category = value
+          puts "map: " + key + " => " + value
+        end
+    end
+
+
+    puts "result: " + mapped_category
 
     if is_spend
       return @categories_ids_by_lower_name[mapped_category.to_s.downcase] || @default_category_id
