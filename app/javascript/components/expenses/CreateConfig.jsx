@@ -59,6 +59,13 @@ class CreateConfig extends React.Component {
       return;
     }
 
+    var mappingDict = {};
+
+    if (this.state.mappings.length > 0) {
+      this.state.mappings.forEach((el) => mappingDict[el.text] = el.category);
+    }
+
+
     var config_json = {
       has_header: this.state.hasHeader,
       descriptions: {
@@ -67,7 +74,7 @@ class CreateConfig extends React.Component {
       },
       categories: {
         index: this.state.categoryIdx,
-        mappings: {}
+        mappings: mappingDict
       },
       spends: {
         index: this.state.spendIdx,
@@ -87,6 +94,7 @@ class CreateConfig extends React.Component {
     }
 
     config_json = JSON.stringify(config_json);
+    console.log(config_json);
 
     let apiCall = null;
 
@@ -239,6 +247,7 @@ class CreateConfig extends React.Component {
           </div>
           <label>Map words in column to categories:</label>
           <br />
+          <br />
           <input id='config-mapping-text' className='config-input config-list-textbox'
             onChange={(e) => this.setState({ currentMappingText: e.target.value })}
             value={this.state.currentMappingText}
@@ -259,9 +268,9 @@ class CreateConfig extends React.Component {
             onClick={this.handleAddMapping}
             className="config-add-mapping config-add-substring fa fa-plus"></span>
 
-            <div className='config-list'>
-              {this.state.mappings.length > 0 && <MappingList handleDelete={this.handleRemoveMapping} list={this.state.mappings}/>}
-            </div>
+          <div className='config-list'>
+            {this.state.mappings.length > 0 && <MappingList handleDelete={this.handleRemoveMapping} list={this.state.mappings} />}
+          </div>
         </div>
 
         <div className='config-spend-container config-group'>

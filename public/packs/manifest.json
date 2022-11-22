@@ -2,7 +2,7 @@
   "application.js": "/packs/js/application-bb859c936b81fe913e43.js",
   "budget.js": "/packs/js/budget-77f809f0397a5d759302.js",
   "config_list.js": "/packs/js/config_list-323e246c797f97d06cbe.js",
-  "create_config.js": "/packs/js/create_config-191ebedda2a8641c68be.js",
+  "create_config.js": "/packs/js/create_config-3a74c359949c282b7ad9.js",
   "dashboard.js": "/packs/js/dashboard-300fce432f4f73551945.js",
   "entrypoints": {
     "application": {
@@ -43,7 +43,7 @@
           "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-node_modules_sweetalert2_-e155af-d21daa994ea5662fff32.js",
           "/packs/js/vendors-node_modules_moment_locale_af_js-node_modules_moment_locale_ar-dz_js-node_modules_mom-248d90-5cb40d85a182dd12df70.js",
           "/packs/js/app_javascript_api_main_js-app_javascript_helpers_alerts_js-b448f4fd42b1c9c7c386.js",
-          "/packs/js/create_config-191ebedda2a8641c68be.js"
+          "/packs/js/create_config-3a74c359949c282b7ad9.js"
         ]
       }
     },
@@ -160,7 +160,7 @@
   "js/application-bb859c936b81fe913e43.js.map": "/packs/js/application-bb859c936b81fe913e43.js.map",
   "js/budget-77f809f0397a5d759302.js.map": "/packs/js/budget-77f809f0397a5d759302.js.map",
   "js/config_list-323e246c797f97d06cbe.js.map": "/packs/js/config_list-323e246c797f97d06cbe.js.map",
-  "js/create_config-191ebedda2a8641c68be.js.map": "/packs/js/create_config-191ebedda2a8641c68be.js.map",
+  "js/create_config-3a74c359949c282b7ad9.js.map": "/packs/js/create_config-3a74c359949c282b7ad9.js.map",
   "js/dashboard-300fce432f4f73551945.js.map": "/packs/js/dashboard-300fce432f4f73551945.js.map",
   "js/history-e615a9d59c8fcc934c29.js.map": "/packs/js/history-e615a9d59c8fcc934c29.js.map",
   "js/insights-70c4e8d341f9031381b9.js.map": "/packs/js/insights-70c4e8d341f9031381b9.js.map",
