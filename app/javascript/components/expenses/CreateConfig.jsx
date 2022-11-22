@@ -1,7 +1,10 @@
 import React from 'react';
 import GenericList from './GenericList';
 import { CsvConfig } from '../../api/main';
+import { Categories } from '../../api/main';
 import { Alerts } from '../../helpers/main';
+import { calendarFormat } from 'moment';
+import MappingList from './MappingList';
 
 class CreateConfig extends React.Component {
   constructor(props) {
@@ -16,12 +19,22 @@ class CreateConfig extends React.Component {
       dateIdx: 0,
       ignoredSubstring: [],
       currentSubstring: "",
+      mappings: [],
+      currentMappingText: "",
+      currentMappingCategory: "",
       hasHeader: false,
       skipNonSpend: false,
       skipNonIncome: false,
       defaultCategory: "Uncategorized",
       isValid: false,
+      cats: [],
     };
+
+
+    Categories.list("").then((response) => {
+      this.setState({ cats: response });
+    });
+
 
   }
 
@@ -29,7 +42,7 @@ class CreateConfig extends React.Component {
     if (response.id != null) {
       console.log(`Saved config ${response.name}(${response.id}) successfully`);
       //Alerts.success(`Config ${response.name}(${response.id}) saved successfully!`)
-      window.location.href='/expense_uploads/config_list';
+      window.location.href = '/expense_uploads/config_list';
     }
     else {
       Alerts.genericError();
@@ -95,6 +108,31 @@ class CreateConfig extends React.Component {
 
     if (stringToDelete != "")
       this.setState(({ ignoredSubstring: this.state.ignoredSubstring.filter(e => e !== stringToDelete) }));
+  }
+
+
+  handleRemoveMapping = (textToDelete) => {
+
+    if (textToDelete != "")
+      this.setState(({ mappings: this.state.mappings.filter(e => e.text !== textToDelete) }));
+
+  }
+
+  handleAddMapping = () => {
+    var currentText = this.state.currentMappingText;
+    var currentCat = this.state.currentMappingCategory;
+
+    if (currentText != "" && currentCat != "") {
+
+      var currentMap = { text: currentText, category: currentCat };
+
+      this.setState(prevState =>
+      ({
+        mappings: [...prevState.mappings
+          .filter(e => e.text !== currentMap.text), ...currentMap].sort()
+      }));
+      this.setState({ currentMappingText: "", currentMappingCategory: "" });
+    }
   }
 
   handleAddSubstring = () => {
@@ -199,6 +237,31 @@ class CreateConfig extends React.Component {
               value={this.state.defaultCategory}
               onChange={this.handleDefaultCategoryChange} />
           </div>
+          <label>Map words in column to categories:</label>
+          <br />
+          <input id='config-mapping-text' className='config-input config-list-textbox'
+            onChange={(e) => this.setState({ currentMappingText: e.target.value })}
+            value={this.state.currentMappingText}
+            type="text" />
+
+          <select id='config-mapping-cat' value={this.state.currentMappingCategory}
+            onChange={(e) => this.setState({ currentMappingCategory: e.target.value })}>
+            <option key="0" value={""}>- Choose a category -</option>
+            {this.state.cats.map((cat) => {
+              return (
+                <option key={cat.id} value={cat.name}>
+                  {cat.name}
+                </option>
+              )
+            })}
+          </select>
+          <span
+            onClick={this.handleAddMapping}
+            className="config-add-mapping config-add-substring fa fa-plus"></span>
+
+            <div className='config-list'>
+              {this.state.mappings.length > 0 && <MappingList handleDelete={this.handleRemoveMapping} list={this.state.mappings}/>}
+            </div>
         </div>
 
         <div className='config-spend-container config-group'>
