@@ -23,10 +23,6 @@ class FormModal extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   console.log(this.state.due_date)
-  // }
-
   handleTitleChange = (title) => { this.setState({ title: title.target.value });}
   handleDescriptionChange = (description) => { this.setState({ description: description.target.value }); }
   handleDueDateChange = (val) => { this.setState({ due_date: val }); }

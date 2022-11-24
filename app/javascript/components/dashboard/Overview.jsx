@@ -35,6 +35,10 @@ class Overview extends React.Component {
     return this.props.categoriesWithExpensesAndSpend.reduce((sum, cat) => sum + cat.spend, 0);
   }
 
+  totalRevenue() {
+    return this.props.totalRevenue*100;
+  }
+
   percentages() {
     const outOf = Math.max(this.props.monthlyGoal, this.totalSpend());
     return this.props.categoriesWithExpensesAndSpend.map((category) => ({ percentage: (category.spend / outOf) * 100, color: category.color }));
@@ -70,7 +74,7 @@ class Overview extends React.Component {
         
         <div className="mb-10">{today.format('MMMM')} ({daysLeftInMonth} days left)</div>
         <div className="flex row-flex flex-space-between flex-baseline mb-10">
-          <div><h1>{Numerics.centsToDollars(this.totalSpend())}</h1></div>
+          <div><h2>Total expenses: {Numerics.centsToDollars(this.totalSpend())}</h2></div>
           {!this.props.monthlyGoal && (
             <a href={null} onClick={this.openGoal} className="dim-til-hover">Set a monthly goal</a>
           )}
@@ -88,6 +92,7 @@ class Overview extends React.Component {
         </div>
 
         <Progress data={this.percentages()} />
+        <div className="mt-10"><h2>Revenues left: {Numerics.centsToDollars(this.totalRevenue())}</h2></div>
       </div>
     );
   }
