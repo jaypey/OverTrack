@@ -101,7 +101,7 @@ class Main extends React.Component {
           </div>
           <div>
           <div className='flex-box'>
-            <div className='filter-button' style={{border: '1px solid black'}} id={0} onClick={this.changeCategories}>
+            <div className='filter-button' id={0} onClick={this.changeCategories}>
             <div className='filter-button-icon'>
             {this.state.excludedCategories.includes("0") &&
             <div className='filer-button-icon-empty'></div>}
@@ -115,7 +115,7 @@ class Main extends React.Component {
                 </div>
           {this.state.categories.map((category) => (
             <div className='flex-box'>
-            <div className='filter-button' style={{border: '1px solid black'}} id={category.id} onClick={this.changeCategories}>
+            <div className='filter-button' id={category.id} onClick={this.changeCategories}>
             <div className='filter-button-icon'>
             {this.state.excludedCategories.includes(category.id.toString()) &&
             <div className='filer-button-icon-empty'></div>}
