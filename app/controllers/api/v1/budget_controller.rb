@@ -2,7 +2,7 @@ module Api; module V1
     class BudgetController < BaseController
         include Rails.application.routes.url_helpers
 
-        def index 
+        def index
             render json: User.find(cookies.signed[:user_id]).budgets.to_json(:include => {:budget_users => {:include => {:user => {:only => [:firstname, :lastname, :email, :id]}}}})
         end
 
@@ -84,6 +84,14 @@ module Api; module V1
             render json: budget.id, status: successful ? 200 : 500
         end
 
+        def getcurrentuserid
+            user = ::User.find(cookies.signed[:user_id])
+            successful = false
+            if user != nil
+                successful = true
+            end
+            render json: user.id, status: successful ? 200 : 500
+        end
         
 
     end
