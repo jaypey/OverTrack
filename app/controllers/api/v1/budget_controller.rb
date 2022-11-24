@@ -40,9 +40,11 @@ module Api; module V1
             budget = ::Budget.includes(:users).find(params[:budgetid])
             userAdd = ::User.find_by(email: params[:email])
             userAdder = ::User.find(cookies.signed[:user_id])
+            budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: budget.id).take
             
             render json: nil, status: 408 and return if budget.users.include?(userAdd)
             render json: nil, status: 409 and return if userAdd == nil
+            render json: nil, status: 403 and return if budget_user.role_value > 1
 
 
 
@@ -52,7 +54,7 @@ module Api; module V1
             if successful
                 userToken = SecureRandom.uuid
                 confUrl = request.host_with_port + '/confirmation'+ '?token='+userToken
-                successful = budget.budget_users.where(user_id: userAdd.id).first().update(token: userToken, role_value: 2)
+                successful = budget.budget_users.where(user_id: userAdd.id).first().update(token: userToken, role_value: 3)
                 UserMailer.with(invitedBudget: budget, recipientUser: userAdd, senderUser: userAdder, confirmationUrl: confUrl).budget_invite.deliver_later
             end
 
