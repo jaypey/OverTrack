@@ -28,7 +28,6 @@ class CreateConfig extends React.Component {
   onSave = (response) => {
     if (response.id != null) {
       console.log(`Saved config ${response.name}(${response.id}) successfully`);
-      //Alerts.success(`Config ${response.name}(${response.id}) saved successfully!`)
       window.location.href='/expense_uploads/config_list';
     }
     else {

@@ -167,7 +167,6 @@ class ProjectionsChart extends React.Component {
       if (this.state.totalPerMonth[i] > 0)
         numberOfMonthWithData++;
     }
-    //console.log(numberOfMonthWithData)
     if (numberOfMonthWithData > 2)
       return true;
     return false;
@@ -180,7 +179,6 @@ class ProjectionsChart extends React.Component {
       if (this.state.totalPerMonthRevenues[i] > 0)
         numberOfMonthWithData++;
     }
-    //console.log(numberOfMonthWithData)
     if (numberOfMonthWithData > 2)
       return true;
     return false;
@@ -210,7 +208,6 @@ class ProjectionsChart extends React.Component {
       monthNames[-10] = "March " + lastYear
       monthNames[-11] = "February " + lastYear
       monthNames[-12] = "January " + lastYear
-    console.log(monthNames)
 
 
     for (let i = 0; i < this.state.totalPerMonth.length;i++)
@@ -236,7 +233,6 @@ class ProjectionsChart extends React.Component {
     {
       this.state.totalRevenuesStudiedAndProjected[i] = this.state.totalPerNextMonthsPredictionsRevenues[i - this.state.totalPerMonthRevenues.length];
     }
-    console.log(this.state.totalRevenuesStudiedAndProjected)
   }
 
 
@@ -251,8 +247,6 @@ class ProjectionsChart extends React.Component {
     this.getTotalExpensesStudiedAndProjected();
     this.getTotalRevenuesStudiedAndProjected();
 
-    //console.log(this.props.studiedMonths);
-    //console.log(this.props.projectedMonths);
     const d = new Date();
     var thisYear = d.getFullYear().toString();
     var lastYear = (d.getFullYear() - 1).toString();

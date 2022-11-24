@@ -113,7 +113,6 @@ checkEnoughDataExpenses() {
     if (this.state.totalPerMonth[i] > 0)
       numberOfMonthWithData++;
   }
-  //console.log(numberOfMonthWithData)
   if (numberOfMonthWithData > 2)
     return true;
   return false;
@@ -143,7 +142,6 @@ getTotalExpensesStudiedAndProjected() {
     monthNames[-10] = "March " + lastYear
     monthNames[-11] = "February " + lastYear
     monthNames[-12] = "January " + lastYear
-  console.log(monthNames)
 
 
   for (let i = 0; i < this.state.totalPerMonth.length;i++)
@@ -183,8 +181,6 @@ render() {
   this.getTotalExpensesStudiedAndProjected();
   this.getColours();
 
-  //console.log(this.props.studiedMonths);
-  //console.log(this.props.projectedMonths);
   const d = new Date();
   var thisYear = d.getFullYear().toString();
   var lastYear = (d.getFullYear() - 1).toString();

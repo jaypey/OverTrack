@@ -73,11 +73,6 @@ Rails.application.routes.draw do
 
       resources :user, only: [:index, :update] do
       end
-      #get "/revenues", to: "/revenues#index"
-      # get "/tasks", to: "/tasks#index"
-      #post "/revenues", to: "/revenues#create"
-      #post "/revenues", to: "/revenues#destroy"
-      #post "/revenues", to: "/revenues#update"
     end
   end
 
