@@ -100,9 +100,21 @@ class Main extends React.Component {
             Filters
           </div>
           <div>
+          <div className='flex-box'>
+            <div className='filter-button' style={{border: '1px solid black'}} id={0} onClick={this.changeCategories}>
+            <div className='filter-button-icon'>
+            {this.state.excludedCategories.includes("0") &&
+            <div className='filer-button-icon-empty'></div>}
+            {(!this.state.excludedCategories.includes("0")) &&
+            <div className='filer-button-icon-green'>✓</div>}
+            </div>
+            <div className='filter-button-text'>
+              no category
+            </div>
+            </div>
+                </div>
           {this.state.categories.map((category) => (
             <div className='flex-box'>
-            {/* <input defaultChecked={true} type="checkbox" name={category.id} value={category.id} onChange={this.changeCategories}></input> */}
             <div className='filter-button' style={{border: '1px solid black'}} id={category.id} onClick={this.changeCategories}>
             <div className='filter-button-icon'>
             {this.state.excludedCategories.includes(category.id.toString()) &&
@@ -114,7 +126,6 @@ class Main extends React.Component {
               {category.name}
             </div>
             </div>
-            {/* <p>{category.name}</p> */}
                 </div>
             ))}
           </div>
