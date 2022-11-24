@@ -276,10 +276,7 @@ class Main extends React.Component {
     var totalExpense = this.getTotalExpense();
     var totalRevenue = this.getTotalRevenue();
 
-    if (totalRevenue > totalExpense)
-      this.setState({ totalRevenuesLeft: totalRevenue - totalExpense });
-    else
-      this.setState({ totalRevenuesLeft: 0 });
+    this.setState({ totalRevenuesLeft: totalRevenue - totalExpense });
   }
 
   renderMain = (keyMain) => {

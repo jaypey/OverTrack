@@ -64,6 +64,16 @@ class Overview extends React.Component {
     this.setState({selectedBudgetName: selectedBudget});
   }
 
+  displayRevenueLeft() {
+
+    if (this.totalRevenue() < 0) {
+      const displayedRevenue = Numerics.centsToDollars(this.totalRevenue());
+      const displayedRevenue2 = displayedRevenue.substring(0, 1) + '+' + displayedRevenue.substring(2, displayedRevenue.length);
+      return <h4 style={{color: "#ee9793"}}>{displayedRevenue2} over</h4>;
+    }
+    return <h4 style={{color: "grey"}}>{Numerics.centsToDollars(this.totalRevenue())} left</h4>;
+  }
+
 
   render() {
     const today = moment();
@@ -74,7 +84,10 @@ class Overview extends React.Component {
         
         <div className="mb-10">{today.format('MMMM')} ({daysLeftInMonth} days left)</div>
         <div className="flex row-flex flex-space-between flex-baseline mb-10">
-          <div><h2>Total expenses: {Numerics.centsToDollars(this.totalSpend())}</h2></div>
+          <div>
+            <h2>{Numerics.centsToDollars(this.totalSpend())}</h2>
+            { this.displayRevenueLeft()}
+          </div>
           {!this.props.monthlyGoal && (
             <a href={null} onClick={this.openGoal} className="dim-til-hover">Set a monthly goal</a>
           )}
@@ -92,7 +105,6 @@ class Overview extends React.Component {
         </div>
 
         <Progress data={this.percentages()} />
-        <div className="mt-10"><h2>Revenues left: {Numerics.centsToDollars(this.totalRevenue())}</h2></div>
       </div>
     );
   }
