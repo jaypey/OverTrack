@@ -5,7 +5,7 @@ class ConfirmationController < ActionController::Base
         if budgetUser == nil
             render status: 422
         else
-            successful = budgetUser.update(confirmed: true, role_value: 2);
+            successful = budgetUser.update(confirmed: true, role_value: 3);
         end
     end
 
