@@ -71,6 +71,12 @@ class Main extends React.Component {
           onChange={this.reloadData}
           />
         <button className="btn btn-round btn-dark mt-10" onClick={this.openTaskCreate}>+ add a task</button>
+        <div style={{marginTop: 40, height: 40}}>
+          <button className='button-sort button-1'>Done <i class="arrow down"></i></button>
+          <button className='button-sort button-2'>Title <i class="arrow down"></i></button>
+          <button className='button-sort button-3'>Category <i class="arrow down"></i></button>
+          <button className='button-sort button-4'>Due date <i class="arrow down"></i></button>
+        </div>
         <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
       </div>
     );

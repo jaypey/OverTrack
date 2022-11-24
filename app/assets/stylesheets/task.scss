@@ -74,3 +74,59 @@
   .no-resize {
     resize: none;
   }
+
+  .button-sort {
+    border: 2px solid #b5d0e2;
+    background-color: white;
+    border-radius: 50px;
+  }
+
+  .button-1 {
+    height: 100%;
+    width: 11%;
+  }
+
+  .button-2 {
+    margin-left: 18.66%;
+    height: 100%;
+    width: 11%;
+  }
+
+  .button-3 {
+    margin-left: 18.66%;
+    height: 100%;
+    width: 11%;
+  }
+
+  .button-4 {
+    margin-left: 18.66%;
+    height: 100%;
+    width: 11%;
+  }
+
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+  
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+  
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
