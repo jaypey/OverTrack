@@ -79,10 +79,6 @@ class Main extends React.Component {
         });
     }
 
-    updateBudget = async (id) => {
-        console.log("update")
-    }
-
     updateSelectedBudget = () => {
         Budgets.updateSelectBudget({ id: this.state.idSelectedBudget }).then(
             (cResp) => { Alerts.success("Selected budget"); },
@@ -91,7 +87,6 @@ class Main extends React.Component {
     }
 
     updateRole = (userId, budgetId, roleValue) => {
-        console.log("UserId : " + userId + " BudgetId : " + budgetId + " RoleValue : " + roleValue);
         Roles.update(roleValue, { user_id: userId, budget_id: budgetId }).then(
             (cResp) => { Alerts.success("Role changed"); this.reloadData(); },
             (error) => {
@@ -138,7 +133,7 @@ class Main extends React.Component {
 
     loadCurrentUserId = () => {
         Budgets.getcurrentuserid().then(
-            (cResp) => { this.setState({ currentUserId: cResp }); console.log(this.state.currentUserId); },
+            (cResp) => { this.setState({ currentUserId: cResp }); },
             () => { Alerts.error("Current user didn't load correctly"); }
         );
     }
