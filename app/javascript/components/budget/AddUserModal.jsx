@@ -31,7 +31,7 @@ class FormAddUserModal extends React.Component {
 
     apiCall.then(
       (resp) => { this.props.onSave(resp); },
-      (error) => { error.status == 408 ? Alerts.genericConflict('User already added!') : error.status == 409 ? Alerts.genericConflict('User doesnt exist!') : Alerts.genericError(); },
+      (error) => { error.status == 408 ? Alerts.genericConflict('User already added!') : error.status == 409 ? Alerts.genericConflict('User doesnt exist!') : error.status == 403 ? Alerts.genericConflict('Insufficient Permissions') : Alerts.genericError(); },
     );
   }
 
