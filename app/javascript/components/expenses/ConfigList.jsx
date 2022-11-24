@@ -30,6 +30,10 @@ class ConfigList extends React.Component {
         })
     }
 
+    handleModify = (id) => {
+        window.location.href = "/expense_uploads/create_config?id=" + id;
+    }
+
 
     render() {
         return (
@@ -50,6 +54,7 @@ class ConfigList extends React.Component {
                                 key={config.id}
                                 config={config}
                                 handleDelete={this.handleDelete}
+                                handleModify={this.handleModify}
                             />
                         ))
                     }

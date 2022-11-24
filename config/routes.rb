@@ -28,7 +28,7 @@ Rails.application.routes.draw do
           post :bulk_create
         end
       end
-      resources :csv_config, only: [:index, :create, :destroy]
+      resources :csv_config, only: [:index, :create, :destroy, :update, :show]
       
       resources :task, only: [:index, :create, :update, :destroy] do
       end
@@ -68,16 +68,12 @@ Rails.application.routes.draw do
           get :listBudgets
           post :selectbudget
           get :getbudgetid
+          get :getcurrentuserid
         end
       end
 
       resources :user, only: [:index, :update] do
       end
-      #get "/revenues", to: "/revenues#index"
-      # get "/tasks", to: "/tasks#index"
-      #post "/revenues", to: "/revenues#create"
-      #post "/revenues", to: "/revenues#destroy"
-      #post "/revenues", to: "/revenues#update"
     end
   end
 

@@ -20,6 +20,7 @@ class Main extends React.Component {
       revenues: [],
       sumExpenses: 0,
       sumRevenues: 0,
+      totalRevenuesLeft: 0,
       loadedexpenses: false,
       loadedrevenues: false,
       monthlyGoal: 0,
@@ -71,7 +72,6 @@ class Main extends React.Component {
           categories: cResp 
         }, 
         () => {  
-          this.state.categories.forEach((item) => { console.log(item) });
           this.loadExpensesCategories();
         });
       },
@@ -85,7 +85,6 @@ class Main extends React.Component {
         this.setState(
           { expenseCategories: cResp },
           () => {
-            this.state.expenseCategories.forEach((item) => { console.log(item) });
             this.loadRevenuesCategories();
           });
         
@@ -100,7 +99,6 @@ class Main extends React.Component {
         this.setState(
           {revenueCategories: cResp},
           () => {
-            this.state.revenueCategories.forEach((item) => { console.log(item) });
             this.loadExpensesData();
           });
       },
@@ -119,7 +117,6 @@ class Main extends React.Component {
           () => { Alerts.error("Goal of expenses didn't load!"); },
         ).then(
           () => {
-            this.state.expenses.forEach((item) => { console.log(item); });
             this.loadRevenueData();
           }
         );
@@ -139,7 +136,6 @@ class Main extends React.Component {
           () => { Alerts.error("Goal of revenues didn't load!"); }
         ).then(
           () => {
-            this.state.revenues.forEach((item) => { console.log(item); });
             this.loadPieChartData(moment().format('MMMM YYYY'))
           }
         );
@@ -222,9 +218,6 @@ class Main extends React.Component {
     var totalExpense = this.getTotalExpense();
     var totalRevenue = this.getTotalRevenue();
 
-    console.log("Expense: " + totalExpense);
-    console.log("Revenue: " + totalRevenue);
-
     if (totalRevenue > totalExpense) {
       return totalRevenue;
     }
@@ -272,10 +265,21 @@ class Main extends React.Component {
         this.setState({ labels: labels });
         this.setState({ colors: colors });
         
+        this.loadSumRevenuesLeft();
         return true;
       },
       () => { Alerts.error("The data for the pie chart didn't load correctly!") }
     );
+  }
+
+  loadSumRevenuesLeft = () => {
+    var totalExpense = this.getTotalExpense();
+    var totalRevenue = this.getTotalRevenue();
+
+    if (totalRevenue > totalExpense)
+      this.setState({ totalRevenuesLeft: totalRevenue - totalExpense });
+    else
+      this.setState({ totalRevenuesLeft: 0 });
   }
 
   renderMain = (keyMain) => {
@@ -284,7 +288,7 @@ class Main extends React.Component {
         {this.renderExpenseCreateModal()}
         {this.renderRevenueCreateModal()}
         <div className="container">
-          <Overview key={keyMain} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} monthlyGoal={this.state.monthlyGoal} onChange={this.reloadData} />
+          <Overview key={keyMain} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} totalRevenue={this.state.totalRevenuesLeft} monthlyGoal={this.state.monthlyGoal} onChange={this.reloadData} />
         </div>
 
         <div className="container mt-100">
