@@ -22,6 +22,8 @@ class Main extends React.Component {
     this.state = {
       categories: [],
       tasks: [],
+      shownTasks: [],
+      excludedCategories: [],
       showTaskCreateModal: false,
     };
   }
@@ -62,16 +64,71 @@ class Main extends React.Component {
     return <TaskFormModal onClose={this.closeTaskCreate} onSave={this.onTaskSave} categories={this.state.categories}/>;
   }
 
+  getShownTasks() {
+    this.state.shownTasks = []
+    for (let data of this.state.tasks) {
+      if (!(this.state.excludedCategories.includes(data.category_id.toString())))
+      {
+        this.state.shownTasks.push(data)
+      }
+    }
+  }
+
+  changeCategories = event => {
+    console.log("CLICKED!")
+    console.log(event.currentTarget.id)
+    let array = this.state.excludedCategories
+    if (array.includes(event.currentTarget.id))
+    {
+      const index = array.indexOf(event.currentTarget.id);
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+    }
+    else
+      array.push(event.currentTarget.id)
+    
+
+    this.setState({ excludedCategories: array })      
+  }
+
   render() {
     return (
-      <div className='container'>
+      <div className='tasks-page'>
+      <div className='task-filer-box'>
+          <div className='task-filter-title'>
+            Filters
+          </div>
+          <div>
+          {this.state.categories.map((category) => (
+            <div className='flex-box'>
+            {/* <input defaultChecked={true} type="checkbox" name={category.id} value={category.id} onChange={this.changeCategories}></input> */}
+            <div className='filter-button' style={{border: '1px solid black'}} id={category.id} onClick={this.changeCategories}>
+            <div className='filter-button-icon'>
+            {this.state.excludedCategories.includes(category.id.toString()) &&
+            <div className='filer-button-icon-empty'></div>}
+            {(!this.state.excludedCategories.includes(category.id.toString())) &&
+            <div className='filer-button-icon-green'>✓</div>}
+            </div>
+            <div className='filter-button-text'>
+              {category.name}
+            </div>
+            </div>
+            {/* <p>{category.name}</p> */}
+                </div>
+            ))}
+          </div>
+      </div>
+      <div className='task-list'>
         {this.renderTaskCreateModal()}
         <h1>Tasks for</h1>
           <BudgetSelector
           onChange={this.reloadData}
           />
         <button className="btn btn-round btn-dark mt-10" onClick={this.openTaskCreate}>+ add a task</button>
-        <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
+        {this.getShownTasks()}
+        <TasksList tasks={this.state.shownTasks} categories={this.state.categories} onChange={this.reloadData} />
+      </div>
       </div>
     );
   }

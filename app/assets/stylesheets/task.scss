@@ -74,3 +74,100 @@
   .no-resize {
     resize: none;
   }
+
+  .tasks-page {
+    display: flex;
+    margin-bottom: 25vh;
+  }
+
+  .task-filer-box {
+    position: relative;
+    background-color: aliceblue;
+    width: 16vw;
+    border: 1px solid #b5d0e2;
+    min-height: 400px;
+    margin-right: 3vw;
+    margin-top: 2vh;
+    margin-left:3vw;
+    border-radius: 30px;
+  }
+
+  .task-filter-title {
+    height: 7vh;
+    width: 100%;
+    border-radius: 30px 30px 0px 0px;
+    background-color: #b5d0e2;
+    text-align: center;
+    padding-top: 6%;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .task-filter-title-text {
+    color: white;
+    font-size: 20px;
+  }
+
+  .task-list {
+    width: 56vw;
+  }
+
+  .flex-box {
+    display: flex;
+    padding-left: 1.5vw;
+  }
+
+  .filter-button {
+    width: 30px;
+    border-radius: 40px;
+    width: 85%;
+    margin-top: 3vh;
+    font-size: 1.2vw;
+    background-color: white;
+    user-select: none;
+    display: flex;
+  }
+
+  .filter-button:hover {
+    width: 30px;
+    border-radius: 40px;
+    width: 85%;
+    margin-top: 3vh;
+    font-size: 1.2vw;
+    background-color: whitesmoke;
+    user-select: none;
+    display: flex;
+  }
+
+  .filter-button-icon {
+    width: 25%;
+  }
+
+  .filer-button-icon-green {
+    width: 16px;
+    height: 16px;
+    border-radius: 15px;
+    background-color: #68bc4c;
+    margin-left: 2vw;
+    margin-top: 0.55vh;
+    color: white;
+    text-align: center;
+    font-size: 0.7vw;
+  }
+
+  .filer-button-icon-empty {
+    width: 16px;
+    height: 16px;
+    border-radius: 15px;
+    background-color: gainsboro;
+    margin-left: 2vw;
+    margin-top: 0.55vh;
+  }
+
+  .filter-button-text {
+    width: 70%;
+    text-align: center;
+    word-wrap: break-word;
+    padding-right: 0.5vw;
+  }
