@@ -321,7 +321,6 @@ class Main extends React.Component {
     return (
       <div>
         <div className='container'>
-          <h3>Current Budget</h3>
           <BudgetSelector
           onChange={this.reloadMain}
           />

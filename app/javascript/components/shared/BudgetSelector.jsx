@@ -54,8 +54,8 @@ class BudgetSelector extends React.Component {
 
     render() {
         return (
-            <div className='input-group'>
-                <select id="budget-selector" value={this.state.idSelectedBudget} onChange={e => this.changeSelectedBudget(e.target.value)}>
+            <div className='input-group d-inline-block'>
+                <select id="budget-selector" className='d-inline-block' value={this.state.idSelectedBudget} onChange={e => this.changeSelectedBudget(e.target.value)}>
                     {this.state.budgets.map((budget) => (this.state.idSelectedBudget == budget.id ?
                         <option selected key={budget.id} value={budget.id}
                         >

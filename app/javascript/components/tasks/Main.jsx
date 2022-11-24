@@ -66,11 +66,11 @@ class Main extends React.Component {
     return (
       <div className='container'>
         {this.renderTaskCreateModal()}
-        <h1>Tasks for</h1>
+        <h1 className='d-inline-block'>Tasks for &nbsp;</h1>
           <BudgetSelector
           onChange={this.reloadData}
           />
-        <button className="btn btn-round btn-dark mt-10" onClick={this.openTaskCreate}>+ add a task</button>
+        <button className="btn btn-round btn-dark mt-10 addTask" onClick={this.openTaskCreate}>+ add a task</button>
         <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
       </div>
     );
