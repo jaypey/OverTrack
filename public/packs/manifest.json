@@ -118,7 +118,7 @@
           "/packs/js/vendors-node_modules_babel_runtime_regenerator_index_js-b595ce3ae3debdff0888.js",
           "/packs/js/app_javascript_api_main_js-app_javascript_helpers_alerts_js-b448f4fd42b1c9c7c386.js",
           "/packs/js/app_javascript_components_shared_CurrencyInput_jsx-app_javascript_components_shared_DatePicke-336d13-3e2840dd63cff63cd778.js",
-          "/packs/js/tasks-6d4b55fb3cad425ccde1.js"
+          "/packs/js/tasks-5de5f25e0aaa4a00000b.js"
         ]
       }
     },
@@ -166,7 +166,7 @@
   "js/insights-3dd0eb3ff0ca90556be0.js.map": "/packs/js/insights-3dd0eb3ff0ca90556be0.js.map",
   "js/projections-a67e188aafed9c48e2fa.js.map": "/packs/js/projections-a67e188aafed9c48e2fa.js.map",
   "js/runtime-dd1c0aaee6e8361b34ca.js.map": "/packs/js/runtime-dd1c0aaee6e8361b34ca.js.map",
-  "js/tasks-6d4b55fb3cad425ccde1.js.map": "/packs/js/tasks-6d4b55fb3cad425ccde1.js.map",
+  "js/tasks-5de5f25e0aaa4a00000b.js.map": "/packs/js/tasks-5de5f25e0aaa4a00000b.js.map",
   "js/upload_preview-c0c02cdbbebe9a72240d.js.map": "/packs/js/upload_preview-c0c02cdbbebe9a72240d.js.map",
   "js/user-33c3a09294fe68113fca.js.map": "/packs/js/user-33c3a09294fe68113fca.js.map",
   "js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-node_modules_sweetalert2_-e155af-d21daa994ea5662fff32.js": "/packs/js/vendors-node_modules_axios_index_js-node_modules_react-dom_index_js-node_modules_sweetalert2_-e155af-d21daa994ea5662fff32.js",
@@ -184,7 +184,7 @@
   "media/images/UserInfo.png": "/packs/media/images/aa41826b1c9cd22b6e8a.png",
   "projections.js": "/packs/js/projections-a67e188aafed9c48e2fa.js",
   "runtime.js": "/packs/js/runtime-dd1c0aaee6e8361b34ca.js",
-  "tasks.js": "/packs/js/tasks-6d4b55fb3cad425ccde1.js",
+  "tasks.js": "/packs/js/tasks-5de5f25e0aaa4a00000b.js",
   "upload_preview.js": "/packs/js/upload_preview-c0c02cdbbebe9a72240d.js",
   "user.js": "/packs/js/user-33c3a09294fe68113fca.js"
 }
