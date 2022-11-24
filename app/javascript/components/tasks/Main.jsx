@@ -113,23 +113,23 @@ class Main extends React.Component {
     let buttonDate;
     if (this.state.tasks.length > 0) {
       if (this.state.TitleSortState) {
-        buttonTitle = <button onClick={this.toggleTitleSort} className='button-sort button-1'>Title <i id="icTitle" className="arrow up"></i></button>
+        buttonTitle = <button onClick={this.toggleTitleSort} className='button-sort button-1'>Title &nbsp;<i id="icTitle" className="arrow up"></i></button>
       } else {
-        buttonTitle = <button onClick={this.toggleTitleSort} className='button-sort button-1'>Title <i id="icTitle" className="arrow down"></i></button>
+        buttonTitle = <button onClick={this.toggleTitleSort} className='button-sort button-1'>Title &nbsp;<i id="icTitle" className="arrow down"></i></button>
       }
     }
     if (this.state.tasks.length > 0) {
       if (this.state.CategorySortState && this.state.tasks.length > 0) {
-        buttonCategory = <button onClick={this.toggleCategorySort} className='button-sort button-2'>Category <i id="icCategory" className="arrow up"></i></button>
+        buttonCategory = <button onClick={this.toggleCategorySort} className='button-sort button-2'>Category &nbsp;<i id="icCategory" className="arrow up"></i></button>
       } else {
-        buttonCategory = <button onClick={this.toggleCategorySort} className='button-sort button-2'>Category <i id="icCategory" className="arrow down"></i></button>
+        buttonCategory = <button onClick={this.toggleCategorySort} className='button-sort button-2'>Category &nbsp;<i id="icCategory" className="arrow down"></i></button>
       }
     }
     if (this.state.tasks.length > 0) {
       if (this.state.DateSortState && this.state.tasks.length > 0) {
-        buttonDate = <button onClick={this.toggleDateSort} className='button-sort button-3'>Due date <i id="icDate" className="arrow up"></i></button>
+        buttonDate = <button onClick={this.toggleDateSort} className='button-sort button-3'>Due date &nbsp;<i id="icDate" className="arrow up"></i></button>
       } else {
-        buttonDate = <button onClick={this.toggleDateSort} className='button-sort button-3'>Due date <i id="icDate" className="arrow down"></i></button>
+        buttonDate = <button onClick={this.toggleDateSort} className='button-sort button-3'>Due date &nbsp;<i id="icDate" className="arrow down"></i></button>
       }
     }
 
