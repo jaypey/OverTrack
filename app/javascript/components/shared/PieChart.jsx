@@ -25,7 +25,7 @@ const PieChart = ({ data, labels, colors }) => {
         maintainAspectRatio: false,
         tooltips: {
           callbacks: {
-            label: t => `${labels[t.index]}: ${data[t.index]}%`
+            label: t => `${labels[t.index]}: $${data[t.index]}`
           },
         }
       },

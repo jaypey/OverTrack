@@ -79,3 +79,10 @@ button[disabled].btn {
 .less-button {
   background-color: #d86a6a;
 }
+
+.select-disabled {
+  opacity: 0.5;
+  &:hover {
+    cursor: not-allowed;
+  }
+}

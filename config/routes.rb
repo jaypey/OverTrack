@@ -65,9 +65,11 @@ Rails.application.routes.draw do
         collection do
           post :adduser
           post :removeuser
+          post :leavebudget
           get :listBudgets
           post :selectbudget
           get :getbudgetid
+          get :getcurrentuserid
         end
       end
 
