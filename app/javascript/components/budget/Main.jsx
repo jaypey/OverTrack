@@ -203,7 +203,15 @@ class Main extends React.Component {
         let addButton
         let isOwner
         if (this.state.idSelectedBudget === 0) { return 'Select a budget'; }
-        if (budget.budget_users.find(this.isCurrentUserOwner))
+        if (budget.budget_users.find(this.isCurrentUserOwner) && budget.is_base_budget == true)
+        {
+            title = <h3>
+                {budget.name}
+                &nbsp; <a onClick={() => this.openBudgetUpdate()} className="dim-til-hover"><i className="fa fa-edit" /></a>
+            </h3>
+            isOwner = true;
+        }
+        else if (budget.budget_users.find(this.isCurrentUserOwner))
         {
             title = <h3>
                 {budget.name}
