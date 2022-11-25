@@ -9,13 +9,8 @@ class Main extends React.Component {
         super(props);
 
         this.state = {
-            budgets: [
-
-            ],
-            budget_role: [
-                // {role_name: "owner", role_value: 1},
-                //          {role_name: "member", role_value: 2}
-            ],
+            budgets: [],
+            budget_role: [],
             idSelectedBudget: 0,
             showBudgetCreate: false,
             showBudgetUpdate: false,
@@ -64,7 +59,7 @@ class Main extends React.Component {
             if (!result.value) { return; }
             Budgets.delete(id).then(
                 () => { this.onBudgetDelete(); },
-                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); },
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 408 ? Alerts.genericConflict('Cannot delete base budget') : Alerts.genericError(); },
             );
         });
     }

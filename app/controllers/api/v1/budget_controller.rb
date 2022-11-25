@@ -31,6 +31,7 @@ module Api; module V1
             budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: budget.id).take
 
             render json: nil, status: 403 and return if budget_user.role_value > 1
+            render json: nil, status: 408 and return if budget.is_base_budget == true
             
             successful = budget.destroy
             render json: nil, status: successful ? 200 : 500
