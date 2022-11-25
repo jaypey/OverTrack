@@ -77,7 +77,7 @@ module Api; module V1
         group by categories.rank, categories.id 
         order by categories.rank asc, categories.id asc) 
         UNION ALL
-        (select 'leftovers' AS category, '#2CAF1E' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        (select 'remaining' AS category, '#eee' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
         from categories 
         full outer join expenses on categories.id = expenses.category_id 
         full outer join revenues on categories.id = revenues.category_id

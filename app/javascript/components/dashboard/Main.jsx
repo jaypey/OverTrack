@@ -251,9 +251,8 @@ class Main extends React.Component {
         
         const colors = resp.category_pourcentage.map((r) => r.color)
         const labels = resp.category_pourcentage.map((r) => r.category)
-        const data = resp.category_pourcentage.map((r) =>
-          this.calculateNumber(r.spend, revenue)
-        )
+        const data = resp.category_pourcentage.map((r) => r.spend)
+
 
         if (data.length === 0) {
           colors = ['gray']
@@ -276,10 +275,7 @@ class Main extends React.Component {
     var totalExpense = this.getTotalExpense();
     var totalRevenue = this.getTotalRevenue();
 
-    if (totalRevenue > totalExpense)
-      this.setState({ totalRevenuesLeft: totalRevenue - totalExpense });
-    else
-      this.setState({ totalRevenuesLeft: 0 });
+    this.setState({ totalRevenuesLeft: totalRevenue - totalExpense });
   }
 
   renderMain = (keyMain) => {
@@ -288,7 +284,7 @@ class Main extends React.Component {
         {this.renderExpenseCreateModal()}
         {this.renderRevenueCreateModal()}
         <div className="container">
-          <Overview key={keyMain} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} totalRevenue={this.state.totalRevenuesLeft} monthlyGoal={this.state.monthlyGoal} onChange={this.reloadData} />
+          <Overview key={keyMain} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} totalExpense={this.getTotalExpense()} totalRevenue={this.state.totalRevenuesLeft} totaltotalRevenue={this.getTotalRevenue()} monthlyGoal={this.getTotalRevenue()} onChange={this.reloadData} />
         </div>
 
         <div className="container mt-100">
@@ -325,7 +321,6 @@ class Main extends React.Component {
     return (
       <div>
         <div className='container'>
-          <h3>Current Budget</h3>
           <BudgetSelector
           onChange={this.reloadMain}
           />
