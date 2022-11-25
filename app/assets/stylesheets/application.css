@@ -18,7 +18,7 @@
    margin-bottom: 16px;
 }
 
-#config-form{
+#config-form {
    margin-bottom: 25px;
 }
 
@@ -83,6 +83,19 @@
 
 .config-item-delete {
    color: red;
+}
+
+#config-mapping-text {
+   width: 44.5%;
+}
+
+#config-mapping-cat{
+   margin-left: 10px;
+   width: 44.5%;
+}
+
+.config-add-mapping{
+   float:right;
 }
 
 .options-button:hover {
