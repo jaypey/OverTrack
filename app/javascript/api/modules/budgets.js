@@ -25,6 +25,9 @@ const Budgets = {
   removeuser(data, opts = {}){
     return Base.post(`/budget/removeuser`, data, opts || {});
   },
+  leavebudget(data, opts = {}){
+    return Base.post(`/budget/leavebudget`, data, opts || {});
+  },
   getcurrentuserid(data, opts = {}){
     return Base.get(`/budget/getcurrentuserid`, data, opts || {});
   }

@@ -66,8 +66,20 @@ module Api; module V1
             budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: budget.id).take
 
             render json: nil, status: 403 and return if budget_user.role_value > 1
+            render json: nil, status: 409 and return if budget_user.user_id == params[:userid]
 
             budget.users.delete(budget.users.find(params[:userid]))
+            successful = budget.save
+            render json: budget, status: successful ? 200 : 500
+        end
+
+        def leavebudget
+            budget = ::Budget.find(params[:id])
+            budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: budget.id).take
+
+            render json: nil, status: 403 and return if budget_user.role_value <= 1
+
+            budget.users.delete(budget.users.find(cookies.signed[:user_id]))
             successful = budget.save
             render json: budget, status: successful ? 200 : 500
         end

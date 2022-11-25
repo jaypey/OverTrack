@@ -51,6 +51,11 @@ class Main extends React.Component {
         this.reloadData();
     }
 
+    onLeaveBudget = () => {
+        this.setState({ idSelectedBudget: 0});
+        this.reloadData();
+    }
+
     openBudgetCreate = () => { this.setState({ showBudgetCreate: true }); }
     closeBudgetCreate = () => { this.setState({ showBudgetCreate: false }); }
     openBudgetUpdate = () => { this.setState({ showBudgetUpdate: true }); }
@@ -69,12 +74,22 @@ class Main extends React.Component {
         });
     }
 
+    leaveBudget = async (budgetId) => {
+        Alerts.genericLeave('budget').then((result) => {
+            if (!result.value) { return; }
+            Budgets.leavebudget({ id: budgetId}).then(
+                () => { this.onLeaveBudget(); },
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); }
+            );
+        });
+    }
+
     handleUserRemove = async (id, budgetId) => {
         Alerts.genericRemove('user').then((result) => {
             if (!result.value) { return; }
             Budgets.removeuser({ id: budgetId, userid: id }).then(
                 () => { this.onRemoveUser(); },
-                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); }
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 409 ? Alerts.genericConflict('Cannot remove yourself from budget') : Alerts.genericError(); }
             );
         });
     }
@@ -236,9 +251,6 @@ class Main extends React.Component {
                     {addButton}
                 </div>
                 <br />
-                <div>
-                    <button onClick={() => this.updateSelectedBudget()} className='btn btn-round btn-accept pos-abs mt-neg-20 z-5'>Select</button>
-                </div>
             </div>
         )
     }
@@ -251,15 +263,23 @@ class Main extends React.Component {
                 <div className='sidebar'>
                     <h3 className=''>Your budgets</h3>
                     <ul>
-                        {this.state.budgets.map((budget) => 
+                        {this.state.budgets.map((budget) => (budget.budget_users.find(this.isCurrentUserOwner) ?
                             <li key={budget.id}
                                 onClick={() => this.changeSelectedBudget(budget.id)}
                                 style={{ cursor: 'pointer' }}
                                 className={budget.id == this.state.idSelectedBudget ? 'input-group text-bold' : 'input-group'}
                             >
                                 &nbsp; {budget.name}
-                            </li>
-                        )}
+                            </li> :
+                            <li key={budget.id}
+                            onClick={() => this.changeSelectedBudget(budget.id)}
+                            style={{ cursor: 'pointer' }}
+                            className={budget.id == this.state.idSelectedBudget ? 'input-group text-bold' : 'input-group'}
+                        >
+                            <a onClick={() => this.leaveBudget(budget.id)} className="dim-til-hover text-right"><i className='fa fa-minus'></i></a>
+                            &nbsp; {budget.name}
+                        </li>
+                        ))}
                     </ul>
                     <br />
                     <div>

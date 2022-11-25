@@ -59,6 +59,18 @@ const Alerts = {
     });
   },
 
+  genericLeave(label) {
+    return Swal.fire({
+      title: 'Confirm departure',
+      text: `Are you sure you want to leave this ${label}?`,
+      type: 'warning',
+      confirmButtonText: 'Yes, leave!',
+      showCancelButton: true,
+      focusCancel: true,
+      confirmButtonColor: '#bd4d4d',
+    });
+  },
+
   genericConflict(description) {
     return Swal.fire({
       title: 'Hold on',
