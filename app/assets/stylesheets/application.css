@@ -102,3 +102,17 @@
    cursor: pointer;
    filter: brightness(.7) !important;
 }
+
+#budget-selector{
+   border: none;
+   border-bottom: solid;
+   font-weight: bold;
+   font-size: 2em;
+   height: 57px;
+   outline: none;
+}
+
+
+.addTask{
+   display: block;
+}

@@ -65,19 +65,16 @@ Rails.application.routes.draw do
         collection do
           post :adduser
           post :removeuser
+          post :leavebudget
           get :listBudgets
           post :selectbudget
           get :getbudgetid
+          get :getcurrentuserid
         end
       end
 
       resources :user, only: [:index, :update] do
       end
-      #get "/revenues", to: "/revenues#index"
-      # get "/tasks", to: "/tasks#index"
-      #post "/revenues", to: "/revenues#create"
-      #post "/revenues", to: "/revenues#destroy"
-      #post "/revenues", to: "/revenues#update"
     end
   end
 
