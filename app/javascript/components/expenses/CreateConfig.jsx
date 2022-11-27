@@ -379,8 +379,8 @@ class CreateConfig extends React.Component {
           </div>
 
           <div className='config-button-container'>
-            <button id="config-submit" disabled={!this.state.isValid || this.state.isSaving} type="submit" className='btn btn-primary'>{this.state.configId == -1 ? 'Create' : 'Save'}</button>
             <a id="config-back" className='btn' href='/expense_uploads/config_list'>Back</a>
+            <button id="config-submit" disabled={!this.state.isValid || this.state.isSaving} type="submit" className='btn btn-primary'>{this.state.configId == -1 ? 'Create' : 'Save'}</button>
           </div>
         </form>
       </>
