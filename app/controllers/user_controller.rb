@@ -22,7 +22,7 @@ class UserController < ApplicationController
                     UserMailer.with(userToConfirm: user, confirmationUrl: confUrl).user_confirm.deliver_later
 
 
-                    initialBudget = ::Budget.new(name: user.firstname + "'s budget", description: "Your own personal budget", owner_id: user.id)
+                    initialBudget = ::Budget.new(name: user.firstname + "'s budget", description: "Your own personal budget", owner_id: user.id, is_base_budget: true)
                     initialBudget.users << user
                     successful = initialBudget.save
                     BudgetUser.where(budget_id: initialBudget.id, user_id: user.id).first().update(confirmed: true, role_value: 1)

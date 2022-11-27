@@ -9,13 +9,8 @@ class Main extends React.Component {
         super(props);
 
         this.state = {
-            budgets: [
-
-            ],
-            budget_role: [
-                // {role_name: "owner", role_value: 1},
-                //          {role_name: "member", role_value: 2}
-            ],
+            budgets: [],
+            budget_role: [],
             idSelectedBudget: 0,
             showBudgetCreate: false,
             showBudgetUpdate: false,
@@ -69,7 +64,7 @@ class Main extends React.Component {
             if (!result.value) { return; }
             Budgets.delete(id).then(
                 () => { this.onBudgetDelete(); },
-                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); },
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 408 ? Alerts.genericConflict('Cannot delete base budget') : Alerts.genericError(); },
             );
         });
     }
@@ -208,7 +203,15 @@ class Main extends React.Component {
         let addButton
         let isOwner
         if (this.state.idSelectedBudget === 0) { return 'Select a budget'; }
-        if (budget.budget_users.find(this.isCurrentUserOwner))
+        if (budget.budget_users.find(this.isCurrentUserOwner) && budget.is_base_budget == true)
+        {
+            title = <h3>
+                {budget.name}
+                &nbsp; <a onClick={() => this.openBudgetUpdate()} className="dim-til-hover"><i className="fa fa-edit" /></a>
+            </h3>
+            isOwner = true;
+        }
+        else if (budget.budget_users.find(this.isCurrentUserOwner))
         {
             title = <h3>
                 {budget.name}
