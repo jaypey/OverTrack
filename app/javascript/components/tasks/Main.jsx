@@ -43,6 +43,11 @@ class Main extends React.Component {
     this.loadTasks();
   }
 
+  toggleDoneTasks = () => {
+    console.log("clicked");
+    // Ajouter le filter pour les done tasks
+  }
+
   openTaskCreate = () => { this.setState({ showTaskCreateModal: true }); }
   closeTaskCreate = () => { this.setState({ showTaskCreateModal: false }); }
 
@@ -146,7 +151,7 @@ class Main extends React.Component {
           {buttonCategory}
           {buttonDate}
         </div>
-        <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} />
+        <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} toggleDoneTasks={this.toggleDoneTasks}/>
       </div>
     );
   }

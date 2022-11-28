@@ -10,6 +10,7 @@ class TaskTile extends React.Component {
     super(props);
     this.state = {
       showTaskEditModal: false,
+      firstDoneTask: false,
     }
   }
 
