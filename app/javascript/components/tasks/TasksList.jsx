@@ -12,6 +12,10 @@ class TasksList extends React.Component {
       }
     }
 
+    static getDerivedStateFromProps(props, state){
+      state.firstDoneTask = props.firstDone
+    }
+
     render() {
         return (
           <div>
@@ -36,10 +40,12 @@ class TasksList extends React.Component {
 TasksList.defaultProps = {
     tasks: [],
     categories: [],
+    firstDone: false,
   };
   
 TasksList.propTypes = {
     categories : PropTypes.array,
+    firstDone : PropTypes.bool,
     tasks: PropTypes.array,
     onChange: PropTypes.func.isRequired,
     toggleDoneTasks: PropTypes.func.isRequired
