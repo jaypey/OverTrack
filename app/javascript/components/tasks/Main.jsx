@@ -202,11 +202,11 @@ class Main extends React.Component {
       </div>
       <div className='task-list'>
         {this.renderTaskCreateModal()}
-        <h1>Tasks for</h1>
+        <h1 className='d-inline-block'>Tasks for &nbsp;</h1>
           <BudgetSelector
           onChange={this.reloadData}
           />
-        <button className="btn btn-round btn-dark mt-10" onClick={this.openTaskCreate}>+ add a task</button>
+        <button className="btn btn-round btn-dark mt-10 addTask" onClick={this.openTaskCreate}>+ add a task</button>
         <div style={{marginTop: 40, height: 40}}>
           {buttonTitle}
           {buttonCategory}

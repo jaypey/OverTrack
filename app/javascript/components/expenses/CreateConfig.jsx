@@ -1,7 +1,9 @@
 import React from 'react';
 import GenericList from './GenericList';
 import { CsvConfig } from '../../api/main';
+import { Categories } from '../../api/main';
 import { Alerts } from '../../helpers/main';
+import MappingList from './MappingList';
 
 class CreateConfig extends React.Component {
   constructor(props) {
@@ -24,11 +26,15 @@ class CreateConfig extends React.Component {
       dateIdx: 0,
       ignoredSubstring: [],
       currentSubstring: "",
+      mappings: [],
+      currentMappingText: "",
+      currentMappingCategory: "",
       hasHeader: false,
       skipNonSpend: false,
       skipNonIncome: false,
       defaultCategory: "Uncategorized",
       isValid: false,
+      cats: [],
       isSaving: false,
       error: false,
     };
@@ -39,7 +45,16 @@ class CreateConfig extends React.Component {
         .then((response) => {
 
           const convertedJson = JSON.parse(response.config_json);
-          console.log(convertedJson);
+
+          const importedMappings = convertedJson.categories.mappings;
+
+
+          var mappings = [];
+
+          for (const [key, val] of Object.entries(importedMappings)) {
+            mappings.push({ text: key, category: val });
+          }
+
           this.setState({
             configId: configId,
             configName: response.name,
@@ -49,7 +64,7 @@ class CreateConfig extends React.Component {
             incomeIdx: convertedJson.incomes.index,
             dateIdx: convertedJson.timestamps.index,
             ignoredSubstring: convertedJson.descriptions.ignore_substrings,
-            currentSubstring: "",
+            mappings: mappings,
             hasHeader: convertedJson.has_header,
             skipNonSpend: convertedJson.spends.skip_non_spend,
             skipNonIncome: convertedJson.incomes.skip_non_income,
@@ -66,6 +81,10 @@ class CreateConfig extends React.Component {
         });
 
     }
+
+    Categories.list("").then((response) => {
+      this.setState({ cats: response });
+    });
   }
 
   onSave = (response) => {
@@ -88,6 +107,13 @@ class CreateConfig extends React.Component {
       return;
     }
 
+    var mappingDict = {};
+
+    if (this.state.mappings.length > 0) {
+      this.state.mappings.forEach((el) => mappingDict[el.text] = el.category);
+    }
+
+
     var config_json = {
       has_header: this.state.hasHeader,
       descriptions: {
@@ -96,7 +122,7 @@ class CreateConfig extends React.Component {
       },
       categories: {
         index: this.state.categoryIdx,
-        mappings: {}
+        mappings: mappingDict
       },
       spends: {
         index: this.state.spendIdx,
@@ -116,6 +142,7 @@ class CreateConfig extends React.Component {
     }
 
     config_json = JSON.stringify(config_json);
+    console.log(config_json);
 
     let apiCall = null;
 
@@ -148,6 +175,31 @@ class CreateConfig extends React.Component {
 
     if (stringToDelete != "")
       this.setState(({ ignoredSubstring: this.state.ignoredSubstring.filter(e => e !== stringToDelete) }));
+  }
+
+
+  handleRemoveMapping = (textToDelete) => {
+
+    if (textToDelete != "")
+      this.setState(({ mappings: this.state.mappings.filter(e => e.text !== textToDelete) }));
+
+  }
+
+  handleAddMapping = () => {
+    var currentText = this.state.currentMappingText;
+    var currentCat = this.state.currentMappingCategory;
+
+    if (currentText != "" && currentCat != "") {
+
+      var currentMap = { text: currentText, category: currentCat };
+
+      this.setState(prevState =>
+      ({
+        mappings: [...prevState.mappings
+          .filter(e => e.text !== currentMap.text), ...currentMap].sort()
+      }));
+      this.setState({ currentMappingText: "", currentMappingCategory: "" });
+    }
   }
 
   handleAddSubstring = () => {
@@ -252,6 +304,32 @@ class CreateConfig extends React.Component {
               <input className="config-input" type="text"
                 value={this.state.defaultCategory}
                 onChange={this.handleDefaultCategoryChange} />
+            </div>
+            <label>Map words in column to categories:</label>
+            <br />
+            <br />
+            <input id='config-mapping-text' className='config-input config-list-textbox'
+              onChange={(e) => this.setState({ currentMappingText: e.target.value })}
+              value={this.state.currentMappingText}
+              type="text" />
+
+            <select id='config-mapping-cat' value={this.state.currentMappingCategory}
+              onChange={(e) => this.setState({ currentMappingCategory: e.target.value })}>
+              <option key="0" value={""}>- Choose a category -</option>
+              {this.state.cats.map((cat) => {
+                return (
+                  <option key={cat.id} value={cat.name}>
+                    {cat.name}
+                  </option>
+                )
+              })}
+            </select>
+            <span
+              onClick={this.handleAddMapping}
+              className="config-add-mapping config-add-substring fa fa-plus"></span>
+
+            <div className='config-list'>
+              {this.state.mappings.length > 0 && <MappingList handleDelete={this.handleRemoveMapping} list={this.state.mappings} />}
             </div>
           </div>
 
