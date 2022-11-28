@@ -92,10 +92,14 @@ class Main extends React.Component {
   }
   toggleCategorySort = () => {
     if(this.state.CategorySortState){
-      this.setState({ tasks: this.state.tasks.sort((a, b) => this.state.categories.find(obj => obj.id === a.category_id).name > this.state.categories.find(obj => obj.id === b.category_id).name ? 1 : -1)});
+      this.setState({ tasks: 
+        this.state.tasks.sort((a, b) => 
+          (a.category_id === 0 ? 'no category' : (this.state.categories.find(obj => obj.id === a.category_id).name)) > (b.category_id === 0 ? 'no category' : (this.state.categories.find(obj => obj.id === b.category_id).name)) ? 1 : -1)});
       this.state.CategorySortState = false;
     } else {
-      this.setState({ tasks: this.state.tasks.sort((a, b) => this.state.categories.find(obj => obj.id === a.category_id).name > this.state.categories.find(obj => obj.id === b.category_id).name ? -1 : 1)});
+      this.setState({ tasks: 
+        this.state.tasks.sort((a, b) => 
+          (a.category_id === 0 ? 'no category' : (this.state.categories.find(obj => obj.id === a.category_id).name)) > (b.category_id === 0 ? 'no category' : (this.state.categories.find(obj => obj.id === b.category_id).name)) ? -1 : 1)});
       this.state.CategorySortState = true;
     }
 
@@ -152,6 +156,7 @@ class Main extends React.Component {
           {buttonDate}
         </div>
         <TasksList tasks={this.state.tasks} categories={this.state.categories} onChange={this.reloadData} toggleDoneTasks={this.toggleDoneTasks}/>
+        {/* Render un boutons show done tasks s'il y a des done tasks et qu'elles sont cachées*/}
       </div>
     );
   }
