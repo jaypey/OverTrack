@@ -13,7 +13,8 @@ class TasksList extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state){
-      state.firstDoneTask = props.firstDone
+      state.firstDoneTask = props.firstDone;
+      return null;
     }
 
     render() {

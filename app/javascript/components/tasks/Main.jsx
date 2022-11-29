@@ -28,6 +28,7 @@ class Main extends React.Component {
       shownTasks: [],
       excludedCategories: [],
       showTaskCreateModal: false,
+      ShowDoneTasks: true,
     };
   }
 
@@ -46,8 +47,7 @@ class Main extends React.Component {
   }
 
   toggleDoneTasks = () => {
-    console.log("clicked");
-    // Ajouter le filter pour les done tasks
+    this.setState({ShowDoneTasks: !this.state.ShowDoneTasks});
   }
 
   openTaskCreate = () => { this.setState({ showTaskCreateModal: true }); }
@@ -77,7 +77,12 @@ class Main extends React.Component {
     for (let data of this.state.tasks) {
       if (!(this.state.excludedCategories.includes(data.category_id.toString())))
       {
-        this.state.shownTasks.push(data)
+        if (this.state.ShowDoneTasks) {
+          this.state.shownTasks.push(data)
+        } else {
+          if (!data.is_done)
+            this.state.shownTasks.push(data)
+        }
       }
     }
   }
@@ -147,9 +152,15 @@ class Main extends React.Component {
   render() {
     this.getShownTasks()
 
+    let btnDoneTasks;
     let buttonTitle;
     let buttonCategory;
     let buttonDate;
+
+    if (!this.state.ShowDoneTasks){
+      btnDoneTasks = <button className='button-sort btn-showdone' onClick={this.toggleDoneTasks}>Show done tasks</button>
+    }
+
     if (this.state.shownTasks.length > 0) {
       if (this.state.TitleSortState) {
         buttonTitle = <button onClick={this.toggleTitleSort} className='button-sort button-1'>Title &nbsp;<i id="icTitle" className="arrow up"></i></button>
@@ -223,6 +234,7 @@ class Main extends React.Component {
         </div>
         <TasksList tasks={this.state.shownTasks} categories={this.state.categories} onChange={this.reloadData} toggleDoneTasks={this.toggleDoneTasks}/>
         {/* Render un boutons show done tasks s'il y a des done tasks et qu'elles sont cachées*/}
+        {btnDoneTasks}
         </div>
       </div>
     );
