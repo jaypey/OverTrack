@@ -157,7 +157,7 @@ class Main extends React.Component {
     let buttonCategory;
     let buttonDate;
 
-    if (!this.state.ShowDoneTasks){
+    if (!this.state.ShowDoneTasks && this.state.shownTasks.length > 0){
       btnDoneTasks = <button className='button-sort btn-showdone' onClick={this.toggleDoneTasks}>Show done tasks</button>
     }
 
