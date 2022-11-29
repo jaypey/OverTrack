@@ -88,8 +88,6 @@ class Main extends React.Component {
   }
 
   changeCategories = event => {
-    console.log("CLICKED!")
-    console.log(event.currentTarget.id)
     let array = this.state.excludedCategories
     if (array.includes(event.currentTarget.id))
     {
@@ -107,7 +105,6 @@ class Main extends React.Component {
 
 
   toggleTitleSort = () => {
-    console.log(this.state.tasks)
     if(this.state.TitleSortState){
       this.setState({ tasks: this.state.tasks.sort((a, b) =>  a.title > b.title ? 1 : -1)});
       this.state.TitleSortState = false;
@@ -115,14 +112,11 @@ class Main extends React.Component {
       this.setState({ tasks: this.state.tasks.sort((a, b) =>  a.title > b.title ? -1 : 1,)});
       this.state.TitleSortState = true;
     }
-    console.log(this.state.tasks)
 
     this.state.tasks.sort((a, b) => a.is_done - b.is_done);
-    console.log(this.state.tasks)
   }
 
   toggleCategorySort = () => {
-    console.log(this.state.categories)
     if(this.state.CategorySortState){
       this.setState({ tasks: 
         this.state.tasks.sort((a, b) => 
