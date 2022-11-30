@@ -69,6 +69,7 @@ class Main extends React.Component {
   updateExpense = (id, updates) => {
     Expenses.update(id, updates).then(
       () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
+      (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
       () => { Alerts.genericError(); },
     );
   }
@@ -77,6 +78,7 @@ class Main extends React.Component {
       if (!result.value) { return; }
       Expenses.delete(id).then(
         () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         () => { Alerts.genericError(); },
       );
     });
@@ -85,6 +87,7 @@ class Main extends React.Component {
   updateRevenue = (id, updates) => {
     Revenues.update(id, updates).then(
       () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
+      (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
       () => { Alerts.genericError(); },
     );
   }
@@ -93,6 +96,7 @@ class Main extends React.Component {
       if (!result.value) { return; }
       Revenues.delete(id).then(
         () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         () => { Alerts.genericError(); },
       );
     });
