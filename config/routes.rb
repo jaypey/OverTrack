@@ -84,6 +84,7 @@ Rails.application.routes.draw do
   get "projections", to: "projections#index"
   get "tasks", to: "tasks#index"
   get 'user/register', to: 'user#register', as: 'register_user' # new
+  get 'user/confirm', to: 'user#confirm', as: 'confirm_user' #confirm
   post 'user', to: 'user#create' # create
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#not_found"
