@@ -10,6 +10,7 @@ class TaskTile extends React.Component {
     super(props);
     this.state = {
       showTaskEditModal: false,
+      firstDoneTask: false,
     }
   }
 
@@ -48,7 +49,7 @@ class TaskTile extends React.Component {
       <>
         <div
             key={this.props.task.id}
-            className="category-tile flex flex-space-between tint-on-hover hover-pointer"
+            className={`category-tile flex flex-space-between tint-on-hover hover-pointer ${task.is_done ? "stripe" : ""}`}
             onClick={this.openTaskEdit}
             style={{ borderColor: this.props.taskCategory.color || 'black'}} >
             <span onClick={this.handleChildClick}>

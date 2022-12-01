@@ -4,7 +4,7 @@ import Modal from '../shared/Modal';
 import DatePicker from '../shared/DatePicker';
 import CurrencyInput from '../shared/CurrencyInput';
 import FieldErrors from '../shared/FieldErrors';
-import { Categories, Expenses, Revenues } from '../../api/main';
+import { Categories, Expenses, Revenues, Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
 class FormModal extends React.Component {
@@ -34,13 +34,19 @@ class FormModal extends React.Component {
     if (Object.values(this.state.errors).flat().length) { return; }
 
     if (this.props.AddRevenue == 1){
+      Budgets.getcurrentuserid().then(
+        (cResp) => { console.log(cResp); },
+        () => { Alerts.error("Current user didn't load correctly"); }
+      );
       Revenues.create({ description: this.state.description.trim(), category_id: this.state.category_id, amount: this.state.amount, paid_at: this.state.paidAt }).then(
-        (resp) => { this.props.onSave(resp); },
-        () => { Alerts.genericError(); },
+        (cResp) => { this.props.onSave(cResp); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
+        () => { Alerts.genericError() },
       );
     } else {
       Expenses.create({ description: this.state.description.trim(), category_id: this.state.category_id, amount: this.state.amount, paid_at: this.state.paidAt }).then(
         (resp) => { this.props.onSave(resp); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         () => { Alerts.genericError(); },
       );
     }
