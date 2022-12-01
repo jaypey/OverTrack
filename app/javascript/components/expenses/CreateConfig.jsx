@@ -57,7 +57,7 @@ class CreateConfig extends React.Component {
           }
 
           var sep = ',';
-          if (convertedJson.separator != null && convertedJson.separator == 1)
+          if (convertedJson.separator != null && convertedJson.separator.length == 1)
             sep = convertedJson.separator;
       
 
