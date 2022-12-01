@@ -4,7 +4,10 @@
     <%= form_tag sessions_path do %>
       <div class="input-group"> 
         <% if flash[:error] %>
-          <div class="error"><%= flash[:error] %></div>
+          <div style="color:red;"><%= flash[:error] %></div>
+        <% end %>
+        <% if flash[:success] %>
+          <div style="color:green;"><%= flash[:success] %></div>
         <% end %>
       </div>
       <div class="input-group">
@@ -15,6 +18,7 @@
       <div class="input-group">
         <label>Password</label>
         <%= password_field_tag :password, nil, autocomplete: "off" %>
+        <%= link_to "Forgot your password?", user_forgot_path, class: "" %>
       </div>
 
       <div class="form-actions">

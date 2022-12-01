@@ -15,4 +15,9 @@ class UserMailer < ApplicationMailer
         mail(to: @userToConfirm.email, subject: '[OverTrack] Confirm registration')
     end
 
+    def password_reset
+        @userToReset = params[:userToReset]
+        @resetUrl = params[:resetUrl]
+        mail(to: @userToReset.email, subject: '[OverTrack] Reset password')
+    end
 end
