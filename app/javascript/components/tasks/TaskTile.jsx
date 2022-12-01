@@ -16,7 +16,9 @@ class TaskTile extends React.Component {
 
   updateTask = (id, updates) => {
     Tasks.update(id, updates).then(
-        () => { this.props.onChange()})
+        () => { this.props.onChange(); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 408 ? Alerts.genericConflict('Cannot update task') : Alerts.genericError(); },
+    );
   }
 
   openTaskEdit = () => { this.setState({ showTaskEditModal: true }); }

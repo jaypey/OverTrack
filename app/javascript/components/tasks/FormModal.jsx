@@ -35,9 +35,11 @@ class FormModal extends React.Component {
       if (!result.value) { return; }
       Tasks.delete(this.props.task.id).then(
         (resp) => { this.props.onSave(resp); },
-        () => { Alerts.genericError(); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 408 ? Alerts.genericConflict('Cannot delete task') : Alerts.genericError(); },
       );
     });
+
+    
   }
 
   handleSubmit= (e) => {
@@ -65,7 +67,7 @@ class FormModal extends React.Component {
 
     apiCall.then(
       (resp) => { this.props.onSave(resp); },
-      () => { Alerts.genericError(); },
+      (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 408 ? Alerts.genericConflict('Cannot update task') : Alerts.genericError(); },
     );
   }
 
