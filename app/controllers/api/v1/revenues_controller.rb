@@ -22,6 +22,10 @@ module Api; module V1
     end
         
     def create
+      budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: cookies.signed[:selectedBudget]).take
+      
+      render json: nil, status: 403 and return if budget_user.role_value > 2
+      
       revenue = Revenue.new(description: params[:description], category_id: params[:category_id], amount: params[:amount], paid_at: params[:paid_at])
       successful = revenue.save
       render json: revenue, status: successful ? 200 : 500
@@ -35,14 +39,22 @@ module Api; module V1
       end
     end
 
-    def destroy
+    def destroy      
       revenue = Revenue.find(params[:id])
+      budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: cookies.signed[:selectedBudget]).take
+      
+      render json: nil, status: 403 and return if budget_user.role_value > 2
+
       successful = revenue.destroy
       render json: nil, status: successful ? 200 : 500
     end
 
     def update
       revenue = Revenue.find(params[:id])
+      budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: cookies.signed[:selectedBudget]).take
+      
+      render json: nil, status: 403 and return if budget_user.role_value > 2
+
       successful = revenue.update(
         category_id: params.fetch(:category_id, revenue.category_id),
         description: params.fetch(:description, revenue.description),
