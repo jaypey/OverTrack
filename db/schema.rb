@@ -116,6 +116,8 @@ ActiveRecord::Schema.define(version: 2031_42_15_562254) do
     t.string "password_digest"
     t.string "token"
     t.boolean "confirmed"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
   end
 
   add_foreign_key "budgets", "users", column: "owner_id"

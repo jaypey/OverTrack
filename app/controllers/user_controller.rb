@@ -1,6 +1,6 @@
 class UserController < ApplicationController
-    skip_before_action :require_login, only: [:create, :register]
-    before_action :require_no_login, only: [:create, :register]
+    skip_before_action :require_login, only: [:create, :register, :forgot, :reset]
+    before_action :require_no_login, only: [:create, :register, :forgot, :reset]
   
     def register
         newUser = User.new
@@ -42,6 +42,16 @@ class UserController < ApplicationController
 
     def index
         
+    end
+
+    def forgot
+    
+    end
+
+    def reset
+        if !params[:token].blank?
+            @token = params[:token]
+        end
     end
 end
   
