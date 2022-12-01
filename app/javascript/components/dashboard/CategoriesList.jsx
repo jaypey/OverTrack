@@ -2,15 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Arr } from '../../helpers/main';
 import CategoryTile from './CategoryTile';
+import { Budgets } from '../../api/main';
 import CategoryFormModal from '../categories/FormModal';
 
 class CategoriesList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showCategoryCreateModal: false, is_revenue: this.props.is_revenue }
+    this.state = { 
+      showCategoryCreateModal: false, 
+      is_revenue: this.props.is_revenue,
+   }
   }
 
-  openCategoryCreate = () => { this.setState({ showCategoryCreateModal: true }); }
+  openCategoryCreate = () => { if (this.props.canCreate) { this.setState({ showCategoryCreateModal: true }); } }
   closeCategoryCreate = () => { this.setState({ showCategoryCreateModal: false }); }
   onCategorySave = () => {
     this.closeCategoryCreate();
@@ -33,19 +37,20 @@ class CategoriesList extends React.Component {
 
   renderCategory(category, idx) {
     let markup = '';
-    if (category == 'addButton') {
+
+    if (category == 'addButton' && this.props.canCreate) {
       markup = (
         <div className="category-tile dim-til-hover hover-pointer no-border" onClick={this.openCategoryCreate}>
           <div className="new">+ Add a category</div>
         </div>
       );
-    } else {
+    } else if (category != 'addButton') {
       markup = (
         <CategoryTile
+          canCreate={this.props.canCreate}
           categoryWithExpensesAndSpend={category}
           colorsToSkip={this.colorsToSkip()}
-          onChange={this.props.onChange}
-        />
+          onChange={this.props.onChange}/>
       );
     }
 
@@ -79,6 +84,7 @@ CategoriesList.propTypes = {
   is_revenue: PropTypes.number,
   categoriesWithExpensesAndSpend: PropTypes.array,
   onChange: PropTypes.func.isRequired,
+  canCreate: PropTypes.bool
 };
 
 export default CategoriesList;

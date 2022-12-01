@@ -4,7 +4,7 @@ import Overview from './Overview';
 import CategoriesList from './CategoriesList';
 import ExpenseFormModal from '../expenses/FormModal';
 import PieChart from '../shared/PieChart';
-import { Categories, Revenues, Expenses, Goals, Reports, Tasks} from '../../api/main';
+import { Categories, Revenues, Expenses, Goals, Reports, Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 import BudgetSelector from '../shared/BudgetSelector'
 
@@ -23,6 +23,7 @@ class Main extends React.Component {
       totalRevenuesLeft: 0,
       loadedexpenses: false,
       loadedrevenues: false,
+      canCreate : false,
       monthlyGoal: 0,
       monthlyGoalRevenues: 0,
       showExpenseCreateModal: false,
@@ -37,9 +38,9 @@ class Main extends React.Component {
     this.reloadData();
   }
 
-  openExpenseCreate = () => { this.setState({ showExpenseCreateModal: true }); }
+  openExpenseCreate = () => { if (this.state.canCreate) { this.setState({ showExpenseCreateModal: true }); } }
   closeExpenseCreate = () => { this.setState({ showExpenseCreateModal: false }); }
-  openRevenueCreate = () => { this.setState({ showRevenueCreateModal: true }); }
+  openRevenueCreate = () => { if (this.state.canCreate) { this.setState({ showRevenueCreateModal: true }); } }
   closeRevenueCreate = () => { this.setState({ showRevenueCreateModal: false }); }
   onExpenseSave = () => {
     this.closeExpenseCreate();
@@ -48,6 +49,7 @@ class Main extends React.Component {
   }
 
   reloadData = () => {
+    this.loadBudgetRole();
     this.loadCategories();
   }
 
@@ -141,6 +143,20 @@ class Main extends React.Component {
         );
       },
       () => { Alerts.error("Revenues didn't load correctly!") }
+    );
+  }
+
+  loadBudgetRole = async () => {
+    var test = false;
+    Budgets.getSelectedBudgetRole()
+    .then((cResp) => { 
+        if (cResp.role_value <= 2 ) {
+          this.setState({ canCreate: true });
+        }
+        else {
+          this.setState({ canCreate: false });
+        }
+      }
     );
   }
 
@@ -279,9 +295,11 @@ class Main extends React.Component {
   }
 
   renderMain = (keyMain) => {
+    let addR = this.state.canCreate ? <div className="container"><button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openRevenueCreate}>+ add a revenue</button></div> : '';
+    let addE = this.state.canCreate ? <div className="container"><button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openExpenseCreate}>+ add an expense</button></div> : '';
     return (
       <div key={keyMain}>
-        {this.renderExpenseCreateModal()}
+        { this.renderExpenseCreateModal() }
         {this.renderRevenueCreateModal()}
         <div className="container">
           <Overview key={keyMain} categoriesWithExpensesAndSpend={this.categoriesWithExpensesAndSpend()} totalExpense={this.getTotalExpense()} totalRevenue={this.state.totalRevenuesLeft} totaltotalRevenue={this.getTotalRevenue()} monthlyGoal={this.getTotalRevenue()} onChange={this.reloadData} />
@@ -294,20 +312,16 @@ class Main extends React.Component {
         </div>
 
         <div className="bg-art-2">
-          <div className="container">
-            <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openExpenseCreate}>+ add an expense</button>
-          </div>
+          {addE}
           <div className="container pv-100">
-            <CategoriesList key={keyMain} categoriesWithExpensesAndSpend={this.EcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
+            <CategoriesList key={keyMain} canCreate={this.state.canCreate} categoriesWithExpensesAndSpend={this.EcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
           </div>
         </div>
 
         <div className="bg-art top-border">
-          <div className="container">
-            <button className="btn btn-round btn-dark pos-abs mt-neg-20 z-5" onClick={this.openRevenueCreate}>+ add a revenue</button> {}
-          </div>
+          {addR}
           <div className="container pv-100">
-            <CategoriesList key={keyMain} is_revenue={1} categoriesWithExpensesAndSpend={this.RcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
+            <CategoriesList key={keyMain} canCreate={this.state.canCreate} is_revenue={1} categoriesWithExpensesAndSpend={this.RcategoriesWithExpensesAndSpend()} onChange={this.reloadData} />
           </div>
         </div>
 
