@@ -202,6 +202,12 @@
     width: 11%;
   }
 
+  .btn-showdone {
+    margin-top: 40px;
+    height: 40px;
+    width: 15%;
+  }
+
   .arrow {
     border: solid black;
     border-width: 0 3px 3px 0;
@@ -227,4 +233,9 @@
   .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+  }
+
+  .stripe {
+    color: white;
+    background-color: rgb(245, 245, 245);
   }

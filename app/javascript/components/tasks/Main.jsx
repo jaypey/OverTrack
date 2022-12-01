@@ -28,6 +28,7 @@ class Main extends React.Component {
       shownTasks: [],
       excludedCategories: [],
       showTaskCreateModal: false,
+      ShowDoneTasks: true,
     };
   }
 
@@ -43,6 +44,10 @@ class Main extends React.Component {
   reloadData = () => {
     this.loadCategories();
     this.loadTasks();
+  }
+
+  toggleDoneTasks = () => {
+    this.setState({ShowDoneTasks: !this.state.ShowDoneTasks});
   }
 
   openTaskCreate = () => { this.setState({ showTaskCreateModal: true }); }
@@ -72,14 +77,17 @@ class Main extends React.Component {
     for (let data of this.state.tasks) {
       if (!(this.state.excludedCategories.includes(data.category_id.toString())))
       {
-        this.state.shownTasks.push(data)
+        if (this.state.ShowDoneTasks) {
+          this.state.shownTasks.push(data)
+        } else {
+          if (!data.is_done)
+            this.state.shownTasks.push(data)
+        }
       }
     }
   }
 
   changeCategories = event => {
-    console.log("CLICKED!")
-    console.log(event.currentTarget.id)
     let array = this.state.excludedCategories
     if (array.includes(event.currentTarget.id))
     {
@@ -97,7 +105,6 @@ class Main extends React.Component {
 
 
   toggleTitleSort = () => {
-    console.log(this.state.tasks)
     if(this.state.TitleSortState){
       this.setState({ tasks: this.state.tasks.sort((a, b) =>  a.title > b.title ? 1 : -1)});
       this.state.TitleSortState = false;
@@ -105,19 +112,20 @@ class Main extends React.Component {
       this.setState({ tasks: this.state.tasks.sort((a, b) =>  a.title > b.title ? -1 : 1,)});
       this.state.TitleSortState = true;
     }
-    console.log(this.state.tasks)
 
     this.state.tasks.sort((a, b) => a.is_done - b.is_done);
-    console.log(this.state.tasks)
   }
 
   toggleCategorySort = () => {
-    console.log(this.state.categories)
     if(this.state.CategorySortState){
-      this.setState({ tasks: this.state.tasks.sort((a, b) => (a.category_id === 0 ? "No category" : (this.state.categories.find(obj => obj.id === a.category_id).name.toString())) > (a.category_id === 0 ? "No category" : (this.state.categories.find(obj => obj.id === b.category_id).name.toString())) ? 1 : -1)});
+      this.setState({ tasks: 
+        this.state.tasks.sort((a, b) => 
+          (a.category_id === 0 ? 'no category' : (this.state.categories.find(obj => obj.id === a.category_id).name)) > (b.category_id === 0 ? 'no category' : (this.state.categories.find(obj => obj.id === b.category_id).name)) ? 1 : -1)});
       this.state.CategorySortState = false;
     } else {
-      this.setState({ tasks: this.state.tasks.sort((a, b) => (a.category_id === 0 ? "No category" : (this.state.categories.find(obj => obj.id === a.category_id).name.toString())) > (a.category_id === 0 ? "No category" : (this.state.categories.find(obj => obj.id === b.category_id).name.toString())) ? -1 : 1)});
+      this.setState({ tasks: 
+        this.state.tasks.sort((a, b) => 
+          (a.category_id === 0 ? 'no category' : (this.state.categories.find(obj => obj.id === a.category_id).name)) > (b.category_id === 0 ? 'no category' : (this.state.categories.find(obj => obj.id === b.category_id).name)) ? -1 : 1)});
       this.state.CategorySortState = true;
     }
 
@@ -138,9 +146,15 @@ class Main extends React.Component {
   render() {
     this.getShownTasks()
 
+    let btnDoneTasks;
     let buttonTitle;
     let buttonCategory;
     let buttonDate;
+
+    if (!this.state.ShowDoneTasks && this.state.shownTasks.length > 0){
+      btnDoneTasks = <button className='button-sort btn-showdone' onClick={this.toggleDoneTasks}>Show done tasks</button>
+    }
+
     if (this.state.shownTasks.length > 0) {
       if (this.state.TitleSortState) {
         buttonTitle = <button onClick={this.toggleTitleSort} className='button-sort button-1'>Title &nbsp;<i id="icTitle" className="arrow up"></i></button>
@@ -212,7 +226,9 @@ class Main extends React.Component {
           {buttonCategory}
           {buttonDate}
         </div>
-        <TasksList tasks={this.state.shownTasks} categories={this.state.categories} onChange={this.reloadData} />
+        <TasksList tasks={this.state.shownTasks} categories={this.state.categories} onChange={this.reloadData} toggleDoneTasks={this.toggleDoneTasks}/>
+        {/* Render un boutons show done tasks s'il y a des done tasks et qu'elles sont cachées*/}
+        {btnDoneTasks}
         </div>
       </div>
     );
