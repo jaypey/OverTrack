@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2031_42_15_562254) do
     t.bigint "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_base_budget", default: false
     t.index ["owner_id"], name: "index_budgets_on_owner_id"
   end
 

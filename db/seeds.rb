@@ -9,8 +9,16 @@
 ### User seed
 if (Role.where(role_name: 'owner')==[]) then
     role_owner = Role.create(role_name: 'owner', role_value: 1)
+end
+
+if (Role.where(role_name: 'member')==[]) then
     role_member = Role.create(role_name: 'member', role_value: 2)
 end
+
+if (Role.where(role_name: 'guest')==[]) then
+    role_guest = Role.create(role_name: 'guest', role_value: 3)
+end
+
 
 # Seed csv config
 if (!CsvConfig.exists?(name: 'Desjardins'))

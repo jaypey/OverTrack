@@ -27,16 +27,19 @@ class Overview extends React.Component {
   }
 
   goalDiff() {
-    if (!this.props.monthlyGoal) { return 0; }
-    return this.props.monthlyGoal - this.totalSpend();
+    return this.props.totaltotalRevenue*100 - this.totalSpend();
   }
 
   totalSpend() {
-    return this.props.categoriesWithExpensesAndSpend.reduce((sum, cat) => sum + cat.spend, 0);
+    return this.props.totalExpense*100;
+  }
+
+  totalRevenue() {
+    return this.props.totalRevenue*100;
   }
 
   percentages() {
-    const outOf = Math.max(this.props.monthlyGoal, this.totalSpend());
+    const outOf = Math.max(this.props.totaltotalRevenue*100, this.totalSpend());
     return this.props.categoriesWithExpensesAndSpend.map((category) => ({ percentage: (category.spend / outOf) * 100, color: category.color }));
   }
 
@@ -60,6 +63,16 @@ class Overview extends React.Component {
     this.setState({selectedBudgetName: selectedBudget});
   }
 
+  displayRevenueLeft() {
+
+    if (this.totalRevenue() < 0) {
+      const displayedRevenue = Numerics.centsToDollars(this.totalRevenue());
+      const displayedRevenue2 = displayedRevenue.substring(0, 1) + '+' + displayedRevenue.substring(2, displayedRevenue.length);
+      return <h4 style={{color: "#ee9793"}}><i style={{color: "#ee9793"}} className="fas fa-exclamation-circle mr-4" />{displayedRevenue2} over</h4>;
+    }
+    return <h4 style={{color: "grey"}}>{Numerics.centsToDollars(this.totalRevenue())} remaining</h4>;
+  }
+
 
   render() {
     const today = moment();
@@ -70,21 +83,10 @@ class Overview extends React.Component {
         
         <div className="mb-10">{today.format('MMMM')} ({daysLeftInMonth} days left)</div>
         <div className="flex row-flex flex-space-between flex-baseline mb-10">
-          <div><h1>{Numerics.centsToDollars(this.totalSpend())}</h1></div>
-          {!this.props.monthlyGoal && (
-            <a href={null} onClick={this.openGoal} className="dim-til-hover">Set a monthly goal</a>
-          )}
-          {!!this.props.monthlyGoal && (
-            <div className="flex flex-baseline">
-              <div className={this.goalDiff() < 0 ? 'text-warning mr-4' : 'text-muted mr-4'}>
-                {this.goalDiff() < 0 && (
-                  <i className="fas fa-exclamation-circle mr-4" />
-                )}
-                {this.goalComparisonDisplay()}
-              </div>
-              <i className="far fa-edit dim-til-hover hover-pointer text-muted" onClick={this.openGoal} />
-            </div>
-          )}
+          <div>
+            <h2>{Numerics.centsToDollars(this.totalSpend())}</h2>
+            { this.displayRevenueLeft()}
+          </div>
         </div>
 
         <Progress data={this.percentages()} />
@@ -95,12 +97,16 @@ class Overview extends React.Component {
 
 Overview.defaultProps = {
   categoriesWithExpensesAndSpend: [],
+  totalExpense: 0,
+  totaltotalRevenue: 0,
   monthlyGoal: 0,
 };
 
 Overview.propTypes = {
   categoriesWithExpensesAndSpend: PropTypes.array,
   monthlyGoal: PropTypes.number,
+  totalExpense: PropTypes.number,
+  totaltotalRevenue: PropTypes.number,
   onChange: PropTypes.func.isRequired,
 };
 

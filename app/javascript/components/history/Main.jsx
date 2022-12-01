@@ -69,6 +69,7 @@ class Main extends React.Component {
   updateExpense = (id, updates) => {
     Expenses.update(id, updates).then(
       () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
+      (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
       () => { Alerts.genericError(); },
     );
   }
@@ -77,6 +78,7 @@ class Main extends React.Component {
       if (!result.value) { return; }
       Expenses.delete(id).then(
         () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         () => { Alerts.genericError(); },
       );
     });
@@ -85,6 +87,7 @@ class Main extends React.Component {
   updateRevenue = (id, updates) => {
     Revenues.update(id, updates).then(
       () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
+      (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
       () => { Alerts.genericError(); },
     );
   }
@@ -93,6 +96,7 @@ class Main extends React.Component {
       if (!result.value) { return; }
       Revenues.delete(id).then(
         () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         () => { Alerts.genericError(); },
       );
     });
@@ -140,8 +144,6 @@ class Main extends React.Component {
     return `/expenses?include_category=true&paid_before=${this.state.maxPaidAtExpense}&paid_after=${this.state.minPaidAtExpense}&category_id=${this.state.categoryIdExpenses}&sort=${this.state.sortExpenses}&sort_desc=${this.state.sortDescExpenses}&search=${this.state.searchExpenses}`;
   }
 
-  // ToDo: Fix url : error raised in paginator loaddata
-  // sort is raising error
   urlRevenues() {
     return `/revenues?include_category=true&paid_before=${this.state.maxPaidAtRevenue}&paid_after=${this.state.minPaidAtRevenue}&category_id=${this.state.categoryIdRevenues}&sort=${this.state.sortRevenues}&sort_desc=${this.state.sortDescRevenues}&search=${this.state.searchRevenues}`; 
   }
@@ -224,7 +226,6 @@ class Main extends React.Component {
 
           <div className="mt-20">
             <Paginator
-              // url = loaddata directly from controller
               url={this.urlExpenses()}
               onLoad={this.onLoadExpenses}
               reloadTrigger={this.state.reloadTrigger}
@@ -285,8 +286,6 @@ class Main extends React.Component {
 
           <div className="mt-20">
             <Paginator
-              // url = loaddata directly from controller
-              // ToDo : Change for urlRevenues and onLoadRevenues
               url={this.urlRevenues()}
               onLoad={this.onLoadRevenues}
               reloadTrigger={this.state.reloadTrigger}

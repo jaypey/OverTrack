@@ -18,7 +18,7 @@
    margin-bottom: 16px;
 }
 
-#config-form{
+#config-form {
    margin-bottom: 25px;
 }
 
@@ -85,7 +85,34 @@
    color: red;
 }
 
+#config-mapping-text {
+   width: 44.5%;
+}
+
+#config-mapping-cat{
+   margin-left: 10px;
+   width: 44.5%;
+}
+
+.config-add-mapping{
+   float:right;
+}
+
 .options-button:hover {
    cursor: pointer;
    filter: brightness(.7) !important;
+}
+
+#budget-selector{
+   border: none;
+   border-bottom: solid;
+   font-weight: bold;
+   font-size: 2em;
+   height: 57px;
+   outline: none;
+}
+
+
+.addTask{
+   display: block;
 }

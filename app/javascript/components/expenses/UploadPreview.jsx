@@ -54,17 +54,12 @@ class UploadPreview extends React.Component {
     var submittedExpenses = [];
     var submittedRevenues = [];
 
-    console.log(this.state.expenses);
-
     this.state.expenses.map((data) => {
       if (data.is_spend)
         submittedExpenses.push(data);
       else
         submittedRevenues.push(data);
     });
-
-    console.log(submittedExpenses);
-    console.log(submittedRevenues);
 
 
 

@@ -9,13 +9,8 @@ class Main extends React.Component {
         super(props);
 
         this.state = {
-            budgets: [
-
-            ],
-            budget_role: [
-                // {role_name: "owner", role_value: 1},
-                //          {role_name: "member", role_value: 2}
-            ],
+            budgets: [],
+            budget_role: [],
             idSelectedBudget: 0,
             showBudgetCreate: false,
             showBudgetUpdate: false,
@@ -51,6 +46,11 @@ class Main extends React.Component {
         this.reloadData();
     }
 
+    onLeaveBudget = () => {
+        this.setState({ idSelectedBudget: 0});
+        this.reloadData();
+    }
+
     openBudgetCreate = () => { this.setState({ showBudgetCreate: true }); }
     closeBudgetCreate = () => { this.setState({ showBudgetCreate: false }); }
     openBudgetUpdate = () => { this.setState({ showBudgetUpdate: true }); }
@@ -64,7 +64,17 @@ class Main extends React.Component {
             if (!result.value) { return; }
             Budgets.delete(id).then(
                 () => { this.onBudgetDelete(); },
-                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); },
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 408 ? Alerts.genericConflict('Cannot delete base budget') : Alerts.genericError(); },
+            );
+        });
+    }
+
+    leaveBudget = async (budgetId) => {
+        Alerts.genericLeave('budget').then((result) => {
+            if (!result.value) { return; }
+            Budgets.leavebudget({ id: budgetId}).then(
+                () => { this.onLeaveBudget(); },
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); }
             );
         });
     }
@@ -74,13 +84,9 @@ class Main extends React.Component {
             if (!result.value) { return; }
             Budgets.removeuser({ id: budgetId, userid: id }).then(
                 () => { this.onRemoveUser(); },
-                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError(); }
+                (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 409 ? Alerts.genericConflict('Cannot remove yourself from budget') : Alerts.genericError(); }
             );
         });
-    }
-
-    updateBudget = async (id) => {
-        console.log("update")
     }
 
     updateSelectedBudget = () => {
@@ -91,19 +97,19 @@ class Main extends React.Component {
     }
 
     updateRole = (userId, budgetId, roleValue) => {
-        console.log("UserId : " + userId + " BudgetId : " + budgetId + " RoleValue : " + roleValue);
         Roles.update(roleValue, { user_id: userId, budget_id: budgetId }).then(
             (cResp) => { Alerts.success("Role changed"); this.reloadData(); },
             (error) => {
                 error.status == 408 ? Alerts.genericConflict('Can\'t change your own permissions')
-                : error.status == 403 ? Alerts.genericConflict('Insufficient permissions')
-                    : Alerts.genericError();
+                    : error.status == 403 ? Alerts.genericConflict('Insufficient permissions')
+                        : Alerts.genericError();
             },
         );
     }
 
     reloadData = () => {
         this.loadBudgets();
+        this.loadCurrentUserId();
         this.loadRoles();
     }
 
@@ -114,10 +120,31 @@ class Main extends React.Component {
         );
     }
 
+    isCurrentUserOwner = (user) => {
+        if (user.user_id == this.state.currentUserId)
+            if (user.role_value <= 1)
+                return true;
+        return false;
+    }
+
+    isCurrentUserMember = (user) => {
+        if (user.user_id == this.state.currentUserId)
+            if (user.role_value <= 2)
+                return true;
+        return false;
+    }
+
     loadBudgets = () => {
         Budgets.list().then(
             (cResp) => { this.setState({ budgets: cResp }); },
             () => { Alerts.error("Budget didn't load correctly"); }
+        );
+    }
+
+    loadCurrentUserId = () => {
+        Budgets.getcurrentuserid().then(
+            (cResp) => { this.setState({ currentUserId: cResp }); },
+            () => { Alerts.error("Current user didn't load correctly"); }
         );
     }
 
@@ -141,7 +168,12 @@ class Main extends React.Component {
     }
 
 
-    renderBudgetUsers(budget_user) {
+    renderBudgetUsers(budget_user, isOwner) {
+        let deleteButton
+        if (isOwner)
+            deleteButton = <a onClick={() => this.handleUserRemove(budget_user.user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
+        else
+            deleteButton = <div></div>
         return (
             <tr id={budget_user.id} key={budget_user.id}>
                 <td className="input-group mh-30 mw-150">
@@ -149,31 +181,60 @@ class Main extends React.Component {
                 </td>
 
                 <td className="input-group mw-150">
-                    <select defaultValue={budget_user.role_value} onChange={(e) => this.updateRole(budget_user.user_id, budget_user.budget_id,
-                        e.target.value)} className="bg-gray-slight-contrast">   
+                    <select disabled={!isOwner} defaultValue={budget_user.role_value} onChange={(e) => this.updateRole(budget_user.user_id, budget_user.budget_id,
+                        e.target.value)} className={isOwner ? "bg-gray-slight-contrast" : "bg-gray-slight-constrast select-disabled"}>
                         {this.state.budget_role.map((c) =>
-                        <option key={c.role_value + budget_user.id} value={c.role_value}>
-                            {c.role_name}
-                        </option>
+                            <option key={c.role_value + budget_user.id} value={c.role_value}>
+                                {c.role_name}
+                            </option>
                         )}
                     </select>
                 </td>
 
                 <td>
-                    <a onClick={() => this.handleUserRemove(budget_user.user.id, this.state.idSelectedBudget)} className="dim-til-hover"><i className="fa fa-times" /></a>
+                    {deleteButton}
                 </td>
             </tr>
         );
     }
 
     renderBudgetInfo(budget) {
+        let title
+        let addButton
+        let isOwner
         if (this.state.idSelectedBudget === 0) { return 'Select a budget'; }
+        if (budget.budget_users.find(this.isCurrentUserOwner) && budget.is_base_budget == true)
+        {
+            title = <h3>
+                {budget.name}
+                &nbsp; <a onClick={() => this.openBudgetUpdate()} className="dim-til-hover"><i className="fa fa-edit" /></a>
+            </h3>
+            isOwner = true;
+        }
+        else if (budget.budget_users.find(this.isCurrentUserOwner))
+        {
+            title = <h3>
+                {budget.name}
+                &nbsp; <a onClick={() => this.openBudgetUpdate()} className="dim-til-hover"><i className="fa fa-edit" /></a>
+                &nbsp; <a onClick={() => this.deleteBudget(budget.id)} className="dim-til-hover text-right"><i className="fa fa-times" /></a>
+            </h3>
+            isOwner = true;
+        }
+        else
+        {
+            title = <h3>
+                {budget.name}
+            </h3>
+            isOwner = false;
+        }
+
+        if (budget.budget_users.find(this.isCurrentUserMember))
+            addButton = <button onClick={() => this.openUserAdd()} className='btn btn-round btn-accept'><i className='text-light fa fa-plus'></i></button>
+        else
+            addButton = <div></div>
         return (
             <div className="content">
-                <h3>
-                    {budget.name}
-                    &nbsp; <a onClick={() => this.openBudgetUpdate()} className="dim-til-hover"><i className="fa fa-edit" /></a>
-                </h3>
+                {title}
                 <p className="table_title">
                     {budget.description}
                 </p>
@@ -187,15 +248,12 @@ class Main extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {budget.budget_users.map((budget_user) => this.renderBudgetUsers(budget_user))}
+                            {budget.budget_users.map((budget_user) => this.renderBudgetUsers(budget_user, isOwner))}
                         </tbody>
                     </table>
-                    <button onClick={() => this.openUserAdd()} className='btn btn-round btn-accept'><i className='text-light fa fa-plus'></i></button>
+                    {addButton}
                 </div>
                 <br />
-                <div>
-                    <button onClick={() => this.updateSelectedBudget()} className='btn btn-round btn-accept pos-abs mt-neg-20 z-5'>Select</button>
-                </div>
             </div>
         )
     }
@@ -208,15 +266,23 @@ class Main extends React.Component {
                 <div className='sidebar'>
                     <h3 className=''>Your budgets</h3>
                     <ul>
-                        {this.state.budgets.map((budget) =>
+                        {this.state.budgets.map((budget) => (budget.budget_users.find(this.isCurrentUserOwner) ?
                             <li key={budget.id}
                                 onClick={() => this.changeSelectedBudget(budget.id)}
                                 style={{ cursor: 'pointer' }}
                                 className={budget.id == this.state.idSelectedBudget ? 'input-group text-bold' : 'input-group'}
                             >
-                                <a onClick={() => this.deleteBudget(budget.id)} className="dim-til-hover text-right"><i className="fa fa-times" /></a>
                                 &nbsp; {budget.name}
-                            </li>)}
+                            </li> :
+                            <li key={budget.id}
+                            onClick={() => this.changeSelectedBudget(budget.id)}
+                            style={{ cursor: 'pointer' }}
+                            className={budget.id == this.state.idSelectedBudget ? 'input-group text-bold' : 'input-group'}
+                        >
+                            <a onClick={() => this.leaveBudget(budget.id)} className="dim-til-hover text-right"><i className='fa fa-minus'></i></a>
+                            &nbsp; {budget.name}
+                        </li>
+                        ))}
                     </ul>
                     <br />
                     <div>
