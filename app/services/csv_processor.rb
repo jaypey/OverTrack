@@ -83,7 +83,16 @@ class CsvProcessor
     description = row[description_index]
     is_spend = false
     
-    if row[spends_index].to_f > 0 
+
+    if spends_index == incomes_index
+      if row[spends_index].to_f < 0
+        amount = row[spends_index]
+        is_spend = true
+      else
+        amount = row[spends_index]
+        is_spend = false
+      end
+    elsif row[spends_index].to_f > 0 
       amount = row[spends_index]
       is_spend = true
     else
@@ -105,18 +114,23 @@ class CsvProcessor
   def get_category_id(row, is_spend)
     category = row[category_index]
 
+    category = category || "invalid_category"
+
 
     mapped_category = category_mappings[category] || category
 
     category_mappings.each do |key,value|
         if category.to_s.downcase.include? key.to_s.downcase 
           mapped_category = value
-          puts "map: " + key + " => " + value
+           puts "map: " + key + " => " + value
         end
     end
 
 
+
     puts "result: " + mapped_category
+
+
 
     if is_spend
       return @categories_ids_by_lower_name[mapped_category.to_s.downcase] || @default_category_id

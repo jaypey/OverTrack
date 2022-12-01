@@ -33,6 +33,7 @@ class FormModal extends React.Component {
       if (!result.value) { return; }
       Categories.delete(this.props.category.id).then(
         (resp) => { this.props.onSave(resp); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         (error) => { error.status == 409 ? Alerts.genericConflict('All expenses must be assigned to a new category first.') : Alerts.genericError(); },
       );
     });
@@ -44,9 +45,15 @@ class FormModal extends React.Component {
 
     let apiCall = null;
     if (this.props.category.id) {
-      apiCall = Categories.update(this.props.category.id, { color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim() });
+      apiCall = Categories.update(this.props.category.id, { color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim() }).then(
+        () => { },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() }
+      );
     } else {
-      apiCall = Categories.create({ color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim(), is_revenue: this.state.is_revenue });
+      apiCall = Categories.create({ color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim(), is_revenue: this.state.is_revenue }).then(
+        () => { },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() }
+      );
     }
 
     apiCall.then(
