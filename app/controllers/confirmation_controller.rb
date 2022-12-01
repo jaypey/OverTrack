@@ -18,5 +18,12 @@ class ConfirmationController < ActionController::Base
             successful = user.save(:validate => false)
         end
     end
+
+    def reset
+        user = User.find_by(reset_password_token: params[:token])
+        if user == nil
+            render status: 422
+        end
+    end
   end
   

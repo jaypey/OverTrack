@@ -1,0 +1,29 @@
+<%= image_tag "logo.svg", size: "150x150" %>
+<div class="login">
+  <div class="flex flex-space-between">
+    <%= form_with url: reset_forgot_path, method: :post do |f| %>
+      <h1>Reset Password</h1>
+
+      <% if flash[:error] %>
+        <div class="error"><%= flash[:error] %></div>
+      <% end %>
+      <% if flash[:success] %>
+        <div style="color:green;"><%= flash[:success] %></div>
+      <% end %>
+      
+      <div style="margin-top: 10px;" class="input-group">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+      
+      <div class="form-actions">
+        <%= f.submit "Confirm", class: "btn btn-dark btn-full btn-round" %> 
+      </div>
+      <div style="margin-left:5%;">
+        <%= link_to "Back", root_path, class: "linkto" %>
+      </div>
+    <% end %>
+
+    <%= image_tag "coins.png" %>
+  </div>
+</div>
