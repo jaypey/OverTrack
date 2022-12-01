@@ -4,7 +4,7 @@
     <%= form_tag sessions_path do %>
       <div class="input-group"> 
         <% if flash[:error] %>
-          <div class="error"><%= flash[:error] %></div>
+          <div style="color:red;"><%= flash[:error] %></div>
         <% end %>
         <% if flash[:success] %>
           <div style="color:green;"><%= flash[:success] %></div>
