@@ -45,6 +45,7 @@ class ResetController < ActionController::Base
   
     if user.present? && user.password_token_valid?
       if user.reset_password!(params[:password])
+        flash[:success] = 'Password changed'
         redirect_to :root
       else
         render json: {error: user.errors.full_messages}, status: :unprocessable_entity
