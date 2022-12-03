@@ -147,7 +147,6 @@ class Main extends React.Component {
   }
 
   loadBudgetRole = async () => {
-    var test = false;
     Budgets.getSelectedBudgetRole()
     .then((cResp) => { 
         if (cResp.role_value <= 2 ) {
