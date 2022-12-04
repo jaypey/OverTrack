@@ -71,6 +71,7 @@ Rails.application.routes.draw do
           post :selectbudget
           get :getbudgetid
           get :getcurrentuserid
+          get :getcurrentbudgetrole
         end
       end
 
