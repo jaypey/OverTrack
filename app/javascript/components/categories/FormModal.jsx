@@ -4,7 +4,7 @@ import Modal from '../shared/Modal';
 import ColorPicker from '../shared/ColorPicker';
 import CurrencyInput from '../shared/CurrencyInput';
 import FieldErrors from '../shared/FieldErrors';
-import { Categories } from '../../api/main';
+import { Categories, Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
 class FormModal extends React.Component {
@@ -16,12 +16,26 @@ class FormModal extends React.Component {
       goal: this.props.category.monthly_goal || 0,
       name: this.props.category.name,
       submitted: false,
-      is_revenue: this.props.is_revenue
+      is_revenue: this.props.is_revenue,
+      canDelete: false
     };
   }
 
   componentDidMount() {
     this.nameInput.focus();
+
+    Budgets.getSelectedBudgetRole()
+    .then(
+      (cResp) => { 
+        console.log(cResp.role_value);
+        if (cResp.role_value <= 2 ) {
+          this.setState({ canDelete: true });
+        }
+        else {
+          this.setState({ canDelete: false });
+        }
+      }
+    );
   }
 
   handleNameChange = (e) => { this.setState({ name: e.target.value }); }
@@ -38,6 +52,7 @@ class FormModal extends React.Component {
       );
     });
   }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ submitted: true });
@@ -73,8 +88,9 @@ class FormModal extends React.Component {
   }
 
   renderDelete() {
-    if (!this.props.category.id) { return ''; }
-    return <a className="link-danger" onClick={this.handleDelete}>Delete</a>;
+    if (!this.props.category.id) { return ''; }    
+    if (this.state.canDelete)
+      return <a className="link-danger" onClick={this.handleDelete}>Delete</a>
   }
 
   render() {

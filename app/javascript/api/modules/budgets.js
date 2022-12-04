@@ -19,6 +19,9 @@ const Budgets = {
   getSelectedBudgetId(data, opts = {}){
     return Base.get(`/budget/getbudgetid`, data, opts || {});
   },
+  getSelectedBudgetRole(data, opts = {}){
+    return Base.get(`/budget/getcurrentbudgetrole`, data, opts || {});
+  },
   adduser(data, opts = {}){
     return Base.post(`/budget/adduser`, data, opts || {});
   },
