@@ -1,6 +1,6 @@
 import React from 'react';
 import TasksList from './TasksList';
-import { Categories, Revenues, Expenses, Goals, Reports, Tasks } from '../../api/main';
+import { Categories, Revenues, Expenses, Goals, Reports, Tasks, Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 import BudgetSelector from '../shared/BudgetSelector';
 import TaskFormModal from './FormModal';
@@ -29,6 +29,7 @@ class Main extends React.Component {
       excludedCategories: [],
       showTaskCreateModal: false,
       ShowDoneTasks: true,
+      canCreate : false,
     };
   }
 
@@ -44,14 +45,28 @@ class Main extends React.Component {
   reloadData = () => {
     this.loadCategories();
     this.loadTasks();
+    this.loadBudgetRole();
+  }
+
+  loadBudgetRole = async () => {
+    Budgets.getSelectedBudgetRole()
+    .then((cResp) => { 
+        if (cResp.role_value <= 2 ) {
+          this.setState({ canCreate: true });
+        }
+        else {
+          this.setState({ canCreate: false });
+        }
+      }
+    );
   }
 
   toggleDoneTasks = () => {
     this.setState({ShowDoneTasks: !this.state.ShowDoneTasks});
   }
 
-  openTaskCreate = () => { this.setState({ showTaskCreateModal: true }); }
-  closeTaskCreate = () => { this.setState({ showTaskCreateModal: false }); }
+  openTaskCreate = () => { if (this.state.canCreate) {this.setState({ showTaskCreateModal: true });} }
+  closeTaskCreate = () => { if (this.state.canCreate) {this.setState({ showTaskCreateModal: false });} }
 
   loadCategories = () => {
     Categories.list().then(
@@ -146,6 +161,14 @@ class Main extends React.Component {
   render() {
     this.getShownTasks()
 
+    let btnCreate;
+
+    if (this.state.canCreate) {
+      btnCreate = <button className="btn btn-round btn-dark mt-10 addTask" onClick={this.openTaskCreate}>+ add a task</button>
+    } else {
+      btnCreate = <div></div>
+    }
+
     let btnDoneTasks;
     let buttonTitle;
     let buttonCategory;
@@ -220,13 +243,13 @@ class Main extends React.Component {
           <BudgetSelector
           onChange={this.reloadData}
           />
-        <button className="btn btn-round btn-dark mt-10 addTask" onClick={this.openTaskCreate}>+ add a task</button>
+          {btnCreate}
         <div style={{marginTop: 40, height: 40}}>
           {buttonTitle}
           {buttonCategory}
           {buttonDate}
         </div>
-        <TasksList tasks={this.state.shownTasks} categories={this.state.categories} onChange={this.reloadData} toggleDoneTasks={this.toggleDoneTasks}/>
+        <TasksList canCreate={this.state.canCreate} tasks={this.state.shownTasks} categories={this.state.categories} onChange={this.reloadData} toggleDoneTasks={this.toggleDoneTasks}/>
         {/* Render un boutons show done tasks s'il y a des done tasks et qu'elles sont cachées*/}
         {btnDoneTasks}
         </div>
