@@ -24,6 +24,20 @@ end
 if (!CsvConfig.exists?(name: 'Desjardins'))
         CsvConfig.create(
             name: 'Desjardins',
-            config_json: '{"has_header":true,"descriptions":{"index":"5","ignore_substrings":[]},"categories":{"index":"5","mappings":{}},"spends":{"index":"7","skip_non_spend":false},"incomes":{"index":"8","skip_non_income":false},"timestamps":{"index":"3"},"auto_detect":{"filename_substring":"N/A","default_category":"Uncategorized"}}'
+            config_json: '{"has_header":true,"separator":",","descriptions":{"index":"5","ignore_substrings":[]},"categories":{"index":"5","mappings":{}},"spends":{"index":"7","skip_non_spend":false},"incomes":{"index":"8","skip_non_income":false},"timestamps":{"index":"3"},"auto_detect":{"filename_substring":"N/A","default_category":"Uncategorized"}}'
         )
+end
+
+if (!CsvConfig.exists?(name: 'Banque Nationale'))
+    CsvConfig.create(
+        name: 'Banque Nationale',
+        config_json: '{"has_header":true,"separator":";","descriptions":{"index":"1","ignore_substrings":[]},"categories":{"index":"2","mappings":{}},"spends":{"index":"3","skip_non_spend":false},"incomes":{"index":"4","skip_non_income":false},"timestamps":{"index":0},"auto_detect":{"filename_substring":"N/A"}}'
+    )
+end
+
+if (!CsvConfig.exists?(name: 'Tangerine'))
+    CsvConfig.create(
+        name: 'Tangerine',
+        config_json: '{"has_header":true,"separator":",","descriptions":{"index":"3","ignore_substrings":[]},"categories":{"index":"1","mappings":{}},"spends":{"index":"4","skip_non_spend":false},"incomes":{"index":"4","skip_non_income":false},"timestamps":{"index":0},"auto_detect":{"filename_substring":"N/A","default_category":"Uncategorized"}}'
+    )
 end
