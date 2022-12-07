@@ -88,6 +88,7 @@ Rails.application.routes.draw do
   get "tasks", to: "tasks#index"
 
   get 'user/register', to: 'user#register', as: 'register_user' # new
+  get 'user/confirm', to: 'user#confirm', as: 'confirm_user' #confirm
   post 'user', to: 'user#create' # create
   get "user", to: "user#index"
   get 'user/forgot', to: 'user#forgot' # forgor 
