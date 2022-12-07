@@ -33,6 +33,9 @@ const Budgets = {
   },
   getcurrentuserid(data, opts = {}){
     return Base.get(`/budget/getcurrentuserid`, data, opts || {});
+  },
+  getnotconfirmedbudgets(data, opts = {}){
+    return Base.get(`/budget/getnotconfirmedbudgets`, data, opts || {});
   }
 };
 

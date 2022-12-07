@@ -116,6 +116,15 @@ module Api; module V1
             end
             render json: user.id, status: successful ? 200 : 500
         end
-
+        
+        def getnotconfirmedbudgets
+            budgetsss = ::BudgetUser.where(user_id: cookies.signed[:user_id])
+            newBudgets = budgetsss.where(confirmed: false)
+            successful = false
+            if newBudgets != nil
+                successful = true
+            end
+            render json: newBudgets, status: successful ? 200 : 500
+        end
     end
 end; end
