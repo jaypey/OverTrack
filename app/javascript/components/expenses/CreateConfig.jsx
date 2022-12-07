@@ -37,6 +37,7 @@ class CreateConfig extends React.Component {
       cats: [],
       isSaving: false,
       error: false,
+      separator: ',',
     };
 
     if (modifying) {
@@ -55,6 +56,12 @@ class CreateConfig extends React.Component {
             mappings.push({ text: key, category: val });
           }
 
+          var sep = ',';
+          if (convertedJson.separator != null && convertedJson.separator.length == 1)
+            sep = convertedJson.separator;
+      
+
+
           this.setState({
             configId: configId,
             configName: response.name,
@@ -72,6 +79,7 @@ class CreateConfig extends React.Component {
             isValid: true,
             isSaving: false,
             error: false,
+            separator: sep
           });
         })
         .catch((e) => {
@@ -113,9 +121,14 @@ class CreateConfig extends React.Component {
       this.state.mappings.forEach((el) => mappingDict[el.text] = el.category);
     }
 
+    var sep = ',';
+    if (this.state.separator != null && this.state.separator.length == 1)
+      sep = this.state.separator;
+
 
     var config_json = {
       has_header: this.state.hasHeader,
+      separator: sep,
       descriptions: {
         index: this.state.descriptionIdx,
         ignore_substrings: this.state.ignoredSubstring
@@ -237,6 +250,7 @@ class CreateConfig extends React.Component {
   handleSkipNonSpendChange = (e) => { this.setState({ skipNonSpend: e.target.checked }); }
   handleIncomeIdxChange = (e) => { this.setState({ incomeIdx: e.target.value }); }
   handleSkipNonIncomeChange = (e) => { this.setState({ skipNonIncome: e.target.checked }); }
+  handleSeparatorChange = (e) => { this.setState({ separator: e.target.value }); }
 
 
   renderForm = () => {
@@ -254,6 +268,13 @@ class CreateConfig extends React.Component {
                 id='config-name-input'
                 value={this.state.configName}
                 onChange={this.handleNameChange} type="text" />
+            </div>
+            <div className='input-group'>
+              <label>Separator</label>
+              <input
+                id='config-separator-input'
+                value={this.state.separator}
+                onChange={this.handleSeparatorChange} type="text" maxLength={1} />
             </div>
             <div className='config-checkbox-group'>
               <label data-toggle="tooltip" data-placement="top" title="Skip the first row of the CSV file (check this box if your file has a header)">Skip first row?</label>
@@ -379,8 +400,8 @@ class CreateConfig extends React.Component {
           </div>
 
           <div className='config-button-container'>
-            <button id="config-submit" disabled={!this.state.isValid || this.state.isSaving} type="submit" className='btn btn-primary'>{this.state.configId == -1 ? 'Create' : 'Save'}</button>
             <a id="config-back" className='btn' href='/expense_uploads/config_list'>Back</a>
+            <button id="config-submit" disabled={!this.state.isValid || this.state.isSaving} type="submit" className='btn btn-primary'>{this.state.configId == -1 ? 'Create' : 'Save'}</button>
           </div>
         </form>
       </>
