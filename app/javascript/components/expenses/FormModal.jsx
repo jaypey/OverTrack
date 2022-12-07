@@ -84,7 +84,7 @@ class FormModal extends React.Component {
 
           <div className="input-group five columns">
             <label className="required">Date</label>
-            <DatePicker onChange={this.handlePaidAtChange} />
+            <DatePicker onChange={this.handlePaidAtChange}/>
             <FieldErrors
               label="Date"
               val={this.state.paidAt}

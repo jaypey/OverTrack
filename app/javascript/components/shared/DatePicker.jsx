@@ -26,7 +26,7 @@ class Picker extends React.Component {
 Picker.defaultProps = {
   value: new Date(),
   className: '',
-  canCreate: false
+  canCreate: true
 };
 
 Picker.propTypes = {
