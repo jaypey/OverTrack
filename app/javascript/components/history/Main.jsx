@@ -5,10 +5,11 @@ import Paginator from '../shared/Paginator';
 import DatePicker from '../shared/DatePicker';
 import CurrencyInput from '../shared/CurrencyInput';
 import { Alerts, Util } from '../../helpers/main';
-import { Expenses, Revenues } from '../../api/main';
+import { Expenses, Revenues, Budgets } from '../../api/main';
 
 class Main extends React.Component {
   constructor(props) {
+    
     super(props);
 
     const defaultTimeframe = 'last_90_days';
@@ -36,6 +37,7 @@ class Main extends React.Component {
       timeframeRevenue: defaultTimeframe,
       searchExpenses: '',
       searchRevenues: '',
+      canCreate: false
     };
   }
 
@@ -44,7 +46,7 @@ class Main extends React.Component {
       return cat.is_revenue === 1;});
     const expenses = props.categories.filter(cat => {
         return cat.is_revenue === 0;});
-    
+
     return {revenueCategories: revenues, expenseCategories: expenses};
   }
 
@@ -69,6 +71,7 @@ class Main extends React.Component {
   updateExpense = (id, updates) => {
     Expenses.update(id, updates).then(
       () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
+      (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
       () => { Alerts.genericError(); },
     );
   }
@@ -77,6 +80,7 @@ class Main extends React.Component {
       if (!result.value) { return; }
       Expenses.delete(id).then(
         () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         () => { Alerts.genericError(); },
       );
     });
@@ -85,6 +89,7 @@ class Main extends React.Component {
   updateRevenue = (id, updates) => {
     Revenues.update(id, updates).then(
       () => { this.setState({ reloadPageTrigger: this.state.reloadPageTrigger + 1 }); },
+      (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
       () => { Alerts.genericError(); },
     );
   }
@@ -93,6 +98,7 @@ class Main extends React.Component {
       if (!result.value) { return; }
       Revenues.delete(id).then(
         () => { this.setState({ reloadTrigger: this.state.reloadTrigger + 1 }); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         () => { Alerts.genericError(); },
       );
     });
@@ -294,53 +300,70 @@ class Main extends React.Component {
   }
 
   renderExpense(expense) {
-    return (
+    let texpense = this.state.canCreate ? 
+      <td className="input-group mw-150"><select defaultValue={expense.category_id} onChange={(e) => this.updateExpense(expense.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">{this.state.expenseCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></td>
+      : <td className="input-group mw-150"><select defaultValue={expense.category_id} onChange={(e) => this.updateExpense(expense.id, { category_id: e.target.value })} className="bg-gray-slight-contrast" disabled>{this.state.expenseCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></td>;
+    let tdescription = this.state.canCreate ?
+      <td className="input-group"><input defaultValue={expense.description} onBlur={(e) => { if (e.target.value.trim() != expense.description) { this.updateExpense(expense.id, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" /></td>  
+      : <td className="input-group"><input defaultValue={expense.description} onBlur={(e) => { if (e.target.value.trim() != expense.description) { this.updateExpense(expense.id, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" disabled/></td>;
+    let tDelete = this.state.canCreate ?
+      <td><a onClick={() => this.handleExpenseDelete(expense.id)} className="dim-til-hover"><i className="fa fa-times" /></a></td>
+      : "";
+      return (
       <tr key={expense.id}>
         <td className="input-group mw-120">
-          <DatePicker onChange={(val) => this.updateExpense(expense.id, { paid_at: val })} value={new Date(expense.paid_at)} className="bg-gray-slight-contrast" />
+          <DatePicker 
+            canCreate={this.state.canCreate} 
+            onChange={(val) => this.updateExpense(expense.id, { paid_at: val })} 
+            value={new Date(expense.paid_at)} 
+            className="bg-gray-slight-contrast " />
         </td>
 
-        <td className="input-group mw-150">
-          <select defaultValue={expense.category_id} onChange={(e) => this.updateExpense(expense.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">
-            {this.state.expenseCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-          </select>
-        </td>
+        {texpense}
 
         <td className="input-group mw-100">
           <CurrencyInput
+            canCreate={this.state.canCreate}
             initialValue={expense.amount}
             onBlur={(val) => this.updateExpense(expense.id, { amount: val })}
             className="bg-gray-slight-contrast"
-            allowNegative
-          />
+            allowNegative/>
         </td>
 
-        <td className="input-group">
-          <input defaultValue={expense.description} onBlur={(e) => { if (e.target.value.trim() != expense.description) { this.updateExpense(expense.id, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" />
-        </td>
+        {tdescription}
 
-        <td>
-          <a onClick={() => this.handleExpenseDelete(expense.id)} className="dim-til-hover"><i className="fa fa-times" /></a>
-        </td>
+        {tDelete}
       </tr>
     );
   }
 
   renderRevenue(revenue) {
+    let trevenue = this.state.canCreate ? 
+    <td className="input-group mw-150"><select defaultValue={revenue.category_id} onChange={(e) => this.updateRevenue(revenue.id, { category_id: e.target.value })} className="bg-gray-slight-contrast" >{this.state.revenueCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></td>
+    : <td className="input-group mw-150"><select defaultValue={revenue.category_id} onChange={(e) => this.updateRevenue(revenue.id, { category_id: e.target.value })} className="bg-gray-slight-contrast" disabled>{this.state.revenueCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></td>;
+    
+    let tdescription = this.state.canCreate ?
+      <td className="input-group"><input defaultValue={revenue.description} onBlur={(e) => { if (e.target.value.trim() != revenue.description) { this.updateRevenue(expense.id, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" /></td>
+      : <td className="input-group"><input defaultValue={revenue.description} onBlur={(e) => { if (e.target.value.trim() != revenue.description) { this.updateRevenue(expense.id, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" disabled/></td>;
+    
+    let tDelete = this.state.canCreate ? 
+      <td><a onClick={() => this.handleRevenueDelete(revenue.id)} className="dim-til-hover"><i className="fa fa-times" /></a></td>
+      : "";
     return (
       <tr key={revenue.id}>
         <td className="input-group mw-120">
-          <DatePicker onChange={(val) => this.updateRevenue(revenue.id, { paid_at: val })} value={new Date(revenue.paid_at)} className="bg-gray-slight-contrast" />
+          <DatePicker 
+            canCreate={this.state.canCreate} 
+            onChange={(val) => this.updateRevenue(revenue.id, { paid_at: val })} 
+            value={new Date(revenue.paid_at)} 
+            className="bg-gray-slight-contrast" />
         </td>
 
-        <td className="input-group mw-150">
-          <select defaultValue={revenue.category_id} onChange={(e) => this.updateRevenue(revenue.id, { category_id: e.target.value })} className="bg-gray-slight-contrast">
-            {this.state.revenueCategories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-          </select>
-        </td>
+        {trevenue}
 
         <td className="input-group mw-100">
           <CurrencyInput
+            canCreate={this.state.canCreate}
             initialValue={revenue.amount}
             onBlur={(val) => this.updateRevenue(revenue.id, { amount: val })}
             className="bg-gray-slight-contrast"
@@ -348,18 +371,25 @@ class Main extends React.Component {
           />
         </td>
 
-        <td className="input-group">
-          <input defaultValue={revenue.description} onBlur={(e) => { if (e.target.value.trim() != revenue.description) { this.updateRevenue(expense.id, { description: e.target.value.trim() }); } } } className="bg-gray-slight-contrast" />
-        </td>
+        {tdescription}
 
-        <td>
-          <a onClick={() => this.handleRevenueDelete(revenue.id)} className="dim-til-hover"><i className="fa fa-times" /></a>
-        </td>
+        {tDelete}
       </tr>
     );
   }
 
   render() {
+    Budgets.getSelectedBudgetRole()
+      .then((cResp) => { 
+        if (cResp.role_value <= 2 ) {
+          this.setState({ canCreate: true });
+        }
+        else {
+          this.setState({ canCreate: false });
+        }
+      }
+    );
+
     return (
       <div className="container wide">
         {this.renderEmptyState()}

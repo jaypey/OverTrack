@@ -34,17 +34,10 @@ class CurrencyInput extends React.Component {
     };
     const currencyMask = createNumberMask(defaultMaskOptions);
 
-    return (
-      <MaskedInput
-        placeholder="$0.00"
-        inputMode="decimal"
-        mask={currencyMask}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-        defaultValue={this.props.initialValue ? (this.props.initialValue / 100).toFixed(2) : ''}
-        className={this.props.className}
-      />
-    );
+    let masked = this.props.canCreate ? 
+      <MaskedInput placeholder="$0.00" inputMode="decimal" mask={currencyMask} onBlur={this.handleBlur} onChange={this.handleChange} defaultValue={this.props.initialValue ? (this.props.initialValue / 100).toFixed(2) : ''} className={this.props.className}/>
+      : <MaskedInput placeholder="$0.00" inputMode="decimal" mask={currencyMask} onBlur={this.handleBlur} onChange={this.handleChange} defaultValue={this.props.initialValue ? (this.props.initialValue / 100).toFixed(2) : ''} className={this.props.className} disabled/>;
+    return (masked);
   }
 }
 
@@ -54,6 +47,7 @@ CurrencyInput.defaultProps = {
   className: '',
   onBlur: null,
   onChange: null,
+  canCreate: true
 };
 
 CurrencyInput.propTypes = {
@@ -62,6 +56,7 @@ CurrencyInput.propTypes = {
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   className: PropTypes.string,
+  canCreate: PropTypes.bool
 };
 
 export default CurrencyInput;

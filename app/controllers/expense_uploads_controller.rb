@@ -19,6 +19,7 @@ class ExpenseUploadsController < ApplicationController
     end.compact
   end
 
+
   def preview
     default_category_id = params[:default_category_id].to_i
     default_income_category_id = params[:default_income_category_id].to_i
@@ -26,8 +27,13 @@ class ExpenseUploadsController < ApplicationController
     skip_existing = params[:skip_existing]
     csv_config = CsvConfig.find(params[:csv_config_id])
     config_hash = JSON.parse(csv_config.config_json)
+
+
     file_contents = File.read(params[:file].tempfile)
-    csv = CSV.parse(file_contents)
+
+    sep = config_hash.dig('separator') || ','
+
+    csv = CSV.parse(file_contents, col_sep: sep, liberal_parsing: true)
 
     processed_csv = CsvProcessor.new(csv, config_hash, default_category_id, default_income_category_id, cookies).process!
 

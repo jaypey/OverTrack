@@ -4,7 +4,7 @@ import Modal from '../shared/Modal';
 import ColorPicker from '../shared/ColorPicker';
 import CurrencyInput from '../shared/CurrencyInput';
 import FieldErrors from '../shared/FieldErrors';
-import { Categories } from '../../api/main';
+import { Categories, Budgets } from '../../api/main';
 import { Alerts } from '../../helpers/main';
 
 class FormModal extends React.Component {
@@ -16,12 +16,26 @@ class FormModal extends React.Component {
       goal: this.props.category.monthly_goal || 0,
       name: this.props.category.name,
       submitted: false,
-      is_revenue: this.props.is_revenue
+      is_revenue: this.props.is_revenue,
+      canDelete: false
     };
   }
 
   componentDidMount() {
     this.nameInput.focus();
+
+    Budgets.getSelectedBudgetRole()
+    .then(
+      (cResp) => { 
+        console.log(cResp.role_value);
+        if (cResp.role_value <= 2 ) {
+          this.setState({ canDelete: true });
+        }
+        else {
+          this.setState({ canDelete: false });
+        }
+      }
+    );
   }
 
   handleNameChange = (e) => { this.setState({ name: e.target.value }); }
@@ -33,10 +47,12 @@ class FormModal extends React.Component {
       if (!result.value) { return; }
       Categories.delete(this.props.category.id).then(
         (resp) => { this.props.onSave(resp); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() },
         (error) => { error.status == 409 ? Alerts.genericConflict('All expenses must be assigned to a new category first.') : Alerts.genericError(); },
       );
     });
   }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ submitted: true });
@@ -44,9 +60,15 @@ class FormModal extends React.Component {
 
     let apiCall = null;
     if (this.props.category.id) {
-      apiCall = Categories.update(this.props.category.id, { color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim() });
+      apiCall = Categories.update(this.props.category.id, { color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim() }).then(
+        () => { },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() }
+      );
     } else {
-      apiCall = Categories.create({ color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim(), is_revenue: this.state.is_revenue });
+      apiCall = Categories.create({ color: this.state.color, monthly_goal: this.state.goal, name: this.state.name.trim(), is_revenue: this.state.is_revenue }).then(
+        () => { },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : Alerts.genericError() }
+      );
     }
 
     apiCall.then(
@@ -66,8 +88,9 @@ class FormModal extends React.Component {
   }
 
   renderDelete() {
-    if (!this.props.category.id) { return ''; }
-    return <a className="link-danger" onClick={this.handleDelete}>Delete</a>;
+    if (!this.props.category.id) { return ''; }    
+    if (this.state.canDelete)
+      return <a className="link-danger" onClick={this.handleDelete}>Delete</a>
   }
 
   render() {

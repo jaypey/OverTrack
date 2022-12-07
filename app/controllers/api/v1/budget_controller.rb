@@ -99,6 +99,15 @@ module Api; module V1
             render json: budget.id, status: successful ? 200 : 500
         end
 
+        def getcurrentbudgetrole
+            budget_user = ::BudgetUser.where(user_id: cookies.signed[:user_id], budget_id: cookies.signed[:selectedBudget]).take
+            successful = false
+            if budget_user != nil
+                successful = true
+            end
+            render json: budget_user, status: successful ? 200 : 500
+        end
+
         def getcurrentuserid
             user = ::User.find(cookies.signed[:user_id])
             successful = false

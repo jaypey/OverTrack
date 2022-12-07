@@ -38,29 +38,33 @@ class ConfigList extends React.Component {
     render() {
         return (
 
-            <div id="config-index">
-                <div id='config-list-title-container'>
-                    <h1 id='config-list-title'>Csv Configs</h1>
+            <>
+                <div id="config-index">
+                    <div id='config-list-title-container'>
+                        <h1 id='config-list-title'>Csv Configs</h1>
+                    </div>
+                    <div id='config-list'>
+                        <span
+                            id="create-config-button"
+                            className="fa fa-plus options-button"
+                            onClick={() => { window.location.href = "/expense_uploads/create_config?"; }}
+                        />
+                        {
+                            this.state.configs.map((config) => (
+                                <ConfigItem
+                                    key={config.id}
+                                    config={config}
+                                    handleDelete={this.handleDelete}
+                                    handleModify={this.handleModify}
+                                />
+                            ))
+                        }
+                    </div>
                 </div>
-                <div id='config-list'>
-                    <span
-                        id="create-config-button"
-                        className="fa fa-plus options-button"
-                        onClick={() => { window.location.href = "/expense_uploads/create_config?"; }}
-                    />
-                    {
-                        this.state.configs.map((config) => (
-                            <ConfigItem
-                                key={config.id}
-                                config={config}
-                                handleDelete={this.handleDelete}
-                                handleModify={this.handleModify}
-                            />
-                        ))
-                    }
+                <div>
+                    <a id="config-list-back" className='btn' href='/expense_uploads/new'>Back</a>
                 </div>
-            </div>
-
+            </>
         );
     }
 }

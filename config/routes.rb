@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index]
   resources :confirmation, only: [:index] do
     get :account, on: :collection
+    get :reset, on: :collection
   end
   resources :insights, only: [:index]
   resources :expenses, only: [:index]
@@ -71,6 +72,7 @@ Rails.application.routes.draw do
           get :getbudgetid
           get :getcurrentuserid
           get :getnotconfirmedbudgets
+          get :getcurrentbudgetrole
         end
       end
 
@@ -79,13 +81,20 @@ Rails.application.routes.draw do
     end
   end
 
-  
+  post 'reset/forgot', to: 'reset#forgot'
+  post 'reset/reset', to: 'reset#reset'
+
   get "budget", to: "budget#index"
-  get "user", to: "user#index"
   get "projections", to: "projections#index"
   get "tasks", to: "tasks#index"
+
   get 'user/register', to: 'user#register', as: 'register_user' # new
+  get 'user/confirm', to: 'user#confirm', as: 'confirm_user' #confirm
   post 'user', to: 'user#create' # create
+  get "user", to: "user#index"
+  get 'user/forgot', to: 'user#forgot' # forgor 
+  get 'user/reset', to: 'user#reset' # reset 
+
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#not_found"
   get "/500", to: "errors#not_found"

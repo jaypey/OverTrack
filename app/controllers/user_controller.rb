@@ -1,7 +1,11 @@
 class UserController < ApplicationController
-    skip_before_action :require_login, only: [:create, :register]
-    before_action :require_no_login, only: [:create, :register]
+    skip_before_action :require_login, only: [:create, :register, :forgot, :reset, :confirm]
+    before_action :require_no_login, only: [:create, :register, :forgot, :reset, :confirm]
   
+    def confirm
+
+    end
+
     def register
         newUser = User.new
         respond_to do |format|
@@ -31,7 +35,7 @@ class UserController < ApplicationController
                         render :register, locals: { user: user}
                     else
                         flash[:success] = "User created successfully"
-                        redirect_to :root
+                        redirect_to :confirm_user
                     end
                 else
                     render :register, locals: { user: user }
@@ -42,6 +46,16 @@ class UserController < ApplicationController
 
     def index
         
+    end
+
+    def forgot
+    
+    end
+
+    def reset
+        if !params[:token].blank?
+            @token = params[:token]
+        end
     end
 end
   
