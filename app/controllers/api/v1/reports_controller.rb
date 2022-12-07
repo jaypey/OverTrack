@@ -77,15 +77,18 @@ module Api; module V1
         group by categories.rank, categories.id 
         order by categories.rank asc, categories.id asc) 
         UNION ALL
-        (select 'remaining' AS category, '#eee' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) as spend 
+        (select 'remaining' AS category, '#eee' AS color, (sum(revenues.amount)/100 - sum(expenses.amount)/100) AS spend 
         from categories 
-        full outer join expenses on categories.id = expenses.category_id 
-        full outer join revenues on categories.id = revenues.category_id
-        where budget_id = '#{cookies.signed[:selectedBudget]}')";
+        inner join expenses on categories.id = expenses.category_id 
+        inner join revenues on categories.id = revenues.category_id
+        where budget_id = '#{cookies.signed[:selectedBudget]}'
+        having (sum(revenues.amount)/100 - sum(expenses.amount)/100) >= 0)";
         
       category_totals = ActiveRecord::Base.connection.execute(barChart_query)
 
       category_pourcentage = ActiveRecord::Base.connection.execute(pieChart_query)
+
+
 
       averages = average_by_category(start_date.year)
 

@@ -378,8 +378,8 @@ class Main extends React.Component {
     );
   }
 
-  render() {
-    Budgets.getSelectedBudgetRole()
+  componentDidMount(){
+      Budgets.getSelectedBudgetRole()
       .then((cResp) => { 
         if (cResp.role_value <= 2 ) {
           this.setState({ canCreate: true });
@@ -389,6 +389,9 @@ class Main extends React.Component {
         }
       }
     );
+  }
+
+  render() {
 
     return (
       <div className="container wide">
