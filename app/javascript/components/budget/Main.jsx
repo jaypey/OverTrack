@@ -328,12 +328,6 @@ class Main extends React.Component {
             </div>
             )
         }
-        else
-        {
-            <div className='content'>
-                <h1>a</h1>
-            </div>
-        }
     }
 
     render() {
