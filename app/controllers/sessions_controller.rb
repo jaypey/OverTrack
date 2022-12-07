@@ -20,9 +20,9 @@ class SessionsController < ApplicationController
     end
 
     if user.confirmed && user.authenticate(params[:password])
-      cookies.signed[:logged_in] = true
-      cookies.signed[:user_id] = user.id
-      cookies.signed[:selectedBudget] = user.budget_users.first().budget.id
+      cookies.signed[:logged_in] = { :value => true , :httponly => true }
+      cookies.signed[:user_id] = { :value => user.id , :httponly => true }
+      cookies.signed[:selectedBudget] = { :value => user.budget_users.first().budget.id, :httponly => true }
       
     else
       flash[:error] = "Incorrect login"
@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    cookies.signed[:logged_in] = false
+    cookies.signed[:logged_in] = { :value => false, :httponly => true }
     cookies.delete :user_id
     cookies.delete :selectedBudget
     redirect_to :root

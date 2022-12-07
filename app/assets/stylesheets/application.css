@@ -63,6 +63,12 @@
    background-color: white;
 }
 
+#config-list-back {
+   margin-left: 25px;
+   margin-top: 10px;
+
+}
+
 .config-item-title {
    margin-left: 10px;
 }
@@ -89,13 +95,13 @@
    width: 44.5%;
 }
 
-#config-mapping-cat{
+#config-mapping-cat {
    margin-left: 10px;
    width: 44.5%;
 }
 
-.config-add-mapping{
-   float:right;
+.config-add-mapping {
+   float: right;
 }
 
 .options-button:hover {
@@ -103,7 +109,7 @@
    filter: brightness(.7) !important;
 }
 
-#budget-selector{
+#budget-selector {
    border: none;
    border-bottom: solid;
    font-weight: bold;
@@ -113,6 +119,6 @@
 }
 
 
-.addTask{
+.addTask {
    display: block;
 }

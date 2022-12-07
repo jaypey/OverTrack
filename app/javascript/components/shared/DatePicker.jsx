@@ -16,21 +16,24 @@ class Picker extends React.Component {
   }
 
   render() {
-    return (
-      <DatePicker onChange={this.handleChange} selected={this.state.startDate} className={this.props.className} />
-    );
+    let tdatePicker = this.props.canCreate ? 
+    <DatePicker onChange={this.handleChange} selected={this.state.startDate} className={this.props.className} /> : 
+    <DatePicker onChange={this.handleChange} selected={this.state.startDate} className={this.props.className} disabled />;
+    return (tdatePicker);
   }
 }
 
 Picker.defaultProps = {
   value: new Date(),
   className: '',
+  canCreate: false
 };
 
 Picker.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.object,
   className: PropTypes.string,
+  canCreate: PropTypes.bool
 };
 
 export default Picker;

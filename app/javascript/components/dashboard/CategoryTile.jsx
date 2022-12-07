@@ -9,7 +9,7 @@ class CategoryTile extends React.Component {
     this.state = { showCategoryEditModal: false };
   }
 
-  openCategoryEdit = () => { this.setState({ showCategoryEditModal: true }); }
+  openCategoryEdit = () => { if (this.props.canCreate)  { this.setState({ showCategoryEditModal: true }); } }
   closeCategoryEdit = () => { this.setState({ showCategoryEditModal: false }); }
   onCategorySave = () => {
     this.closeCategoryEdit();
@@ -87,12 +87,14 @@ class CategoryTile extends React.Component {
 CategoryTile.defaultProps = {
   categoryWithExpensesAndSpend: {},
   colorsToSkip: [],
+  canCreate: false
 };
 
 CategoryTile.propTypes = {
   categoryWithExpensesAndSpend: PropTypes.object,
   colorsToSkip: PropTypes.array,
   onChange: PropTypes.func.isRequired,
+  canCreate: PropTypes.bool
 };
 
 export default CategoryTile;
