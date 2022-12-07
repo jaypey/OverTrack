@@ -70,6 +70,7 @@ Rails.application.routes.draw do
           post :selectbudget
           get :getbudgetid
           get :getcurrentuserid
+          get :getnotconfirmedbudgets
         end
       end
 

@@ -11,6 +11,7 @@ class Main extends React.Component {
         this.state = {
             budgets: [],
             budget_role: [],
+            notAcceptedBudgets: [],
             idSelectedBudget: 0,
             showBudgetCreate: false,
             showBudgetUpdate: false,
@@ -111,6 +112,7 @@ class Main extends React.Component {
         this.loadBudgets();
         this.loadCurrentUserId();
         this.loadRoles();
+        this.loadNotAcceptedBudgets();
     }
 
     loadRoles = () => {
@@ -119,6 +121,15 @@ class Main extends React.Component {
             () => { Alerts.error("Roles didn't load correctly"); }
         );
     }
+
+    loadNotAcceptedBudgets() {
+        Budgets.getnotconfirmedbudgets().then(
+          (fResp) => {
+            this.setState({ notAcceptedBudgets: fResp});
+          },
+          () => { Alerts.error("Your not accepted budgets didn't load correctly!") }
+        );
+      }
 
     isCurrentUserOwner = (user) => {
         if (user.user_id == this.state.currentUserId)
@@ -296,9 +307,39 @@ class Main extends React.Component {
         )
     }
 
+    renderNotAcceptedBudgets() {
+        if (this.state.notAcceptedBudgets.length > 1)
+        {
+            return (
+            <div className='content'>
+                <div className='requestsBox'>
+                <h5>You have {this.state.notAcceptedBudgets.length} budget invitations pending! Go check your emails to accept them and be sure to look in your spam and promotion sections.</h5>
+                </div>
+            </div>
+            )
+        }
+        else if (this.state.notAcceptedBudgets.length == 1)
+        {
+            return (
+            <div className='content'>
+                <div className='requestsBox'>
+                <h5>You have {this.state.notAcceptedBudgets.length} budget invitation pending! Go check your emails to accept it and be sure to look in your spam and promotion sections.</h5>
+                </div>
+            </div>
+            )
+        }
+        else
+        {
+            <div className='content'>
+                <h1>a</h1>
+            </div>
+        }
+    }
+
     render() {
         return (
             <div className='container wide'>
+                {this.renderNotAcceptedBudgets()}
                 {this.renderBudgetCreateModal()}
                 {this.renderBudgetEditModal()}
                 {this.renderUserAddModal()}
