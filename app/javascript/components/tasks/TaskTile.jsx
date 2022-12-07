@@ -16,11 +16,13 @@ class TaskTile extends React.Component {
 
   updateTask = (id, updates) => {
     Tasks.update(id, updates).then(
-        () => { this.props.onChange()})
+        () => { this.props.onChange(); },
+        (error) => { error.status == 403 ? Alerts.genericConflict('Insufficient permissions') : error.status == 408 ? Alerts.genericConflict('Cannot update task') : Alerts.genericError(); },
+    );
   }
 
-  openTaskEdit = () => { this.setState({ showTaskEditModal: true }); }
-  closeTaskEdit = () => { this.setState({ showTaskEditModal: false }); }
+  openTaskEdit = () => { if (this.props.canCreate) { this.setState({ showTaskEditModal: true });} }
+  closeTaskEdit = () => { if (this.props.canCreate) {this.setState({ showTaskEditModal: false });} }
   onTaskSave = () => {
     this.closeTaskEdit();
     this.props.onChange();
@@ -45,6 +47,15 @@ class TaskTile extends React.Component {
 
   render() {
     const task = this.props.task;
+
+    let check;
+
+    if(this.props.canCreate){
+      check = <span onClick={this.handleChildClick}><label className="container-checkbox"><input id="chk" checked={this.props.task.is_done} type="checkbox" onChange={() => {{ this.updateTask(this.props.task.id, { is_done: !task.is_done})}}}/><span className="checkmark"></span></label></span>
+    } else {
+      check = <span><label className="container-checkbox"><input id="chk" checked={this.props.task.is_done} type="checkbox"/><span className="checkmark"></span></label></span>
+    }
+
     return (
       <>
         <div
@@ -52,12 +63,7 @@ class TaskTile extends React.Component {
             className={`category-tile flex flex-space-between tint-on-hover hover-pointer ${task.is_done ? "stripe" : ""}`}
             onClick={this.openTaskEdit}
             style={{ borderColor: this.props.taskCategory.color || 'black'}} >
-            <span onClick={this.handleChildClick}>
-              <label className="container-checkbox">
-              <input id="chk" checked={this.props.task.is_done} type="checkbox" onChange={() => {{ this.updateTask(this.props.task.id, { is_done: !task.is_done})}}}/>
-              <span className="checkmark"></span>
-              </label>
-            </span>
+            {check}
             <h3>{task.title}</h3>
             <h3>
                 <span style={{ color: this.props.taskCategory.color, border: '1px solid' + this.props.taskCategory.color, padding: '10px', borderRadius: 50}}>{this.props.taskCategory.name || 'no category'}</span>
@@ -83,6 +89,7 @@ TaskTile.propTypes = {
     taskCategory: PropTypes.object,
     categories : PropTypes.array,
     onChange: PropTypes.func.isRequired,
+    canCreate: PropTypes.bool.isRequired,
 };
 
 export default TaskTile;

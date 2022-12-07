@@ -27,11 +27,11 @@ class TasksList extends React.Component {
                   return (
                     <div>
                       <button className='button-sort btn-showdone' onClick={this.props.toggleDoneTasks}>Hide done tasks</button>
-                      <TaskTile task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})} onChange={this.props.onChange} categories={this.props.categories}/>
+                      <TaskTile canCreate={this.props.canCreate} task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})} onChange={this.props.onChange} categories={this.props.categories}/>
                     </div>
                   )
                 }
-                return <TaskTile task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})} onChange={this.props.onChange} categories={this.props.categories}/>
+                return <TaskTile canCreate={this.props.canCreate} task={task} taskCategory={this.props.categories.find(cat => {return cat.id === task.category_id})} onChange={this.props.onChange} categories={this.props.categories}/>
             })}
           </div>
         );
@@ -49,7 +49,8 @@ TasksList.propTypes = {
     firstDone : PropTypes.bool,
     tasks: PropTypes.array,
     onChange: PropTypes.func.isRequired,
-    toggleDoneTasks: PropTypes.func.isRequired
+    toggleDoneTasks: PropTypes.func.isRequired,
+    canCreate: PropTypes.bool.isRequired,
 };
 
 export default TasksList
