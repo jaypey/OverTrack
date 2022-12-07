@@ -88,10 +88,15 @@ ul {
   border: 2px solid #eef0f55c;
   background-color: #EEF0F5;
   width: 30vw;
-  height: 8vh;
+  min-height: 10vh;
   border-radius: 35px;
-  padding-top: 2.9vh;
+  padding-top: 1.7vh;
   padding-left: 3vw;
   padding-right: 3vw;
   margin-top:-10vh;
+}
+
+.requestsText {
+  font-size: 1.9vh;
+  font-weight: bold;
 }

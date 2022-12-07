@@ -313,7 +313,7 @@ class Main extends React.Component {
             return (
             <div className='content'>
                 <div className='requestsBox'>
-                <h5>You have {this.state.notAcceptedBudgets.length} budget invitations pending! Go check your emails to accept them and be sure to look in your spam and promotion sections.</h5>
+                <p className='requestsText'>You have {this.state.notAcceptedBudgets.length} budget invitations pending! Go check your emails to accept them and be sure to look in your spam and promotion sections.</p>
                 </div>
             </div>
             )
@@ -323,7 +323,7 @@ class Main extends React.Component {
             return (
             <div className='content'>
                 <div className='requestsBox'>
-                <h5>You have {this.state.notAcceptedBudgets.length} budget invitation pending! Go check your emails to accept it and be sure to look in your spam and promotion sections.</h5>
+                <p className='requestsText'>You have {this.state.notAcceptedBudgets.length} budget invitation pending! Go check your emails to accept it and be sure to look in your spam and promotion sections.</p>
                 </div>
             </div>
             )
