@@ -4,14 +4,14 @@
 
 ## About
 
-In a nutshell: a private budgeting tool that can be self-hosted.
+In a nutshell: a budgeting tool that can be self-hosted.
 
 This project is an attempt to understand and control my own
 spending better without giving my banking/financial info
 to a 3rd party. The app is meant to be used with 1 login, and
 you can host easily your own instance.
 
-The app was designed by [Iana Noda](https://iananoda.com).
+The app was designed by [Iana Noda](https://iananoda.com) and is a fork of a private budgeting tool: [Ontrack](https://github.com/inoda/ontrack) . 
 
 ## Features
 
